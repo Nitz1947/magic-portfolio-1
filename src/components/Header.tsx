@@ -5,16 +5,19 @@ import { useEffect, useState } from "react";
 
 import { Fade, Flex, Line, Row, ToggleButton } from "@once-ui-system/core";
 
-import { routes, display, person, about, blog, work, gallery } from "@/resources";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
+import { useLocale } from "@/context/LocaleContext";
+import { getTimeLocale, stripLocalePath } from "@/i18n/paths";
+import { routes, display } from "@/resources";
 import { ThemeToggle } from "./ThemeToggle";
 import styles from "./Header.module.scss";
 
 type TimeDisplayProps = {
   timeZone: string;
-  locale?: string; // Optionally allow locale, defaulting to 'en-GB'
+  locale: string;
 };
 
-const TimeDisplay: React.FC<TimeDisplayProps> = ({ timeZone, locale = "en-GB" }) => {
+const TimeDisplay: React.FC<TimeDisplayProps> = ({ timeZone, locale }) => {
   const [currentTime, setCurrentTime] = useState("");
 
   useEffect(() => {
@@ -40,10 +43,11 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({ timeZone, locale = "en-GB" })
   return <>{currentTime}</>;
 };
 
-export default TimeDisplay;
-
 export const Header = () => {
   const pathname = usePathname() ?? "";
+  const routePath = stripLocalePath(pathname);
+  const { locale, content, href } = useLocale();
+  const { person, about, blog, work, gallery } = content;
 
   return (
     <>
@@ -87,7 +91,7 @@ export const Header = () => {
           >
             <Row gap="4" vertical="center" textVariant="body-default-s" suppressHydrationWarning>
               {routes["/"] && (
-                <ToggleButton prefixIcon="home" href="/" selected={pathname === "/"} />
+                <ToggleButton prefixIcon="home" href={href("/")} selected={routePath === "/"} />
               )}
               <Line background="neutral-alpha-medium" vert maxHeight="24" />
               {routes["/about"] && (
@@ -95,16 +99,16 @@ export const Header = () => {
                   <Row s={{ hide: true }}>
                     <ToggleButton
                       prefixIcon="person"
-                      href="/about"
+                      href={href("/about")}
                       label={about.label}
-                      selected={pathname === "/about"}
+                      selected={routePath === "/about"}
                     />
                   </Row>
                   <Row hide s={{ hide: false }}>
                     <ToggleButton
                       prefixIcon="person"
-                      href="/about"
-                      selected={pathname === "/about"}
+                      href={href("/about")}
+                      selected={routePath === "/about"}
                     />
                   </Row>
                 </>
@@ -114,16 +118,16 @@ export const Header = () => {
                   <Row s={{ hide: true }}>
                     <ToggleButton
                       prefixIcon="grid"
-                      href="/work"
+                      href={href("/work")}
                       label={work.label}
-                      selected={pathname.startsWith("/work")}
+                      selected={routePath.startsWith("/work")}
                     />
                   </Row>
                   <Row hide s={{ hide: false }}>
                     <ToggleButton
                       prefixIcon="grid"
-                      href="/work"
-                      selected={pathname.startsWith("/work")}
+                      href={href("/work")}
+                      selected={routePath.startsWith("/work")}
                     />
                   </Row>
                 </>
@@ -133,16 +137,16 @@ export const Header = () => {
                   <Row s={{ hide: true }}>
                     <ToggleButton
                       prefixIcon="book"
-                      href="/blog"
+                      href={href("/blog")}
                       label={blog.label}
-                      selected={pathname.startsWith("/blog")}
+                      selected={routePath.startsWith("/blog")}
                     />
                   </Row>
                   <Row hide s={{ hide: false }}>
                     <ToggleButton
                       prefixIcon="book"
-                      href="/blog"
-                      selected={pathname.startsWith("/blog")}
+                      href={href("/blog")}
+                      selected={routePath.startsWith("/blog")}
                     />
                   </Row>
                 </>
@@ -152,16 +156,16 @@ export const Header = () => {
                   <Row s={{ hide: true }}>
                     <ToggleButton
                       prefixIcon="gallery"
-                      href="/gallery"
+                      href={href("/gallery")}
                       label={gallery.label}
-                      selected={pathname.startsWith("/gallery")}
+                      selected={routePath.startsWith("/gallery")}
                     />
                   </Row>
                   <Row hide s={{ hide: false }}>
                     <ToggleButton
                       prefixIcon="gallery"
-                      href="/gallery"
-                      selected={pathname.startsWith("/gallery")}
+                      href={href("/gallery")}
+                      selected={routePath.startsWith("/gallery")}
                     />
                   </Row>
                 </>
@@ -170,6 +174,12 @@ export const Header = () => {
                 <>
                   <Line background="neutral-alpha-medium" vert maxHeight="24" />
                   <ThemeToggle />
+                </>
+              )}
+              {display.languageSwitcher && (
+                <>
+                  <Line background="neutral-alpha-medium" vert maxHeight="24" />
+                  <LanguageSwitcher />
                 </>
               )}
             </Row>
@@ -184,7 +194,9 @@ export const Header = () => {
             gap="20"
           >
             <Flex s={{ hide: true }}>
-              {display.time && <TimeDisplay timeZone={person.location} />}
+              {display.time && (
+                <TimeDisplay timeZone={person.location} locale={getTimeLocale(locale)} />
+              )}
             </Flex>
           </Flex>
         </Flex>

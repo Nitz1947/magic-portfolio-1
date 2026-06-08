@@ -1,14 +1,6 @@
-// import a pre-defined template for config and content options
-export {
-  person,
-  social,
-  newsletter,
-  home,
-  about,
-  blog,
-  work,
-  gallery,
-} from "./content";
+// Content is locale-aware — use getContent(locale) in pages or useLocale() in client components.
+export { getContent, defaultContent } from "./content";
+export type { LocaleContent } from "./content";
 
 export {
   display,

@@ -11,7 +11,6 @@ import {
   SocialSharingConfig,
   StyleConfig,
 } from "@/types";
-import { home } from "./index";
 
 // IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
 const baseURL: string = "https://demo.magic-portfolio.com";
@@ -28,6 +27,7 @@ const display: DisplayConfig = {
   location: true,
   time: true,
   themeSwitcher: true,
+  languageSwitcher: true,
 };
 
 // Enable password protection on selected routes
@@ -189,7 +189,7 @@ const schema: SchemaConfig = {
   logo: "",
   type: "Organization",
   name: "Once UI",
-  description: home.description,
+  description: "Portfolio website showcasing design and development work",
   email: "lorant@once-ui.com",
 };
 

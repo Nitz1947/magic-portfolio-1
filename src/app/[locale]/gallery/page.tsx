@@ -1,18 +1,30 @@
 import { Flex, Meta, Schema } from "@once-ui-system/core";
 import GalleryView from "@/components/gallery/GalleryView";
-import { baseURL, gallery, person } from "@/resources";
+import { localizedPath } from "@/i18n/paths";
+import { resolveLocale } from "@/i18n/page";
+import { baseURL, getContent } from "@/resources";
 
-export async function generateMetadata() {
+type PageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: PageProps) {
+  const locale = await resolveLocale(params);
+  const { gallery } = getContent(locale);
+
   return Meta.generate({
     title: gallery.title,
     description: gallery.description,
     baseURL: baseURL,
     image: `/api/og/generate?title=${encodeURIComponent(gallery.title)}`,
-    path: gallery.path,
+    path: localizedPath(gallery.path, locale),
   });
 }
 
-export default function Gallery() {
+export default async function Gallery({ params }: PageProps) {
+  const locale = await resolveLocale(params);
+  const { gallery, person } = getContent(locale);
+
   return (
     <Flex maxWidth="l">
       <Schema
@@ -20,11 +32,11 @@ export default function Gallery() {
         baseURL={baseURL}
         title={gallery.title}
         description={gallery.description}
-        path={gallery.path}
+        path={localizedPath(gallery.path, locale)}
         image={`/api/og/generate?title=${encodeURIComponent(gallery.title)}`}
         author={{
           name: person.name,
-          url: `${baseURL}${gallery.path}`,
+          url: `${baseURL}${localizedPath(gallery.path, locale)}`,
           image: `${baseURL}${person.avatar}`,
         }}
       />

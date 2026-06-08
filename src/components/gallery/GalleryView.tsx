@@ -1,9 +1,12 @@
 "use client";
 
 import { Media, MasonryGrid } from "@once-ui-system/core";
-import { gallery } from "@/resources";
+import { useLocale } from "@/context/LocaleContext";
 
 export default function GalleryView() {
+  const { content } = useLocale();
+  const { gallery } = content;
+
   return (
     <MasonryGrid columns={2} s={{ columns: 1 }}>
       {gallery.images.map((image, index) => (

@@ -12,22 +12,35 @@ import {
   Schema,
   Row,
 } from "@once-ui-system/core";
-import { baseURL, about, person, social } from "@/resources";
+import { baseURL, getContent } from "@/resources";
 import TableOfContents from "@/components/about/TableOfContents";
 import styles from "@/components/about/about.module.scss";
+import { localizedPath } from "@/i18n/paths";
+import { resolveLocale } from "@/i18n/page";
+import { getUi } from "@/i18n/ui";
 import React from "react";
 
-export async function generateMetadata() {
+type PageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: PageProps) {
+  const locale = await resolveLocale(params);
+  const { about } = getContent(locale);
+
   return Meta.generate({
     title: about.title,
     description: about.description,
     baseURL: baseURL,
     image: `/api/og/generate?title=${encodeURIComponent(about.title)}`,
-    path: about.path,
+    path: localizedPath(about.path, locale),
   });
 }
 
-export default function About() {
+export default async function About({ params }: PageProps) {
+  const locale = await resolveLocale(params);
+  const { about, person, social } = getContent(locale);
+  const ui = getUi(locale);
   const structure = [
     {
       title: about.intro.title,
@@ -57,11 +70,11 @@ export default function About() {
         baseURL={baseURL}
         title={about.title}
         description={about.description}
-        path={about.path}
+        path={localizedPath(about.path, locale)}
         image={`/api/og/generate?title=${encodeURIComponent(about.title)}`}
         author={{
           name: person.name,
-          url: `${baseURL}${about.path}`,
+          url: `${baseURL}${localizedPath(about.path, locale)}`,
           image: `${baseURL}${person.avatar}`,
         }}
       />
@@ -133,7 +146,7 @@ export default function About() {
                 }}
               >
                 <Icon paddingLeft="12" name="calendar" onBackground="brand-weak" />
-                <Row paddingX="8">Schedule a call</Row>
+                <Row paddingX="8">{ui.about.scheduleCall}</Row>
                 <IconButton
                   href={about.calendar.link}
                   data-border="rounded"

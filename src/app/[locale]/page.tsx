@@ -11,34 +11,48 @@ import {
   Meta,
   Line,
 } from "@once-ui-system/core";
-import { home, about, person, baseURL, routes } from "@/resources";
 import { Mailchimp } from "@/components";
 import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
+import { localizedPath } from "@/i18n/paths";
+import { resolveLocale } from "@/i18n/page";
+import { getUi } from "@/i18n/ui";
+import { baseURL, getContent, routes } from "@/resources";
 
-export async function generateMetadata() {
+type PageProps = {
+  params: Promise<{ locale: string }>;
+};
+
+export async function generateMetadata({ params }: PageProps) {
+  const locale = await resolveLocale(params);
+  const { home } = getContent(locale);
+
   return Meta.generate({
     title: home.title,
     description: home.description,
     baseURL: baseURL,
-    path: home.path,
+    path: localizedPath(home.path, locale),
     image: home.image,
   });
 }
 
-export default function Home() {
+export default async function Home({ params }: PageProps) {
+  const locale = await resolveLocale(params);
+  const { home, about, person } = getContent(locale);
+  const ui = getUi(locale);
+
   return (
     <Column maxWidth="m" gap="xl" paddingY="12" horizontal="center">
       <Schema
         as="webPage"
         baseURL={baseURL}
-        path={home.path}
+        path={localizedPath(home.path, locale)}
         title={home.title}
         description={home.description}
         image={`/api/og/generate?title=${encodeURIComponent(home.title)}`}
         author={{
           name: person.name,
-          url: `${baseURL}${about.path}`,
+          url: `${baseURL}${localizedPath(about.path, locale)}`,
           image: `${baseURL}${person.avatar}`,
         }}
       />
@@ -59,7 +73,7 @@ export default function Home() {
                 onBackground="neutral-strong"
                 textVariant="label-default-s"
                 arrow={false}
-                href={home.featured.href}
+                href={localizedPath(home.featured.href, locale)}
               >
                 <Row paddingY="2">{home.featured.title}</Row>
               </Badge>
@@ -79,7 +93,7 @@ export default function Home() {
             <Button
               id="about"
               data-border="rounded"
-              href={about.path}
+              href={localizedPath(about.path, locale)}
               variant="secondary"
               size="m"
               weight="default"
@@ -101,7 +115,7 @@ export default function Home() {
         </Column>
       </Column>
       <RevealFx translateY="16" delay={0.6}>
-        <Projects range={[1, 1]} />
+        <Projects range={[1, 1]} locale={locale} />
       </RevealFx>
       {routes["/blog"] && (
         <Column fillWidth gap="24" marginBottom="l">
@@ -111,11 +125,11 @@ export default function Home() {
           <Row fillWidth gap="24" marginTop="40" s={{ direction: "column" }}>
             <Row flex={1} paddingLeft="l" paddingTop="24">
               <Heading as="h2" variant="display-strong-xs" wrap="balance">
-                Latest from the blog
+                {ui.latestFromBlog}
               </Heading>
             </Row>
             <Row flex={3} paddingX="20">
-              <Posts range={[1, 2]} columns="2" />
+              <Posts range={[1, 2]} columns="2" locale={locale} />
             </Row>
           </Row>
           <Row fillWidth paddingLeft="64" horizontal="end">
@@ -123,7 +137,7 @@ export default function Home() {
           </Row>
         </Column>
       )}
-      <Projects range={[2]} />
+      <Projects range={[2]} locale={locale} />
       <Mailchimp />
     </Column>
   );

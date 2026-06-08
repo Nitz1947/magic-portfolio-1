@@ -1,6 +1,9 @@
-import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
+import type { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
 import { Line, Row, Text } from "@once-ui-system/core";
 
+import type { LocaleContent } from "./types";
+
+export function createEnglishContent(): LocaleContent {
 const person: Person = {
   firstName: "Selene",
   lastName: "Yu",
@@ -301,4 +304,5 @@ const gallery: Gallery = {
   ],
 };
 
-export { person, social, newsletter, home, about, blog, work, gallery };
+  return { person, social, newsletter, home, about, blog, work, gallery };
+}

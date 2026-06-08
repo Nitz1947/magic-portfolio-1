@@ -1,4 +1,12 @@
-export function formatDate(date: string, includeRelative = false) {
+import type { Locale } from "@/i18n/config";
+import { getDateLocale } from "@/i18n/paths";
+import { getUi } from "@/i18n/ui";
+
+export function formatDate(
+  date: string,
+  includeRelative = false,
+  locale: Locale = "en",
+) {
   const currentDate = new Date();
 
   if (!date.includes("T")) {
@@ -10,25 +18,25 @@ export function formatDate(date: string, includeRelative = false) {
   const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
   const hoursAgo = Math.floor(timeDifference / (1000 * 60 * 60));
   const minutesAgo = Math.floor(timeDifference / (1000 * 60));
-  const secondsAgo = Math.floor(timeDifference / 1000);
+  const ui = getUi(locale);
 
   let formattedDate = "";
 
   if (daysAgo >= 365) {
-    formattedDate = `${Math.floor(daysAgo / 365)}y ago`;
+    formattedDate = `${Math.floor(daysAgo / 365)}${ui.relativeTime.years}`;
   } else if (daysAgo >= 30) {
-    formattedDate = `${Math.floor(daysAgo / 30)}mo ago`;
+    formattedDate = `${Math.floor(daysAgo / 30)}${ui.relativeTime.months}`;
   } else if (daysAgo > 0) {
-    formattedDate = `${daysAgo}d ago`;
+    formattedDate = `${daysAgo}${ui.relativeTime.days}`;
   } else if (hoursAgo > 0) {
-    formattedDate = `${hoursAgo}h ago`;
+    formattedDate = `${hoursAgo}${ui.relativeTime.hours}`;
   } else if (minutesAgo > 0) {
-    formattedDate = `${minutesAgo}m ago`;
+    formattedDate = `${minutesAgo}${ui.relativeTime.minutes}`;
   } else {
-    formattedDate = "just now";
+    formattedDate = ui.relativeTime.justNow;
   }
 
-  const fullDate = targetDate.toLocaleString("en-us", {
+  const fullDate = targetDate.toLocaleString(getDateLocale(locale), {
     month: "long",
     day: "numeric",
     year: "numeric",
