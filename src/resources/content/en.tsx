@@ -51,16 +51,32 @@ export function createEnglishContent(): LocaleContent {
     headline: <>Code that ships like a product</>,
     featured: {
       display: true,
-      title: (
-        <Row gap="12" vertical="center">
-          <strong className="ml-4">Strefa Kibica</strong>{" "}
-          <Line background="brand-alpha-strong" vert height="20" />
-          <Text marginRight="4" onBackground="brand-medium">
-            Featured project
-          </Text>
-        </Row>
-      ),
-      href: "/work/strefa-kibica",
+      items: [
+        {
+          title: (
+            <Row gap="8" vertical="center">
+              <strong className="ml-4">Strefa Kibica</strong>
+              <Line background="brand-alpha-strong" vert height="16" />
+              <Text marginRight="4" onBackground="brand-medium">
+                Featured
+              </Text>
+            </Row>
+          ),
+          href: "/work/strefa-kibica",
+        },
+        {
+          title: (
+            <Row gap="8" vertical="center">
+              <strong className="ml-4">BJ Trade</strong>
+              <Line background="brand-alpha-strong" vert height="16" />
+              <Text marginRight="4" onBackground="brand-medium">
+                Featured
+              </Text>
+            </Row>
+          ),
+          href: "/work/bjtrade",
+        },
+      ],
     },
     subline: (
       <>

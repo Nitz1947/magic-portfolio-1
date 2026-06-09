@@ -1,5 +1,6 @@
 import type { Locale } from "@/i18n/config";
 import { localizedPath } from "@/i18n/paths";
+import { homepageFeaturedSlugs } from "@/data/featuredProjects";
 import { getPosts } from "@/utils/utils";
 import { Column } from "@once-ui-system/core";
 import { ProjectCard } from "@/components";
@@ -17,7 +18,13 @@ export function Projects({ range, exclude, locale }: ProjectsProps) {
     allProjects = allProjects.filter((post) => !exclude.includes(post.slug));
   }
 
+  const featuredSlugs = new Set<string>(homepageFeaturedSlugs);
+
   const sortedProjects = allProjects.sort((a, b) => {
+    const aFeatured = a.metadata.featured || featuredSlugs.has(a.slug);
+    const bFeatured = b.metadata.featured || featuredSlugs.has(b.slug);
+    if (aFeatured && !bFeatured) return -1;
+    if (!aFeatured && bFeatured) return 1;
     if (a.slug === "serwer-ot-tfs-myAAC") return 1;
     if (b.slug === "serwer-ot-tfs-myAAC") return -1;
     return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();

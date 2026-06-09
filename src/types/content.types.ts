@@ -93,11 +93,15 @@ export interface Home extends BasePageConfig {
   image: `/images/${string}` | string;
   /** The headline of the home page */
   headline: React.ReactNode;
-  /** Featured badge, which appears above the headline */
+  /** Featured badge(s), which appear above the headline */
   featured: {
     display: boolean;
-    title: React.ReactNode;
-    href: string;
+    title?: React.ReactNode;
+    href?: string;
+    items?: Array<{
+      title: React.ReactNode;
+      href: string;
+    }>;
   };
   /** The sub text which appears below the headline */
   subline: React.ReactNode;
