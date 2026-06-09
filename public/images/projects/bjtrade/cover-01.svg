@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14532d"/>
+      <stop offset="50%" stop-color="#166534"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="200" cy="700" r="150" fill="#4ade80" opacity="0.12"/>
+  <circle cx="1350" cy="180" r="100" fill="#fbbf24" opacity="0.15"/>
+  <rect x="140" y="60" width="1320" height="780" rx="20" fill="#1e293b" stroke="rgba(255,255,255,0.1)"/>
+  <rect x="140" y="60" width="1320" height="52" fill="#334155" rx="20"/>
+  <rect x="140" y="88" width="1320" height="24" fill="#334155"/>
+  <circle cx="175" cy="86" r="9" fill="#ef4444"/><circle cx="200" cy="86" r="9" fill="#f59e0b"/><circle cx="225" cy="86" r="9" fill="#22c55e"/>
+  <rect x="180" y="130" width="100" height="14" rx="4" fill="#4ade80"/>
+  <rect x="300" y="132" width="70" height="10" rx="4" fill="rgba(255,255,255,0.3)"/>
+  <rect x="390" y="132" width="70" height="10" rx="4" fill="rgba(255,255,255,0.2)"/>
+  <rect x="480" y="132" width="70" height="10" rx="4" fill="rgba(255,255,255,0.2)"/>
+  <rect x="1180" y="122" width="180" height="36" rx="18" fill="rgba(74,222,128,0.2)" stroke="#4ade80"/>
+  <text x="1270" y="145" font-family="system-ui,sans-serif" font-size="14" fill="#4ade80" text-anchor="middle">Kontakt</text>
+  <text x="200" y="240" font-family="system-ui,sans-serif" font-size="48" font-weight="700" fill="white">BJTrade</text>
+  <text x="200" y="290" font-family="system-ui,sans-serif" font-size="22" fill="rgba(255,255,255,0.65)">ZioBa i przyprawy  handluj z nami</text>
+  <rect x="200" y="320" width="200" height="44" rx="22" fill="#16a34a"/>
+  <text x="300" y="348" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="white" text-anchor="middle">Napisz do nas</text>
+  <rect x="200" y="400" width="200" height="180" rx="14" fill="rgba(74,222,128,0.1)" stroke="rgba(74,222,128,0.25)"/>
+  <rect x="420" y="400" width="200" height="180" rx="14" fill="rgba(251,191,36,0.1)" stroke="rgba(251,191,36,0.25)"/>
+  <rect x="640" y="400" width="200" height="180" rx="14" fill="rgba(255,255,255,0.05)"/>
+  <rect x="860" y="400" width="200" height="180" rx="14" fill="rgba(255,255,255,0.05)"/>
+  <rect x="1080" y="400" width="200" height="180" rx="14" fill="rgba(255,255,255,0.05)"/>
+  <rect x="200" y="620" width="500" height="160" rx="14" fill="rgba(0,0,0,0.25)"/>
+  <text x="220" y="660" font-family="system-ui,sans-serif" font-size="16" font-weight="600" fill="white">Certyfikaty jako[ci</text>
+  <rect x="220" y="680" width="80" height="80" rx="40" fill="rgba(74,222,128,0.2)" stroke="#4ade80"/>
+  <text x="260" y="728" font-family="system-ui,sans-serif" font-size="12" fill="#4ade80" text-anchor="middle">GMP</text>
+  <rect x="320" y="680" width="80" height="80" rx="40" fill="rgba(251,191,36,0.2)" stroke="#fbbf24"/>
+  <text x="360" y="728" font-family="system-ui,sans-serif" font-size="11" fill="#fbbf24" text-anchor="middle">HACCP</text>
+  <text x="800" y="860" font-family="system-ui,sans-serif" font-size="26" font-weight="600" fill="rgba(255,255,255,0.2)" text-anchor="middle">BJ Trade  strona firmowa B2B</text>
+</svg>

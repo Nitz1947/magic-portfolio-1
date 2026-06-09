@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#312e81"/>
+    </linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <circle cx="1300" cy="200" r="120" fill="#5865F2" opacity="0.25"/>
+  <circle cx="300" cy="700" r="160" fill="#22d3ee" opacity="0.12"/>
+  <rect x="160" y="80" width="1280" height="740" rx="20" fill="#1e293b" stroke="rgba(255,255,255,0.1)"/>
+  <rect x="160" y="80" width="1280" height="52" fill="#334155" rx="20"/>
+  <rect x="160" y="108" width="1280" height="24" fill="#334155"/>
+  <circle cx="195" cy="106" r="9" fill="#ef4444"/><circle cx="220" cy="106" r="9" fill="#f59e0b"/><circle cx="245" cy="106" r="9" fill="#22c55e"/>
+  <rect x="560" y="96" width="480" height="24" rx="12" fill="#0f172a"/>
+  <text x="800" y="112" font-family="system-ui,sans-serif" font-size="13" fill="rgba(255,255,255,0.5)" text-anchor="middle">discord-strefakibica.vercel.app</text>
+  <text x="220" y="200" font-family="system-ui,sans-serif" font-size="42" font-weight="700" fill="white">Obstawiaj ZakBady</text>
+  <text x="220" y="245" font-family="system-ui,sans-serif" font-size="18" fill="rgba(255,255,255,0.6)">Wirtualne zakBady dla spoBeczno[ci Discord</text>
+  <rect x="220" y="280" width="220" height="48" rx="24" fill="#5865F2" filter="url(#glow)"/>
+  <text x="330" y="310" font-family="system-ui,sans-serif" font-size="15" font-weight="600" fill="white" text-anchor="middle">Zaloguj przez Discord</text>
+  <rect x="220" y="380" width="280" height="160" rx="16" fill="rgba(88,101,242,0.15)" stroke="rgba(88,101,242,0.35)"/>
+  <text x="240" y="420" font-family="system-ui,sans-serif" font-size="14" fill="rgba(255,255,255,0.55)">ZakBady na |ywo</text>
+  <text x="240" y="470" font-family="system-ui,sans-serif" font-size="32" font-weight="700" fill="#a5b4fc">LIVE</text>
+  <rect x="520" y="380" width="280" height="160" rx="16" fill="rgba(34,211,238,0.12)" stroke="rgba(34,211,238,0.3)"/>
+  <text x="540" y="420" font-family="system-ui,sans-serif" font-size="14" fill="rgba(255,255,255,0.55)">Startowy bonus</text>
+  <text x="540" y="470" font-family="system-ui,sans-serif" font-size="32" font-weight="700" fill="#22d3ee">1000</text>
+  <text x="540" y="500" font-family="system-ui,sans-serif" font-size="14" fill="rgba(255,255,255,0.45)">coinów</text>
+  <rect x="820" y="380" width="280" height="160" rx="16" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.1)"/>
+  <text x="840" y="420" font-family="system-ui,sans-serif" font-size="14" fill="rgba(255,255,255,0.55)">Ranking Top 10</text>
+  <rect x="840" y="440" width="200" height="12" rx="4" fill="rgba(165,180,252,0.4)"/>
+  <rect x="840" y="462" width="160" height="12" rx="4" fill="rgba(165,180,252,0.25)"/>
+  <rect x="840" y="484" width="180" height="12" rx="4" fill="rgba(165,180,252,0.18)"/>
+  <rect x="220" y="580" width="880" height="200" rx="16" fill="rgba(0,0,0,0.25)" stroke="rgba(255,255,255,0.08)"/>
+  <text x="240" y="620" font-family="system-ui,sans-serif" font-size="16" font-weight="600" fill="white">Tablica wyników</text>
+  <text x="240" y="660" font-family="system-ui,sans-serif" font-size="13" fill="rgba(255,255,255,0.5)">#1 KibicPro  12 450 coinów</text>
+  <text x="240" y="690" font-family="system-ui,sans-serif" font-size="13" fill="rgba(255,255,255,0.4)">#2 FanZone  11 200 coinów</text>
+  <text x="800" y="860" font-family="system-ui,sans-serif" font-size="26" font-weight="600" fill="rgba(255,255,255,0.2)" text-anchor="middle">Strefa Kibica  Discord Community</text>
+</svg>

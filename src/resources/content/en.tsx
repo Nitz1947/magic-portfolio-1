@@ -6,11 +6,11 @@ import type { LocaleContent } from "./types";
 export function createEnglishContent(): LocaleContent {
   const person: Person = {
     firstName: "Krystian",
-    lastName: "",
-    name: "Krystian",
-    role: "Full-Stack Developer",
+    lastName: "G.",
+    name: "Krystian G.",
+    role: "Full-Stack Developer & Web Designer",
     avatar: "/images/avatar.svg",
-    email: "kontakt@1choc.dev",
+    email: "kgdev@biuro.net",
     location: "Europe/Warsaw",
     languages: ["Polish", "English"],
   };
@@ -47,33 +47,31 @@ export function createEnglishContent(): LocaleContent {
     image: "/images/og/home.svg",
     label: "Home",
     title: `${person.name}'s Portfolio`,
-    description: `Full-stack developer portfolio with TFS/myAAC background — Next.js, React, TypeScript, and Open Tibia`,
-    headline: <>From OT servers to production web applications</>,
+    description: `Full-stack developer portfolio — custom websites for gaming, OT servers, and businesses. TFS/myAAC, Next.js, React, TypeScript.`,
+    headline: <>Professional websites — from OT to any industry</>,
     featured: {
       display: true,
       title: (
         <Row gap="12" vertical="center">
-          <strong className="ml-4">TFS & myAAC</strong>{" "}
+          <strong className="ml-4">Strefa Kibica</strong>{" "}
           <Line background="brand-alpha-strong" vert height="20" />
           <Text marginRight="4" onBackground="brand-medium">
             Featured project
           </Text>
         </Row>
       ),
-      href: "/work/serwer-ot-tfs-myAAC",
+      href: "/work/strefa-kibica",
     },
     subline: (
       <>
-        I'm a full-stack developer with 6 years in the{" "}
-        <Text as="span" size="xl" weight="strong">
-          TFS
-        </Text>
+        I build <Text as="span" size="xl" weight="strong">professional websites</Text>{" "}
+        — for multi-gaming communities, private game servers, and companies across all
+        industries. Every project is <Text as="span" size="xl" weight="strong">custom</Text>{" "}
+        and tailored to the client. With 6+ years as a contract developer in the{" "}
+        <Text as="span" size="xl" weight="strong">TFS</Text>
         {" "}and{" "}
-        <Text as="span" size="xl" weight="strong">
-          myAAC
-        </Text>
-        {" "}ecosystem. Today I ship fast apps with Next.js, React, and TypeScript — bridging
-        community gaming passion with professional architecture and UX.
+        <Text as="span" size="xl" weight="strong">myAAC</Text>
+        {" "}ecosystem, I now ship modern apps with Next.js, React, and TypeScript.
       </>
     ),
   };
@@ -82,7 +80,7 @@ export function createEnglishContent(): LocaleContent {
     path: "/about",
     label: "About",
     title: `About – ${person.name}`,
-    description: `Meet ${person.name}, a ${person.role} with a unique Open Tibia and TFS background`,
+    description: `Meet ${person.name} — full-stack developer and web designer with OT/TFS experience and real client projects`,
     tableOfContent: {
       display: true,
       subItems: false,
@@ -99,13 +97,19 @@ export function createEnglishContent(): LocaleContent {
       title: "Introduction",
       description: (
         <>
-          I started in the Open Tibia world — for 6 years I ran servers on{" "}
-          <strong>The Forgotten Server (TFS)</strong> and customized{" "}
-          <strong>myAAC</strong>, the popular CMS for OT communities. That taught me Lua,
-          PHP, MySQL, and product-minded work: from quest scripts to player panels and
-          registration sites. Today I bring the same drive to the modern stack — React,
-          TypeScript, Next.js, and Node.js — building SaaS, e-commerce, and APIs ready for
-          production.
+          I'm a full-stack developer and web designer. I create{" "}
+          <strong>professional websites</strong> — for multi-gaming communities, private
+          game servers, and companies from every industry. Each project is{" "}
+          <strong>custom-built for the client</strong>.
+          <br />
+          <br />
+          For over 6 years I worked as a <strong>freelance contractor</strong> in the Open
+          Tibia ecosystem — not as a single-server owner, but delivering work for{" "}
+          <strong>different server owners</strong>. I built game systems, server scripts,
+          modules, and <strong>client ↔ server</strong> sync integrations, plus website
+          updates in <strong>PHP, HTML, and CSS</strong> (myAAC and custom). Today I
+          combine that background with the modern stack — React, TypeScript, Next.js, and
+          Vercel.
         </>
       ),
     },
@@ -114,28 +118,29 @@ export function createEnglishContent(): LocaleContent {
       title: "Work Experience",
       experiences: [
         {
-          company: "Open Tibia Ecosystem (TFS + myAAC)",
+          company: "Open Tibia — contractor for OT community",
           timeframe: "2019 – Present",
-          role: "Server Developer & CMS Customizer",
+          role: "OT Developer, Integrator & CMS",
           achievements: [
             <>
-              6 years with <strong>The Forgotten Server</strong> — custom game systems,
-              quests, balancing, events, and core extensions in <strong>Lua</strong>.
+              6+ years of contract work for <strong>multiple server owners</strong> — game
+              systems, quests, events, and extensions in <strong>Lua</strong>,{" "}
+              <strong>C++</strong>, and <strong>C#</strong> on TFS.
             </>,
             <>
-              Full <strong>myAAC</strong> customization in PHP — templates, registration
-              modules, rankings, shops, and server database integrations in{" "}
-              <strong>MySQL</strong>.
+              <strong>Game client ↔ server</strong> integrations — data sync, player
+              panels, rankings, and modules tailored per client.
             </>,
             <>
-              Community frontend: landing pages, player panels, and responsive UI in{" "}
-              <strong>HTML, CSS, and JavaScript</strong> — from prototype to production.
+              Community sites in <strong>myAAC</strong> and custom builds — updates in{" "}
+              <strong>PHP, HTML, and CSS</strong>; <strong>MariaDB</strong> and{" "}
+              <strong>MySQL</strong> on <strong>Ubuntu</strong> and <strong>Debian</strong>.
             </>,
           ],
           images: [
             {
               src: "/images/projects/ot/cover-01.svg",
-              alt: "OT server — TFS and myAAC",
+              alt: "Open Tibia — TFS and myAAC",
               width: 16,
               height: 9,
             },
@@ -144,24 +149,31 @@ export function createEnglishContent(): LocaleContent {
         {
           company: "Web Projects (Freelance)",
           timeframe: "2022 – Present",
-          role: "Full-Stack Developer",
+          role: "Full-Stack Developer & Web Designer",
           achievements: [
             <>
-              Skill migration to <strong>React, TypeScript, and Next.js</strong> — portfolios,
-              e-commerce platforms, and SaaS analytics dashboards.
+              <strong>Strefa Kibica</strong> — virtual betting platform for a Discord
+              community (Next.js, OAuth, leaderboard).
             </>,
             <>
-              <strong>Node.js</strong> API architecture, payment integrations, and performance
-              tuning (Core Web Vitals, ISR, edge caching).
+              <strong>BJ Trade</strong> — B2B corporate site for a herbs and spices
+              producer with quality certifications and Polish locale.
             </>,
             <>
-              <strong>Vercel</strong> deployments with preview URLs, SEO, and i18n (PL/EN).
+              <strong>Custom</strong> websites for multi-gaming, private servers, and
+              businesses — Next.js, TypeScript, i18n, Vercel deployments.
             </>,
           ],
           images: [
             {
-              src: "/images/projects/portfolio/cover-01.svg",
-              alt: "Full-stack Next.js projects",
+              src: "/images/projects/strefa-kibica/cover-01.svg",
+              alt: "Strefa Kibica — Discord community",
+              width: 16,
+              height: 9,
+            },
+            {
+              src: "/images/projects/bjtrade/cover-01.svg",
+              alt: "BJ Trade — corporate website",
               width: 16,
               height: 9,
             },
@@ -177,8 +189,9 @@ export function createEnglishContent(): LocaleContent {
           name: "Open Tibia Community & TFS",
           description: (
             <>
-              6 years of hands-on practice — Lua (TFS scripting), PHP (myAAC), MySQL, Linux
-              server administration, and running gaming communities from scratch.
+              6+ years of contract practice — Lua, C++, C#, PHP (myAAC), MariaDB/MySQL,
+              Ubuntu/Debian administration, and web ↔ game server integrations for OT
+              communities.
             </>
           ),
         },
@@ -186,8 +199,9 @@ export function createEnglishContent(): LocaleContent {
           name: "Self-directed — modern web",
           description: (
             <>
-              React, TypeScript, Next.js App Router, Node.js, REST APIs, Docker, and cloud
-              (Vercel/AWS) — continuous growth from community dev to professional full-stack.
+              React, TypeScript, Next.js App Router, Node.js, REST APIs, Docker, and Vercel
+              — continuous growth from community dev to professional full-stack and web
+              design.
             </>
           ),
         },
@@ -201,8 +215,9 @@ export function createEnglishContent(): LocaleContent {
           title: "OT / TFS & myAAC",
           description: (
             <>
-              Lua scripting in TFS, custom game systems, myAAC in PHP, MySQL schemas for OT
-              servers, and community tooling from quests to admin panels.
+              Lua, C++, and C# on TFS; client ↔ server integrations; myAAC and custom
+              PHP/HTML/CSS; MariaDB/MySQL; Ubuntu/Debian hosting — contract work for
+              multiple owners.
             </>
           ),
           tags: [
@@ -220,11 +235,11 @@ export function createEnglishContent(): LocaleContent {
           ],
         },
         {
-          title: "Frontend (modern stack)",
+          title: "Web design & Frontend",
           description: (
             <>
-              React and Next.js apps with App Router, SSR/SSG, TypeScript, animations,
-              accessibility, and performance optimization.
+              Custom professional sites for gaming and business — React, Next.js,
+              TypeScript, responsive layouts, accessibility, and performance.
             </>
           ),
           tags: [
@@ -234,8 +249,8 @@ export function createEnglishContent(): LocaleContent {
           ],
           images: [
             {
-              src: "/images/projects/portfolio/cover-01.svg",
-              alt: "Next.js frontend project",
+              src: "/images/projects/strefa-kibica/cover-01.svg",
+              alt: "Next.js web project",
               width: 16,
               height: 9,
             },
@@ -245,8 +260,8 @@ export function createEnglishContent(): LocaleContent {
           title: "Backend & DevOps",
           description: (
             <>
-              REST APIs in Node.js, PostgreSQL/MySQL, Redis, Docker, microservices, and
-              Vercel deploys with CI/CD and monitoring.
+              REST APIs, Node.js, PostgreSQL/MySQL/MariaDB, OAuth integrations, Docker,
+              and Vercel deploys with CI/CD.
             </>
           ),
           tags: [
@@ -256,8 +271,8 @@ export function createEnglishContent(): LocaleContent {
           ],
           images: [
             {
-              src: "/images/projects/api/cover-01.svg",
-              alt: "API architecture",
+              src: "/images/projects/bjtrade/cover-01.svg",
+              alt: "B2B corporate website",
               width: 16,
               height: 9,
             },
@@ -278,7 +293,7 @@ export function createEnglishContent(): LocaleContent {
     path: "/work",
     label: "Work",
     title: `Projects – ${person.name}`,
-    description: `Case studies — from TFS/myAAC to Next.js apps and APIs by ${person.name}`,
+    description: `Case studies — Strefa Kibica, BJ Trade, TFS/myAAC, and Next.js portfolio by ${person.name}`,
   };
 
   const gallery: Gallery = {

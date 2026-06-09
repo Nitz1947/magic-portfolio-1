@@ -6,11 +6,11 @@ import type { LocaleContent } from "./types";
 export function createPolishContent(): LocaleContent {
   const person: Person = {
     firstName: "Krystian",
-    lastName: "",
-    name: "Krystian",
-    role: "Full-Stack Developer",
+    lastName: "G.",
+    name: "Krystian G.",
+    role: "Full-Stack Developer & Web Designer",
     avatar: "/images/avatar.svg",
-    email: "kontakt@1choc.dev",
+    email: "kgdev@biuro.net",
     location: "Europe/Warsaw",
     languages: ["Polski", "Angielski"],
   };
@@ -47,33 +47,32 @@ export function createPolishContent(): LocaleContent {
     image: "/images/og/home.svg",
     label: "Strona główna",
     title: `Portfolio – ${person.name}`,
-    description: `Portfolio full-stack developera z backgroundiem TFS/myAAC — Next.js, React, TypeScript i Open Tibia`,
-    headline: <>Od serwerów OT do produkcyjnych aplikacji webowych</>,
+    description: `Portfolio full-stack developera — strony custom dla gamingu, serwerów OT i firm. TFS/myAAC, Next.js, React, TypeScript.`,
+    headline: <>Profesjonalne strony — od OT po każdą branżę</>,
     featured: {
       display: true,
       title: (
         <Row gap="12" vertical="center">
-          <strong className="ml-4">TFS & myAAC</strong>{" "}
+          <strong className="ml-4">Strefa Kibica</strong>{" "}
           <Line background="brand-alpha-strong" vert height="20" />
           <Text marginRight="4" onBackground="brand-medium">
             Wyróżniony projekt
           </Text>
         </Row>
       ),
-      href: "/work/serwer-ot-tfs-myAAC",
+      href: "/work/strefa-kibica",
     },
     subline: (
       <>
-        Jestem full-stack developerem z 6 lat doświadczenia w ekosystemie{" "}
-        <Text as="span" size="xl" weight="strong">
-          TFS
-        </Text>
+        Tworzę <Text as="span" size="xl" weight="strong">profesjonalne strony</Text>{" "}
+        — dla multi gamingów, prywatnych serwerów gier i firm ze wszystkich branż.
+        Każdy projekt jest <Text as="span" size="xl" weight="strong">custom</Text>{" "}
+        i dopasowany indywidualnie do klienta. Mam 6+ lat doświadczenia kontraktorskiego
+        w ekosystemie{" "}
+        <Text as="span" size="xl" weight="strong">TFS</Text>
         {" "}i{" "}
-        <Text as="span" size="xl" weight="strong">
-          myAAC
-        </Text>
-        . Dziś buduję szybkie aplikacje w Next.js, React i TypeScript — łącząc pasję do
-        community gaming z profesjonalnym podejściem do architektury i UX.
+        <Text as="span" size="xl" weight="strong">myAAC</Text>
+        , a dziś buduję nowoczesne aplikacje w Next.js, React i TypeScript.
       </>
     ),
   };
@@ -82,7 +81,7 @@ export function createPolishContent(): LocaleContent {
     path: "/about",
     label: "O mnie",
     title: `O mnie – ${person.name}`,
-    description: `Poznaj ${person.name}, ${person.role} z unikalnym backgroundiem Open Tibia i TFS`,
+    description: `Poznaj ${person.name} — full-stack developer i web designer z doświadczeniem OT/TFS i projektami dla firm`,
     tableOfContent: {
       display: true,
       subItems: false,
@@ -99,13 +98,18 @@ export function createPolishContent(): LocaleContent {
       title: "Wprowadzenie",
       description: (
         <>
-          Zaczynałem w świecie Open Tibia — przez 6 lat rozwijałem serwery na{" "}
-          <strong>The Forgotten Server (TFS)</strong> i customizowałem{" "}
-          <strong>myAAC</strong>, popularne CMS dla community OT. To nauczyło mnie Lua,
-          PHP, MySQL i pracy blisko produktu: od skryptów questów po panele gracza i
-          strony rejestracji. Dziś przenoszę tę samą determinację na nowoczesny stack —
-          React, TypeScript, Next.js i Node.js — budując aplikacje SaaS, e-commerce i API
-          gotowe na produkcję.
+          Jestem full-stack developerem i web designerem. Potrafię tworzyć{" "}
+          <strong>profesjonalne strony internetowe</strong> — dla multi gamingów,
+          prywatnych serwerów gier oraz firm ze wszystkich branż. Każdy projekt
+          realizuję <strong>custom, indywidualnie pod klienta</strong>.
+          <br />
+          <br />
+          Przez ponad 6 lat pracowałem jako <strong>freelance contractor</strong> w
+          ekosystemie Open Tibia — nie jako właściciel jednego serwera, lecz wykonując
+          zlecenia dla różnych ownerów. Tworzyłem systemy gry, skrypty serwerowe, moduły
+          i integracje <strong>klient ↔ serwer</strong> (sync), a także aktualizowałem
+          strony w <strong>PHP, HTML i CSS</strong> (myAAC i custom). Dziś łączę to
+          doświadczenie z nowoczesnym stackiem — React, TypeScript, Next.js i Vercel.
         </>
       ),
     },
@@ -114,29 +118,29 @@ export function createPolishContent(): LocaleContent {
       title: "Doświadczenie zawodowe",
       experiences: [
         {
-          company: "Ekosystem Open Tibia (TFS + myAAC)",
+          company: "Open Tibia — contractor dla społeczności OT",
           timeframe: "2019 – obecnie",
-          role: "Server Developer & CMS Customizer",
+          role: "OT Developer, Integrator & CMS",
           achievements: [
             <>
-              6 lat pracy z <strong>The Forgotten Server</strong> — custom systemy gry,
-              questy, balans, eventy i rozszerzenia core w <strong>Lua</strong>.
+              6+ lat pracy kontraktorskiej dla <strong>różnych właścicieli serwerów</strong> —
+              systemy gry, questy, eventy i rozszerzenia w <strong>Lua</strong>,{" "}
+              <strong>C++</strong> i <strong>C#</strong> na TFS.
             </>,
             <>
-              Pełna customizacja <strong>myAAC</strong> w PHP — szablony, moduły
-              rejestracji, rankingi, shop i integracje z bazą serwera w{" "}
-              <strong>MySQL</strong>.
+              Integracje <strong>klient gry ↔ serwer</strong> — synchronizacja danych,
+              panele gracza, rankingi i moduły pod konkretnych klientów.
             </>,
             <>
-              Frontend community: landing pages, panele gracza i responsywne UI w{" "}
-              <strong>HTML, CSS i JavaScript</strong> — od prototypu po wdrożenie na
-              produkcji.
+              Strony community w <strong>myAAC</strong> i custom — aktualizacje w{" "}
+              <strong>PHP, HTML i CSS</strong>; bazy <strong>MariaDB</strong> i{" "}
+              <strong>MySQL</strong> na <strong>Ubuntu</strong> i <strong>Debian</strong>.
             </>,
           ],
           images: [
             {
               src: "/images/projects/ot/cover-01.svg",
-              alt: "Serwer OT — TFS i myAAC",
+              alt: "Open Tibia — TFS i myAAC",
               width: 16,
               height: 9,
             },
@@ -145,25 +149,31 @@ export function createPolishContent(): LocaleContent {
         {
           company: "Projekty webowe (freelance)",
           timeframe: "2022 – obecnie",
-          role: "Full-Stack Developer",
+          role: "Full-Stack Developer & Web Designer",
           achievements: [
             <>
-              Migracja umiejętności na <strong>React, TypeScript i Next.js</strong> —
-              portfolio, platformy e-commerce i panele analityczne SaaS.
+              <strong>Strefa Kibica</strong> — platforma wirtualnych zakładów dla społeczności
+              Discord (Next.js, OAuth, ranking).
             </>,
             <>
-              Architektura API w <strong>Node.js</strong>, integracje płatności, optymalizacja
-              wydajności (Core Web Vitals, ISR, edge caching).
+              <strong>BJ Trade</strong> — strona firmowa B2B dla producenta ziół i przypraw
+              z certyfikatami jakości i wersją PL.
             </>,
             <>
-              Wdrożenia na <strong>Vercel</strong> z preview deployments, SEO i
-              wielojęzyczność (i18n PL/EN).
+              Strony <strong>custom</strong> dla multi gamingów, serwerów prywatnych i firm —
+              Next.js, TypeScript, i18n, wdrożenia na Vercel.
             </>,
           ],
           images: [
             {
-              src: "/images/projects/portfolio/cover-01.svg",
-              alt: "Projekty full-stack Next.js",
+              src: "/images/projects/strefa-kibica/cover-01.svg",
+              alt: "Strefa Kibica — Discord community",
+              width: 16,
+              height: 9,
+            },
+            {
+              src: "/images/projects/bjtrade/cover-01.svg",
+              alt: "BJ Trade — strona firmowa",
               width: 16,
               height: 9,
             },
@@ -179,8 +189,8 @@ export function createPolishContent(): LocaleContent {
           name: "Open Tibia Community & TFS",
           description: (
             <>
-              6 lat praktyki w ekosystemie OT — Lua (TFS scripting), PHP (myAAC), MySQL,
-              administracja serwerów Linux i prowadzenie community gaming od zera.
+              6+ lat praktyki kontraktorskiej — Lua, C++, C#, PHP (myAAC), MariaDB/MySQL,
+              administracja Ubuntu/Debian i integracje web ↔ game server dla społeczności OT.
             </>
           ),
         },
@@ -188,8 +198,8 @@ export function createPolishContent(): LocaleContent {
           name: "Samodzielna nauka — nowoczesny web",
           description: (
             <>
-              React, TypeScript, Next.js App Router, Node.js, REST API, Docker i chmura
-              (Vercel/AWS) — ciągły rozwój od community dev do profesjonalnego full-stack.
+              React, TypeScript, Next.js App Router, Node.js, REST API, Docker i Vercel —
+              ciągły rozwój od community dev do profesjonalnego full-stack i web designu.
             </>
           ),
         },
@@ -203,8 +213,8 @@ export function createPolishContent(): LocaleContent {
           title: "OT / TFS & myAAC",
           description: (
             <>
-              Lua scripting w TFS, custom systemy gry, myAAC w PHP, schematy MySQL pod
-              serwery OT i community tooling od questów po panele administracyjne.
+              Lua, C++ i C# w TFS; integracje klient ↔ serwer; myAAC i custom w PHP/HTML/CSS;
+              MariaDB/MySQL; hosting Ubuntu/Debian — praca dla wielu ownerów jako contractor.
             </>
           ),
           tags: [
@@ -222,11 +232,11 @@ export function createPolishContent(): LocaleContent {
           ],
         },
         {
-          title: "Frontend (nowoczesny stack)",
+          title: "Web design & Frontend",
           description: (
             <>
-              Aplikacje React i Next.js z App Router, SSR/SSG, TypeScript, animacje,
-              dostępność i optymalizacja wydajności.
+              Profesjonalne strony custom dla gamingu i firm — React, Next.js, TypeScript,
+              responsywność, dostępność i optymalizacja wydajności.
             </>
           ),
           tags: [
@@ -236,8 +246,8 @@ export function createPolishContent(): LocaleContent {
           ],
           images: [
             {
-              src: "/images/projects/portfolio/cover-01.svg",
-              alt: "Projekt frontend Next.js",
+              src: "/images/projects/strefa-kibica/cover-01.svg",
+              alt: "Projekt webowy Next.js",
               width: 16,
               height: 9,
             },
@@ -247,8 +257,8 @@ export function createPolishContent(): LocaleContent {
           title: "Backend & DevOps",
           description: (
             <>
-              REST API w Node.js, PostgreSQL/MySQL, Redis, Docker, mikroserwisy i
-              wdrożenia na Vercel z CI/CD i monitoringiem.
+              REST API, Node.js, PostgreSQL/MySQL/MariaDB, integracje OAuth, Docker i
+              wdrożenia na Vercel z CI/CD.
             </>
           ),
           tags: [
@@ -258,8 +268,8 @@ export function createPolishContent(): LocaleContent {
           ],
           images: [
             {
-              src: "/images/projects/api/cover-01.svg",
-              alt: "Architektura API",
+              src: "/images/projects/bjtrade/cover-01.svg",
+              alt: "Strona firmowa B2B",
               width: 16,
               height: 9,
             },
@@ -280,7 +290,7 @@ export function createPolishContent(): LocaleContent {
     path: "/work",
     label: "Projekty",
     title: `Projekty – ${person.name}`,
-    description: `Case studies — od TFS/myAAC po aplikacje Next.js i API autorstwa ${person.name}`,
+    description: `Case studies — Strefa Kibica, BJ Trade, TFS/myAAC i portfolio Next.js autorstwa ${person.name}`,
   };
 
   const gallery: Gallery = {
