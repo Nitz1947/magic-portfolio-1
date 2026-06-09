@@ -18,6 +18,7 @@ import { resolveLocale } from "@/i18n/page";
 import { getUi } from "@/i18n/ui";
 import { formatDate } from "@/utils/formatDate";
 import { ScrollToHash, CustomMDX } from "@/components";
+import { SectionBackdrop } from "@/components/effects";
 import { Metadata } from "next";
 import { Projects } from "@/components/work/Projects";
 
@@ -77,6 +78,7 @@ export default async function Project({ params }: PageProps) {
   const workPath = localizedPath(work.path, locale);
 
   return (
+    <SectionBackdrop variant="workDetail">
     <Column as="section" maxWidth="m" horizontal="center" gap="l">
       <Schema
         as="blogPosting"
@@ -136,5 +138,6 @@ export default async function Project({ params }: PageProps) {
       </Column>
       <ScrollToHash />
     </Column>
+    </SectionBackdrop>
   );
 }

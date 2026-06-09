@@ -1,0 +1,22 @@
+@mixin effect-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+@mixin reduced-motion-hide {
+  @media (prefers-reduced-motion: reduce) {
+    display: none;
+  }
+}
+
+@mixin mono-code {
+  font-family: var(--font-family-code);
+  font-variant-ligatures: none;
+}
+
+@mixin accent-color {
+  color: var(--brand-on-background-weak);
+}

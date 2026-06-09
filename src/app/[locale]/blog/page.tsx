@@ -3,6 +3,7 @@ import { Mailchimp } from "@/components";
 import { Posts } from "@/components/blog/Posts";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
+import { SectionBackdrop } from "@/components/effects";
 import { baseURL, getContent } from "@/resources";
 
 type PageProps = {
@@ -27,6 +28,7 @@ export default async function Blog({ params }: PageProps) {
   const { blog, person, newsletter } = getContent(locale);
 
   return (
+    <SectionBackdrop variant="blog">
     <Column maxWidth="m" paddingTop="24">
       <Schema
         as="blogPosting"
@@ -45,7 +47,12 @@ export default async function Blog({ params }: PageProps) {
         {blog.title}
       </Heading>
       <Posts locale={locale} />
-      {newsletter.display && <Mailchimp marginTop="xl" />}
+      {newsletter.display && (
+        <SectionBackdrop variant="newsletter">
+          <Mailchimp marginTop="xl" />
+        </SectionBackdrop>
+      )}
     </Column>
+    </SectionBackdrop>
   );
 }

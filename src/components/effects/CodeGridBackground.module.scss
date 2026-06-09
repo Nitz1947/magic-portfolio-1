@@ -1,0 +1,44 @@
+@import "./effects.shared.scss";
+
+.wrapper {
+  @include effect-layer;
+  opacity: 0.12;
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 0.06;
+  }
+}
+
+.grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--brand-alpha-weak) 1px, transparent 1px),
+    linear-gradient(90deg, var(--brand-alpha-weak) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 75%);
+}
+
+.symbol {
+  @include mono-code;
+  @include accent-color;
+  position: absolute;
+  font-size: clamp(14px, 2vw, 22px);
+  opacity: 0.08;
+  user-select: none;
+  animation: float 12s ease-in-out infinite;
+
+  @include reduced-motion-hide;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.06;
+  }
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+    opacity: 0.14;
+  }
+}

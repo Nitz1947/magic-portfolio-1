@@ -14,6 +14,7 @@ import {
 } from "@once-ui-system/core";
 import { baseURL, getContent } from "@/resources";
 import TableOfContents from "@/components/about/TableOfContents";
+import { SectionBackdrop, SectionTerminal } from "@/components/effects";
 import styles from "@/components/about/about.module.scss";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
@@ -64,6 +65,7 @@ export default async function About({ params }: PageProps) {
     },
   ];
   return (
+    <SectionBackdrop variant="about">
     <Column maxWidth="m">
       <Schema
         as="webPage"
@@ -130,6 +132,7 @@ export default async function About({ params }: PageProps) {
             vertical="center"
             marginBottom="32"
           >
+            <SectionTerminal />
             {about.calendar.display && (
               <Row
                 fitWidth
@@ -351,5 +354,6 @@ export default async function About({ params }: PageProps) {
         </Column>
       </Row>
     </Column>
+    </SectionBackdrop>
   );
 }

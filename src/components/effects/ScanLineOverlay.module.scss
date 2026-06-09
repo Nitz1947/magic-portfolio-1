@@ -1,0 +1,25 @@
+@import "./effects.shared.scss";
+
+.wrapper {
+  @include effect-layer;
+  opacity: 0.04;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    var(--brand-alpha-weak) 2px,
+    var(--brand-alpha-weak) 3px
+  );
+  animation: scan 8s linear infinite;
+
+  @include reduced-motion-hide;
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4px);
+  }
+}

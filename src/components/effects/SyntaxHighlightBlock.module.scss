@@ -1,0 +1,64 @@
+@import "./effects.shared.scss";
+
+.wrapper {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.15;
+  user-select: none;
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 0.1;
+  }
+}
+
+.block {
+  @include mono-code;
+  font-size: 10px;
+  line-height: 1.6;
+  padding: 12px 14px;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--brand-alpha-weak);
+  background: var(--neutral-alpha-weak);
+  white-space: pre;
+  backdrop-filter: blur(2px);
+}
+
+.keyword {
+  color: var(--brand-on-background-medium);
+}
+
+.string {
+  color: var(--accent-on-background-medium);
+}
+
+.comment {
+  color: var(--neutral-on-background-weak);
+  opacity: 0.6;
+}
+
+.function {
+  color: var(--brand-on-background-strong);
+}
+
+.punctuation {
+  color: var(--neutral-on-background-medium);
+  opacity: 0.7;
+}
+
+.topRight {
+  top: 8%;
+  right: 4%;
+  transform: rotate(2deg);
+}
+
+.bottomLeft {
+  bottom: 10%;
+  left: 2%;
+  transform: rotate(-1deg);
+}
+
+.compact {
+  font-size: 9px;
+  padding: 8px 10px;
+}

@@ -4,6 +4,7 @@ import { Posts } from "@/components/blog/Posts";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
 import { baseURL, getContent } from "@/resources";
+import { SectionBackdrop } from "@/components/effects";
 import { Projects } from "@/components/work/Projects";
 
 type PageProps = {
@@ -28,6 +29,7 @@ export default async function Work({ params }: PageProps) {
   const { work, about, person } = getContent(locale);
 
   return (
+    <SectionBackdrop variant="work">
     <Column maxWidth="m" paddingTop="24">
       <Schema
         as="webPage"
@@ -47,5 +49,6 @@ export default async function Work({ params }: PageProps) {
       </Heading>
       <Projects locale={locale} />
     </Column>
+    </SectionBackdrop>
   );
 }

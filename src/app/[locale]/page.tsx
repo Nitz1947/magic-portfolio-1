@@ -13,6 +13,7 @@ import {
 } from "@once-ui-system/core";
 import { Mailchimp } from "@/components";
 import { CodeRain } from "@/components/CodeRain";
+import { SectionBackdrop, SectionTerminal } from "@/components/effects";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { ProjectShowcase } from "@/components/ProjectShowcase";
 import { TechMarquee } from "@/components/TechMarquee";
@@ -78,6 +79,7 @@ export default async function Home({ params }: PageProps) {
           image: `${baseURL}${person.avatar}`,
         }}
       />
+      <SectionBackdrop variant="hero">
       <Column fillWidth horizontal="center" gap="m">
         <Column
           maxWidth="s"
@@ -164,36 +166,45 @@ export default async function Home({ params }: PageProps) {
           </RevealFx>
         </Column>
       </Column>
+      </SectionBackdrop>
 
       <RevealFx translateY="20" delay={0.5} fillWidth>
         <TechMarquee />
       </RevealFx>
 
       <RevealFx translateY="24" delay={0.55} fillWidth paddingX="l">
-        <Column fillWidth gap="16">
-          <Heading as="h2" variant="display-strong-xs">
-            {ui.featuredProjects}
-          </Heading>
-          <Text variant="body-default-m" onBackground="neutral-weak">
-            {ui.featuredProjectsSubline}
-          </Text>
-          <ProjectShowcase projects={showcaseProjects} />
-        </Column>
+        <SectionBackdrop variant="projects">
+          <Column fillWidth gap="16">
+            <Heading as="h2" variant="display-strong-xs">
+              {ui.featuredProjects}
+            </Heading>
+            <Text variant="body-default-m" onBackground="neutral-weak">
+              {ui.featuredProjectsSubline}
+            </Text>
+            <ProjectShowcase projects={showcaseProjects} />
+          </Column>
+        </SectionBackdrop>
       </RevealFx>
 
       <RevealFx translateY="20" delay={0.6}>
-        <Projects
-          exclude={[...homepageFeaturedSlugs]}
-          locale={locale}
-        />
+        <SectionBackdrop variant="projects">
+          <Projects
+            exclude={[...homepageFeaturedSlugs]}
+            locale={locale}
+          />
+        </SectionBackdrop>
       </RevealFx>
 
       <RevealFx translateY="24" delay={0.65} fillWidth>
-        <ProcessSteps title={ui.process.title} steps={ui.process.steps} />
+        <SectionBackdrop variant="process">
+          <SectionTerminal />
+          <ProcessSteps title={ui.process.title} steps={ui.process.steps} />
+        </SectionBackdrop>
       </RevealFx>
 
       {routes["/blog"] && (
         <RevealFx translateY="16" delay={0.7}>
+          <SectionBackdrop variant="blogPreview">
           <Column fillWidth gap="24" marginBottom="l">
             <Row fillWidth paddingRight="64">
               <Line maxWidth={48} />
@@ -212,10 +223,13 @@ export default async function Home({ params }: PageProps) {
               <Line maxWidth={48} />
             </Row>
           </Column>
+          </SectionBackdrop>
         </RevealFx>
       )}
 
-      <Mailchimp />
+      <SectionBackdrop variant="newsletter">
+        <Mailchimp />
+      </SectionBackdrop>
     </Column>
   );
 }

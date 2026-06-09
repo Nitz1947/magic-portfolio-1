@@ -1,0 +1,101 @@
+@import "./effects.shared.scss";
+
+.wrapper {
+  @include effect-layer;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  pointer-events: none;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none !important;
+  }
+}
+
+.cyan {
+  background: radial-gradient(circle, var(--brand-solid-medium) 0%, transparent 70%);
+}
+
+.teal {
+  background: radial-gradient(circle, var(--accent-solid-medium) 0%, transparent 70%);
+}
+
+.topLeft {
+  width: min(280px, 40vw);
+  height: min(280px, 40vw);
+  top: -10%;
+  left: -5%;
+  opacity: 0.35;
+  animation: pulseTopLeft 10s ease-in-out infinite;
+
+  @include reduced-motion-hide;
+}
+
+.bottomRight {
+  width: min(220px, 35vw);
+  height: min(220px, 35vw);
+  bottom: -8%;
+  right: -4%;
+  opacity: 0.3;
+  animation: pulseBottomRight 12s ease-in-out infinite;
+
+  @include reduced-motion-hide;
+}
+
+.center {
+  width: min(200px, 30vw);
+  height: min(200px, 30vw);
+  top: 40%;
+  left: 50%;
+  opacity: 0.2;
+  animation: pulseCenter 14s ease-in-out infinite;
+
+  @include reduced-motion-hide;
+}
+
+@keyframes pulseTopLeft {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.25;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.4;
+  }
+}
+
+@keyframes pulseBottomRight {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 0.35;
+  }
+}
+
+@keyframes pulseCenter {
+  0%,
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.15;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topLeft,
+  .bottomRight,
+  .center {
+    opacity: 0.15;
+  }
+}

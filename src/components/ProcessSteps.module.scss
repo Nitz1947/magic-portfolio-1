@@ -12,15 +12,45 @@
   border-radius: var(--radius-l);
   background: var(--neutral-alpha-weak);
   transition: var(--transition-micro-medium);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "//";
+    position: absolute;
+    top: var(--static-space-12);
+    right: var(--static-space-16);
+    font-family: var(--font-family-code);
+    font-size: 10px;
+    color: var(--brand-on-background-weak);
+    opacity: 0;
+    transition: opacity var(--transition-micro-medium);
+
+    @media (prefers-reduced-motion: reduce) {
+      opacity: 0.3;
+    }
+  }
 
   &:hover {
     border-color: var(--brand-alpha-medium);
     transform: translateY(calc(-1 * var(--static-space-4)));
+
+    &::before {
+      opacity: 0.4;
+    }
+
+    .numberPulse {
+      animation: numberPulse 1.5s ease-in-out infinite;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
     &:hover {
       transform: none;
+
+      .numberPulse {
+        animation: none;
+      }
     }
   }
 }
@@ -28,4 +58,24 @@
 .number {
   font-variant-numeric: tabular-nums;
   opacity: 0.8;
+}
+
+.numberPulse {
+  display: inline-block;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes numberPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
 }

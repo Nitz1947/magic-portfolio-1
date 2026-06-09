@@ -17,6 +17,43 @@
   position: relative;
   border-radius: var(--radius-l);
   overflow: hidden;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      var(--brand-alpha-medium) 50%,
+      transparent 60%
+    );
+    background-size: 200% 100%;
+    background-position: 200% 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--transition-micro-medium);
+    border-radius: var(--radius-l);
+  }
+
+  .card:hover &::after {
+    opacity: 0.35;
+    animation: shimmer 1.2s ease-out forwards;
+
+    @media (prefers-reduced-motion: reduce) {
+      animation: none;
+      opacity: 0;
+    }
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 .image {

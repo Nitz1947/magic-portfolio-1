@@ -1,0 +1,32 @@
+@import "./effects.shared.scss";
+
+.wrapper {
+  @include effect-layer;
+}
+
+.symbol {
+  @include mono-code;
+  @include accent-color;
+  position: absolute;
+  font-size: clamp(10px, 1.5vw, 14px);
+  opacity: 0.1;
+  white-space: nowrap;
+  user-select: none;
+  animation: drift linear infinite;
+
+  @include reduced-motion-hide;
+}
+
+@keyframes drift {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.05;
+  }
+  50% {
+    opacity: 0.15;
+  }
+  100% {
+    transform: translateY(-40px) translateX(8px);
+    opacity: 0.05;
+  }
+}

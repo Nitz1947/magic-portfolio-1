@@ -8,6 +8,16 @@ export { ProjectShowcase } from "@/components/ProjectShowcase";
 export { CodeRain } from "@/components/CodeRain";
 export { ProcessSteps } from "@/components/ProcessSteps";
 export { TechMarquee } from "@/components/TechMarquee";
+export {
+  CodeGridBackground,
+  FloatingSymbols,
+  TerminalTyping,
+  SyntaxHighlightBlock,
+  ScanLineOverlay,
+  SectionGlow,
+  SectionBackdrop,
+  SectionTerminal,
+} from "@/components/effects";
 export { HeadingLink } from "@/components/HeadingLink";
 export { RouteGuard } from "@/components/RouteGuard";
 export { Providers } from "@/components/Providers";

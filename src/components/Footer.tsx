@@ -2,6 +2,7 @@
 
 import { Row, IconButton, SmartLink, Text } from "@once-ui-system/core";
 import { useLocale } from "@/context/LocaleContext";
+import { FloatingSymbols } from "@/components/effects";
 import styles from "./Footer.module.scss";
 
 export const Footer = () => {
@@ -10,7 +11,10 @@ export const Footer = () => {
   const { person, social } = content;
 
   return (
-    <Row as="footer" fillWidth padding="8" horizontal="center" s={{ direction: "column" }}>
+    <Row as="footer" fillWidth padding="8" horizontal="center" s={{ direction: "column" }} className={styles.footer}>
+      <div className={styles.backdrop} aria-hidden="true">
+        <FloatingSymbols density="sparse" />
+      </div>
       <Row
         className={styles.mobile}
         maxWidth="m"
