@@ -13,14 +13,14 @@ import {
 } from "@/types";
 
 // IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
-const baseURL: string = "https://demo.magic-portfolio.com";
+const baseURL: string = "https://magic-portfolio-beta-eight.vercel.app";
 
 const routes: RoutesConfig = {
   "/": true,
   "/about": true,
   "/work": true,
   "/blog": true,
-  "/gallery": true,
+  "/gallery": false,
 };
 
 const display: DisplayConfig = {
@@ -32,9 +32,7 @@ const display: DisplayConfig = {
 
 // Enable password protection on selected routes
 // Set password in the .env file, refer to .env.example
-const protectedRoutes: ProtectedRoutesConfig = {
-  "/work/automate-design-handovers-with-a-figma-to-code-pipeline": true,
-};
+const protectedRoutes: ProtectedRoutesConfig = {};
 
 // Import and set font for each variant
 import { Geist } from "next/font/google";
@@ -101,25 +99,25 @@ const dataStyle: DataStyleConfig = {
 
 const effects: EffectsConfig = {
   mask: {
-    cursor: false,
+    cursor: true,
     x: 50,
     y: 0,
     radius: 100,
   },
   gradient: {
-    display: false,
-    opacity: 100,
+    display: true,
+    opacity: 80,
     x: 50,
-    y: 60,
+    y: 40,
     width: 100,
-    height: 50,
-    tilt: 0,
-    colorStart: "accent-background-strong",
+    height: 60,
+    tilt: 12,
+    colorStart: "brand-background-strong",
     colorEnd: "page-background",
   },
   dots: {
     display: true,
-    opacity: 40,
+    opacity: 35,
     size: "2",
     color: "brand-background-strong",
   },
@@ -186,18 +184,18 @@ const mailchimp: MailchimpConfig = {
 
 // default schema data
 const schema: SchemaConfig = {
-  logo: "",
-  type: "Organization",
-  name: "Once UI",
-  description: "Portfolio website showcasing design and development work",
-  email: "lorant@once-ui.com",
+  logo: "/images/avatar.svg",
+  type: "Person",
+  name: "Michał Ch.",
+  description: "Full-stack developer portfolio — Next.js, React, TypeScript",
+  email: "kontakt@1choc.dev",
 };
 
 // social links
 const sameAs: SameAsConfig = {
-  threads: "https://www.threads.com/@once_ui",
-  linkedin: "https://www.linkedin.com/company/once-ui/",
-  discord: "https://discord.com/invite/5EyAQ4eNdS",
+  threads: "",
+  linkedin: "https://www.linkedin.com/in/1choc",
+  discord: "",
 };
 
 // social sharing configuration for blog posts

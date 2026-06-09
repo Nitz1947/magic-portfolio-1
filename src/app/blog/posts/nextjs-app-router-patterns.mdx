@@ -1,0 +1,38 @@
+---
+title: "Next.js App Router — patterns that scale"
+publishedAt: "2026-03-15"
+summary: "Server Components, streaming, and cache strategies for production Next.js apps."
+tag: "Next.js"
+---
+
+Building with the App Router means thinking in **boundaries** — what runs on the server, what streams, and what stays interactive on the client.
+
+## Server Components by default
+
+Start every page as a Server Component. Push `"use client"` only to leaf nodes that need hooks or browser APIs. This keeps bundles small and data fetching colocated with rendering.
+
+```tsx
+// app/products/page.tsx — server component
+export default async function ProductsPage() {
+  const products = await getProducts();
+  return <ProductGrid items={products} />;
+}
+```
+
+## Streaming with Suspense
+
+Wrap slow data sources in `<Suspense>` so the shell renders immediately while sections hydrate progressively.
+
+```tsx
+<Suspense fallback={<ProductGridSkeleton />}>
+  <ProductGrid />
+</Suspense>
+```
+
+## Cache tags and revalidation
+
+Use `revalidateTag` after mutations instead of blanket `revalidatePath`. Tag by entity (`product:123`) so unrelated pages stay cached.
+
+## Takeaway
+
+The App Router rewards explicit data boundaries. Map your UI to server/client splits early — refactoring later is expensive.

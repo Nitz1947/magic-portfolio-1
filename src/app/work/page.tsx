@@ -1,5 +1,7 @@
+import { defaultLocale } from "@/i18n/config";
 import { Column, Heading, Meta, Schema } from "@once-ui-system/core";
 import { baseURL, about, person, work } from "@/resources";
+import { LegacyLocaleShell } from "@/components";
 import { Projects } from "@/components/work/Projects";
 
 export async function generateMetadata() {
@@ -14,6 +16,7 @@ export async function generateMetadata() {
 
 export default function Work() {
   return (
+    <LegacyLocaleShell>
     <Column maxWidth="m" paddingTop="24">
       <Schema
         as="webPage"
@@ -31,7 +34,8 @@ export default function Work() {
       <Heading marginBottom="l" variant="heading-strong-xl" align="center">
         {work.title}
       </Heading>
-      <Projects />
+      <Projects locale={defaultLocale} />
     </Column>
+    </LegacyLocaleShell>
   );
 }

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { CustomMDX, ScrollToHash } from "@/components";
+import { CustomMDX, LegacyLocaleShell, ScrollToHash } from "@/components";
 import {
   Meta,
   Schema,
@@ -19,6 +19,7 @@ import { formatDate } from "@/utils/formatDate";
 import { getPosts } from "@/utils/utils";
 import { Metadata } from "next";
 import React from "react";
+import { defaultLocale } from "@/i18n/config";
 import { Posts } from "@/components/blog/Posts";
 import { ShareSection } from "@/components/blog/ShareSection";
 
@@ -71,6 +72,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
     })) || [];
 
   return (
+    <LegacyLocaleShell>
     <Row fillWidth>
       <Row maxWidth={12} m={{ hide: true }} />
       <Row fillWidth horizontal="center">
@@ -147,7 +149,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
             <Text as="h2" id="recent-posts" variant="heading-strong-xl" marginBottom="24">
               Recent posts
             </Text>
-            <Posts exclude={[post.slug]} range={[1, 2]} columns="2" thumbnail direction="column" />
+            <Posts exclude={[post.slug]} range={[1, 2]} columns="2" thumbnail direction="column" locale={defaultLocale} />
           </Column>
           <ScrollToHash />
         </Column>
@@ -164,5 +166,6 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
         <HeadingNav fitHeight />
       </Column>
     </Row>
+    </LegacyLocaleShell>
   );
 }

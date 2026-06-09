@@ -2,6 +2,13 @@ import type { Locale } from "./config";
 
 export type UiStrings = {
   latestFromBlog: string;
+  viewProjects: string;
+  contactMe: string;
+  featuredProject: string;
+  process: {
+    title: string;
+    steps: Array<{ number: string; title: string; description: string }>;
+  };
   notFound: {
     title: string;
     description: string;
@@ -30,6 +37,8 @@ export type UiStrings = {
   work: {
     label: string;
     relatedProjects: string;
+    readCaseStudy: string;
+    viewProject: string;
   };
   relativeTime: {
     justNow: string;
@@ -44,6 +53,34 @@ export type UiStrings = {
 const uiStrings: Record<Locale, UiStrings> = {
   en: {
     latestFromBlog: "Latest from the blog",
+    viewProjects: "View projects",
+    contactMe: "Contact",
+    featuredProject: "Featured project",
+    process: {
+      title: "How I work",
+      steps: [
+        {
+          number: "01",
+          title: "Discovery",
+          description: "Understanding goals, users, and constraints before writing code.",
+        },
+        {
+          number: "02",
+          title: "Architecture",
+          description: "Designing scalable structure — data models, API contracts, and UX flows.",
+        },
+        {
+          number: "03",
+          title: "Build & iterate",
+          description: "Shipping in small increments with tests, reviews, and preview deploys.",
+        },
+        {
+          number: "04",
+          title: "Launch & measure",
+          description: "Monitoring performance, gathering feedback, and continuous improvement.",
+        },
+      ],
+    },
     notFound: {
       title: "Page Not Found",
       description: "The page you are looking for does not exist.",
@@ -72,6 +109,8 @@ const uiStrings: Record<Locale, UiStrings> = {
     work: {
       label: "Projects",
       relatedProjects: "Related projects",
+      readCaseStudy: "Read case study",
+      viewProject: "View project",
     },
     relativeTime: {
       justNow: "just now",
@@ -84,6 +123,34 @@ const uiStrings: Record<Locale, UiStrings> = {
   },
   pl: {
     latestFromBlog: "Najnowsze wpisy na blogu",
+    viewProjects: "Zobacz projekty",
+    contactMe: "Kontakt",
+    featuredProject: "Wyróżniony projekt",
+    process: {
+      title: "Jak pracuję",
+      steps: [
+        {
+          number: "01",
+          title: "Discovery",
+          description: "Poznanie celów, użytkowników i ograniczeń zanim napiszę kod.",
+        },
+        {
+          number: "02",
+          title: "Architektura",
+          description: "Projekt skalowalnej struktury — modele danych, kontrakty API i flow UX.",
+        },
+        {
+          number: "03",
+          title: "Build & iteracja",
+          description: "Dostarczanie w małych krokach z testami, review i preview deployami.",
+        },
+        {
+          number: "04",
+          title: "Launch & pomiar",
+          description: "Monitoring wydajności, feedback użytkowników i ciągłe usprawnienia.",
+        },
+      ],
+    },
     notFound: {
       title: "Nie znaleziono strony",
       description: "Strona, której szukasz, nie istnieje.",
@@ -112,6 +179,8 @@ const uiStrings: Record<Locale, UiStrings> = {
     work: {
       label: "Projekty",
       relatedProjects: "Powiązane projekty",
+      readCaseStudy: "Czytaj case study",
+      viewProject: "Zobacz projekt",
     },
     relativeTime: {
       justNow: "przed chwilą",

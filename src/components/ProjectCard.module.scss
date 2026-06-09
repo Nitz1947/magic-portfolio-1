@@ -1,0 +1,14 @@
+.card {
+  transition: var(--transition-micro-medium);
+  border-radius: var(--radius-l);
+
+  &:hover {
+    transform: translateY(calc(-1 * var(--static-space-4)));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:hover {
+      transform: none;
+    }
+  }
+}

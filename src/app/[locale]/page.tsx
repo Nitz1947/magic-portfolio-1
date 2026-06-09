@@ -12,6 +12,9 @@ import {
   Line,
 } from "@once-ui-system/core";
 import { Mailchimp } from "@/components";
+import { ProcessSteps } from "@/components/ProcessSteps";
+import { ProjectBrowserFrame } from "@/components/ProjectBrowserFrame";
+import { TechMarquee } from "@/components/TechMarquee";
 import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
 import { localizedPath } from "@/i18n/paths";
@@ -38,7 +41,7 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function Home({ params }: PageProps) {
   const locale = await resolveLocale(params);
-  const { home, about, person } = getContent(locale);
+  const { home, about, person, work } = getContent(locale);
   const ui = getUi(locale);
 
   return (
@@ -63,7 +66,7 @@ export default async function Home({ params }: PageProps) {
               fillWidth
               horizontal="center"
               paddingTop="16"
-              paddingBottom="32"
+              paddingBottom="24"
               paddingLeft="12"
             >
               <Badge
@@ -79,22 +82,43 @@ export default async function Home({ params }: PageProps) {
               </Badge>
             </RevealFx>
           )}
-          <RevealFx translateY="4" fillWidth horizontal="center" paddingBottom="16">
+          <RevealFx translateY="8" fillWidth horizontal="center" paddingBottom="16">
             <Heading wrap="balance" variant="display-strong-l">
               {home.headline}
             </Heading>
           </RevealFx>
-          <RevealFx translateY="8" delay={0.2} fillWidth horizontal="center" paddingBottom="32">
+          <RevealFx translateY="12" delay={0.15} fillWidth horizontal="center" paddingBottom="32">
             <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
               {home.subline}
             </Text>
           </RevealFx>
-          <RevealFx paddingTop="12" delay={0.4} horizontal="center" paddingLeft="12">
+          <RevealFx translateY="16" delay={0.3} fillWidth horizontal="center">
+            <Row gap="12" wrap horizontal="center">
+              <Button
+                href={localizedPath(work.path, locale)}
+                variant="primary"
+                size="m"
+                weight="default"
+                arrowIcon
+              >
+                {ui.viewProjects}
+              </Button>
+              <Button
+                href={`mailto:${person.email}`}
+                variant="secondary"
+                size="m"
+                weight="default"
+              >
+                {ui.contactMe}
+              </Button>
+            </Row>
+          </RevealFx>
+          <RevealFx translateY="8" delay={0.45} horizontal="center" paddingTop="24">
             <Button
               id="about"
               data-border="rounded"
               href={localizedPath(about.path, locale)}
-              variant="secondary"
+              variant="tertiary"
               size="m"
               weight="default"
               arrowIcon
@@ -114,30 +138,59 @@ export default async function Home({ params }: PageProps) {
           </RevealFx>
         </Column>
       </Column>
-      <RevealFx translateY="16" delay={0.6}>
+
+      <RevealFx translateY="20" delay={0.5} fillWidth>
+        <TechMarquee />
+      </RevealFx>
+
+      <RevealFx translateY="24" delay={0.55} fillWidth paddingX="l">
+        <Column fillWidth gap="16">
+          <Heading as="h2" variant="display-strong-xs">
+            {ui.featuredProject}
+          </Heading>
+          <ProjectBrowserFrame
+            src="/images/projects/ecommerce/cover-01.svg"
+            alt="Platforma E-commerce Next.js"
+            url="shop.example.com"
+          />
+        </Column>
+      </RevealFx>
+
+      <RevealFx translateY="20" delay={0.6}>
         <Projects range={[1, 1]} locale={locale} />
       </RevealFx>
+
+      <RevealFx translateY="24" delay={0.65} fillWidth>
+        <ProcessSteps title={ui.process.title} steps={ui.process.steps} />
+      </RevealFx>
+
       {routes["/blog"] && (
-        <Column fillWidth gap="24" marginBottom="l">
-          <Row fillWidth paddingRight="64">
-            <Line maxWidth={48} />
-          </Row>
-          <Row fillWidth gap="24" marginTop="40" s={{ direction: "column" }}>
-            <Row flex={1} paddingLeft="l" paddingTop="24">
-              <Heading as="h2" variant="display-strong-xs" wrap="balance">
-                {ui.latestFromBlog}
-              </Heading>
+        <RevealFx translateY="16" delay={0.7}>
+          <Column fillWidth gap="24" marginBottom="l">
+            <Row fillWidth paddingRight="64">
+              <Line maxWidth={48} />
             </Row>
-            <Row flex={3} paddingX="20">
-              <Posts range={[1, 2]} columns="2" locale={locale} />
+            <Row fillWidth gap="24" marginTop="40" s={{ direction: "column" }}>
+              <Row flex={1} paddingLeft="l" paddingTop="24">
+                <Heading as="h2" variant="display-strong-xs" wrap="balance">
+                  {ui.latestFromBlog}
+                </Heading>
+              </Row>
+              <Row flex={3} paddingX="20">
+                <Posts range={[1, 2]} columns="2" locale={locale} />
+              </Row>
             </Row>
-          </Row>
-          <Row fillWidth paddingLeft="64" horizontal="end">
-            <Line maxWidth={48} />
-          </Row>
-        </Column>
+            <Row fillWidth paddingLeft="64" horizontal="end">
+              <Line maxWidth={48} />
+            </Row>
+          </Column>
+        </RevealFx>
       )}
-      <Projects range={[2]} locale={locale} />
+
+      <RevealFx translateY="20" delay={0.75}>
+        <Projects range={[2]} locale={locale} />
+      </RevealFx>
+
       <Mailchimp />
     </Column>
   );

@@ -17,7 +17,8 @@ import {
 } from "@once-ui-system/core";
 import { baseURL, about, person, work } from "@/resources";
 import { formatDate } from "@/utils/formatDate";
-import { ScrollToHash, CustomMDX } from "@/components";
+import { CustomMDX, LegacyLocaleShell, ScrollToHash } from "@/components";
+import { defaultLocale } from "@/i18n/config";
 import { Metadata } from "next";
 import { Projects } from "@/components/work/Projects";
 
@@ -74,6 +75,7 @@ export default async function Project({
     })) || [];
 
   return (
+    <LegacyLocaleShell>
     <Column as="section" maxWidth="m" horizontal="center" gap="l">
       <Schema
         as="blogPosting"
@@ -129,9 +131,10 @@ export default async function Project({
         <Heading as="h2" variant="heading-strong-xl" marginBottom="24">
           Related projects
         </Heading>
-        <Projects exclude={[post.slug]} range={[2]} />
+        <Projects exclude={[post.slug]} range={[2]} locale={defaultLocale} />
       </Column>
       <ScrollToHash />
     </Column>
+    </LegacyLocaleShell>
   );
 }

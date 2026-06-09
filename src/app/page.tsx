@@ -12,7 +12,8 @@ import {
   Line,
 } from "@once-ui-system/core";
 import { home, about, person, baseURL, routes } from "@/resources";
-import { Mailchimp } from "@/components";
+import { defaultLocale } from "@/i18n/config";
+import { LegacyLocaleShell, Mailchimp } from "@/components";
 import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
 
@@ -28,6 +29,7 @@ export async function generateMetadata() {
 
 export default function Home() {
   return (
+    <LegacyLocaleShell>
     <Column maxWidth="m" gap="xl" paddingY="12" horizontal="center">
       <Schema
         as="webPage"
@@ -101,7 +103,7 @@ export default function Home() {
         </Column>
       </Column>
       <RevealFx translateY="16" delay={0.6}>
-        <Projects range={[1, 1]} />
+        <Projects range={[1, 1]} locale={defaultLocale} />
       </RevealFx>
       {routes["/blog"] && (
         <Column fillWidth gap="24" marginBottom="l">
@@ -115,7 +117,7 @@ export default function Home() {
               </Heading>
             </Row>
             <Row flex={3} paddingX="20">
-              <Posts range={[1, 2]} columns="2" />
+              <Posts range={[1, 2]} columns="2" locale={defaultLocale} />
             </Row>
           </Row>
           <Row fillWidth paddingLeft="64" horizontal="end">
@@ -123,8 +125,9 @@ export default function Home() {
           </Row>
         </Column>
       )}
-      <Projects range={[2]} />
+      <Projects range={[2]} locale={defaultLocale} />
       <Mailchimp />
     </Column>
+    </LegacyLocaleShell>
   );
 }

@@ -1,4 +1,5 @@
 import { Flex, Meta, Schema } from "@once-ui-system/core";
+import { LegacyLocaleShell } from "@/components";
 import GalleryView from "@/components/gallery/GalleryView";
 import { baseURL, gallery, person } from "@/resources";
 
@@ -14,6 +15,7 @@ export async function generateMetadata() {
 
 export default function Gallery() {
   return (
+    <LegacyLocaleShell>
     <Flex maxWidth="l">
       <Schema
         as="webPage"
@@ -30,5 +32,6 @@ export default function Gallery() {
       />
       <GalleryView />
     </Flex>
+    </LegacyLocaleShell>
   );
 }

@@ -1,0 +1,46 @@
+---
+title: "TypeScript type safety in real projects"
+publishedAt: "2026-01-22"
+summary: "Practical patterns for strict TypeScript — branded types, discriminated unions, and API contracts."
+tag: "TypeScript"
+---
+
+Strict TypeScript pays off when types model **domain rules**, not just shapes.
+
+## Branded types for IDs
+
+Prevent mixing user IDs with order IDs at compile time:
+
+```typescript
+type Brand<T, B extends string> = T & { readonly __brand: B };
+type UserId = Brand<string, "UserId">;
+type OrderId = Brand<string, "OrderId">;
+
+function getOrder(id: OrderId) { /* ... */ }
+// getOrder(userId) — compile error
+```
+
+## Discriminated unions for state
+
+Model async UI state explicitly instead of optional fields:
+
+```typescript
+type RequestState<T> =
+  | { status: "idle" }
+  | { status: "loading" }
+  | { status: "success"; data: T }
+  | { status: "error"; error: string };
+```
+
+## API contracts with Zod
+
+Validate at the boundary, infer types inside:
+
+```typescript
+const UserSchema = z.object({ id: z.string(), email: z.string().email() });
+type User = z.infer<typeof UserSchema>;
+```
+
+## Takeaway
+
+Invest in types at system boundaries — API responses, form payloads, event schemas. Internal component props can stay simpler.

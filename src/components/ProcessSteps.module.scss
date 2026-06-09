@@ -1,0 +1,31 @@
+@import "./breakpoints.scss";
+
+.grid {
+  @include s {
+    flex-direction: column;
+  }
+}
+
+.step {
+  padding: var(--static-space-24);
+  border: 1px solid var(--neutral-alpha-weak);
+  border-radius: var(--radius-l);
+  background: var(--neutral-alpha-weak);
+  transition: var(--transition-micro-medium);
+
+  &:hover {
+    border-color: var(--brand-alpha-medium);
+    transform: translateY(calc(-1 * var(--static-space-4)));
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+.number {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.8;
+}

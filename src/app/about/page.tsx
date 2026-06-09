@@ -13,6 +13,7 @@ import {
   Row,
 } from "@once-ui-system/core";
 import { baseURL, about, person, social } from "@/resources";
+import { LegacyLocaleShell } from "@/components";
 import TableOfContents from "@/components/about/TableOfContents";
 import styles from "@/components/about/about.module.scss";
 import React from "react";
@@ -51,6 +52,7 @@ export default function About() {
     },
   ];
   return (
+    <LegacyLocaleShell>
     <Column maxWidth="m">
       <Schema
         as="webPage"
@@ -338,5 +340,6 @@ export default function About() {
         </Column>
       </Row>
     </Column>
+    </LegacyLocaleShell>
   );
 }

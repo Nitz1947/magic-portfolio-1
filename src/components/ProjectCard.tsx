@@ -9,6 +9,8 @@ import {
   SmartLink,
   Text,
 } from "@once-ui-system/core";
+import { useLocale } from "@/context/LocaleContext";
+import styles from "./ProjectCard.module.scss";
 
 interface ProjectCardProps {
   href: string;
@@ -30,8 +32,10 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   avatars,
   link,
 }) => {
+  const { ui } = useLocale();
+
   return (
-    <Column fillWidth gap="m">
+    <Column fillWidth gap="m" className={styles.card}>
       <Carousel
         sizes="(max-width: 960px) 100vw, 960px"
         items={images.map((image) => ({
@@ -69,7 +73,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   style={{ margin: "0", width: "fit-content" }}
                   href={href}
                 >
-                  <Text variant="body-default-s">Read case study</Text>
+                  <Text variant="body-default-s">{ui.work.readCaseStudy}</Text>
                 </SmartLink>
               )}
               {link && (
@@ -78,7 +82,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                   style={{ margin: "0", width: "fit-content" }}
                   href={link}
                 >
-                  <Text variant="body-default-s">View project</Text>
+                  <Text variant="body-default-s">{ui.work.viewProject}</Text>
                 </SmartLink>
               )}
             </Flex>
