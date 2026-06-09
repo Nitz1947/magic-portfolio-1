@@ -12,15 +12,18 @@ import {
   Line,
 } from "@once-ui-system/core";
 import { Mailchimp } from "@/components";
+import { CodeRain } from "@/components/CodeRain";
 import { ProcessSteps } from "@/components/ProcessSteps";
-import { ProjectBrowserFrame } from "@/components/ProjectBrowserFrame";
+import { ProjectShowcase } from "@/components/ProjectShowcase";
 import { TechMarquee } from "@/components/TechMarquee";
 import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
+import { featuredProjectConfigs, homepageFeaturedSlugs } from "@/data/featuredProjects";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
 import { getUi } from "@/i18n/ui";
 import { baseURL, getContent, routes } from "@/resources";
+import { getPosts } from "@/utils/utils";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -44,6 +47,22 @@ export default async function Home({ params }: PageProps) {
   const { home, about, person, work } = getContent(locale);
   const ui = getUi(locale);
 
+  const allProjects = getPosts(["src", "app", "work", "projects"]);
+  const showcaseProjects = homepageFeaturedSlugs
+    .map((slug) => {
+      const post = allProjects.find((p) => p.slug === slug);
+      const config = featuredProjectConfigs[slug];
+      if (!post || !config) return null;
+      return {
+        slug,
+        title: post.metadata.title,
+        summary: post.metadata.summary,
+        href: localizedPath(`/work/${slug}`, locale),
+        config,
+      };
+    })
+    .filter((p): p is NonNullable<typeof p> => p !== null);
+
   return (
     <Column maxWidth="m" gap="xl" paddingY="12" horizontal="center">
       <Schema
@@ -60,7 +79,14 @@ export default async function Home({ params }: PageProps) {
         }}
       />
       <Column fillWidth horizontal="center" gap="m">
-        <Column maxWidth="s" horizontal="center" align="center">
+        <Column
+          maxWidth="s"
+          horizontal="center"
+          align="center"
+          style={{ position: "relative" }}
+          fillWidth
+        >
+          <CodeRain />
           {home.featured.display && (
             <RevealFx
               fillWidth
@@ -146,18 +172,20 @@ export default async function Home({ params }: PageProps) {
       <RevealFx translateY="24" delay={0.55} fillWidth paddingX="l">
         <Column fillWidth gap="16">
           <Heading as="h2" variant="display-strong-xs">
-            {ui.featuredProject}
+            {ui.featuredProjects}
           </Heading>
-          <ProjectBrowserFrame
-            src="/images/projects/ecommerce/cover-01.svg"
-            alt="Platforma E-commerce Next.js"
-            url="shop.example.com"
-          />
+          <Text variant="body-default-m" onBackground="neutral-weak">
+            {ui.featuredProjectsSubline}
+          </Text>
+          <ProjectShowcase projects={showcaseProjects} />
         </Column>
       </RevealFx>
 
       <RevealFx translateY="20" delay={0.6}>
-        <Projects range={[1, 1]} locale={locale} />
+        <Projects
+          exclude={[...homepageFeaturedSlugs]}
+          locale={locale}
+        />
       </RevealFx>
 
       <RevealFx translateY="24" delay={0.65} fillWidth>
@@ -186,10 +214,6 @@ export default async function Home({ params }: PageProps) {
           </Column>
         </RevealFx>
       )}
-
-      <RevealFx translateY="20" delay={0.75}>
-        <Projects range={[2]} locale={locale} />
-      </RevealFx>
 
       <Mailchimp />
     </Column>

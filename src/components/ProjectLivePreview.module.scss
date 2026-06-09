@@ -1,0 +1,68 @@
+.viewport {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: var(--neutral-alpha-weak);
+}
+
+.iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  background: var(--page-background);
+}
+
+.fallback {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.fallbackImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--static-space-12);
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(2px);
+}
+
+.loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--neutral-alpha-weak);
+  font-family: var(--font-family-code);
+  font-size: var(--font-size-label-default-s);
+  color: var(--neutral-on-background-weak);
+}
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--static-space-8);
+  width: 100%;
+  height: 100%;
+  padding: var(--static-space-24);
+  text-align: center;
+}
+
+.placeholderIcon {
+  font-size: 2rem;
+  opacity: 0.5;
+}

@@ -12,3 +12,41 @@
     }
   }
 }
+
+.mediaWrap {
+  position: relative;
+  border-radius: var(--radius-l);
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-l);
+  border: 1px solid var(--neutral-alpha-weak);
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--static-space-12);
+  background: rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transition: opacity var(--transition-micro-medium);
+  border-radius: var(--radius-l);
+
+  .mediaWrap:hover &,
+  .mediaWrap:focus-within & {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.35);
+  }
+}

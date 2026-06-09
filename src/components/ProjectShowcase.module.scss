@@ -1,0 +1,22 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--static-space-32);
+
+  @media (min-width: 960px) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--static-space-24);
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--static-space-16);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--static-space-12);
+}

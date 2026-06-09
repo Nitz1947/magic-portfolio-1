@@ -47,8 +47,8 @@ export function createEnglishContent(): LocaleContent {
     image: "/images/og/home.svg",
     label: "Home",
     title: `${person.name}'s Portfolio`,
-    description: `Full-stack developer portfolio — custom websites for gaming, OT servers, and businesses. TFS/myAAC, Next.js, React, TypeScript.`,
-    headline: <>Professional websites — from OT to any industry</>,
+    description: `Full-stack developer portfolio — custom websites for gaming communities, Discord platforms, and businesses. Next.js, React, TypeScript.`,
+    headline: <>Code that ships like a product</>,
     featured: {
       display: true,
       title: (
@@ -64,14 +64,10 @@ export function createEnglishContent(): LocaleContent {
     },
     subline: (
       <>
-        I build <Text as="span" size="xl" weight="strong">professional websites</Text>{" "}
-        — for multi-gaming communities, private game servers, and companies across all
-        industries. Every project is <Text as="span" size="xl" weight="strong">custom</Text>{" "}
-        and tailored to the client. With 6+ years as a contract developer in the{" "}
-        <Text as="span" size="xl" weight="strong">TFS</Text>
-        {" "}and{" "}
-        <Text as="span" size="xl" weight="strong">myAAC</Text>
-        {" "}ecosystem, I now ship modern apps with Next.js, React, and TypeScript.
+        I design and ship <Text as="span" size="xl" weight="strong">custom websites</Text>{" "}
+        for gaming communities, Discord platforms, and businesses that need more than
+        a template. From first sketch to Vercel deploy — fast, responsive, and
+        obsessively polished.
       </>
     ),
   };

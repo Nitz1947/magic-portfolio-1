@@ -1,13 +1,20 @@
+import type { ReactNode } from "react";
 import { Column, Text } from "@once-ui-system/core";
 import styles from "./ProjectBrowserFrame.module.scss";
 
 interface ProjectBrowserFrameProps {
-  src: string;
-  alt: string;
+  src?: string;
+  alt?: string;
   url?: string;
+  children?: ReactNode;
 }
 
-export function ProjectBrowserFrame({ src, alt, url = "app.example.com" }: ProjectBrowserFrameProps) {
+export function ProjectBrowserFrame({
+  src,
+  alt = "",
+  url = "app.example.com",
+  children,
+}: ProjectBrowserFrameProps) {
   return (
     <Column fillWidth className={styles.frame} radius="l" border="neutral-alpha-weak">
       <div className={styles.chrome}>
@@ -20,10 +27,14 @@ export function ProjectBrowserFrame({ src, alt, url = "app.example.com" }: Proje
           {url}
         </Text>
       </div>
-      <div className={styles.viewport}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={src} alt={alt} className={styles.screenshot} loading="lazy" />
-      </div>
+      {children ?? (
+        <div className={styles.viewport}>
+          {src && (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img src={src} alt={alt} className={styles.screenshot} loading="lazy" />
+          )}
+        </div>
+      )}
     </Column>
   );
 }

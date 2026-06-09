@@ -5,6 +5,8 @@ export type UiStrings = {
   viewProjects: string;
   contactMe: string;
   featuredProject: string;
+  featuredProjects: string;
+  featuredProjectsSubline: string;
   process: {
     title: string;
     steps: Array<{ number: string; title: string; description: string }>;
@@ -39,6 +41,12 @@ export type UiStrings = {
     relatedProjects: string;
     readCaseStudy: string;
     viewProject: string;
+    preview: string;
+    openLive: string;
+    closePreview: string;
+    previewLoading: string;
+    previewBlocked: string;
+    previewPlaceholder: string;
   };
   relativeTime: {
     justNow: string;
@@ -56,6 +64,8 @@ const uiStrings: Record<Locale, UiStrings> = {
     viewProjects: "View projects",
     contactMe: "Contact",
     featuredProject: "Featured project",
+    featuredProjects: "Selected work",
+    featuredProjectsSubline: "Live previews of recent projects — click to explore or open the deployed site.",
     process: {
       title: "How I work",
       steps: [
@@ -111,6 +121,12 @@ const uiStrings: Record<Locale, UiStrings> = {
       relatedProjects: "Related projects",
       readCaseStudy: "Read case study",
       viewProject: "View project",
+      preview: "Preview",
+      openLive: "Open live",
+      closePreview: "Close",
+      previewLoading: "Loading preview…",
+      previewBlocked: "Live embed unavailable — open the site directly",
+      previewPlaceholder: "Click to open the live site",
     },
     relativeTime: {
       justNow: "just now",
@@ -126,6 +142,8 @@ const uiStrings: Record<Locale, UiStrings> = {
     viewProjects: "Zobacz projekty",
     contactMe: "Kontakt",
     featuredProject: "Wyróżniony projekt",
+    featuredProjects: "Wybrane projekty",
+    featuredProjectsSubline: "Podgląd na żywo ostatnich realizacji — kliknij, aby zobaczyć szczegóły lub otworzyć stronę.",
     process: {
       title: "Jak pracuję",
       steps: [
@@ -181,6 +199,12 @@ const uiStrings: Record<Locale, UiStrings> = {
       relatedProjects: "Powiązane projekty",
       readCaseStudy: "Czytaj case study",
       viewProject: "Zobacz projekt",
+      preview: "Podgląd",
+      openLive: "Otwórz live",
+      closePreview: "Zamknij",
+      previewLoading: "Ładowanie podglądu…",
+      previewBlocked: "Podgląd niedostępny — otwórz stronę bezpośrednio",
+      previewPlaceholder: "Kliknij, aby otworzyć stronę na żywo",
     },
     relativeTime: {
       justNow: "przed chwilą",

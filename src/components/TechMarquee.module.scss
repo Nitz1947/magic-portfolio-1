@@ -15,7 +15,7 @@
   display: flex;
   gap: var(--static-space-32);
   width: max-content;
-  animation: marquee 40s linear infinite;
+  animation: marquee 32s linear infinite;
 
   @media (prefers-reduced-motion: reduce) {
     animation: none;
@@ -27,9 +27,11 @@
 
 .item {
   flex-shrink: 0;
-  font-size: var(--font-size-body-default-m);
+  font-family: var(--font-family-code);
+  font-size: var(--font-size-label-default-s);
   font-weight: 500;
   color: var(--neutral-on-background-weak);
+  letter-spacing: 0.02em;
   padding: var(--static-space-8) var(--static-space-20);
   border: 1px solid var(--neutral-alpha-weak);
   border-radius: var(--radius-full);

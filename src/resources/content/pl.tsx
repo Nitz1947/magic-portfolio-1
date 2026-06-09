@@ -47,8 +47,8 @@ export function createPolishContent(): LocaleContent {
     image: "/images/og/home.svg",
     label: "Strona główna",
     title: `Portfolio – ${person.name}`,
-    description: `Portfolio full-stack developera — strony custom dla gamingu, serwerów OT i firm. TFS/myAAC, Next.js, React, TypeScript.`,
-    headline: <>Profesjonalne strony — od OT po każdą branżę</>,
+    description: `Portfolio full-stack developera — custom strony dla gamingu, społeczności Discord i firm. Next.js, React, TypeScript.`,
+    headline: <>Kod, który wygląda jak produkt</>,
     featured: {
       display: true,
       title: (
@@ -64,15 +64,10 @@ export function createPolishContent(): LocaleContent {
     },
     subline: (
       <>
-        Tworzę <Text as="span" size="xl" weight="strong">profesjonalne strony</Text>{" "}
-        — dla multi gamingów, prywatnych serwerów gier i firm ze wszystkich branż.
-        Każdy projekt jest <Text as="span" size="xl" weight="strong">custom</Text>{" "}
-        i dopasowany indywidualnie do klienta. Mam 6+ lat doświadczenia kontraktorskiego
-        w ekosystemie{" "}
-        <Text as="span" size="xl" weight="strong">TFS</Text>
-        {" "}i{" "}
-        <Text as="span" size="xl" weight="strong">myAAC</Text>
-        , a dziś buduję nowoczesne aplikacje w Next.js, React i TypeScript.
+        Projektuję i wdrażam <Text as="span" size="xl" weight="strong">custom strony</Text>{" "}
+        dla społeczności gamingowych, platform Discord i firm, które potrzebują
+        czegoś więcej niż szablonu. Od pierwszego szkicu po deploy na Vercel —
+        szybko, responsywnie i z dbałością o detale.
       </>
     ),
   };

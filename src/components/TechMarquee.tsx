@@ -7,14 +7,14 @@ const TECH_STACK = [
   "React",
   "TypeScript",
   "Node.js",
-  "PostgreSQL",
-  "Docker",
+  "Discord OAuth",
   "Vercel",
+  "PostgreSQL",
   "Tailwind CSS",
-  "GraphQL",
-  "Redis",
-  "AWS",
-  "Prisma",
+  "i18n",
+  "App Router",
+  "MDX",
+  "Sass",
 ];
 
 export function TechMarquee() {

@@ -187,7 +187,7 @@ const schema: SchemaConfig = {
   logo: "/images/avatar.svg",
   type: "Person",
   name: "Krystian G.",
-  description: "Full-stack developer & web designer — custom sites for gaming and business, TFS/myAAC, Next.js, React, TypeScript",
+  description: "Full-stack developer & web designer — custom sites for gaming communities and businesses. Next.js, React, TypeScript",
   email: "kgdev@biuro.net",
 };
 

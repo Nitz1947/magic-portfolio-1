@@ -18,6 +18,8 @@ export function Projects({ range, exclude, locale }: ProjectsProps) {
   }
 
   const sortedProjects = allProjects.sort((a, b) => {
+    if (a.slug === "serwer-ot-tfs-myAAC") return 1;
+    if (b.slug === "serwer-ot-tfs-myAAC") return -1;
     return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
   });
 
@@ -31,6 +33,7 @@ export function Projects({ range, exclude, locale }: ProjectsProps) {
         <ProjectCard
           priority={index < 2}
           key={post.slug}
+          slug={post.slug}
           href={localizedPath(`/work/${post.slug}`, locale)}
           images={post.metadata.images}
           title={post.metadata.title}
