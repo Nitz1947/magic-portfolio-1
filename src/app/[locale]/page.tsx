@@ -13,7 +13,7 @@ import {
 } from "@once-ui-system/core";
 import { Mailchimp } from "@/components";
 import { CodeRain } from "@/components/CodeRain";
-import { SectionBackdrop, SectionTerminal } from "@/components/effects";
+import { SectionBackdrop } from "@/components/effects";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { ProjectShowcase } from "@/components/ProjectShowcase";
 import { TechMarquee } from "@/components/TechMarquee";
@@ -80,101 +80,101 @@ export default async function Home({ params }: PageProps) {
         }}
       />
       <SectionBackdrop variant="hero">
-      <Column fillWidth horizontal="center" gap="m">
-        <Column
-          maxWidth="s"
-          horizontal="center"
-          align="center"
-          style={{ position: "relative" }}
-          fillWidth
-        >
-          <CodeRain />
-          {home.featured.display && (
-            <RevealFx
-              fillWidth
-              horizontal="center"
-              paddingTop="16"
-              paddingBottom="24"
-              paddingLeft="12"
-            >
-              <Row gap="8" wrap horizontal="center">
-                {(home.featured.items ??
-                  (home.featured.href
-                    ? [{ title: home.featured.title, href: home.featured.href }]
-                    : [])
-                ).map((item) => (
-                  <Badge
-                    key={item.href}
-                    background="brand-alpha-weak"
-                    paddingX="12"
-                    paddingY="4"
-                    onBackground="neutral-strong"
-                    textVariant="label-default-s"
-                    arrow={false}
-                    href={localizedPath(item.href, locale)}
-                  >
-                    <Row paddingY="2">{item.title}</Row>
-                  </Badge>
-                ))}
+        <Column fillWidth horizontal="center" gap="m">
+          <Column
+            maxWidth="s"
+            horizontal="center"
+            align="center"
+            style={{ position: "relative" }}
+            fillWidth
+          >
+            <CodeRain />
+            {home.featured.display && (
+              <RevealFx
+                fillWidth
+                horizontal="center"
+                paddingTop="16"
+                paddingBottom="24"
+                paddingLeft="12"
+              >
+                <Row gap="8" wrap horizontal="center">
+                  {(home.featured.items ??
+                    (home.featured.href
+                      ? [{ title: home.featured.title, href: home.featured.href }]
+                      : [])
+                  ).map((item) => (
+                    <Badge
+                      key={item.href}
+                      background="brand-alpha-weak"
+                      paddingX="12"
+                      paddingY="4"
+                      onBackground="neutral-strong"
+                      textVariant="label-default-s"
+                      arrow={false}
+                      href={localizedPath(item.href, locale)}
+                    >
+                      <Row paddingY="2">{item.title}</Row>
+                    </Badge>
+                  ))}
+                </Row>
+              </RevealFx>
+            )}
+            <RevealFx translateY="8" fillWidth horizontal="center" paddingBottom="16">
+              <Heading wrap="balance" variant="display-strong-l">
+                {home.headline}
+              </Heading>
+            </RevealFx>
+            <RevealFx translateY="12" delay={0.15} fillWidth horizontal="center" paddingBottom="32">
+              <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
+                {home.subline}
+              </Text>
+            </RevealFx>
+            <RevealFx translateY="16" delay={0.3} fillWidth horizontal="center">
+              <Row gap="12" wrap horizontal="center">
+                <Button
+                  href={localizedPath(work.path, locale)}
+                  variant="primary"
+                  size="m"
+                  weight="default"
+                  arrowIcon
+                >
+                  {ui.viewProjects}
+                </Button>
+                <Button
+                  href={`mailto:${person.email}`}
+                  variant="secondary"
+                  size="m"
+                  weight="default"
+                >
+                  {ui.contactMe}
+                </Button>
               </Row>
             </RevealFx>
-          )}
-          <RevealFx translateY="8" fillWidth horizontal="center" paddingBottom="16">
-            <Heading wrap="balance" variant="display-strong-l">
-              {home.headline}
-            </Heading>
-          </RevealFx>
-          <RevealFx translateY="12" delay={0.15} fillWidth horizontal="center" paddingBottom="32">
-            <Text wrap="balance" onBackground="neutral-weak" variant="heading-default-xl">
-              {home.subline}
-            </Text>
-          </RevealFx>
-          <RevealFx translateY="16" delay={0.3} fillWidth horizontal="center">
-            <Row gap="12" wrap horizontal="center">
+            <RevealFx translateY="8" delay={0.45} horizontal="center" paddingTop="24">
               <Button
-                href={localizedPath(work.path, locale)}
-                variant="primary"
+                id="about"
+                data-border="rounded"
+                href={localizedPath(about.path, locale)}
+                variant="tertiary"
                 size="m"
                 weight="default"
                 arrowIcon
               >
-                {ui.viewProjects}
+                <Row gap="8" vertical="center" paddingRight="4">
+                  {about.avatar.display && (
+                    <Avatar
+                      marginRight="8"
+                      style={{ marginLeft: "-0.75rem" }}
+                      src={person.avatar}
+                      size="m"
+                    />
+                  )}
+                  {about.title}
+                </Row>
               </Button>
-              <Button
-                href={`mailto:${person.email}`}
-                variant="secondary"
-                size="m"
-                weight="default"
-              >
-                {ui.contactMe}
-              </Button>
-            </Row>
-          </RevealFx>
-          <RevealFx translateY="8" delay={0.45} horizontal="center" paddingTop="24">
-            <Button
-              id="about"
-              data-border="rounded"
-              href={localizedPath(about.path, locale)}
-              variant="tertiary"
-              size="m"
-              weight="default"
-              arrowIcon
-            >
-              <Row gap="8" vertical="center" paddingRight="4">
-                {about.avatar.display && (
-                  <Avatar
-                    marginRight="8"
-                    style={{ marginLeft: "-0.75rem" }}
-                    src={person.avatar}
-                    size="m"
-                  />
-                )}
-                {about.title}
-              </Row>
-            </Button>
-          </RevealFx>
+            </RevealFx>
+          </Column>
         </Column>
-      </Column>
       </SectionBackdrop>
 
       <RevealFx translateY="20" delay={0.5} fillWidth>
@@ -182,38 +182,27 @@ export default async function Home({ params }: PageProps) {
       </RevealFx>
 
       <RevealFx translateY="24" delay={0.55} fillWidth paddingX="l">
-        <SectionBackdrop variant="projects">
-          <Column fillWidth gap="16">
-            <Heading as="h2" variant="display-strong-xs">
-              {ui.featuredProjects}
-            </Heading>
-            <Text variant="body-default-m" onBackground="neutral-weak">
-              {ui.featuredProjectsSubline}
-            </Text>
-            <ProjectShowcase projects={showcaseProjects} />
-          </Column>
-        </SectionBackdrop>
+        <Column fillWidth gap="16">
+          <Heading as="h2" variant="display-strong-xs">
+            {ui.featuredProjects}
+          </Heading>
+          <Text variant="body-default-m" onBackground="neutral-weak">
+            {ui.featuredProjectsSubline}
+          </Text>
+          <ProjectShowcase projects={showcaseProjects} />
+        </Column>
       </RevealFx>
 
       <RevealFx translateY="20" delay={0.6}>
-        <SectionBackdrop variant="projects">
-          <Projects
-            exclude={[...homepageFeaturedSlugs]}
-            locale={locale}
-          />
-        </SectionBackdrop>
+        <Projects exclude={[...homepageFeaturedSlugs]} locale={locale} />
       </RevealFx>
 
       <RevealFx translateY="24" delay={0.65} fillWidth>
-        <SectionBackdrop variant="process">
-          <SectionTerminal />
-          <ProcessSteps title={ui.process.title} steps={ui.process.steps} />
-        </SectionBackdrop>
+        <ProcessSteps title={ui.process.title} steps={ui.process.steps} />
       </RevealFx>
 
       {routes["/blog"] && (
         <RevealFx translateY="16" delay={0.7}>
-          <SectionBackdrop variant="blogPreview">
           <Column fillWidth gap="24" marginBottom="l">
             <Row fillWidth paddingRight="64">
               <Line maxWidth={48} />
@@ -232,13 +221,10 @@ export default async function Home({ params }: PageProps) {
               <Line maxWidth={48} />
             </Row>
           </Column>
-          </SectionBackdrop>
         </RevealFx>
       )}
 
-      <SectionBackdrop variant="newsletter">
-        <Mailchimp />
-      </SectionBackdrop>
+      <Mailchimp />
     </Column>
   );
 }

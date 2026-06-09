@@ -22,7 +22,7 @@ export function ProcessSteps({ title, steps }: ProcessStepsProps) {
         {steps.map((step) => (
           <Column key={step.number} flex={1} minWidth={20} gap="8" className={styles.step}>
             <Text variant="display-strong-xs" onBackground="brand-medium" className={styles.number}>
-              <span className={styles.numberPulse}>{step.number}</span>
+              {step.number}
             </Text>
             <Heading as="h3" variant="heading-strong-m">
               {step.title}

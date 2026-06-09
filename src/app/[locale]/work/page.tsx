@@ -1,11 +1,10 @@
 import { Column, Heading, Meta, Schema } from "@once-ui-system/core";
-import { Mailchimp } from "@/components";
-import { Posts } from "@/components/blog/Posts";
+import { SyntaxHighlightBlock } from "@/components/effects";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
 import { baseURL, getContent } from "@/resources";
-import { SectionBackdrop } from "@/components/effects";
 import { Projects } from "@/components/work/Projects";
+import styles from "./work.module.scss";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -29,26 +28,29 @@ export default async function Work({ params }: PageProps) {
   const { work, about, person } = getContent(locale);
 
   return (
-    <SectionBackdrop variant="work">
-    <Column maxWidth="m" paddingTop="24">
-      <Schema
-        as="webPage"
-        baseURL={baseURL}
-        path={localizedPath(work.path, locale)}
-        title={work.title}
-        description={work.description}
-        image={`/api/og/generate?title=${encodeURIComponent(work.title)}`}
-        author={{
-          name: person.name,
-          url: `${baseURL}${localizedPath(about.path, locale)}`,
-          image: `${baseURL}${person.avatar}`,
-        }}
-      />
-      <Heading marginBottom="l" variant="heading-strong-xl">
-        {work.title}
-      </Heading>
-      <Projects locale={locale} />
-    </Column>
-    </SectionBackdrop>
+    <div className={styles.page}>
+      <div className={styles.decoration} aria-hidden="true">
+        <SyntaxHighlightBlock position="topRight" compact />
+      </div>
+      <Column maxWidth="m" paddingTop="24" className={styles.content}>
+        <Schema
+          as="webPage"
+          baseURL={baseURL}
+          path={localizedPath(work.path, locale)}
+          title={work.title}
+          description={work.description}
+          image={`/api/og/generate?title=${encodeURIComponent(work.title)}`}
+          author={{
+            name: person.name,
+            url: `${baseURL}${localizedPath(about.path, locale)}`,
+            image: `${baseURL}${person.avatar}`,
+          }}
+        />
+        <Heading marginBottom="l" variant="heading-strong-xl">
+          {work.title}
+        </Heading>
+        <Projects locale={locale} />
+      </Column>
+    </div>
   );
 }

@@ -1,24 +1,5 @@
 @use "./breakpoints.scss" as breakpoints;
 
-.footer {
-  position: relative;
-  overflow: hidden;
-}
-
-.backdrop {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.5;
-  mask-image: linear-gradient(to top, black 0%, transparent 80%);
-}
-
-.mobile {
-  position: relative;
-  z-index: 1;
-}
-
 @media (max-width: breakpoints.$s) {
     .mobile {
         text-align: center;

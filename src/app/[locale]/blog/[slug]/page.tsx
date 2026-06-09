@@ -24,8 +24,6 @@ import { Metadata } from "next";
 import React from "react";
 import { Posts } from "@/components/blog/Posts";
 import { ShareSection } from "@/components/blog/ShareSection";
-import { SectionBackdrop } from "@/components/effects";
-
 type PageProps = {
   params: Promise<{ locale: string; slug: string | string[] }>;
 };
@@ -77,7 +75,6 @@ export default async function BlogPost({ params }: PageProps) {
   const blogPath = localizedPath(blog.path, locale);
 
   return (
-    <SectionBackdrop variant="blogPost">
     <Row fillWidth>
       <Row maxWidth={12} m={{ hide: true }} />
       <Row fillWidth horizontal="center">
@@ -175,6 +172,5 @@ export default async function BlogPost({ params }: PageProps) {
         <HeadingNav fitHeight />
       </Column>
     </Row>
-    </SectionBackdrop>
   );
 }
