@@ -186,8 +186,8 @@ const mailchimp: MailchimpConfig = {
 const schema: SchemaConfig = {
   logo: "/images/avatar.svg",
   type: "Person",
-  name: "Michał Ch.",
-  description: "Full-stack developer portfolio — Next.js, React, TypeScript",
+  name: "Krystian",
+  description: "Full-stack developer portfolio — TFS/myAAC background, Next.js, React, TypeScript",
   email: "kontakt@1choc.dev",
 };
 

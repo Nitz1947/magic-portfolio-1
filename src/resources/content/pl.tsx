@@ -5,9 +5,9 @@ import type { LocaleContent } from "./types";
 
 export function createPolishContent(): LocaleContent {
   const person: Person = {
-    firstName: "Michał",
-    lastName: "Ch.",
-    name: "Michał Ch.",
+    firstName: "Krystian",
+    lastName: "",
+    name: "Krystian",
     role: "Full-Stack Developer",
     avatar: "/images/avatar.svg",
     email: "kontakt@1choc.dev",
@@ -47,28 +47,33 @@ export function createPolishContent(): LocaleContent {
     image: "/images/og/home.svg",
     label: "Strona główna",
     title: `Portfolio – ${person.name}`,
-    description: `Portfolio full-stack developera specjalizującego się w Next.js, React i TypeScript`,
-    headline: <>Buduję szybkie, skalowalne aplikacje webowe</>,
+    description: `Portfolio full-stack developera z backgroundiem TFS/myAAC — Next.js, React, TypeScript i Open Tibia`,
+    headline: <>Od serwerów OT do produkcyjnych aplikacji webowych</>,
     featured: {
       display: true,
       title: (
         <Row gap="12" vertical="center">
-          <strong className="ml-4">E-commerce Next.js</strong>{" "}
+          <strong className="ml-4">TFS & myAAC</strong>{" "}
           <Line background="brand-alpha-strong" vert height="20" />
           <Text marginRight="4" onBackground="brand-medium">
             Wyróżniony projekt
           </Text>
         </Row>
       ),
-      href: "/work/platforma-ecommerce-nextjs",
+      href: "/work/serwer-ot-tfs-myAAC",
     },
     subline: (
       <>
-        Jestem full-stack developerem tworzącym produkcyjne aplikacje w{" "}
+        Jestem full-stack developerem z 6 lat doświadczenia w ekosystemie{" "}
         <Text as="span" size="xl" weight="strong">
-          Next.js
+          TFS
         </Text>
-        , React i TypeScript. Łączę solidną architekturę backendu z dopracowanym UX.
+        {" "}i{" "}
+        <Text as="span" size="xl" weight="strong">
+          myAAC
+        </Text>
+        . Dziś buduję szybkie aplikacje w Next.js, React i TypeScript — łącząc pasję do
+        community gaming z profesjonalnym podejściem do architektury i UX.
       </>
     ),
   };
@@ -77,7 +82,7 @@ export function createPolishContent(): LocaleContent {
     path: "/about",
     label: "O mnie",
     title: `O mnie – ${person.name}`,
-    description: `Poznaj ${person.name}, ${person.role} z Warszawy`,
+    description: `Poznaj ${person.name}, ${person.role} z unikalnym backgroundiem Open Tibia i TFS`,
     tableOfContent: {
       display: true,
       subItems: false,
@@ -94,10 +99,13 @@ export function createPolishContent(): LocaleContent {
       title: "Wprowadzenie",
       description: (
         <>
-          Full-stack developer z doświadczeniem w budowaniu aplikacji SaaS, platform e-commerce i
-          API od projektu po wdrożenie. Skupiam się na wydajności, czytelnej architekturze i
-          iteracyjnym dostarczaniu wartości biznesowej. Pracuję głównie w ekosystemie JavaScript —
-          od interfejsu po warstwę serwerową i infrastrukturę chmurową.
+          Zaczynałem w świecie Open Tibia — przez 6 lat rozwijałem serwery na{" "}
+          <strong>The Forgotten Server (TFS)</strong> i customizowałem{" "}
+          <strong>myAAC</strong>, popularne CMS dla community OT. To nauczyło mnie Lua,
+          PHP, MySQL i pracy blisko produktu: od skryptów questów po panele gracza i
+          strony rejestracji. Dziś przenoszę tę samą determinację na nowoczesny stack —
+          React, TypeScript, Next.js i Node.js — budując aplikacje SaaS, e-commerce i API
+          gotowe na produkcję.
         </>
       ),
     },
@@ -106,41 +114,60 @@ export function createPolishContent(): LocaleContent {
       title: "Doświadczenie zawodowe",
       experiences: [
         {
-          company: "TechFlow Studio",
-          timeframe: "2022 – obecnie",
-          role: "Senior Full-Stack Developer",
+          company: "Ekosystem Open Tibia (TFS + myAAC)",
+          timeframe: "2019 – obecnie",
+          role: "Server Developer & CMS Customizer",
           achievements: [
             <>
-              Zaprojektowałem i wdrożyłem platformę e-commerce obsługującą 12 000+ transakcji
-              miesięcznie, skracając czas ładowania strony produktu o 40%.
+              6 lat pracy z <strong>The Forgotten Server</strong> — custom systemy gry,
+              questy, balans, eventy i rozszerzenia core w <strong>Lua</strong>.
             </>,
             <>
-              Wprowadziłem architekturę mikroserwisów dla modułu płatności, co zmniejszyło liczbę
-              incydentów produkcyjnych o 60%.
+              Pełna customizacja <strong>myAAC</strong> w PHP — szablony, moduły
+              rejestracji, rankingi, shop i integracje z bazą serwera w{" "}
+              <strong>MySQL</strong>.
+            </>,
+            <>
+              Frontend community: landing pages, panele gracza i responsywne UI w{" "}
+              <strong>HTML, CSS i JavaScript</strong> — od prototypu po wdrożenie na
+              produkcji.
             </>,
           ],
           images: [
             {
-              src: "/images/projects/ecommerce/cover-01.svg",
-              alt: "Platforma e-commerce",
+              src: "/images/projects/ot/cover-01.svg",
+              alt: "Serwer OT — TFS i myAAC",
               width: 16,
               height: 9,
             },
           ],
         },
         {
-          company: "DevBridge",
-          timeframe: "2019 – 2022",
-          role: "Frontend Developer",
+          company: "Projekty webowe (freelance)",
+          timeframe: "2022 – obecnie",
+          role: "Full-Stack Developer",
           achievements: [
             <>
-              Zbudowałem design system w React, który skrócił czas tworzenia nowych widoków o 35%.
+              Migracja umiejętności na <strong>React, TypeScript i Next.js</strong> —
+              portfolio, platformy e-commerce i panele analityczne SaaS.
             </>,
             <>
-              Zoptymalizowałem Core Web Vitals kluczowych stron — LCP spadł z 4,2 s do 1,8 s.
+              Architektura API w <strong>Node.js</strong>, integracje płatności, optymalizacja
+              wydajności (Core Web Vitals, ISR, edge caching).
+            </>,
+            <>
+              Wdrożenia na <strong>Vercel</strong> z preview deployments, SEO i
+              wielojęzyczność (i18n PL/EN).
             </>,
           ],
-          images: [],
+          images: [
+            {
+              src: "/images/projects/portfolio/cover-01.svg",
+              alt: "Projekty full-stack Next.js",
+              width: 16,
+              height: 9,
+            },
+          ],
         },
       ],
     },
@@ -149,12 +176,22 @@ export function createPolishContent(): LocaleContent {
       title: "Edukacja",
       institutions: [
         {
-          name: "Politechnika Warszawska",
-          description: <>Inżynieria informatyki — specjalizacja systemy webowe.</>,
+          name: "Open Tibia Community & TFS",
+          description: (
+            <>
+              6 lat praktyki w ekosystemie OT — Lua (TFS scripting), PHP (myAAC), MySQL,
+              administracja serwerów Linux i prowadzenie community gaming od zera.
+            </>
+          ),
         },
         {
-          name: "Certyfikaty",
-          description: <>AWS Cloud Practitioner, Meta Front-End Developer Professional.</>,
+          name: "Samodzielna nauka — nowoczesny web",
+          description: (
+            <>
+              React, TypeScript, Next.js App Router, Node.js, REST API, Docker i chmura
+              (Vercel/AWS) — ciągły rozwój od community dev do profesjonalnego full-stack.
+            </>
+          ),
         },
       ],
     },
@@ -163,21 +200,44 @@ export function createPolishContent(): LocaleContent {
       title: "Umiejętności techniczne",
       skills: [
         {
-          title: "Frontend",
+          title: "OT / TFS & myAAC",
           description: (
             <>
-              Aplikacje React i Next.js z App Router, SSR/SSG, optymalizacja wydajności i
-              dostępności.
+              Lua scripting w TFS, custom systemy gry, myAAC w PHP, schematy MySQL pod
+              serwery OT i community tooling od questów po panele administracyjne.
             </>
           ),
           tags: [
+            { name: "PHP", icon: "php" },
             { name: "JavaScript", icon: "javascript" },
+            { name: "MySQL", icon: "mysql" },
+          ],
+          images: [
+            {
+              src: "/images/projects/ot/cover-01.svg",
+              alt: "TFS i myAAC",
+              width: 16,
+              height: 9,
+            },
+          ],
+        },
+        {
+          title: "Frontend (nowoczesny stack)",
+          description: (
+            <>
+              Aplikacje React i Next.js z App Router, SSR/SSG, TypeScript, animacje,
+              dostępność i optymalizacja wydajności.
+            </>
+          ),
+          tags: [
+            { name: "TypeScript", icon: "typescript" },
+            { name: "React", icon: "react" },
             { name: "Next.js", icon: "nextjs" },
           ],
           images: [
             {
               src: "/images/projects/portfolio/cover-01.svg",
-              alt: "Projekt frontend",
+              alt: "Projekt frontend Next.js",
               width: 16,
               height: 9,
             },
@@ -187,10 +247,12 @@ export function createPolishContent(): LocaleContent {
           title: "Backend & DevOps",
           description: (
             <>
-              REST i GraphQL API w Node.js, PostgreSQL, Redis, Docker i wdrożenia na Vercel/AWS.
+              REST API w Node.js, PostgreSQL/MySQL, Redis, Docker, mikroserwisy i
+              wdrożenia na Vercel z CI/CD i monitoringiem.
             </>
           ),
           tags: [
+            { name: "Node.js", icon: "nodejs" },
             { name: "Next.js", icon: "nextjs" },
             { name: "Supabase", icon: "supabase" },
           ],
@@ -218,7 +280,7 @@ export function createPolishContent(): LocaleContent {
     path: "/work",
     label: "Projekty",
     title: `Projekty – ${person.name}`,
-    description: `Case studies aplikacji webowych i API autorstwa ${person.name}`,
+    description: `Case studies — od TFS/myAAC po aplikacje Next.js i API autorstwa ${person.name}`,
   };
 
   const gallery: Gallery = {
