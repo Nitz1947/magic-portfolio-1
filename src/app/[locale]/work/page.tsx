@@ -58,7 +58,15 @@ export default async function Work({ params }: PageProps) {
       <div className={styles.decoration} aria-hidden="true">
         <SyntaxHighlightBlock position="topRight" compact />
       </div>
-      <Column maxWidth="m" paddingTop="24" paddingX="l" gap="xl" className={styles.content}>
+      <Column
+        maxWidth="m"
+        paddingTop="24"
+        paddingX="l"
+        gap="xl"
+        horizontal="center"
+        align="center"
+        className={styles.content}
+      >
         <Schema
           as="webPage"
           baseURL={baseURL}
@@ -72,7 +80,7 @@ export default async function Work({ params }: PageProps) {
             image: `${baseURL}${person.avatar}`,
           }}
         />
-        <Column fillWidth gap="12" className={styles.hero}>
+        <Column fillWidth gap="12" horizontal="center" align="center" className={styles.hero}>
           <Heading variant="display-strong-s" wrap="balance">
             {ui.work.hubTitle}
           </Heading>

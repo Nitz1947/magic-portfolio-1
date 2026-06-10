@@ -14,16 +14,12 @@ import { Mailchimp, SocialProofStrip } from "@/components";
 import { SectionBackdrop, HeroBackground } from "@/components/effects";
 import homeStyles from "./home.module.scss";
 import { ProcessSteps } from "@/components/ProcessSteps";
-import { ProjectSlideshow } from "@/components/ProjectSlideshow";
 import { ServicesGrid } from "@/components/ServicesGrid";
 import { TechMarquee } from "@/components/TechMarquee";
-import { featuredProjectConfigs, homepageFeaturedSlugs } from "@/data/featuredProjects";
-import { getProjectPresentations } from "@/data/projectPresentations";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
 import { getUi } from "@/i18n/ui";
 import { baseURL, getContent, routes } from "@/resources";
-import { getPosts } from "@/utils/utils";
 
 type PageProps = {
   params: Promise<{ locale: string }>;
@@ -46,27 +42,6 @@ export default async function Home({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const { home, about, person, work } = getContent(locale);
   const ui = getUi(locale);
-
-  const allProjects = getPosts(["src", "app", "work", "projects"]);
-  const presentations = getProjectPresentations(locale);
-  const showcaseProjects = homepageFeaturedSlugs
-    .map((slug) => {
-      const post = allProjects.find((p) => p.slug === slug);
-      const config = featuredProjectConfigs[slug];
-      const presentation = presentations.find((p) => p.slug === slug);
-      if (!post || !config || !presentation) return null;
-      return {
-        slug,
-        title: post.metadata.title,
-        summary: presentation.shortSummary,
-        tagline: presentation.tagline,
-        stack: presentation.stack,
-        presentationHref: `${localizedPath("/work", locale)}#project-${slug}`,
-        href: localizedPath(`/work/${slug}`, locale),
-        config,
-      };
-    })
-    .filter((p): p is NonNullable<typeof p> => p !== null);
 
   return (
     <Column maxWidth="m" gap="48" paddingY="12" paddingX="l" horizontal="center" fillWidth>
@@ -191,28 +166,14 @@ export default async function Home({ params }: PageProps) {
       </SectionBackdrop>
 
       <RevealFx translateY="12" delay={0.42} fillWidth>
-        <SocialProofStrip />
-      </RevealFx>
-
-      <RevealFx translateY="20" delay={0.5} fillWidth>
         <TechMarquee />
       </RevealFx>
 
-      <RevealFx translateY="24" delay={0.55} fillWidth>
-        <Column fillWidth gap="20">
-          <Column fillWidth gap="8">
-            <Heading as="h2" variant="display-strong-xs" wrap="balance">
-              {ui.featuredProjects}
-            </Heading>
-            <Text variant="body-default-m" onBackground="neutral-weak" wrap="balance">
-              {ui.featuredProjectsSubline}
-            </Text>
-          </Column>
-          <ProjectSlideshow projects={showcaseProjects} />
-        </Column>
+      <RevealFx translateY="20" delay={0.5} fillWidth>
+        <SocialProofStrip />
       </RevealFx>
 
-      <RevealFx translateY="24" delay={0.65} fillWidth>
+      <RevealFx translateY="24" delay={0.55} fillWidth>
         <ServicesGrid />
       </RevealFx>
 

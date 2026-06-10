@@ -72,7 +72,7 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
   const progress = ((activeIndex + 1) / projects.length) * 100;
 
   return (
-    <Column fillWidth gap="24" className={styles.guide}>
+    <Column fillWidth gap="24" horizontal="center" align="center" className={styles.guide}>
       <div className={styles.thumbnails} role="tablist" aria-label={ui.work.presentation.thumbnailsLabel}>
         {projects.map((item, index) => (
           <button
@@ -105,9 +105,9 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
         className={styles.stage}
         aria-labelledby={`presentation-title-${project.slug}`}
       >
-        <Column fillWidth gap="20">
+        <Column fillWidth gap="20" horizontal="center" align="center">
           <div className={styles.stageHeader}>
-            <Column gap="8" style={{ flex: 1 }}>
+            <Column gap="8" horizontal="center" align="center">
               <span className={styles.stepBadge}>
                 {ui.work.presentation.step} {activeIndex + 1}/{projects.length}
               </span>
@@ -203,7 +203,7 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
             </Text>
           </div>
 
-          <Row className={styles.actions}>
+          <Row className={styles.actions} horizontal="center">
             <Button
               href={project.config.liveUrl}
               variant="primary"
