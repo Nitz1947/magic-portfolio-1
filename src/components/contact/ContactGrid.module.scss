@@ -1,5 +1,6 @@
 @import "../breakpoints.scss";
 @import "../branded-scrollbar.scss";
+@import "../../resources/rotating-border-glow.scss";
 
 .root {
   width: 100%;
@@ -9,6 +10,7 @@
 }
 
 .hero {
+  @include rotating-border-glow();
   padding: 36px 40px;
   border-radius: var(--radius-l);
   border: 1px solid var(--effect-surface-border);
@@ -52,6 +54,7 @@
 }
 
 .card {
+  @include rotating-border-glow();
   padding: var(--static-space-24);
   border: 1px solid var(--neutral-alpha-weak);
   border-radius: var(--radius-l);
@@ -118,6 +121,7 @@
 }
 
 .formInner {
+  @include rotating-border-glow();
   padding: var(--static-space-32);
   border-radius: var(--radius-l);
   border: 1px solid var(--effect-surface-border);

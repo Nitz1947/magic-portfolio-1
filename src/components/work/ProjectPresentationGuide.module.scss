@@ -1,4 +1,5 @@
 @import "../branded-scrollbar.scss";
+@import "../../resources/rotating-border-glow.scss";
 
 $preview-max-width: min(1400px, 96vw);
 $info-max-width: min(1200px, 92vw);
@@ -65,6 +66,7 @@ $info-max-width: min(1200px, 92vw);
 }
 
 .thumbnail {
+  @include rotating-border-glow($opacity: 0.6);
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -210,7 +212,7 @@ $info-max-width: min(1200px, 92vw);
   margin-inline: auto;
   min-width: 0;
   min-height: max(900px, 85vh);
-  overflow: hidden;
+  overflow: visible;
   color-scheme: dark;
   display: flex;
   flex-direction: column;
@@ -218,6 +220,7 @@ $info-max-width: min(1200px, 92vw);
 }
 
 .infoSection {
+  @include rotating-border-glow();
   width: 100%;
   max-width: $info-max-width;
   margin-inline: auto;

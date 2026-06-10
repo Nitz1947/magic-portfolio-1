@@ -1,6 +1,9 @@
+@import "../resources/rotating-border-glow.scss";
+
 .strip {
-  border-top: 1px solid var(--effect-surface-border);
-  border-bottom: 1px solid var(--effect-surface-border);
+  @include rotating-border-glow($opacity: 0.52, $duration: 5s);
+  border: 1px solid var(--effect-surface-border);
+  border-radius: var(--radius-l);
   background: var(--effect-surface-bg);
   backdrop-filter: blur(8px);
 }

@@ -1,0 +1,12 @@
+@import "../../../resources/rotating-border-glow.scss";
+
+.pageShell {
+  @include rotating-border-glow();
+  width: 100%;
+  max-width: min(1200px, 96vw);
+  padding: clamp(20px, 3vw, 32px);
+  border-radius: var(--radius-l);
+  border: 1px solid var(--effect-surface-border);
+  background: color-mix(in srgb, var(--effect-surface-bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+}

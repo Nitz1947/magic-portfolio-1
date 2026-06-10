@@ -1,4 +1,5 @@
 @import "./breakpoints.scss";
+@import "../resources/rotating-border-glow.scss";
 
 .grid {
   display: grid;
@@ -15,6 +16,7 @@
 }
 
 .card {
+  @include rotating-border-glow();
   padding: var(--static-space-24);
   border: 1px solid var(--neutral-alpha-weak);
   border-radius: var(--radius-l);

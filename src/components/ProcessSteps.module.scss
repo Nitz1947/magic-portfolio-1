@@ -1,4 +1,5 @@
 @import "./breakpoints.scss";
+@import "../resources/rotating-border-glow.scss";
 
 .grid {
   @include s {
@@ -7,6 +8,7 @@
 }
 
 .step {
+  @include rotating-border-glow();
   flex: 1 1 220px;
   min-width: min(100%, 220px);
   padding: var(--static-space-24);
@@ -14,18 +16,19 @@
   border-radius: var(--radius-l);
   background: var(--neutral-alpha-weak);
   transition: var(--transition-micro-medium);
-  position: relative;
 
-  &::before {
+  &::after {
     content: "//";
     position: absolute;
     top: var(--static-space-12);
     right: var(--static-space-16);
+    z-index: 1;
     font-family: var(--font-family-code);
     font-size: 10px;
     color: var(--brand-on-background-weak);
     opacity: 0;
     transition: opacity var(--transition-micro-medium);
+    pointer-events: none;
 
     @media (prefers-reduced-motion: reduce) {
       opacity: 0.3;
@@ -35,7 +38,7 @@
   &:hover {
     border-color: var(--brand-alpha-medium);
 
-    &::before {
+    &::after {
       opacity: 0.4;
     }
   }

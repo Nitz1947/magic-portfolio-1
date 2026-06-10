@@ -1,3 +1,5 @@
+@import "../resources/rotating-border-glow.scss";
+
 .card {
   transition: var(--transition-micro-medium);
   border-radius: var(--radius-l);
@@ -14,6 +16,7 @@
 }
 
 .mediaWrap {
+  @include rotating-border-glow($pseudo: before, $position: inside);
   position: relative;
   border-radius: var(--radius-l);
   overflow: hidden;

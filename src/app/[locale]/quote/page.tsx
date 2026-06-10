@@ -1,5 +1,6 @@
 import { Column, Meta, Schema } from "@once-ui-system/core";
 import { OfferBuilder } from "@/components/OfferBuilder";
+import styles from "./quote.module.scss";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
 import { getUi } from "@/i18n/ui";
@@ -40,7 +41,9 @@ export default async function QuotePage({ params }: PageProps) {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <OfferBuilder />
+      <div className={styles.pageShell}>
+        <OfferBuilder />
+      </div>
     </Column>
   );
 }
