@@ -13,6 +13,8 @@
     "@mdx-js/loader": "^3.1.0",
     "@next/mdx": "^16.0.10",
     "@once-ui-system/core": "latest",
+    "@tsparticles/react": "^4.1.3",
+    "@tsparticles/slim": "^4.1.3",
     "classnames": "^2.5.1",
     "cookie": "^1.0.2",
     "gray-matter": "^4.0.3",
@@ -23,7 +25,8 @@
     "react-dom": "^19.2.3",
     "react-icons": "^5.5.0",
     "sass": "^1.86.3",
-    "transliteration": "^2.3.5"
+    "transliteration": "^2.3.5",
+    "tsparticles": "^4.1.3"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",

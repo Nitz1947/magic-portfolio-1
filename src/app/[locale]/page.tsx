@@ -12,8 +12,9 @@ import {
   Line,
 } from "@once-ui-system/core";
 import { Mailchimp } from "@/components";
-import { CodeRain } from "@/components/CodeRain";
-import { SectionBackdrop } from "@/components/effects";
+import { PortfolioWall } from "@/components/PortfolioWall";
+import { ParticlesHero, SectionBackdrop, TerminalTyping } from "@/components/effects";
+import homeStyles from "./home.module.scss";
 import { OfferBuilder } from "@/components/OfferBuilder";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { ProjectSlideshow } from "@/components/ProjectSlideshow";
@@ -89,7 +90,10 @@ export default async function Home({ params }: PageProps) {
             style={{ position: "relative" }}
             fillWidth
           >
-            <CodeRain />
+            <ParticlesHero />
+            <div className={homeStyles.heroCorner}>
+              <TerminalTyping />
+            </div>
             {home.featured.display && (
               <RevealFx
                 fillWidth
@@ -121,7 +125,7 @@ export default async function Home({ params }: PageProps) {
               </RevealFx>
             )}
             <RevealFx translateY="8" fillWidth horizontal="center" paddingBottom="16">
-              <Heading wrap="balance" variant="display-strong-l">
+              <Heading wrap="balance" variant="display-strong-l" className={homeStyles.heroHeadline}>
                 {home.headline}
               </Heading>
             </RevealFx>
@@ -131,7 +135,7 @@ export default async function Home({ params }: PageProps) {
               </Text>
             </RevealFx>
             <RevealFx translateY="16" delay={0.3} fillWidth horizontal="center">
-              <Row gap="12" wrap horizontal="center">
+              <Row gap="12" wrap horizontal="center" className={homeStyles.heroActions}>
                 <Button
                   href={localizedPath(work.path, locale)}
                   variant="primary"
@@ -196,20 +200,24 @@ export default async function Home({ params }: PageProps) {
         </Column>
       </RevealFx>
 
-      <RevealFx translateY="24" delay={0.62} fillWidth>
-        <ServicesGrid />
+      <RevealFx translateY="24" delay={0.58} fillWidth>
+        <PortfolioWall projects={showcaseProjects} />
       </RevealFx>
 
       <RevealFx translateY="24" delay={0.65} fillWidth>
+        <ServicesGrid />
+      </RevealFx>
+
+      <RevealFx translateY="24" delay={0.72} fillWidth>
         <ProcessSteps title={ui.process.title} steps={ui.process.steps} />
       </RevealFx>
 
-      <RevealFx translateY="24" delay={0.68} fillWidth>
+      <RevealFx translateY="24" delay={0.76} fillWidth>
         <OfferBuilder />
       </RevealFx>
 
       {routes["/blog"] && (
-        <RevealFx translateY="16" delay={0.7}>
+        <RevealFx translateY="16" delay={0.8}>
           <Column fillWidth gap="24" marginBottom="l">
             <Row fillWidth paddingRight="64">
               <Line maxWidth={48} />

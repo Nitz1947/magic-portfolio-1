@@ -1,0 +1,43 @@
+.heroActions {
+  :global(a),
+  :global(button) {
+    transition:
+      transform var(--transition-micro-medium),
+      box-shadow var(--transition-micro-medium);
+
+    &:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 20px rgba(6, 182, 212, 0.25);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      &:hover {
+        transform: none;
+        box-shadow: none;
+      }
+    }
+  }
+}
+
+.heroHeadline {
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  letter-spacing: -0.02em;
+}
+
+.heroCorner {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(280px, 38vw);
+  z-index: 2;
+  opacity: 0.75;
+  pointer-events: none;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 0.55;
+  }
+}

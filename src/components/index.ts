@@ -11,7 +11,13 @@ export { ProcessSteps } from "@/components/ProcessSteps";
 export { ServicesGrid } from "@/components/ServicesGrid";
 export { OfferBuilder } from "@/components/OfferBuilder";
 export { TechMarquee } from "@/components/TechMarquee";
-export { SyntaxHighlightBlock, SectionBackdrop } from "@/components/effects";
+export { PortfolioWall } from "@/components/PortfolioWall";
+export {
+  SyntaxHighlightBlock,
+  SectionBackdrop,
+  ParticlesHero,
+  TerminalTyping,
+} from "@/components/effects";
 export { HeadingLink } from "@/components/HeadingLink";
 export { RouteGuard } from "@/components/RouteGuard";
 export { Providers } from "@/components/Providers";

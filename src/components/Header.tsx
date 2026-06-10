@@ -81,6 +81,7 @@ export const Header = () => {
         </Row>
         <Row fillWidth horizontal="center">
           <Row
+            className={styles.navPill}
             background="page"
             border="neutral-alpha-weak"
             radius="m-4"

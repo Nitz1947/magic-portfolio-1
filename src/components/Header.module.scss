@@ -8,6 +8,37 @@
     mask-size: 100% 100%;
 }
 
+.navPill {
+    :global(a),
+    :global(button) {
+        position: relative;
+
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 4px;
+            width: 0;
+            height: 2px;
+            border-radius: 1px;
+            background: var(--brand-solid-strong);
+            transform: translateX(-50%);
+            transition: width var(--transition-micro-medium);
+        }
+
+        &:hover::after,
+        &[data-selected="true"]::after {
+            width: 55%;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            &::after {
+                transition: none;
+            }
+        }
+    }
+}
+
 @media (max-width: breakpoints.$s) {
     .position {
         top: auto;

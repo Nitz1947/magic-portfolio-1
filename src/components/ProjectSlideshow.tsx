@@ -55,15 +55,16 @@ export function ProjectSlideshow({ projects, autoplayMs = 8000 }: ProjectSlidesh
   return (
     <Column fillWidth gap="20" className={styles.slideshow}>
       <div className={styles.viewport}>
-        <ProjectLivePreview
-          key={project.slug}
-          title={project.title}
-          liveUrl={project.config.liveUrl}
-          embedUrl={project.config.embedUrl}
-          canEmbed={project.config.canEmbed}
-          fallbackImage={project.config.fallbackImage}
-          displayUrl={project.config.displayUrl}
-        />
+        <div key={project.slug} className={styles.slide}>
+          <ProjectLivePreview
+            title={project.title}
+            liveUrl={project.config.liveUrl}
+            embedUrl={project.config.embedUrl}
+            canEmbed={project.config.canEmbed}
+            fallbackImage={project.config.fallbackImage}
+            displayUrl={project.config.displayUrl}
+          />
+        </div>
         {projects.length > 1 && (
           <>
             <IconButton

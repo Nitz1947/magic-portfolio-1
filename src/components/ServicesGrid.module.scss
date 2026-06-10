@@ -19,15 +19,24 @@
   border: 1px solid var(--neutral-alpha-weak);
   border-radius: var(--radius-l);
   background: var(--neutral-alpha-weak);
-  transition: border-color var(--transition-micro-medium);
+  transition:
+    border-color var(--transition-micro-medium),
+    transform var(--transition-micro-medium),
+    box-shadow var(--transition-micro-medium);
 
   &:hover {
     border-color: var(--brand-alpha-medium);
+    transform: translateY(-6px);
+    box-shadow:
+      0 12px 28px rgba(6, 182, 212, 0.1),
+      var(--shadow-l);
   }
 
   @media (prefers-reduced-motion: reduce) {
     &:hover {
       border-color: var(--neutral-alpha-weak);
+      transform: none;
+      box-shadow: none;
     }
   }
 }
