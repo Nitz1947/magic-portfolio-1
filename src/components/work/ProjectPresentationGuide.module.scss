@@ -1,6 +1,8 @@
+@import "../branded-scrollbar.scss";
+
 .guide {
   width: 100%;
-  max-width: 56rem;
+  max-width: 72rem;
   margin-inline: auto;
   text-align: center;
 }
@@ -110,51 +112,93 @@
   font-variant-numeric: tabular-nums;
 }
 
-.previewCell {
+.contentRow {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   width: 100%;
   padding: 16px 20px 0;
 
   @media (max-width: 640px) {
     padding: 12px 12px 0;
   }
+
+  @media (min-width: 900px) {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 24px;
+    min-height: 500px;
+  }
+}
+
+.previewCell {
+  width: 100%;
+  min-width: 0;
+  min-height: 500px;
+  @include branded-scrollbar;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  @media (min-width: 900px) {
+    flex: 1 1 63%;
+    max-width: 63%;
+    max-height: min(720px, calc(100vh - 160px));
+  }
 }
 
 .infoCell {
   display: flex;
   flex-direction: column;
-  gap: 24px;
   width: 100%;
-  margin-top: 16px;
-  padding: 24px 20px;
+  min-width: 0;
   border-radius: var(--radius-l);
   border: 1px solid var(--effect-surface-border);
   background: var(--effect-surface-bg);
   backdrop-filter: blur(8px);
+  text-align: left;
+
+  @media (min-width: 900px) {
+    flex: 1 1 37%;
+    max-width: 37%;
+    position: sticky;
+    top: 120px;
+    align-self: flex-start;
+    max-height: min(720px, calc(100vh - 160px));
+  }
+}
+
+.infoScroll {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px 20px;
+  @include branded-scrollbar;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: inherit;
 
   @media (max-width: 640px) {
     padding: 20px 16px;
   }
+
+  @media (min-width: 900px) {
+    max-height: min(720px, calc(100vh - 160px));
+  }
 }
 
 .details {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
   width: 100%;
-  text-align: center;
-
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr;
-  }
 }
 
 .detailBlock {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
-  max-width: 36rem;
-  margin-inline: auto;
+  width: 100%;
 }
 
 .detailLabel {
@@ -166,10 +210,9 @@
 .outcomeBlock {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 8px;
-  max-width: 40rem;
-  margin-inline: auto;
+  width: 100%;
   padding-top: 8px;
   border-top: 1px solid var(--effect-surface-border);
 }
@@ -178,7 +221,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .stackTag {
@@ -196,7 +239,7 @@
   list-style: none;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 6px;
 }
 

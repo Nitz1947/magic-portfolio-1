@@ -1,0 +1,23 @@
+@mixin branded-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand-solid-medium) var(--neutral-alpha-weak);
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--neutral-alpha-weak);
+    border-radius: var(--radius-full);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--brand-solid-medium);
+    border-radius: var(--radius-full);
+
+    &:hover {
+      background: var(--brand-solid-strong);
+    }
+  }
+}

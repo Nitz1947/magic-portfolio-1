@@ -16,6 +16,8 @@ interface ProjectLivePreviewProps {
   lazy?: boolean;
   /** Full-bleed preview without browser chrome — for work presentation cell */
   fullBleed?: boolean;
+  /** Two-column presentation layout — fills parent height on desktop */
+  presentationLayout?: boolean;
 }
 
 export function ProjectLivePreview({
@@ -27,6 +29,7 @@ export function ProjectLivePreview({
   displayUrl,
   lazy = true,
   fullBleed = false,
+  presentationLayout = false,
 }: ProjectLivePreviewProps) {
   const { ui } = useLocale();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -124,8 +127,15 @@ export function ProjectLivePreview({
     </div>
   );
 
+  const rootClassName = [
+    fullBleed ? styles.fullBleedRoot : undefined,
+    presentationLayout ? styles.presentationContext : undefined,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <Column ref={containerRef} fillWidth className={fullBleed ? styles.fullBleedRoot : undefined}>
+    <Column ref={containerRef} fillWidth className={rootClassName || undefined}>
       {fullBleed ? (
         <div className={styles.fullBleedFrame}>
           <div className={styles.fullBleedChrome}>

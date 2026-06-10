@@ -137,71 +137,76 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
             )}
           </div>
 
-          <div className={styles.previewCell}>
-            <ProjectLivePreview
-              title={project.title}
-              liveUrl={project.config.liveUrl}
-              embedUrl={project.config.embedUrl}
-              canEmbed={project.config.canEmbed}
-              fallbackImage={project.config.fallbackImage}
-              displayUrl={project.config.displayUrl}
-              fullBleed
-            />
-          </div>
-
-          <div className={styles.infoCell}>
-            <div className={styles.details}>
-              <div className={styles.detailBlock}>
-                <Text variant="label-default-s" className={styles.detailLabel}>
-                  {ui.work.presentation.forWhom}
-                </Text>
-                <Text variant="body-default-s" onBackground="neutral-weak" wrap="balance">
-                  {project.presentation.audience}
-                </Text>
-              </div>
-              <div className={styles.detailBlock}>
-                <Text variant="label-default-s" className={styles.detailLabel}>
-                  {ui.work.presentation.delivered}
-                </Text>
-                <Text variant="body-default-s" onBackground="neutral-weak" wrap="balance">
-                  {project.presentation.delivered}
-                </Text>
-              </div>
-              <div className={styles.detailBlock}>
-                <Text variant="label-default-s" className={styles.detailLabel}>
-                  {ui.work.presentation.stack}
-                </Text>
-                <div className={styles.stackTags}>
-                  {project.presentation.stack.map((item) => (
-                    <span key={item} className={styles.stackTag}>
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-              <div className={styles.detailBlock}>
-                <Text variant="label-default-s" className={styles.detailLabel}>
-                  {ui.work.presentation.features}
-                </Text>
-                <ul className={styles.featureList}>
-                  {project.presentation.features.map((feature) => (
-                    <li key={feature}>
-                      <Text as="span" variant="body-default-s" onBackground="neutral-weak">
-                        {feature}
-                      </Text>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+          <div className={styles.contentRow}>
+            <div className={styles.previewCell}>
+              <ProjectLivePreview
+                title={project.title}
+                liveUrl={project.config.liveUrl}
+                embedUrl={project.config.embedUrl}
+                canEmbed={project.config.canEmbed}
+                fallbackImage={project.config.fallbackImage}
+                displayUrl={project.config.displayUrl}
+                fullBleed
+                presentationLayout
+              />
             </div>
 
-            <div className={styles.outcomeBlock}>
-              <Text variant="label-default-s" className={styles.detailLabel}>
-                {ui.work.presentation.outcome}
-              </Text>
-              <Text variant="body-default-m" onBackground="neutral-strong" wrap="balance">
-                {project.presentation.outcome}
-              </Text>
+            <div className={styles.infoCell}>
+              <div className={styles.infoScroll}>
+                <div className={styles.details}>
+                  <div className={styles.detailBlock}>
+                    <Text variant="label-default-s" className={styles.detailLabel}>
+                      {ui.work.presentation.forWhom}
+                    </Text>
+                    <Text variant="body-default-s" onBackground="neutral-weak" wrap="balance">
+                      {project.presentation.audience}
+                    </Text>
+                  </div>
+                  <div className={styles.detailBlock}>
+                    <Text variant="label-default-s" className={styles.detailLabel}>
+                      {ui.work.presentation.delivered}
+                    </Text>
+                    <Text variant="body-default-s" onBackground="neutral-weak" wrap="balance">
+                      {project.presentation.delivered}
+                    </Text>
+                  </div>
+                  <div className={styles.detailBlock}>
+                    <Text variant="label-default-s" className={styles.detailLabel}>
+                      {ui.work.presentation.stack}
+                    </Text>
+                    <div className={styles.stackTags}>
+                      {project.presentation.stack.map((item) => (
+                        <span key={item} className={styles.stackTag}>
+                          {item}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className={styles.detailBlock}>
+                    <Text variant="label-default-s" className={styles.detailLabel}>
+                      {ui.work.presentation.features}
+                    </Text>
+                    <ul className={styles.featureList}>
+                      {project.presentation.features.map((feature) => (
+                        <li key={feature}>
+                          <Text as="span" variant="body-default-s" onBackground="neutral-weak">
+                            {feature}
+                          </Text>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className={styles.outcomeBlock}>
+                  <Text variant="label-default-s" className={styles.detailLabel}>
+                    {ui.work.presentation.outcome}
+                  </Text>
+                  <Text variant="body-default-m" onBackground="neutral-strong" wrap="balance">
+                    {project.presentation.outcome}
+                  </Text>
+                </div>
+              </div>
             </div>
           </div>
 
