@@ -83,7 +83,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
   }));
 
   return (
-    <Column fillWidth gap="m" className={styles.card}>
+    <Column
+      fillWidth
+      gap="m"
+      className={styles.card}
+      data-cursor="card"
+      data-cursor-label={ui.work.viewProject}
+    >
       <div className={styles.mediaWrap}>
         {images.length > 1 ? (
           <Carousel
