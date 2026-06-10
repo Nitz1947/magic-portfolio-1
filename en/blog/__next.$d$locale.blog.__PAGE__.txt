@@ -1,0 +1,43 @@
+1:"$Sreact.fragment"
+2:I[273323,["/magic-portfolio-1/_next/static/chunks/89017f792cdcf2b7.js","/magic-portfolio-1/_next/static/chunks/2079049d5abbbd3d.js","/magic-portfolio-1/_next/static/chunks/cf92b733c40884cd.js","/magic-portfolio-1/_next/static/chunks/30b94e804cd1bc9a.js","/magic-portfolio-1/_next/static/chunks/5349c688e0b5e2dd.js","/magic-portfolio-1/_next/static/chunks/2c2cf5f82f08c280.js","/magic-portfolio-1/_next/static/chunks/c44a74afdd6348ba.js","/magic-portfolio-1/_next/static/chunks/ce5e689de81815e3.js"],"Column"]
+3:I[479520,["/magic-portfolio-1/_next/static/chunks/89017f792cdcf2b7.js","/magic-portfolio-1/_next/static/chunks/2079049d5abbbd3d.js","/magic-portfolio-1/_next/static/chunks/cf92b733c40884cd.js","/magic-portfolio-1/_next/static/chunks/30b94e804cd1bc9a.js","/magic-portfolio-1/_next/static/chunks/5349c688e0b5e2dd.js","/magic-portfolio-1/_next/static/chunks/2c2cf5f82f08c280.js","/magic-portfolio-1/_next/static/chunks/c44a74afdd6348ba.js","/magic-portfolio-1/_next/static/chunks/ce5e689de81815e3.js"],""]
+4:I[89532,["/magic-portfolio-1/_next/static/chunks/89017f792cdcf2b7.js","/magic-portfolio-1/_next/static/chunks/2079049d5abbbd3d.js","/magic-portfolio-1/_next/static/chunks/cf92b733c40884cd.js","/magic-portfolio-1/_next/static/chunks/30b94e804cd1bc9a.js","/magic-portfolio-1/_next/static/chunks/5349c688e0b5e2dd.js","/magic-portfolio-1/_next/static/chunks/2c2cf5f82f08c280.js","/magic-portfolio-1/_next/static/chunks/c44a74afdd6348ba.js","/magic-portfolio-1/_next/static/chunks/ce5e689de81815e3.js"],"Grid"]
+5:I[814360,["/magic-portfolio-1/_next/static/chunks/89017f792cdcf2b7.js","/magic-portfolio-1/_next/static/chunks/2079049d5abbbd3d.js","/magic-portfolio-1/_next/static/chunks/cf92b733c40884cd.js","/magic-portfolio-1/_next/static/chunks/30b94e804cd1bc9a.js","/magic-portfolio-1/_next/static/chunks/5349c688e0b5e2dd.js","/magic-portfolio-1/_next/static/chunks/2c2cf5f82f08c280.js","/magic-portfolio-1/_next/static/chunks/c44a74afdd6348ba.js","/magic-portfolio-1/_next/static/chunks/ce5e689de81815e3.js"],"default"]
+9:I[897367,["/magic-portfolio-1/_next/static/chunks/d96012bcfc98706a.js","/magic-portfolio-1/_next/static/chunks/73e3194f06db260e.js"],"OutletBoundary"]
+a:"$Sreact.suspense"
+6:T441,
+Building with the App Router means thinking in **boundaries** — what runs on the server, what streams, and what stays interactive on the client.
+
+## Server Components by default
+
+Start every page as a Server Component. Push `"use client"` only to leaf nodes that need hooks or browser APIs. This keeps bundles small and data fetching colocated with rendering.
+
+```tsx
+// app/products/page.tsx — server component
+export default async function ProductsPage() {
+  const products = await getProducts();
+  return <ProductGrid items={products} />;
+}
+```
+
+## Streaming with Suspense
+
+Wrap slow data sources in `<Suspense>` so the shell renders immediately while sections hydrate progressively.
+
+```tsx
+<Suspense fallback={<ProductGridSkeleton />}>
+  <ProductGrid />
+</Suspense>
+```
+
+## Cache tags and revalidation
+
+Use `revalidateTag` after mutations instead of blanket `revalidatePath`. Tag by entity (`product:123`) so unrelated pages stay cached.
+
+## Takeaway
+
+The App Router rewards explicit data boundaries. Map your UI to server/client splits early — refactoring later is expensive.
+0:{"buildId":"WasVFEWjoAbRHe_lP6DSf","rsc":["$","$1","c",{"children":[["$","$L2",null,{"maxWidth":"m","paddingTop":"24","children":[["$","$L3",null,{"id":"schema-blogPosting-/en/blog","type":"application/ld+json","dangerouslySetInnerHTML":{"__html":"{\"@context\":\"https://schema.org\",\"@type\":\"BlogPosting\",\"url\":\"https://nitz1947.github.io/magic-portfolio-1/en/blog\",\"sameAs\":[],\"headline\":\"Notes on code and architecture\",\"description\":\"Technical articles by Krystian G. about Next.js, TypeScript, and web development\",\"image\":\"https://nitz1947.github.io/magic-portfolio-1/api/og/generate?title=Notes%20on%20code%20and%20architecture\",\"author\":{\"@type\":\"Person\",\"name\":\"Krystian G.\",\"url\":\"https://nitz1947.github.io/magic-portfolio-1/en/blog\",\"image\":{\"@type\":\"ImageObject\",\"url\":\"https://nitz1947.github.io/magic-portfolio-1/images/avatar.svg\"}}}"}}],["$","h1",null,{"className":"font-heading font-strong font-xl neutral-on-background-strong mb-l","style":{"textWrap":"balance"},"children":"Notes on code and architecture"}],["$","$L4",null,{"columns":"1","s":{"columns":1},"fillWidth":true,"marginBottom":"40","gap":"16","children":[["$","$L5","nextjs-app-router-patterns",{"post":{"metadata":{"title":"Next.js App Router — patterns that scale","subtitle":"","publishedAt":"2026-03-15","summary":"Server Components, streaming, and cache strategies for production Next.js apps.","image":"","images":[],"tag":"Next.js","team":[],"link":"","featured":false},"slug":"nextjs-app-router-patterns","content":"$6"},"thumbnail":false,"href":"/en/blog/nextjs-app-router-patterns"}],["$","$L5","typescript-type-safety",{"post":{"metadata":{"title":"TypeScript type safety in real projects","subtitle":"","publishedAt":"2026-01-22","summary":"Practical patterns for strict TypeScript — branded types, discriminated unions, and API contracts.","image":"","images":[],"tag":"TypeScript","team":[],"link":"","featured":false},"slug":"typescript-type-safety","content":"\nStrict TypeScript pays off when types model **domain rules**, not just shapes.\n\n## Branded types for IDs\n\nPrevent mixing user IDs with order IDs at compile time:\n\n```typescript\ntype Brand<T, B extends string> = T & { readonly __brand: B };\ntype UserId = Brand<string, \"UserId\">;\ntype OrderId = Brand<string, \"OrderId\">;\n\nfunction getOrder(id: OrderId) { /* ... */ }\n// getOrder(userId) — compile error\n```\n\n## Discriminated unions for state\n\nModel async UI state explicitly instead of optional fields:\n\n```typescript\ntype RequestState<T> =\n  | { status: \"idle\" }\n  | { status: \"loading\" }\n  | { status: \"success\"; data: T }\n  | { status: \"error\"; error: string };\n```\n\n## API contracts with Zod\n\nValidate at the boundary, infer types inside:\n\n```typescript\nconst UserSchema = z.object({ id: z.string(), email: z.string().email() });\ntype User = z.infer<typeof UserSchema>;\n```\n\n## Takeaway\n\nInvest in types at system boundaries — API responses, form payloads, event schemas. Internal component props can stay simpler.\n"},"thumbnail":false,"href":"/en/blog/typescript-type-safety"}]]}],false]}],["$L7"],"$L8"]}],"loading":null,"isPartial":false}
+7:["$","script","script-0",{"src":"/magic-portfolio-1/_next/static/chunks/ce5e689de81815e3.js","async":true}]
+8:["$","$L9",null,{"children":["$","$a",null,{"name":"Next.MetadataOutlet","children":"$@b"}]}]
+b:null
