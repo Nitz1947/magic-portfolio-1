@@ -19,6 +19,9 @@ export type ShowcaseProject = {
   slug: string;
   title: string;
   summary: string;
+  tagline?: string;
+  stack?: string[];
+  presentationHref?: string;
   href: string;
   config: FeaturedProjectConfig;
 };

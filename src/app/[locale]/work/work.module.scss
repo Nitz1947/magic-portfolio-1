@@ -16,32 +16,10 @@
   z-index: 1;
 }
 
-.stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-  width: 100%;
-  padding: 16px;
+.hero {
+  padding: 20px;
   border-radius: var(--radius-l);
   border: 1px solid var(--effect-surface-border);
   background: var(--effect-surface-bg);
   backdrop-filter: blur(8px);
-
-  @media (max-width: 640px) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.statItem {
-  text-align: center;
-  padding: 8px 4px;
-}
-
-.statValue {
-  color: var(--effect-accent-text);
-  font-variant-numeric: tabular-nums;
-}
-
-.projectsSection {
-  width: 100%;
 }

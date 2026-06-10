@@ -49,6 +49,8 @@ export type UiStrings = {
   };
   work: {
     label: string;
+    hubTitle: string;
+    hubDescription: string;
     relatedProjects: string;
     readCaseStudy: string;
     viewProject: string;
@@ -58,11 +60,22 @@ export type UiStrings = {
     previewLoading: string;
     previewBlocked: string;
     previewPlaceholder: string;
+    presentation: {
+      step: string;
+      forWhom: string;
+      delivered: string;
+      stack: string;
+      features: string;
+      outcome: string;
+      progress: string;
+      thumbnailsLabel: string;
+    };
   };
   slideshow: {
     label: string;
     prev: string;
     next: string;
+    viewPresentation: string;
   };
   quote: {
     navLabel: string;
@@ -156,7 +169,7 @@ const uiStrings: Record<Locale, UiStrings> = {
     featuredProject: "Featured project",
     featuredProjects: "Selected work",
     featuredProjectsSubline:
-      "Three live Vercel projects — browse the slideshow, open the site, or read the case study.",
+      "Three production deployments — preview each project and open the full presentation on the portfolio page.",
     process: {
       title: "How I work",
       steps: [
@@ -230,7 +243,10 @@ const uiStrings: Record<Locale, UiStrings> = {
       recentPosts: "Recent posts",
     },
     work: {
-      label: "Projects",
+      label: "Portfolio",
+      hubTitle: "Project presentations",
+      hubDescription:
+        "A guided walkthrough of three live builds — what was delivered, who they serve, and the business value behind each deployment. For decision-makers evaluating a custom web partner.",
       relatedProjects: "Related projects",
       readCaseStudy: "Read case study",
       viewProject: "View project",
@@ -240,11 +256,22 @@ const uiStrings: Record<Locale, UiStrings> = {
       previewLoading: "Loading preview…",
       previewBlocked: "Live embed unavailable — open the site directly",
       previewPlaceholder: "Click to open the live site",
+      presentation: {
+        step: "Step",
+        forWhom: "Who it's for",
+        delivered: "What was built",
+        stack: "Tech stack",
+        features: "Key features",
+        outcome: "Value for the client",
+        progress: "Project {current} of {total}",
+        thumbnailsLabel: "Jump to project",
+      },
     },
     slideshow: {
       label: "Project slideshow",
       prev: "Previous project",
       next: "Next project",
+      viewPresentation: "View presentation →",
     },
     quote: {
       navLabel: "Quote",
@@ -450,7 +477,7 @@ const uiStrings: Record<Locale, UiStrings> = {
     featuredProject: "Wyróżniony projekt",
     featuredProjects: "Wybrane realizacje",
     featuredProjectsSubline:
-      "Trzy projekty live na Vercel — przełączaj slajdy, otwórz stronę lub czytaj case study.",
+      "Trzy wdrożenia produkcyjne — podejrzyj każdy projekt i przejdź do pełnej prezentacji na stronie realizacji.",
     process: {
       title: "Jak pracuję",
       steps: [
@@ -524,7 +551,10 @@ const uiStrings: Record<Locale, UiStrings> = {
       recentPosts: "Najnowsze wpisy",
     },
     work: {
-      label: "Projekty",
+      label: "Realizacje",
+      hubTitle: "Prezentacja projektów",
+      hubDescription:
+        "Przewodnik po trzech wdrożeniach produkcyjnych — co zostało zrobione, dla kogo i jaka wartość biznesowa stoi za każdym projektem. Dla osób decyzyjnych szukających partnera do stron i aplikacji na zamówienie.",
       relatedProjects: "Powiązane projekty",
       readCaseStudy: "Czytaj case study",
       viewProject: "Zobacz projekt",
@@ -534,11 +564,22 @@ const uiStrings: Record<Locale, UiStrings> = {
       previewLoading: "Ładowanie podglądu…",
       previewBlocked: "Podgląd niedostępny — otwórz stronę bezpośrednio",
       previewPlaceholder: "Kliknij, aby otworzyć stronę na żywo",
+      presentation: {
+        step: "Krok",
+        forWhom: "Dla kogo",
+        delivered: "Co zrobiono",
+        stack: "Stack techniczny",
+        features: "Kluczowe funkcje",
+        outcome: "Wartość dla klienta",
+        progress: "Projekt {current} z {total}",
+        thumbnailsLabel: "Przejdź do projektu",
+      },
     },
     slideshow: {
       label: "Slideshow projektów",
       prev: "Poprzedni projekt",
       next: "Następny projekt",
+      viewPresentation: "Zobacz prezentację →",
     },
     quote: {
       navLabel: "Oferta",

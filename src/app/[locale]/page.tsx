@@ -18,6 +18,7 @@ import { ProjectSlideshow } from "@/components/ProjectSlideshow";
 import { ServicesGrid } from "@/components/ServicesGrid";
 import { TechMarquee } from "@/components/TechMarquee";
 import { featuredProjectConfigs, homepageFeaturedSlugs } from "@/data/featuredProjects";
+import { getProjectPresentations } from "@/data/projectPresentations";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
 import { getUi } from "@/i18n/ui";
@@ -47,15 +48,20 @@ export default async function Home({ params }: PageProps) {
   const ui = getUi(locale);
 
   const allProjects = getPosts(["src", "app", "work", "projects"]);
+  const presentations = getProjectPresentations(locale);
   const showcaseProjects = homepageFeaturedSlugs
     .map((slug) => {
       const post = allProjects.find((p) => p.slug === slug);
       const config = featuredProjectConfigs[slug];
-      if (!post || !config) return null;
+      const presentation = presentations.find((p) => p.slug === slug);
+      if (!post || !config || !presentation) return null;
       return {
         slug,
         title: post.metadata.title,
-        summary: post.metadata.summary,
+        summary: presentation.shortSummary,
+        tagline: presentation.tagline,
+        stack: presentation.stack,
+        presentationHref: `${localizedPath("/work", locale)}#project-${slug}`,
         href: localizedPath(`/work/${slug}`, locale),
         config,
       };

@@ -47,55 +47,30 @@ export function createPolishContent(): LocaleContent {
     image: "/images/og/home.svg",
     label: "Strona główna",
     title: `Portfolio – ${person.name}`,
-    description: `Strony i aplikacje Next.js wdrożone na Vercel — platforma SEO, community Discord z OAuth, strona B2B z i18n. React, TypeScript.`,
-    headline: <>Strony i aplikacje Next.js — wdrożone na Vercel, nie w szablonie</>,
+    description: `Strony i aplikacje webowe szyte na miarę — indywidualne podejście, analiza potrzeb i wdrożenie dopasowane do branży. Next.js, React, TypeScript.`,
+    headline: <>Strony i aplikacje szyte na miarę — dla firm, które chcą więcej niż szablon</>,
     featured: {
       display: true,
       items: [
         {
           title: (
             <Row gap="8" vertical="center">
-              <strong className="ml-4">SEO Opt One</strong>
+              <strong className="ml-4">Custom development</strong>
               <Line background="brand-alpha-strong" vert height="16" />
               <Text marginRight="4" onBackground="brand-medium">
-                audyt SEO
+                Indywidualna wycena
               </Text>
             </Row>
           ),
-          href: "/work/seo-opt-one",
-        },
-        {
-          title: (
-            <Row gap="8" vertical="center">
-              <strong className="ml-4">Strefa Kibica</strong>
-              <Line background="brand-alpha-strong" vert height="16" />
-              <Text marginRight="4" onBackground="brand-medium">
-                Discord OAuth
-              </Text>
-            </Row>
-          ),
-          href: "/work/strefa-kibica",
-        },
-        {
-          title: (
-            <Row gap="8" vertical="center">
-              <strong className="ml-4">BJ Trade</strong>
-              <Line background="brand-alpha-strong" vert height="16" />
-              <Text marginRight="4" onBackground="brand-medium">
-                B2B PL/EN
-              </Text>
-            </Row>
-          ),
-          href: "/work/bjtrade",
+          href: "/quote",
         },
       ],
     },
     subline: (
       <>
-        Buduję w <Text as="span" size="xl" weight="strong">Next.js i React</Text> — od platformy
-        audytu SEO z planami strategii i generatorami kodów, przez aplikację Discord z
-        wirtualnymi zakładami i rankingiem, po wielojęzyczną stronę hurtowni z certyfikatami
-        GMP/HACCP. Od briefu po deploy na Vercel.
+        Indywidualne podejście, analiza potrzeb i projekt dopasowany do branży oraz celów
+        biznesowych. Od pierwszej rozmowy przez projekt i wdrożenie — po wsparcie po starcie.
+        Technologia: <Text as="span" size="xl" weight="strong">Next.js, React i TypeScript</Text>.
       </>
     ),
   };
@@ -123,26 +98,26 @@ export function createPolishContent(): LocaleContent {
         <>
           Jestem <strong>Krystian G.</strong> — freelancer full-stack, który projektuje
           i wdraża strony oraz aplikacje webowe od zera. Nie sprzedaję szablonów:
-          każdy projekt to <strong>custom rozwiązanie</strong> dopasowane do Twojego
-          biznesu, grupy docelowej i budżetu.
+          każdy projekt to <strong>rozwiązanie dopasowane do potrzeb</strong> Twojej
+          firmy, grupy docelowej i budżetu.
           <br />
           <br />
-          <strong>Co tworzę dla klientów:</strong> strony firmowe B2B, platformy
-          community i Discord, landingi SEO, sklepy internetowe, panele
-          administracyjne, audyty SEO oraz serwisy wielojęzyczne (PL/EN i więcej).
+          <strong>Jak pracuję:</strong> zaczynam od rozmowy i analizy celów biznesowych,
+          potem projektuję strukturę i UX, wdrażam iteracyjnie z podglądem na każdym
+          etapie i pomagam po starcie. Strony firmowe, aplikacje, platformy
+          community, sklepy, panele administracyjne i serwisy wielojęzyczne — zawsze
+          pod konkretny brief, nie pod gotowy motyw.
           <br />
           <br />
-          <strong>Dlaczego warto:</strong> Next.js i Vercel oznaczają szybkość,
-          wydajność i stabilny hosting. Dostajesz przejrzysty proces, preview
-          deploye na każdym etapie oraz wsparcie po wdrożeniu — nie zostajesz sam
-          z technologią.
+          <strong>Dlaczego warto:</strong> nowoczesny stack (Next.js, React, TypeScript)
+          oznacza szybkość, wydajność i stabilne wdrożenie. Dostajesz przejrzysty
+          proces, jasną komunikację i partnera technicznego, który tłumaczy decyzje
+          w języku biznesu.
           <br />
           <br />
-          <strong>Dla kogo:</strong> firmy bez własnego IT, społeczności gamingowe,
-          przedsiębiorcy i marki, które chcą profesjonalnej obecności online bez
-          kompromisów. Dowód jakości: <strong>SEO Opt One</strong>,{" "}
-          <strong>Strefa Kibica</strong> i <strong>BJ Trade</strong> — projekty live
-          na produkcji.
+          <strong>Dla kogo:</strong> firmy bez własnego działu IT, przedsiębiorcy
+          i marki, które chcą profesjonalnej obecności online bez kompromisów.
+          Przykłady wdrożeń zobaczysz w sekcji <strong>Realizacje</strong>.
         </>
       ),
     },
@@ -271,9 +246,9 @@ export function createPolishContent(): LocaleContent {
 
   const work: Work = {
     path: "/work",
-    label: "Projekty",
-    title: `Projekty – ${person.name}`,
-    description: `Realizacje ${person.name} — SEO Opt One, Strefa Kibica, BJ Trade i portfolio Next.js. Custom strony dla gamingu i biznesu.`,
+    label: "Realizacje",
+    title: `Realizacje – ${person.name}`,
+    description: `Prezentacja projektów ${person.name} — wdrożenia produkcyjne dla biznesu, marketingu i społeczności. Strony i aplikacje Next.js na zamówienie.`,
   };
 
   const gallery: Gallery = {

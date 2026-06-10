@@ -1,10 +1,14 @@
 import { Column, Heading, Meta, Schema, Text } from "@once-ui-system/core";
+import { ScrollToHash } from "@/components";
 import { SyntaxHighlightBlock } from "@/components/effects";
+import { ProjectPresentationGuide } from "@/components/work/ProjectPresentationGuide";
+import { featuredProjectConfigs, homepageFeaturedSlugs } from "@/data/featuredProjects";
+import { getProjectPresentations } from "@/data/projectPresentations";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
 import { getUi } from "@/i18n/ui";
 import { baseURL, getContent } from "@/resources";
-import { Projects } from "@/components/work/Projects";
+import { getPosts } from "@/utils/utils";
 import styles from "./work.module.scss";
 
 type PageProps = {
@@ -29,12 +33,32 @@ export default async function Work({ params }: PageProps) {
   const { work, about, person } = getContent(locale);
   const ui = getUi(locale);
 
+  const allProjects = getPosts(["src", "app", "work", "projects"]);
+  const presentations = getProjectPresentations(locale);
+
+  const presentationProjects = homepageFeaturedSlugs
+    .map((slug) => {
+      const post = allProjects.find((p) => p.slug === slug);
+      const config = featuredProjectConfigs[slug];
+      const presentation = presentations.find((p) => p.slug === slug);
+      if (!post || !config || !presentation) return null;
+      return {
+        slug,
+        title: post.metadata.title,
+        href: localizedPath(`/work/${slug}`, locale),
+        config,
+        presentation,
+      };
+    })
+    .filter((p): p is NonNullable<typeof p> => p !== null);
+
   return (
     <div className={styles.page}>
+      <ScrollToHash />
       <div className={styles.decoration} aria-hidden="true">
         <SyntaxHighlightBlock position="topRight" compact />
       </div>
-      <Column maxWidth="m" paddingTop="24" paddingX="l" gap="l" className={styles.content}>
+      <Column maxWidth="m" paddingTop="24" paddingX="l" gap="xl" className={styles.content}>
         <Schema
           as="webPage"
           baseURL={baseURL}
@@ -48,29 +72,15 @@ export default async function Work({ params }: PageProps) {
             image: `${baseURL}${person.avatar}`,
           }}
         />
-        <Column fillWidth gap="8" marginBottom="m">
-          <Heading variant="heading-strong-xl" wrap="balance">
-            {work.title}
+        <Column fillWidth gap="12" className={styles.hero}>
+          <Heading variant="display-strong-s" wrap="balance">
+            {ui.work.hubTitle}
           </Heading>
           <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
-            {work.description}
+            {ui.work.hubDescription}
           </Text>
         </Column>
-        <div className={styles.stats} role="region" aria-label={ui.socialProof.ariaLabel}>
-          {ui.socialProof.items.map((item) => (
-            <div key={item.label} className={styles.statItem}>
-              <Text variant="display-strong-xs" className={styles.statValue}>
-                {item.value}
-              </Text>
-              <Text variant="label-default-s" onBackground="neutral-weak">
-                {item.label}
-              </Text>
-            </div>
-          ))}
-        </div>
-        <div className={styles.projectsSection}>
-          <Projects locale={locale} />
-        </div>
+        <ProjectPresentationGuide projects={presentationProjects} />
       </Column>
     </div>
   );

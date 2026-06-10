@@ -47,55 +47,31 @@ export function createEnglishContent(): LocaleContent {
     image: "/images/og/home.svg",
     label: "Home",
     title: `${person.name}'s Portfolio`,
-    description: `Next.js websites and apps deployed on Vercel — SEO platform, Discord community with OAuth, multilingual B2B site. React, TypeScript.`,
-    headline: <>Next.js websites and apps — shipped on Vercel, not from a template</>,
+    description: `Custom websites and web apps — individual approach, needs analysis, and delivery tailored to your industry. Next.js, React, TypeScript.`,
+    headline: <>Websites and apps built to fit — for businesses that need more than a template</>,
     featured: {
       display: true,
       items: [
         {
           title: (
             <Row gap="8" vertical="center">
-              <strong className="ml-4">SEO Opt One</strong>
+              <strong className="ml-4">Custom development</strong>
               <Line background="brand-alpha-strong" vert height="16" />
               <Text marginRight="4" onBackground="brand-medium">
-                SEO audit
+                Tailored quote
               </Text>
             </Row>
           ),
-          href: "/work/seo-opt-one",
-        },
-        {
-          title: (
-            <Row gap="8" vertical="center">
-              <strong className="ml-4">Strefa Kibica</strong>
-              <Line background="brand-alpha-strong" vert height="16" />
-              <Text marginRight="4" onBackground="brand-medium">
-                Discord OAuth
-              </Text>
-            </Row>
-          ),
-          href: "/work/strefa-kibica",
-        },
-        {
-          title: (
-            <Row gap="8" vertical="center">
-              <strong className="ml-4">BJ Trade</strong>
-              <Line background="brand-alpha-strong" vert height="16" />
-              <Text marginRight="4" onBackground="brand-medium">
-                B2B PL/EN
-              </Text>
-            </Row>
-          ),
-          href: "/work/bjtrade",
+          href: "/quote",
         },
       ],
     },
     subline: (
       <>
-        I build with <Text as="span" size="xl" weight="strong">Next.js and React</Text> — from an SEO
-        audit platform with strategy plans and code generators, through a Discord app with
-        virtual betting and leaderboards, to a multilingual B2B wholesaler site with GMP/HACCP
-        certifications. From brief to Vercel deploy.
+        Individual approach, needs analysis, and a solution tailored to your industry and
+        business goals. From the first conversation through design, build, and launch — plus
+        post-launch support. Built with{" "}
+        <Text as="span" size="xl" weight="strong">Next.js, React, and TypeScript</Text>.
       </>
     ),
   };
@@ -123,26 +99,26 @@ export function createEnglishContent(): LocaleContent {
         <>
           I'm <strong>Krystian G.</strong> — a full-stack freelancer who designs and
           ships websites and web apps from scratch. I don't sell templates: every
-          project is a <strong>custom build</strong> aligned with your business,
-          audience, and budget.
+          project is a <strong>solution shaped around your needs</strong> — your
+          business, audience, and budget.
           <br />
           <br />
-          <strong>What I build for clients:</strong> B2B corporate sites, community
-          and Discord platforms, SEO landing pages, e-commerce stores, admin panels,
-          SEO audits, and multi-language products (PL/EN and beyond).
+          <strong>How I work:</strong> I start with a conversation and business goals,
+          then shape structure and UX, ship iteratively with preview deploys at every
+          stage, and stay available after launch. Corporate sites, apps, community
+          platforms, stores, admin panels, and multilingual products — always against
+          a real brief, never a prefab theme.
           <br />
           <br />
-          <strong>Why work with me:</strong> Next.js and Vercel mean speed,
-          performance, and reliable hosting. You get a transparent process, preview
-          deploys at every stage, and post-launch support — you're not left alone
-          with the tech.
+          <strong>Why work with me:</strong> a modern stack (Next.js, React, TypeScript)
+          means speed, performance, and reliable delivery. You get a transparent
+          process, clear communication, and a technical partner who explains decisions
+          in business terms.
           <br />
           <br />
           <strong>Who it's for:</strong> companies without an in-house IT team,
-          gaming communities, entrepreneurs, and brands that want a professional
-          online presence without compromise. Proof in production:{" "}
-          <strong>SEO Opt One</strong>, <strong>Strefa Kibica</strong>, and{" "}
-          <strong>BJ Trade</strong>.
+          entrepreneurs, and brands that want a professional online presence without
+          compromise. See live examples in the <strong>Portfolio</strong> section.
         </>
       ),
     },
@@ -272,9 +248,9 @@ export function createEnglishContent(): LocaleContent {
 
   const work: Work = {
     path: "/work",
-    label: "Work",
-    title: `Projects – ${person.name}`,
-    description: `Work by ${person.name} — SEO Opt One, Strefa Kibica, BJ Trade, and Next.js portfolio. Custom sites for gaming and business.`,
+    label: "Portfolio",
+    title: `Portfolio – ${person.name}`,
+    description: `Project presentations by ${person.name} — production deployments for business, marketing, and community. Custom Next.js websites and apps.`,
   };
 
   const gallery: Gallery = {

@@ -83,6 +83,30 @@
   }
 }
 
+.metaRow {
+  padding: 0 4px;
+}
+
+.copyBlock {
+  padding: 16px;
+  border-radius: var(--radius-m);
+  border: 1px solid var(--effect-surface-border);
+  background: var(--effect-surface-bg);
+}
+
+.stackRow {
+  width: 100%;
+}
+
+.stackTag {
+  padding: 4px 10px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--neutral-alpha-medium);
+  background: var(--neutral-alpha-weak);
+  font-size: 0.85rem;
+  color: var(--neutral-on-background-weak);
+}
+
 .actions {
   display: flex;
   flex-wrap: wrap;

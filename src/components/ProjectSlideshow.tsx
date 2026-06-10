@@ -52,8 +52,31 @@ export function ProjectSlideshow({ projects, autoplayMs = 8000 }: ProjectSlidesh
   const project = projects[activeIndex];
   if (!project) return null;
 
+  const presentationHref = project.presentationHref ?? project.href;
+
   return (
     <Column fillWidth gap="20" className={styles.slideshow}>
+      <Row fillWidth horizontal="between" vertical="center" gap="12" className={styles.metaRow}>
+        <Text variant="label-default-s" onBackground="brand-medium">
+          {ui.work.presentation.step} {activeIndex + 1}/{projects.length}
+        </Text>
+        {projects.length > 1 && (
+          <Row gap="8" className={styles.dots} role="tablist" aria-label={ui.slideshow.label}>
+            {projects.map((item, index) => (
+              <button
+                key={item.slug}
+                type="button"
+                role="tab"
+                aria-selected={index === activeIndex}
+                aria-label={`${item.title} (${index + 1}/${projects.length})`}
+                className={`${styles.dot} ${index === activeIndex ? styles.dotActive : ""}`}
+                onClick={() => goTo(index)}
+              />
+            ))}
+          </Row>
+        )}
+      </Row>
+
       <div className={styles.viewport}>
         <div key={project.slug} className={styles.slide}>
           <ProjectLivePreview
@@ -87,34 +110,41 @@ export function ProjectSlideshow({ projects, autoplayMs = 8000 }: ProjectSlidesh
         )}
       </div>
 
-      <Column gap="8" paddingX="4">
-        <Row fillWidth horizontal="between" vertical="center" gap="12">
-          <Heading as="h3" variant="heading-strong-l">
+      <Column gap="12" paddingX="4" className={styles.copyBlock}>
+        <Column gap="8">
+          <Heading as="h3" variant="heading-strong-l" wrap="balance">
             {project.title}
           </Heading>
-          {projects.length > 1 && (
-            <Row gap="8" className={styles.dots} role="tablist" aria-label={ui.slideshow.label}>
-              {projects.map((item, index) => (
-                <button
-                  key={item.slug}
-                  type="button"
-                  role="tab"
-                  aria-selected={index === activeIndex}
-                  aria-label={`${item.title} (${index + 1}/${projects.length})`}
-                  className={`${styles.dot} ${index === activeIndex ? styles.dotActive : ""}`}
-                  onClick={() => goTo(index)}
-                />
-              ))}
-            </Row>
+          {project.tagline && (
+            <Text variant="body-default-m" onBackground="brand-medium" wrap="balance">
+              {project.tagline}
+            </Text>
           )}
-        </Row>
-        <Text variant="body-default-s" onBackground="neutral-weak">
+        </Column>
+        <Text variant="body-default-s" onBackground="neutral-weak" wrap="balance">
           {project.summary}
         </Text>
+        {project.stack && project.stack.length > 0 && (
+          <Row gap="8" wrap className={styles.stackRow}>
+            {project.stack.map((item) => (
+              <span key={item} className={styles.stackTag}>
+                {item}
+              </span>
+            ))}
+          </Row>
+        )}
         <Row className={styles.actions}>
           <Button
-            href={project.config.liveUrl}
+            href={presentationHref}
             variant="primary"
+            size="s"
+            suffixIcon="arrowRight"
+          >
+            {ui.slideshow.viewPresentation}
+          </Button>
+          <Button
+            href={project.config.liveUrl}
+            variant="secondary"
             size="s"
             suffixIcon="arrowUpRightFromSquare"
             target="_blank"
