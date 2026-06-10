@@ -1,6 +1,7 @@
 @import "../breakpoints.scss";
 @import "../branded-scrollbar.scss";
 @import "../../resources/rotating-border-glow.scss";
+@import "../../resources/card-hover-fill.scss";
 
 .root {
   width: 100%;
@@ -11,6 +12,7 @@
 
 .hero {
   @include rotating-border-glow();
+  @include card-hover-fill();
   padding: 36px 40px;
   border-radius: var(--radius-l);
   border: 1px solid var(--effect-surface-border);
@@ -55,6 +57,7 @@
 
 .card {
   @include rotating-border-glow();
+  @include card-hover-fill(".cardLink");
   padding: var(--static-space-24);
   border: 1px solid var(--neutral-alpha-weak);
   border-radius: var(--radius-l);
@@ -65,24 +68,30 @@
   flex: 1;
   height: 100%;
   transition:
+    background 0.3s ease,
     border-color var(--transition-micro-medium),
     transform var(--transition-micro-medium),
-    box-shadow var(--transition-micro-medium);
+    box-shadow 0.3s ease;
 
   .cardLink:hover &,
-  &:hover {
+  .cardLink:focus-visible &,
+  &:hover,
+  &:focus-visible {
     border-color: var(--brand-alpha-medium);
     transform: translateY(-6px);
     box-shadow:
+      var(--card-hover-fill-shadow),
       0 12px 28px var(--brand-alpha-weak),
       var(--shadow-l);
   }
 
   @media (prefers-reduced-motion: reduce) {
     .cardLink:hover &,
-    &:hover {
+    .cardLink:focus-visible &,
+    &:hover,
+    &:focus-visible {
       transform: none;
-      box-shadow: none;
+      box-shadow: var(--card-hover-fill-shadow);
     }
   }
 }
@@ -122,6 +131,7 @@
 
 .formInner {
   @include rotating-border-glow();
+  @include card-hover-fill();
   padding: var(--static-space-32);
   border-radius: var(--radius-l);
   border: 1px solid var(--effect-surface-border);

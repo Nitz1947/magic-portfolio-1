@@ -23,7 +23,10 @@
   align-items: center;
 }
 
+@import "../../../resources/card-hover-fill.scss";
+
 .hero {
+  @include card-hover-fill();
   padding: 20px;
   border-radius: var(--radius-l);
   border: 1px solid var(--effect-surface-border);

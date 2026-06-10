@@ -1,0 +1,53 @@
+@mixin card-hover-fill-background {
+  background: var(--card-hover-fill-bg);
+  box-shadow: var(--card-hover-fill-shadow);
+}
+
+@mixin card-hover-fill-text {
+  :is(h1, h2, h3, h4, h5, h6) {
+    color: var(--neutral-on-background-strong);
+  }
+
+  .thumbnailTitle {
+    color: var(--neutral-on-background-strong);
+  }
+
+  .thumbnailTagline {
+    color: var(--neutral-on-background-medium);
+    opacity: 1;
+  }
+}
+
+@mixin card-hover-fill-persist {
+  @include card-hover-fill-background;
+  @include card-hover-fill-text;
+}
+
+@mixin card-hover-fill($parent-trigger: null) {
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    color 0.3s ease;
+
+  @if $parent-trigger {
+    #{$parent-trigger}:hover &,
+    #{$parent-trigger}:focus-visible & {
+      @include card-hover-fill-background;
+      @include card-hover-fill-text;
+    }
+  }
+
+  &:hover,
+  &:focus-visible {
+    @include card-hover-fill-background;
+    @include card-hover-fill-text;
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    &:active {
+      @include card-hover-fill-background;
+      @include card-hover-fill-text;
+    }
+  }
+}

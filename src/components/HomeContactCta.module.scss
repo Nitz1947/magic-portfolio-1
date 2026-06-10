@@ -1,4 +1,7 @@
+@import "../resources/card-hover-fill.scss";
+
 .cta {
+  @include card-hover-fill();
   border: 1px solid var(--effect-surface-border);
   background:
     radial-gradient(ellipse 80% 60% at 50% 0%, var(--brand-alpha-weak), transparent 65%),

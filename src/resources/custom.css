@@ -4,6 +4,9 @@
  */
 
 [data-theme="dark"] {
+  --card-hover-fill-bg: color-mix(in srgb, #0d1520 92%, var(--neutral-alpha-medium));
+  --card-active-fill-bg: color-mix(in srgb, #0d1520 88%, var(--neutral-alpha-medium));
+  --card-hover-fill-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
   --effect-surface-bg: var(--neutral-alpha-weak);
   --effect-surface-border: var(--brand-alpha-weak);
   --effect-accent-text: var(--brand-on-background-strong);
@@ -24,6 +27,9 @@
 }
 
 [data-theme="light"] {
+  --card-hover-fill-bg: color-mix(in srgb, var(--page-background) 96%, var(--neutral-alpha-medium));
+  --card-active-fill-bg: color-mix(in srgb, var(--page-background) 94%, var(--neutral-alpha-medium));
+  --card-hover-fill-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   --effect-surface-bg: var(--neutral-alpha-weak);
   --effect-surface-border: var(--brand-alpha-weak);
   --effect-accent-text: var(--brand-on-background-strong);

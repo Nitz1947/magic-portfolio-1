@@ -1,7 +1,9 @@
 @import "../resources/rotating-border-glow.scss";
+@import "../resources/card-hover-fill.scss";
 
 .strip {
   @include rotating-border-glow($duration: 4s);
+  @include card-hover-fill();
   border: 1px solid var(--effect-surface-border);
   border-radius: var(--radius-l);
   background: var(--effect-surface-bg);

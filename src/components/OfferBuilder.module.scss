@@ -1,6 +1,7 @@
 @import "./breakpoints.scss";
 @import "./branded-scrollbar.scss";
 @import "../resources/rotating-border-glow.scss";
+@import "../resources/card-hover-fill.scss";
 
 @mixin scrollable-list {
   @include branded-scrollbar;
@@ -30,6 +31,7 @@
 
 .form {
   @include rotating-border-glow();
+  @include card-hover-fill();
   padding: var(--static-space-32);
   border: 1px solid var(--neutral-alpha-weak);
   border-radius: var(--radius-l);
@@ -52,6 +54,7 @@
 
 .sidebarInner {
   @include rotating-border-glow();
+  @include card-hover-fill();
   display: flex;
   flex-direction: column;
   gap: var(--static-space-16);
@@ -88,6 +91,7 @@
 
 .featureGrid {
   @include rotating-border-glow();
+  @include card-hover-fill();
   @include scrollable-list;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -115,25 +119,38 @@
 
 .styleCard {
   @include rotating-border-glow($duration: 4s);
+  @include card-hover-fill();
   display: flex;
   flex-direction: column;
   gap: var(--static-space-8);
   padding: var(--static-space-16);
   border: 1px solid var(--neutral-alpha-weak);
   border-radius: var(--radius-m);
-  background: transparent;
+  background: var(--neutral-alpha-weak);
   text-align: left;
   cursor: pointer;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     border-color: var(--brand-alpha-medium);
   }
 }
 
 .styleCardActive {
   border-color: var(--brand-alpha-strong);
-  box-shadow: 0 0 20px var(--brand-alpha-weak);
+  background: var(--card-active-fill-bg);
+  box-shadow:
+    var(--card-hover-fill-shadow),
+    0 0 20px var(--brand-alpha-weak);
+
+  &:hover,
+  &:focus-visible {
+    background: var(--card-active-fill-bg);
+  }
 }
 
 .contactGrid {

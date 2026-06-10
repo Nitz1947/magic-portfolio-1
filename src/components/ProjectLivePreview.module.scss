@@ -1,5 +1,6 @@
 @import "./branded-scrollbar.scss";
 @import "../resources/rotating-border-glow.scss";
+@import "../resources/card-hover-fill.scss";
 
 .fullBleedRoot {
   width: 100%;
@@ -8,6 +9,7 @@
 
 .fullBleedFrame {
   @include rotating-border-glow($position: inside);
+  @include card-hover-fill();
   width: 100%;
   overflow: hidden;
   border-radius: var(--radius-l);

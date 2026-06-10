@@ -1,5 +1,6 @@
 @import "./breakpoints.scss";
 @import "../resources/rotating-border-glow.scss";
+@import "../resources/card-hover-fill.scss";
 
 .grid {
   display: grid;
@@ -17,28 +18,33 @@
 
 .card {
   @include rotating-border-glow();
+  @include card-hover-fill();
   padding: var(--static-space-24);
   border: 1px solid var(--neutral-alpha-weak);
   border-radius: var(--radius-l);
   background: var(--neutral-alpha-weak);
   transition:
+    background 0.3s ease,
     border-color var(--transition-micro-medium),
     transform var(--transition-micro-medium),
-    box-shadow var(--transition-micro-medium);
+    box-shadow 0.3s ease;
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     border-color: var(--brand-alpha-medium);
     transform: translateY(-6px);
     box-shadow:
+      var(--card-hover-fill-shadow),
       0 12px 28px var(--brand-alpha-weak),
       var(--shadow-l);
   }
 
   @media (prefers-reduced-motion: reduce) {
-    &:hover {
+    &:hover,
+    &:focus-visible {
       border-color: var(--neutral-alpha-weak);
       transform: none;
-      box-shadow: none;
+      box-shadow: var(--card-hover-fill-shadow);
     }
   }
 }

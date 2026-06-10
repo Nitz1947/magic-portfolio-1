@@ -1,15 +1,22 @@
 @import "../resources/rotating-border-glow.scss";
+@import "../resources/card-hover-fill.scss";
 
 .card {
-  transition: var(--transition-micro-medium);
+  @include card-hover-fill();
   border-radius: var(--radius-l);
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease,
+    transform var(--transition-micro-medium);
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     transform: translateY(calc(-1 * var(--static-space-4)));
   }
 
   @media (prefers-reduced-motion: reduce) {
-    &:hover {
+    &:hover,
+    &:focus-visible {
       transform: none;
     }
   }
@@ -21,16 +28,23 @@
   border-radius: var(--radius-l);
   overflow: hidden;
   border: 1px solid var(--neutral-alpha-weak);
+  background: var(--neutral-alpha-weak);
   transition:
+    background 0.3s ease,
     border-color var(--transition-micro-medium),
-    box-shadow var(--transition-micro-medium);
+    box-shadow 0.3s ease;
 
-  .card:hover & {
+  .card:hover &,
+  .card:focus-within & {
+    background: var(--card-hover-fill-bg);
     border-color: var(--brand-alpha-medium);
-    box-shadow: 0 0 0 1px var(--brand-alpha-weak), 0 8px 32px var(--brand-alpha-weak);
+    box-shadow:
+      var(--card-hover-fill-shadow),
+      0 0 0 1px var(--brand-alpha-weak),
+      0 8px 32px var(--brand-alpha-weak);
 
     @media (prefers-reduced-motion: reduce) {
-      box-shadow: none;
+      box-shadow: var(--card-hover-fill-shadow);
     }
   }
 

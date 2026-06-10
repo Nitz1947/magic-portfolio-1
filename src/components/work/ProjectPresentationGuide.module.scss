@@ -1,5 +1,6 @@
 @import "../branded-scrollbar.scss";
 @import "../../resources/rotating-border-glow.scss";
+@import "../../resources/card-hover-fill.scss";
 
 $preview-max-width: min(1400px, 96vw);
 $info-max-width: min(1200px, 92vw);
@@ -67,6 +68,7 @@ $info-max-width: min(1200px, 92vw);
 
 .thumbnail {
   @include rotating-border-glow();
+  @include card-hover-fill();
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -81,9 +83,9 @@ $info-max-width: min(1200px, 92vw);
   text-align: left;
   width: 100%;
   transition:
+    background 0.3s ease,
     border-color var(--transition-micro-medium),
-    background var(--transition-micro-medium),
-    box-shadow var(--transition-micro-medium),
+    box-shadow 0.3s ease,
     transform var(--transition-micro-medium);
 
   @media (max-width: 900px) {
@@ -91,9 +93,9 @@ $info-max-width: min(1200px, 92vw);
     scroll-snap-align: start;
   }
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     border-color: var(--brand-alpha-strong);
-    background: color-mix(in srgb, var(--brand-alpha-weak) 65%, #0d1520);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -103,10 +105,16 @@ $info-max-width: min(1200px, 92vw);
 
 .thumbnailActive {
   border-color: var(--brand-solid-medium);
-  background: var(--brand-alpha-weak);
+  background: var(--card-active-fill-bg);
   box-shadow:
+    var(--card-hover-fill-shadow),
     inset 0 0 0 1px var(--brand-alpha-medium),
     0 0 20px color-mix(in srgb, var(--brand-solid-medium) 28%, transparent);
+
+  &:hover,
+  &:focus-visible {
+    background: var(--card-active-fill-bg);
+  }
 
   .thumbnailTitle {
     color: var(--brand-on-background-strong);
@@ -114,6 +122,7 @@ $info-max-width: min(1200px, 92vw);
 
   .thumbnailTagline {
     color: var(--brand-on-background-medium);
+    opacity: 1;
   }
 }
 
@@ -221,6 +230,7 @@ $info-max-width: min(1200px, 92vw);
 
 .infoSection {
   @include rotating-border-glow();
+  @include card-hover-fill();
   width: 100%;
   max-width: $info-max-width;
   margin-inline: auto;
