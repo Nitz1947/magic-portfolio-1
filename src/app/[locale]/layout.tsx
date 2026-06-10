@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { notFound } from "next/navigation";
 
 import { Column, Flex, Meta } from "@once-ui-system/core";
-import { Footer, Header, RouteGuard, Providers } from "@/components";
+import { Footer, Header, RouteGuard } from "@/components";
 import { CustomCursor, GlobalPageBackground } from "@/components/effects";
 import { LocaleProvider } from "@/context/LocaleContext";
 import { defaultLocale, isLocale, locales } from "@/i18n/config";
@@ -116,8 +116,7 @@ export default async function LocaleLayout({
           }}
         />
       </head>
-      <Providers>
-        <LocaleProvider locale={localeParam} content={content} ui={ui}>
+      <LocaleProvider locale={localeParam} content={content} ui={ui}>
           <Column
             as="body"
             fillWidth
@@ -138,7 +137,6 @@ export default async function LocaleLayout({
             <Footer />
           </Column>
         </LocaleProvider>
-      </Providers>
     </Flex>
   );
 }
