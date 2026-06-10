@@ -128,22 +128,21 @@
     flex-direction: row;
     align-items: stretch;
     gap: 32px;
-    min-height: 680px;
+    min-height: 720px;
   }
 }
 
 .previewCell {
   width: 100%;
   min-width: 0;
-  min-height: 680px;
-  @include branded-scrollbar;
-  overflow-y: auto;
-  overflow-x: hidden;
+  min-height: 720px;
+  overflow: hidden;
+  color-scheme: dark;
 
   @media (min-width: 900px) {
     flex: 1 1 58%;
     max-width: 58%;
-    max-height: min(820px, calc(100vh - 120px));
+    max-height: min(800px, calc(100vh - 120px));
   }
 }
 
@@ -175,10 +174,11 @@
   padding: 28px 28px;
   line-height: 1.65;
   font-size: 1rem;
-  @include branded-scrollbar;
+  @include branded-scrollbar($dark-chrome: true);
   overflow-y: auto;
   overflow-x: hidden;
   max-height: inherit;
+  color-scheme: dark;
 
   @media (max-width: 640px) {
     padding: 24px 20px;

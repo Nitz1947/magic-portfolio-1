@@ -18,6 +18,13 @@ interface ProjectLivePreviewProps {
   fullBleed?: boolean;
   /** Two-column presentation layout — fills parent height on desktop */
   presentationLayout?: boolean;
+  /**
+   * Scroll the iframe via a portfolio wrapper (dark branded scrollbar) instead of
+   * the cross-origin iframe viewport — avoids default white inner scrollbars.
+   */
+  externalScroll?: boolean;
+  /** Tall iframe viewport height when externalScroll is enabled (px). */
+  embedViewportHeight?: number;
 }
 
 export function ProjectLivePreview({
@@ -30,6 +37,8 @@ export function ProjectLivePreview({
   lazy = true,
   fullBleed = false,
   presentationLayout = false,
+  externalScroll = presentationLayout,
+  embedViewportHeight = 2400,
 }: ProjectLivePreviewProps) {
   const { ui } = useLocale();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -94,15 +103,33 @@ export function ProjectLivePreview({
       {showIframe ? (
         <>
           {isLoading && <div className={styles.loading}>{ui.work.previewLoading}</div>}
-          <iframe
-            className={`${styles.iframe} ${isVisible ? styles.iframeActive : styles.iframePaused}`}
-            src={src}
-            title={`${title} — ${ui.work.preview}`}
-            sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-            loading="lazy"
-            onLoad={handleIframeLoad}
-            onError={handleIframeError}
-          />
+          {externalScroll ? (
+            <div
+              className={styles.previewScroll}
+              style={{ "--embed-viewport-height": `${embedViewportHeight}px` } as React.CSSProperties}
+            >
+              <iframe
+                className={`${styles.iframe} ${styles.iframeExternal} ${isVisible ? styles.iframeActive : styles.iframePaused}`}
+                src={src}
+                title={`${title} — ${ui.work.preview}`}
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                loading="lazy"
+                scrolling="no"
+                onLoad={handleIframeLoad}
+                onError={handleIframeError}
+              />
+            </div>
+          ) : (
+            <iframe
+              className={`${styles.iframe} ${isVisible ? styles.iframeActive : styles.iframePaused}`}
+              src={src}
+              title={`${title} — ${ui.work.preview}`}
+              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+              loading="lazy"
+              onLoad={handleIframeLoad}
+              onError={handleIframeError}
+            />
+          )}
         </>
       ) : (
         <div className={styles.fallback}>

@@ -18,7 +18,7 @@
   --effect-cursor-glow: var(--brand-alpha-strong);
   --effect-matrix-opacity: 0.22;
   --effect-matrix-alpha: 1;
-  --scrollbar-track: color-mix(in srgb, var(--neutral-solid-weak) 55%, transparent);
+  --scrollbar-track: color-mix(in srgb, #0d1520 72%, var(--neutral-alpha-weak));
   --scrollbar-thumb: var(--brand-solid-medium);
   --scrollbar-thumb-hover: var(--brand-solid-strong);
 }
