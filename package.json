@@ -5,6 +5,7 @@
     "dev": "next dev",
     "export": "next export",
     "build": "next build",
+    "build:pages": "node scripts/build-github-pages.mjs",
     "biome-write": "npx @biomejs/biome format --write .",
     "start": "next start",
     "lint": "next lint"

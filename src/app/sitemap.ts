@@ -3,6 +3,8 @@ import { baseURL, routes as routesConfig } from "@/resources";
 import { locales } from "@/i18n/config";
 import { localizedPath } from "@/i18n/paths";
 
+export const dynamic = "force-static";
+
 export default async function sitemap() {
   const blogs = getPosts(["src", "app", "blog", "posts"]).flatMap((post) =>
     locales.map((locale) => ({

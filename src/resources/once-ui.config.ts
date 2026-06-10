@@ -13,7 +13,9 @@ import {
 } from "@/types";
 
 // IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
-const baseURL: string = "https://magic-portfolio-beta-eight.vercel.app";
+const baseURL: string =
+  process.env.NEXT_PUBLIC_BASE_URL ??
+  "https://magic-portfolio-beta-eight.vercel.app";
 
 const routes: RoutesConfig = {
   "/": true,
