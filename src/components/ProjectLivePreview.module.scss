@@ -2,6 +2,7 @@
 
 .fullBleedRoot {
   width: 100%;
+  margin-inline: auto;
 }
 
 .fullBleedFrame {
@@ -35,8 +36,8 @@
 
 .viewportFullBleed {
   aspect-ratio: unset;
-  min-height: max(800px, 85vh);
-  height: max(800px, 85vh);
+  min-height: max(900px, 85vh);
+  height: max(900px, 85vh);
 
   @media (max-width: 768px) {
     min-height: min(85vh, 720px);
@@ -64,6 +65,8 @@
 }
 
 .iframeScaleOuter {
+  display: flex;
+  justify-content: center;
   width: 100%;
   max-width: 100%;
   overflow: hidden;
@@ -71,34 +74,47 @@
 }
 
 .iframeScaleInner {
-  transform-origin: top left;
+  transform-origin: top center;
   position: relative;
   will-change: transform;
+  flex-shrink: 0;
 }
 
 .presentationContext {
+  width: 100%;
   height: 100%;
-  min-height: max(800px, 85vh);
+  min-height: max(900px, 85vh);
   overflow: hidden;
   max-width: 100%;
+  margin-inline: auto;
+  align-items: center;
 
   .fullBleedFrame {
     display: flex;
     flex-direction: column;
     flex: 1;
-    min-height: max(800px, 85vh);
+    width: 100%;
+    min-height: max(900px, 85vh);
     height: 100%;
     overflow: hidden;
     max-width: 100%;
+    margin-inline: auto;
   }
 
   .viewportFullBleed {
     display: flex;
     flex-direction: column;
     flex: 1;
-    min-height: max(800px, 85vh);
+    width: 100%;
+    min-height: max(900px, 85vh);
     height: auto;
     overflow: hidden;
+    max-width: 100%;
+    align-items: center;
+  }
+
+  .previewScroll {
+    width: 100%;
     max-width: 100%;
   }
 }

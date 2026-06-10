@@ -63,43 +63,45 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
 
   return (
     <Column fillWidth gap="24" horizontal="center" align="center" className={styles.guide}>
-      <Text variant="label-default-s" onBackground="neutral-weak" className={styles.selectorHint}>
-        {ui.work.presentation.selectProject}
-      </Text>
+      <div className={styles.selectorBlock}>
+        <Text variant="label-default-s" onBackground="neutral-weak" className={styles.selectorHint}>
+          {ui.work.presentation.selectProject}
+        </Text>
 
-      <div className={styles.thumbnails} role="tablist" aria-label={ui.work.presentation.thumbnailsLabel}>
-        {projects.map((item, index) => (
-          <button
-            key={item.slug}
-            type="button"
-            role="tab"
-            aria-selected={index === activeIndex}
-            aria-controls={hashForSlug(item.slug)}
-            className={`${styles.thumbnail} ${index === activeIndex ? styles.thumbnailActive : ""}`}
-            onClick={() => goTo(index)}
-          >
-            <span className={styles.thumbnailBadge}>{ui.work.presentation.projectBadge}</span>
-            <span className={styles.thumbnailTitle}>{item.title}</span>
-            <span className={styles.thumbnailTagline}>{item.presentation.tagline}</span>
-          </button>
-        ))}
-      </div>
-
-      {projects.length > 1 && (
-        <div className={styles.projectDots} role="tablist" aria-label={ui.work.presentation.thumbnailsLabel}>
+        <div className={styles.thumbnails} role="tablist" aria-label={ui.work.presentation.thumbnailsLabel}>
           {projects.map((item, index) => (
             <button
               key={item.slug}
               type="button"
               role="tab"
               aria-selected={index === activeIndex}
-              aria-label={item.title}
-              className={`${styles.projectDot} ${index === activeIndex ? styles.projectDotActive : ""}`}
+              aria-controls={hashForSlug(item.slug)}
+              className={`${styles.thumbnail} ${index === activeIndex ? styles.thumbnailActive : ""}`}
               onClick={() => goTo(index)}
-            />
+            >
+              <span className={styles.thumbnailBadge}>{ui.work.presentation.projectBadge}</span>
+              <span className={styles.thumbnailTitle}>{item.title}</span>
+              <span className={styles.thumbnailTagline}>{item.presentation.tagline}</span>
+            </button>
           ))}
         </div>
-      )}
+
+        {projects.length > 1 && (
+          <div className={styles.projectDots} role="tablist" aria-label={ui.work.presentation.thumbnailsLabel}>
+            {projects.map((item, index) => (
+              <button
+                key={item.slug}
+                type="button"
+                role="tab"
+                aria-selected={index === activeIndex}
+                aria-label={item.title}
+                className={`${styles.projectDot} ${index === activeIndex ? styles.projectDotActive : ""}`}
+                onClick={() => goTo(index)}
+              />
+            ))}
+          </div>
+        )}
+      </div>
 
       <section
         id={hashForSlug(project.slug)}
@@ -111,7 +113,7 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
           {project.title} — {project.presentation.tagline}
         </h2>
 
-        <Column fillWidth gap="24" horizontal="center" align="center">
+        <div className={styles.stageColumn}>
           <div className={styles.previewSection}>
             <ProjectLivePreview
               title={project.title}
@@ -200,7 +202,7 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
               {ui.services.cta}
             </Button>
           </Row>
-        </Column>
+        </div>
       </section>
 
       <div className={styles.navRow}>

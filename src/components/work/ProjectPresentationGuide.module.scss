@@ -1,10 +1,26 @@
 @import "../branded-scrollbar.scss";
 
+$preview-max-width: min(1400px, 96vw);
+$info-max-width: min(1200px, 92vw);
+
 .guide {
   width: 100%;
   max-width: 100%;
   margin-inline: auto;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.selectorBlock {
+  width: 100%;
+  max-width: $preview-max-width;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
 }
 
 .srOnly {
@@ -29,6 +45,8 @@
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
   width: 100%;
+  max-width: $preview-max-width;
+  margin-inline: auto;
 
   @media (max-width: 900px) {
     display: flex;
@@ -171,21 +189,38 @@
 
 .stage {
   width: 100%;
+  max-width: $preview-max-width;
+  margin-inline: auto;
   padding: 0;
   scroll-margin-top: 120px;
   text-align: center;
 }
 
+.stageColumn {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(32px, 4vw, 48px);
+}
+
 .previewSection {
   width: 100%;
+  max-width: $preview-max-width;
+  margin-inline: auto;
   min-width: 0;
-  min-height: max(800px, 85vh);
+  min-height: max(900px, 85vh);
   overflow: hidden;
   color-scheme: dark;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .infoSection {
   width: 100%;
+  max-width: $info-max-width;
+  margin-inline: auto;
   border-radius: var(--radius-l);
   border: 1px solid var(--effect-surface-border);
   background: var(--effect-surface-bg);
@@ -203,6 +238,8 @@
   grid-template-columns: 1fr;
   gap: 24px;
   width: 100%;
+  max-width: $info-max-width;
+  margin-inline: auto;
   line-height: 1.65;
   font-size: 1rem;
   color-scheme: dark;
@@ -271,6 +308,8 @@
   justify-content: center;
   gap: 14px;
   width: 100%;
+  max-width: $preview-max-width;
+  margin-inline: auto;
   padding-top: 4px;
 }
 
