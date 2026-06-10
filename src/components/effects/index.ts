@@ -9,5 +9,6 @@ export { CodeGridBackground } from "./CodeGridBackground";
 export { FloatingSymbols } from "./FloatingSymbols";
 export { TerminalTyping } from "./TerminalTyping";
 export { GlobalPageBackground } from "./GlobalPageBackground";
+export { MatrixRain } from "./MatrixRain";
 export { CustomCursor } from "./CustomCursor";
 export type { SectionVariant } from "./SectionBackdrop";

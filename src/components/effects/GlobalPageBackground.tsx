@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import { FloatingSymbols } from "./FloatingSymbols";
+import { MatrixRain } from "./MatrixRain";
+import { brandRgba, getCssVar, onThemeChange } from "./themeColors";
 import styles from "./GlobalPageBackground.module.scss";
 
 const CODE_SNIPPETS = [
@@ -69,6 +71,13 @@ export function GlobalPageBackground() {
     window.addEventListener("mousemove", onMove);
     window.addEventListener("mouseleave", onLeave);
 
+    const readAlphas = () => ({
+      base: Number.parseFloat(getCssVar("--effect-dot-base-alpha")) || 0.22,
+      active: Number.parseFloat(getCssVar("--effect-dot-active-alpha")) || 0.62,
+    });
+
+    let alphas = readAlphas();
+
     const draw = () => {
       const w = window.innerWidth;
       const h = window.innerHeight;
@@ -84,7 +93,7 @@ export function GlobalPageBackground() {
           const baseY = row * spacing - scrollOffset;
           let x = baseX;
           let y = baseY;
-          let alpha = 0.22;
+          let alpha = alphas.base;
 
           if (mouse.active) {
             const dx = mouse.x - baseX;
@@ -94,13 +103,13 @@ export function GlobalPageBackground() {
             if (influence > 0) {
               x += dx * influence * 0.1;
               y += dy * influence * 0.1;
-              alpha = 0.22 + influence * 0.5;
+              alpha = alphas.base + influence * (alphas.active - alphas.base);
             }
           }
 
           ctx.beginPath();
           ctx.arc(x, y, dotRadius + 0.3, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(34, 211, 238, ${alpha})`;
+          ctx.fillStyle = brandRgba("--brand-on-background-weak", alpha);
           ctx.fill();
         }
       }
@@ -108,10 +117,15 @@ export function GlobalPageBackground() {
       animationId = requestAnimationFrame(draw);
     };
 
+    const unsubscribeTheme = onThemeChange(() => {
+      alphas = readAlphas();
+    });
+
     draw();
 
     return () => {
       cancelAnimationFrame(animationId);
+      unsubscribeTheme();
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("mousemove", onMove);
@@ -129,6 +143,7 @@ export function GlobalPageBackground() {
       </div>
       <div className={styles.perspectiveGrid} />
       <div className={styles.grid} />
+      <MatrixRain />
       <canvas ref={canvasRef} className={styles.canvas} />
       <FloatingSymbols density="full" />
       <div className={styles.watermarks}>
