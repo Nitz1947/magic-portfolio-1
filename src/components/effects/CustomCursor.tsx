@@ -29,8 +29,11 @@ export function CustomCursor() {
   const labelRef = useRef<HTMLSpanElement>(null);
   const charsContainerRef = useRef<HTMLDivElement>(null);
   const ripplesContainerRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   const [enabled, setEnabled] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const inViewportRef = useRef(false);
   const [state, setState] = useState<CursorState>("default");
   const [label, setLabel] = useState("");
 
@@ -44,7 +47,6 @@ export function CustomCursor() {
     if (coarse || reduced) return;
 
     setEnabled(true);
-    document.documentElement.classList.add("cursor-hidden");
 
     let mouseX = 0;
     let mouseY = 0;
@@ -54,6 +56,21 @@ export function CustomCursor() {
     let ringY = 0;
     let animationId = 0;
     let pendingMove = false;
+    let cursorHiddenApplied = false;
+
+    const applyCursorHidden = () => {
+      if (cursorHiddenApplied) return;
+      if (dotRef.current && canvasRef.current) {
+        document.documentElement.classList.add("cursor-hidden");
+        cursorHiddenApplied = true;
+        setMounted(true);
+      }
+    };
+
+    const removeCursorHidden = () => {
+      document.documentElement.classList.remove("cursor-hidden");
+      cursorHiddenApplied = false;
+    };
 
     resize();
 
@@ -104,10 +121,31 @@ export function CustomCursor() {
       );
     };
 
+    const setRootVisible = (visible: boolean) => {
+      const root = rootRef.current;
+      if (!root) return;
+      root.style.opacity = visible ? "1" : "0";
+      root.style.visibility = visible ? "visible" : "hidden";
+    };
+
     const onMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
       pendingMove = true;
+      if (!inViewportRef.current) {
+        inViewportRef.current = true;
+        setRootVisible(true);
+      }
+    };
+
+    const onEnter = () => {
+      inViewportRef.current = true;
+      setRootVisible(true);
+    };
+
+    const onLeave = () => {
+      inViewportRef.current = false;
+      setRootVisible(false);
     };
 
     const onOver = (e: MouseEvent) => {
@@ -138,6 +176,14 @@ export function CustomCursor() {
 
     const onResize = () => {
       resize();
+    };
+
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        setRootVisible(false);
+      } else if (inViewportRef.current) {
+        setRootVisible(true);
+      }
     };
 
     const animate = () => {
@@ -206,7 +252,7 @@ export function CustomCursor() {
         }
         const t = c.life / c.maxLife;
         const yOffset = (1 - t) * -30;
-        c.el.style.opacity = String(t * 0.85);
+        c.el.style.opacity = String(t * 0.9);
         c.el.style.transform = `translateY(${yOffset}px)`;
         return true;
       });
@@ -219,6 +265,12 @@ export function CustomCursor() {
     window.addEventListener("mousedown", onDown);
     window.addEventListener("resize", onResize);
     document.addEventListener("mouseover", onOver);
+    document.documentElement.addEventListener("mouseenter", onEnter);
+    document.documentElement.addEventListener("mouseleave", onLeave);
+    document.addEventListener("visibilitychange", onVisibilityChange);
+
+    applyCursorHidden();
+    requestAnimationFrame(applyCursorHidden);
     animate();
 
     return () => {
@@ -227,7 +279,10 @@ export function CustomCursor() {
       window.removeEventListener("mousedown", onDown);
       window.removeEventListener("resize", onResize);
       document.removeEventListener("mouseover", onOver);
-      document.documentElement.classList.remove("cursor-hidden");
+      document.documentElement.removeEventListener("mouseenter", onEnter);
+      document.documentElement.removeEventListener("mouseleave", onLeave);
+      document.removeEventListener("visibilitychange", onVisibilityChange);
+      removeCursorHidden();
       codeCharsRef.current.forEach((c) => c.el.remove());
       codeCharsRef.current = [];
     };
@@ -245,7 +300,11 @@ export function CustomCursor() {
     .join(" ");
 
   return (
-    <div className={styles.root} aria-hidden="true">
+    <div
+      ref={rootRef}
+      className={`${styles.root} ${mounted ? styles.ready : ""}`}
+      aria-hidden="true"
+    >
       <canvas ref={canvasRef} className={styles.trailCanvas} />
 
       <svg ref={crosshairRef} className={styles.crosshair}>

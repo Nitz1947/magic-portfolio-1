@@ -6,17 +6,17 @@
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  background: #0a1018;
+  background: #101a26;
 }
 
 .mesh {
   position: absolute;
   inset: -30%;
   background:
-    radial-gradient(ellipse 55% 45% at 12% 18%, rgba(6, 182, 212, 0.28), transparent 58%),
-    radial-gradient(ellipse 50% 42% at 88% 72%, rgba(20, 184, 166, 0.2), transparent 52%),
-    radial-gradient(ellipse 38% 32% at 55% 45%, rgba(124, 58, 237, 0.14), transparent 62%),
-    radial-gradient(ellipse 30% 28% at 72% 22%, rgba(8, 145, 178, 0.16), transparent 55%);
+    radial-gradient(ellipse 55% 45% at 12% 18%, rgba(6, 182, 212, 0.38), transparent 58%),
+    radial-gradient(ellipse 50% 42% at 88% 72%, rgba(20, 184, 166, 0.3), transparent 52%),
+    radial-gradient(ellipse 38% 32% at 55% 45%, rgba(124, 58, 237, 0.2), transparent 62%),
+    radial-gradient(ellipse 30% 28% at 72% 22%, rgba(8, 145, 178, 0.24), transparent 55%);
   animation: meshDrift 28s ease-in-out infinite alternate;
 
   @media (prefers-reduced-motion: reduce) {
@@ -24,13 +24,59 @@
   }
 }
 
+.orbs {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: orbFloat ease-in-out infinite alternate;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+.orb:nth-child(1) {
+  top: 12%;
+  left: 8%;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.22), transparent 70%);
+  animation-duration: 18s;
+}
+
+.orb:nth-child(2) {
+  top: 55%;
+  right: 6%;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.18), transparent 70%);
+  animation-duration: 22s;
+  animation-delay: -6s;
+}
+
+.orb:nth-child(3) {
+  bottom: 18%;
+  left: 38%;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(20, 184, 166, 0.16), transparent 70%);
+  animation-duration: 16s;
+  animation-delay: -3s;
+}
+
 .grid {
   position: absolute;
   inset: 0;
-  opacity: 0.62;
+  opacity: 0.72;
   background-image:
-    linear-gradient(rgba(34, 211, 238, 0.11) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(34, 211, 238, 0.11) 1px, transparent 1px);
+    linear-gradient(rgba(34, 211, 238, 0.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34, 211, 238, 0.14) 1px, transparent 1px);
   background-size: 72px 72px;
   transform: perspective(900px) rotateX(58deg) scale(1.35);
   transform-origin: center 85%;
@@ -47,10 +93,10 @@
 .perspectiveGrid {
   position: absolute;
   inset: 0;
-  opacity: 0.18;
+  opacity: 0.26;
   background-image:
-    linear-gradient(rgba(20, 184, 166, 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(20, 184, 166, 0.12) 1px, transparent 1px);
+    linear-gradient(rgba(20, 184, 166, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 184, 166, 0.15) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 5%, transparent 75%);
 }
@@ -77,14 +123,14 @@
   position: absolute;
   font-size: clamp(9px, 1.1vw, 12px);
   line-height: 1.5;
-  color: rgba(34, 211, 238, 0.11);
+  color: rgba(34, 211, 238, 0.16);
   white-space: pre;
   user-select: none;
-  filter: blur(0.4px);
+  filter: blur(0.3px);
   transform-origin: center;
 
   @media (prefers-reduced-motion: reduce) {
-    opacity: 0.06;
+    opacity: 0.08;
   }
 }
 
@@ -95,22 +141,22 @@
   bottom: -8%;
   height: 42%;
   background:
-    radial-gradient(ellipse 60% 50% at 30% 100%, rgba(6, 182, 212, 0.18), transparent 65%),
-    radial-gradient(ellipse 55% 45% at 70% 100%, rgba(124, 58, 237, 0.12), transparent 60%),
-    radial-gradient(ellipse 40% 35% at 50% 100%, rgba(20, 184, 166, 0.14), transparent 55%);
+    radial-gradient(ellipse 60% 50% at 30% 100%, rgba(6, 182, 212, 0.28), transparent 65%),
+    radial-gradient(ellipse 55% 45% at 70% 100%, rgba(124, 58, 237, 0.18), transparent 60%),
+    radial-gradient(ellipse 40% 35% at 50% 100%, rgba(20, 184, 166, 0.22), transparent 55%);
   filter: blur(24px);
   animation: auroraWave 22s ease-in-out infinite alternate;
 
   @media (prefers-reduced-motion: reduce) {
     animation: none;
-    opacity: 0.7;
+    opacity: 0.8;
   }
 }
 
 .noise {
   position: absolute;
   inset: 0;
-  opacity: 0.055;
+  opacity: 0.045;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 160px 160px;
@@ -119,31 +165,45 @@
 @keyframes meshDrift {
   0% {
     transform: translate(0, 0) scale(1);
+    filter: hue-rotate(0deg);
   }
   50% {
-    transform: translate(2%, -1.5%) scale(1.03);
+    transform: translate(2%, -1.5%) scale(1.04);
+    filter: hue-rotate(8deg);
   }
   100% {
-    transform: translate(-1.5%, 2%) scale(1.02);
+    transform: translate(-1.5%, 2%) scale(1.03);
+    filter: hue-rotate(-6deg);
+  }
+}
+
+@keyframes orbFloat {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translate(3%, -4%) scale(1.08);
+    opacity: 1;
   }
 }
 
 @keyframes gridPulse {
   0% {
-    opacity: 0.35;
+    opacity: 0.45;
   }
   100% {
-    opacity: 0.55;
+    opacity: 0.68;
   }
 }
 
 @keyframes auroraWave {
   0% {
     transform: translateX(-2%) scaleY(1);
-    opacity: 0.75;
+    opacity: 0.85;
   }
   100% {
-    transform: translateX(3%) scaleY(1.08);
+    transform: translateX(3%) scaleY(1.1);
     opacity: 1;
   }
 }

@@ -84,7 +84,7 @@ export function GlobalPageBackground() {
           const baseY = row * spacing - scrollOffset;
           let x = baseX;
           let y = baseY;
-          let alpha = 0.16;
+          let alpha = 0.22;
 
           if (mouse.active) {
             const dx = mouse.x - baseX;
@@ -94,12 +94,12 @@ export function GlobalPageBackground() {
             if (influence > 0) {
               x += dx * influence * 0.1;
               y += dy * influence * 0.1;
-              alpha = 0.16 + influence * 0.42;
+              alpha = 0.22 + influence * 0.5;
             }
           }
 
           ctx.beginPath();
-          ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+          ctx.arc(x, y, dotRadius + 0.3, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(34, 211, 238, ${alpha})`;
           ctx.fill();
         }
@@ -122,10 +122,15 @@ export function GlobalPageBackground() {
   return (
     <div className={styles.root} aria-hidden="true">
       <div className={styles.mesh} />
+      <div className={styles.orbs}>
+        <div className={styles.orb} />
+        <div className={styles.orb} />
+        <div className={styles.orb} />
+      </div>
       <div className={styles.perspectiveGrid} />
       <div className={styles.grid} />
       <canvas ref={canvasRef} className={styles.canvas} />
-      <FloatingSymbols density="sparse" />
+      <FloatingSymbols density="full" />
       <div className={styles.watermarks}>
         {WATERMARK_POSITIONS.map((pos, i) => (
           <pre

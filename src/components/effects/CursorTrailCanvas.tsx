@@ -2,11 +2,11 @@
 
 import { useCallback, useRef } from "react";
 
-const MAX_TRAIL = 25;
+const MAX_TRAIL = 30;
 const TRAIL_COLORS = [
   "rgba(34, 211, 238,",
-  "rgba(20, 184, 166,",
   "rgba(6, 182, 212,",
+  "rgba(20, 184, 166,",
 ] as const;
 
 interface TrailParticle {
@@ -60,7 +60,7 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
     const last = lastTrailPos.current;
     const dx = x - last.x;
     const dy = y - last.y;
-    if (Math.sqrt(dx * dx + dy * dy) < 6) return;
+    if (Math.sqrt(dx * dx + dy * dy) < 5) return;
 
     lastTrailPos.current = { x, y };
 
@@ -72,35 +72,35 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
       x,
       y,
       life: 1,
-      maxLife: 0.6 + Math.random() * 0.4,
-      size: 2 + Math.random() * 3,
+      maxLife: 0.65 + Math.random() * 0.45,
+      size: 3 + Math.random() * 4.5,
       colorIndex: Math.floor(Math.random() * TRAIL_COLORS.length),
     });
   }, []);
 
   const addBurst = useCallback((x: number, y: number) => {
-    const count = 10 + Math.floor(Math.random() * 5);
+    const count = 12 + Math.floor(Math.random() * 6);
     for (let i = 0; i < count; i++) {
       const angle = (Math.PI * 2 * i) / count + Math.random() * 0.4;
-      const speed = 2 + Math.random() * 4;
+      const speed = 2.5 + Math.random() * 4.5;
       bursts.current.push({
         x,
         y,
         vx: Math.cos(angle) * speed,
         vy: Math.sin(angle) * speed,
         life: 1,
-        maxLife: 0.5 + Math.random() * 0.3,
-        size: 1.5 + Math.random() * 2,
+        maxLife: 0.55 + Math.random() * 0.35,
+        size: 2 + Math.random() * 3,
       });
     }
 
     ripples.current.push({
       x,
       y,
-      radius: 4,
-      maxRadius: 60 + Math.random() * 20,
+      radius: 5,
+      maxRadius: 70 + Math.random() * 25,
       life: 1,
-      maxLife: 0.55,
+      maxLife: 0.6,
     });
   }, []);
 
@@ -119,12 +119,12 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
     ctx.clearRect(0, 0, w, h);
 
     trail.current = trail.current.filter((p) => {
-      p.life -= 0.018;
+      p.life -= 0.016;
       if (p.life <= 0) return false;
 
       const t = p.life / p.maxLife;
-      const alpha = t * 0.65;
-      const size = p.size * (0.4 + t * 0.6);
+      const alpha = t * 0.85;
+      const size = p.size * (0.45 + t * 0.55);
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
@@ -134,7 +134,7 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
     });
 
     bursts.current = bursts.current.filter((p) => {
-      p.life -= 0.028;
+      p.life -= 0.026;
       if (p.life <= 0) return false;
 
       p.x += p.vx;
@@ -145,22 +145,22 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
       const t = p.life / p.maxLife;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size * t, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(34, 211, 238, ${t * 0.8})`;
+      ctx.fillStyle = `rgba(34, 211, 238, ${t * 0.95})`;
       ctx.fill();
       return true;
     });
 
     ripples.current = ripples.current.filter((r) => {
-      r.life -= 0.022;
+      r.life -= 0.02;
       if (r.life <= 0) return false;
 
       const t = 1 - r.life / r.maxLife;
-      r.radius = 4 + (r.maxRadius - 4) * t;
+      r.radius = 5 + (r.maxRadius - 5) * t;
 
       ctx.beginPath();
       ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(34, 211, 238, ${r.life * 0.5})`;
-      ctx.lineWidth = 1.5;
+      ctx.strokeStyle = `rgba(34, 211, 238, ${r.life * 0.65})`;
+      ctx.lineWidth = 2;
       ctx.stroke();
       return true;
     });

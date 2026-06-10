@@ -7,8 +7,8 @@
 .symbol {
   @include mono-code;
   position: absolute;
-  font-size: clamp(11px, 1.6vw, 15px);
-  color: rgba(34, 211, 238, 0.14);
+  font-size: clamp(12px, 1.8vw, 17px);
+  color: rgba(34, 211, 238, 0.22);
   white-space: nowrap;
   user-select: none;
   animation: drift linear infinite;
@@ -19,13 +19,13 @@
 @keyframes drift {
   0% {
     transform: translateY(0) translateX(0);
-    opacity: 0.1;
+    opacity: 0.16;
   }
   50% {
-    opacity: 0.22;
+    opacity: 0.34;
   }
   100% {
     transform: translateY(-40px) translateX(8px);
-    opacity: 0.1;
+    opacity: 0.16;
   }
 }

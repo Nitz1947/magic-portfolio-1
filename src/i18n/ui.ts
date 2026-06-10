@@ -211,9 +211,10 @@ const uiStrings: Record<Locale, UiStrings> = {
       ariaLabel: "Portfolio highlights",
       available: "Available for new projects",
       items: [
-        { value: "3+", label: "Live projects" },
-        { value: "Next.js", label: "Core stack" },
-        { value: "Vercel", label: "Deploy & hosting" },
+        { value: "100% Custom", label: "No templates" },
+        { value: "Next.js + React", label: "Modern stack" },
+        { value: "Brief → Deploy", label: "Full process" },
+        { value: "24–48h reply", label: "Fast quote" },
       ],
     },
     homeCta: {
@@ -504,9 +505,10 @@ const uiStrings: Record<Locale, UiStrings> = {
       ariaLabel: "Najważniejsze informacje o portfolio",
       available: "Dostępny do współpracy",
       items: [
-        { value: "3+", label: "Projekty live" },
-        { value: "Next.js", label: "Stack główny" },
-        { value: "Vercel", label: "Deploy i hosting" },
+        { value: "100% Custom", label: "Bez szablonów" },
+        { value: "Next.js + React", label: "Nowoczesny stack" },
+        { value: "Od briefu po deploy", label: "Pełny proces" },
+        { value: "Odpowiedź 24–48h", label: "Szybka wycena" },
       ],
     },
     homeCta: {
