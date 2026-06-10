@@ -1,7 +1,22 @@
-@use "./breakpoints.scss" as breakpoints;
+.footer {
+  border-top: 1px solid rgba(34, 211, 238, 0.1);
+  background: linear-gradient(to top, rgba(6, 10, 15, 0.92), rgba(6, 10, 15, 0.55));
+  backdrop-filter: blur(12px);
+}
 
-@media (max-width: breakpoints.$s) {
-    .mobile {
-        text-align: center;
-    }
+.inner {
+  width: 100%;
+}
+
+.ctaBlock {
+  padding: 24px 16px;
+  border-radius: var(--radius-l);
+  border: 1px solid rgba(34, 211, 238, 0.1);
+  background: rgba(8, 12, 18, 0.45);
+}
+
+.bottom {
+  @media (max-width: 640px) {
+    text-align: center;
+  }
 }

@@ -2,6 +2,7 @@ import styles from "./FloatingSymbols.module.scss";
 
 const SYMBOLS = [
   "{ }",
+  "</>",
   "[ ]",
   "=>",
   "const",

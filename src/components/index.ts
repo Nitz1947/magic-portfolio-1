@@ -10,6 +10,8 @@ export { ProcessSteps } from "@/components/ProcessSteps";
 export { ServicesGrid } from "@/components/ServicesGrid";
 export { OfferBuilder } from "@/components/OfferBuilder";
 export { TechMarquee } from "@/components/TechMarquee";
+export { SocialProofStrip } from "@/components/SocialProofStrip";
+export { HomeContactCta } from "@/components/HomeContactCta";
 export {
   SyntaxHighlightBlock,
   SectionBackdrop,

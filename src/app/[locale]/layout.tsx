@@ -1,22 +1,14 @@
 import classNames from "classnames";
 import { notFound } from "next/navigation";
 
-import {
-  Background,
-  Column,
-  Flex,
-  Meta,
-  opacity,
-  RevealFx,
-  SpacingToken,
-} from "@once-ui-system/core";
+import { Column, Flex, Meta } from "@once-ui-system/core";
 import { Footer, Header, RouteGuard, Providers } from "@/components";
 import { CustomCursor, GlobalPageBackground } from "@/components/effects";
 import { LocaleProvider } from "@/context/LocaleContext";
 import { defaultLocale, isLocale, locales } from "@/i18n/config";
 import { localizedPath } from "@/i18n/paths";
 import { getUi } from "@/i18n/ui";
-import { baseURL, effects, fonts, getContent, style, dataStyle } from "@/resources";
+import { baseURL, fonts, getContent, style, dataStyle } from "@/resources";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -68,6 +60,7 @@ export default async function LocaleLayout({
         fonts.label.variable,
         fonts.code.variable,
       )}
+      style={{ background: "transparent" }}
     >
       <head>
         <script
@@ -127,60 +120,17 @@ export default async function LocaleLayout({
         <LocaleProvider locale={localeParam} content={content} ui={ui}>
           <Column
             as="body"
-            background="page"
             fillWidth
-            style={{ minHeight: "100vh", position: "relative" }}
+            style={{ minHeight: "100vh", position: "relative", background: "transparent" }}
             margin="0"
             padding="0"
             horizontal="center"
           >
             <GlobalPageBackground />
             <CustomCursor />
-            <RevealFx fill position="absolute">
-              <Background
-                mask={{
-                  x: effects.mask.x,
-                  y: effects.mask.y,
-                  radius: effects.mask.radius,
-                  cursor: effects.mask.cursor,
-                }}
-                gradient={{
-                  display: effects.gradient.display,
-                  opacity: effects.gradient.opacity as opacity,
-                  x: effects.gradient.x,
-                  y: effects.gradient.y,
-                  width: effects.gradient.width,
-                  height: effects.gradient.height,
-                  tilt: effects.gradient.tilt,
-                  colorStart: effects.gradient.colorStart,
-                  colorEnd: effects.gradient.colorEnd,
-                }}
-                dots={{
-                  display: effects.dots.display,
-                  opacity: effects.dots.opacity as opacity,
-                  size: effects.dots.size as SpacingToken,
-                  color: effects.dots.color,
-                }}
-                grid={{
-                  display: effects.grid.display,
-                  opacity: effects.grid.opacity as opacity,
-                  color: effects.grid.color,
-                  width: effects.grid.width,
-                  height: effects.grid.height,
-                }}
-                lines={{
-                  display: effects.lines.display,
-                  opacity: effects.lines.opacity as opacity,
-                  size: effects.lines.size as SpacingToken,
-                  thickness: effects.lines.thickness,
-                  angle: effects.lines.angle,
-                  color: effects.lines.color,
-                }}
-              />
-            </RevealFx>
-            <Flex fillWidth minHeight="16" s={{ hide: true }} />
+            <Flex fillWidth minHeight="16" s={{ hide: true }} position="relative" zIndex={2} />
             <Header />
-            <Flex zIndex={1} fillWidth padding="l" horizontal="center" flex={1}>
+            <Flex zIndex={2} fillWidth padding="l" horizontal="center" flex={1} position="relative">
               <Flex horizontal="center" fillWidth minHeight="0">
                 <RouteGuard>{children}</RouteGuard>
               </Flex>

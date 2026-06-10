@@ -4,6 +4,22 @@ import { useEffect, useRef } from "react";
 import { FloatingSymbols } from "./FloatingSymbols";
 import styles from "./GlobalPageBackground.module.scss";
 
+const CODE_SNIPPETS = [
+  `export async function getData() {\n  const res = await fetch(url);\n  return res.json();\n}`,
+  `const App = () => {\n  return <Layout>{children}</Layout>;\n};`,
+  `interface Props {\n  locale: Locale;\n  children: ReactNode;\n}`,
+  `await prisma.user.findMany({\n  where: { active: true }\n});`,
+  `export const metadata = {\n  title: "Portfolio"\n};`,
+];
+
+const WATERMARK_POSITIONS = [
+  { top: "8%", left: "3%", rotate: -12 },
+  { top: "22%", left: "68%", rotate: 8 },
+  { top: "48%", left: "78%", rotate: -6 },
+  { top: "62%", left: "6%", rotate: 14 },
+  { top: "78%", left: "42%", rotate: -10 },
+];
+
 export function GlobalPageBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -20,8 +36,8 @@ export function GlobalPageBackground() {
 
     let animationId = 0;
     let scrollY = 0;
-    const spacing = 56;
-    const dotRadius = 1.2;
+    const spacing = 52;
+    const dotRadius = 1.35;
     const mouse = { x: -9999, y: -9999, active: false };
 
     const resize = () => {
@@ -60,7 +76,7 @@ export function GlobalPageBackground() {
 
       const cols = Math.ceil(w / spacing) + 1;
       const rows = Math.ceil(h / spacing) + 1;
-      const scrollOffset = (scrollY * 0.15) % spacing;
+      const scrollOffset = (scrollY * 0.12) % spacing;
 
       for (let row = 0; row < rows; row++) {
         for (let col = 0; col < cols; col++) {
@@ -68,17 +84,17 @@ export function GlobalPageBackground() {
           const baseY = row * spacing - scrollOffset;
           let x = baseX;
           let y = baseY;
-          let alpha = 0.12;
+          let alpha = 0.16;
 
           if (mouse.active) {
             const dx = mouse.x - baseX;
             const dy = mouse.y - baseY;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            const influence = Math.max(0, 1 - dist / 180);
+            const influence = Math.max(0, 1 - dist / 200);
             if (influence > 0) {
-              x += dx * influence * 0.08;
-              y += dy * influence * 0.08;
-              alpha = 0.12 + influence * 0.35;
+              x += dx * influence * 0.1;
+              y += dy * influence * 0.1;
+              alpha = 0.16 + influence * 0.42;
             }
           }
 
@@ -106,9 +122,26 @@ export function GlobalPageBackground() {
   return (
     <div className={styles.root} aria-hidden="true">
       <div className={styles.mesh} />
+      <div className={styles.perspectiveGrid} />
       <div className={styles.grid} />
       <canvas ref={canvasRef} className={styles.canvas} />
       <FloatingSymbols density="sparse" />
+      <div className={styles.watermarks}>
+        {WATERMARK_POSITIONS.map((pos, i) => (
+          <pre
+            key={i}
+            className={styles.watermark}
+            style={{
+              top: pos.top,
+              left: pos.left,
+              transform: `rotate(${pos.rotate}deg)`,
+            }}
+          >
+            {CODE_SNIPPETS[i % CODE_SNIPPETS.length]}
+          </pre>
+        ))}
+      </div>
+      <div className={styles.aurora} />
       <div className={styles.noise} />
     </div>
   );

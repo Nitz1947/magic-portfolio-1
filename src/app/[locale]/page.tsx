@@ -10,7 +10,7 @@ import {
   Schema,
   Meta,
 } from "@once-ui-system/core";
-import { Mailchimp } from "@/components";
+import { Mailchimp, SocialProofStrip, HomeContactCta } from "@/components";
 import { SectionBackdrop, HeroBackground } from "@/components/effects";
 import homeStyles from "./home.module.scss";
 import { ProcessSteps } from "@/components/ProcessSteps";
@@ -184,6 +184,10 @@ export default async function Home({ params }: PageProps) {
         </Column>
       </SectionBackdrop>
 
+      <RevealFx translateY="12" delay={0.42} fillWidth>
+        <SocialProofStrip />
+      </RevealFx>
+
       <RevealFx translateY="20" delay={0.5} fillWidth>
         <TechMarquee />
       </RevealFx>
@@ -208,6 +212,10 @@ export default async function Home({ params }: PageProps) {
 
       <RevealFx translateY="24" delay={0.72} fillWidth>
         <ProcessSteps title={ui.process.title} steps={ui.process.steps} />
+      </RevealFx>
+
+      <RevealFx translateY="24" delay={0.78} fillWidth>
+        <HomeContactCta />
       </RevealFx>
 
       <Mailchimp />

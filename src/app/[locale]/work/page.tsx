@@ -2,6 +2,7 @@ import { Column, Heading, Meta, Schema, Text } from "@once-ui-system/core";
 import { SyntaxHighlightBlock } from "@/components/effects";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
+import { getUi } from "@/i18n/ui";
 import { baseURL, getContent } from "@/resources";
 import { Projects } from "@/components/work/Projects";
 import styles from "./work.module.scss";
@@ -26,6 +27,7 @@ export async function generateMetadata({ params }: PageProps) {
 export default async function Work({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const { work, about, person } = getContent(locale);
+  const ui = getUi(locale);
 
   return (
     <div className={styles.page}>
@@ -54,7 +56,21 @@ export default async function Work({ params }: PageProps) {
             {work.description}
           </Text>
         </Column>
-        <Projects locale={locale} />
+        <div className={styles.stats} role="region" aria-label={ui.socialProof.ariaLabel}>
+          {ui.socialProof.items.map((item) => (
+            <div key={item.label} className={styles.statItem}>
+              <Text variant="display-strong-xs" className={styles.statValue}>
+                {item.value}
+              </Text>
+              <Text variant="label-default-s" onBackground="neutral-weak">
+                {item.label}
+              </Text>
+            </div>
+          ))}
+        </div>
+        <div className={styles.projectsSection}>
+          <Projects locale={locale} />
+        </div>
       </Column>
     </div>
   );

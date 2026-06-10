@@ -28,6 +28,17 @@ export type UiStrings = {
   };
   footer: {
     buildWith: string;
+    ctaTitle: string;
+    ctaDescription: string;
+  };
+  socialProof: {
+    ariaLabel: string;
+    available: string;
+    items: Array<{ value: string; label: string }>;
+  };
+  homeCta: {
+    title: string;
+    description: string;
   };
   about: {
     scheduleCall: string;
@@ -192,6 +203,23 @@ const uiStrings: Record<Locale, UiStrings> = {
     },
     footer: {
       buildWith: "Build your portfolio with",
+      ctaTitle: "Have a project in mind?",
+      ctaDescription:
+        "Tell me about your goals — I'll reply with a clear scope, timeline, and quote within 1–2 business days.",
+    },
+    socialProof: {
+      ariaLabel: "Portfolio highlights",
+      available: "Available for new projects",
+      items: [
+        { value: "3+", label: "Live projects" },
+        { value: "Next.js", label: "Core stack" },
+        { value: "Vercel", label: "Deploy & hosting" },
+      ],
+    },
+    homeCta: {
+      title: "Ready to build something real?",
+      description:
+        "From brief to Vercel deploy — custom Next.js sites and apps with preview deploys at every stage.",
     },
     about: {
       scheduleCall: "Schedule a call",
@@ -468,6 +496,23 @@ const uiStrings: Record<Locale, UiStrings> = {
     },
     footer: {
       buildWith: "Zbuduj portfolio z",
+      ctaTitle: "Masz projekt do zrealizowania?",
+      ctaDescription:
+        "Opowiedz o celach — odpowiem z jasnym zakresem, harmonogramem i wyceną w ciągu 1–2 dni roboczych.",
+    },
+    socialProof: {
+      ariaLabel: "Najważniejsze informacje o portfolio",
+      available: "Dostępny do współpracy",
+      items: [
+        { value: "3+", label: "Projekty live" },
+        { value: "Next.js", label: "Stack główny" },
+        { value: "Vercel", label: "Deploy i hosting" },
+      ],
+    },
+    homeCta: {
+      title: "Gotowy zbudować coś konkretnego?",
+      description:
+        "Od briefu po deploy na Vercel — custom strony i aplikacje Next.js z preview deployami na każdym etapie.",
     },
     about: {
       scheduleCall: "Umów rozmowę",
