@@ -61,7 +61,7 @@ export type UiStrings = {
     previewBlocked: string;
     previewPlaceholder: string;
     presentation: {
-      step: string;
+      projectBadge: string;
       forWhom: string;
       delivered: string;
       stack: string;
@@ -69,6 +69,7 @@ export type UiStrings = {
       outcome: string;
       progress: string;
       thumbnailsLabel: string;
+      selectProject: string;
     };
   };
   slideshow: {
@@ -295,14 +296,15 @@ const uiStrings: Record<Locale, UiStrings> = {
       previewBlocked: "Live embed unavailable — open the site directly",
       previewPlaceholder: "Click to open the live site",
       presentation: {
-        step: "Step",
+        projectBadge: "Project",
         forWhom: "Who it's for",
         delivered: "What was built",
         stack: "Tech stack",
         features: "Key features",
         outcome: "Value for the client",
         progress: "Project {current} of {total}",
-        thumbnailsLabel: "Jump to project",
+        thumbnailsLabel: "Portfolio projects",
+        selectProject: "Select a project",
       },
     },
     slideshow: {
@@ -642,14 +644,15 @@ const uiStrings: Record<Locale, UiStrings> = {
       previewBlocked: "Podgląd niedostępny — otwórz stronę bezpośrednio",
       previewPlaceholder: "Kliknij, aby otworzyć stronę na żywo",
       presentation: {
-        step: "Krok",
+        projectBadge: "Realizacja",
         forWhom: "Dla kogo",
         delivered: "Co zrobiono",
         stack: "Stack techniczny",
         features: "Kluczowe funkcje",
         outcome: "Wartość dla klienta",
         progress: "Projekt {current} z {total}",
-        thumbnailsLabel: "Przejdź do projektu",
+        thumbnailsLabel: "Realizacje w portfolio",
+        selectProject: "Wybierz projekt",
       },
     },
     slideshow: {

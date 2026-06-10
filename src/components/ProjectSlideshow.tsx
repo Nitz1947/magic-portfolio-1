@@ -58,7 +58,7 @@ export function ProjectSlideshow({ projects, autoplayMs = 8000 }: ProjectSlidesh
     <Column fillWidth gap="20" className={styles.slideshow}>
       <Row fillWidth horizontal="between" vertical="center" gap="12" className={styles.metaRow}>
         <Text variant="label-default-s" onBackground="brand-medium">
-          {ui.work.presentation.step} {activeIndex + 1}/{projects.length}
+          {ui.work.presentation.projectBadge}
         </Text>
         {projects.length > 1 && (
           <Row gap="8" className={styles.dots} role="tablist" aria-label={ui.slideshow.label}>

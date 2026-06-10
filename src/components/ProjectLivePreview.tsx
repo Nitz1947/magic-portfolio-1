@@ -6,6 +6,8 @@ import { useLocale } from "@/context/LocaleContext";
 import { ProjectBrowserFrame } from "./ProjectBrowserFrame";
 import styles from "./ProjectLivePreview.module.scss";
 
+const EMBED_REFERENCE_WIDTH = 1280;
+
 interface ProjectLivePreviewProps {
   title: string;
   liveUrl: string;
@@ -23,6 +25,8 @@ interface ProjectLivePreviewProps {
    * the cross-origin iframe viewport — avoids default white inner scrollbars.
    */
   externalScroll?: boolean;
+  /** Scale a fixed-width iframe down to fit the container — prevents horizontal overflow. */
+  scaleToFit?: boolean;
   /** Tall iframe viewport height when externalScroll is enabled (px). */
   embedViewportHeight?: number;
 }
@@ -38,17 +42,22 @@ export function ProjectLivePreview({
   fullBleed = false,
   presentationLayout = false,
   externalScroll = presentationLayout,
+  scaleToFit = false,
   embedViewportHeight = 2400,
 }: ProjectLivePreviewProps) {
   const { ui } = useLocale();
   const containerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const [shouldLoad, setShouldLoad] = useState(!lazy);
   const [isVisible, setIsVisible] = useState(false);
   const [embedBlocked, setEmbedBlocked] = useState(!canEmbed);
   const [isLoading, setIsLoading] = useState(canEmbed);
+  const [iframeScale, setIframeScale] = useState(1);
   const loadTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   const src = embedUrl || liveUrl;
+  const useScale = externalScroll && scaleToFit;
+  const scaledHeight = embedViewportHeight * iframeScale;
 
   useEffect(() => {
     if (!canEmbed) return;
@@ -83,6 +92,32 @@ export function ProjectLivePreview({
     };
   }, [shouldLoad, canEmbed, embedBlocked]);
 
+  useEffect(() => {
+    if (!useScale) {
+      setIframeScale(1);
+      return;
+    }
+
+    const node = scrollRef.current;
+    if (!node) return;
+
+    const updateScale = () => {
+      const width = node.clientWidth;
+      if (width <= 0) return;
+      setIframeScale(Math.min(1, width / EMBED_REFERENCE_WIDTH));
+    };
+
+    updateScale();
+    const observer = new ResizeObserver(updateScale);
+    observer.observe(node);
+    window.addEventListener("resize", updateScale);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateScale);
+    };
+  }, [useScale, shouldLoad]);
+
   const handleIframeLoad = useCallback(() => {
     if (loadTimeoutRef.current) clearTimeout(loadTimeoutRef.current);
     setIsLoading(false);
@@ -98,6 +133,28 @@ export function ProjectLivePreview({
 
   const viewportClass = fullBleed ? `${styles.viewport} ${styles.viewportFullBleed}` : styles.viewport;
 
+  const iframeClassName = [
+    styles.iframe,
+    externalScroll ? styles.iframeExternal : undefined,
+    useScale ? styles.iframeScaled : undefined,
+    isVisible ? styles.iframeActive : styles.iframePaused,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const iframeElement = (
+    <iframe
+      className={iframeClassName}
+      src={src}
+      title={`${title} — ${ui.work.preview}`}
+      sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+      loading="lazy"
+      scrolling="no"
+      onLoad={handleIframeLoad}
+      onError={handleIframeError}
+    />
+  );
+
   const previewContent = (
     <div className={viewportClass}>
       {showIframe ? (
@@ -105,19 +162,32 @@ export function ProjectLivePreview({
           {isLoading && <div className={styles.loading}>{ui.work.previewLoading}</div>}
           {externalScroll ? (
             <div
+              ref={scrollRef}
               className={styles.previewScroll}
-              style={{ "--embed-viewport-height": `${embedViewportHeight}px` } as React.CSSProperties}
+              style={
+                {
+                  "--embed-viewport-height": `${embedViewportHeight}px`,
+                  "--iframe-scale": iframeScale,
+                  "--scaled-height": `${scaledHeight}px`,
+                } as React.CSSProperties
+              }
             >
-              <iframe
-                className={`${styles.iframe} ${styles.iframeExternal} ${isVisible ? styles.iframeActive : styles.iframePaused}`}
-                src={src}
-                title={`${title} — ${ui.work.preview}`}
-                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-                loading="lazy"
-                scrolling="no"
-                onLoad={handleIframeLoad}
-                onError={handleIframeError}
-              />
+              {useScale ? (
+                <div className={styles.iframeScaleOuter} style={{ height: `${scaledHeight}px` }}>
+                  <div
+                    className={styles.iframeScaleInner}
+                    style={{
+                      width: EMBED_REFERENCE_WIDTH,
+                      height: embedViewportHeight,
+                      transform: `scale(${iframeScale})`,
+                    }}
+                  >
+                    {iframeElement}
+                  </div>
+                </div>
+              ) : (
+                iframeElement
+              )}
             </div>
           ) : (
             <iframe

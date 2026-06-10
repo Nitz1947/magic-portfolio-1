@@ -35,12 +35,12 @@
 
 .viewportFullBleed {
   aspect-ratio: unset;
-  min-height: 500px;
-  height: min(70vh, 720px);
+  min-height: max(800px, 85vh);
+  height: max(800px, 85vh);
 
   @media (max-width: 768px) {
-    min-height: 480px;
-    height: min(60vh, 560px);
+    min-height: min(85vh, 720px);
+    height: min(85vh, 720px);
   }
 }
 
@@ -51,7 +51,7 @@
   min-height: 0;
   width: 100%;
   max-width: 100%;
-  overflow-x: hidden;
+  overflow-x: hidden !important;
   overflow-y: auto;
   overscroll-behavior-x: none;
   @include branded-scrollbar($dark-chrome: true);
@@ -63,9 +63,22 @@
   }
 }
 
+.iframeScaleOuter {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.iframeScaleInner {
+  transform-origin: top left;
+  position: relative;
+  will-change: transform;
+}
+
 .presentationContext {
   height: 100%;
-  min-height: 720px;
+  min-height: max(800px, 85vh);
   overflow: hidden;
   max-width: 100%;
 
@@ -73,7 +86,7 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    min-height: 720px;
+    min-height: max(800px, 85vh);
     height: 100%;
     overflow: hidden;
     max-width: 100%;
@@ -83,7 +96,7 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    min-height: 720px;
+    min-height: max(800px, 85vh);
     height: auto;
     overflow: hidden;
     max-width: 100%;
@@ -110,6 +123,13 @@
   contain: none;
   content-visibility: visible;
   overflow: hidden;
+}
+
+.iframeScaled {
+  width: 1280px;
+  max-width: none;
+  height: var(--embed-viewport-height, 2400px);
+  min-height: var(--embed-viewport-height, 2400px);
 }
 
 .iframeActive {

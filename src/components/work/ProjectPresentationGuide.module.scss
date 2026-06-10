@@ -19,6 +19,11 @@
   border: 0;
 }
 
+.selectorHint {
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
 .thumbnails {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -92,7 +97,7 @@
   }
 }
 
-.thumbnailStep {
+.thumbnailBadge {
   display: inline-flex;
   align-items: center;
   padding: 3px 10px;
@@ -104,7 +109,6 @@
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  font-variant-numeric: tabular-nums;
 }
 
 .thumbnailTitle {
@@ -122,68 +126,29 @@
   width: 100%;
 }
 
-.progressWrap {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 12px;
-  width: 100%;
-  max-width: 36rem;
-  margin-inline: auto;
-}
-
-.progressBar {
-  position: relative;
-  width: 100%;
-  height: 5px;
-  border-radius: 999px;
-  background: color-mix(in srgb, #0d1520 78%, var(--neutral-alpha-weak));
-  overflow: hidden;
-  box-shadow: inset 0 1px 2px color-mix(in srgb, #000 35%, transparent);
-}
-
-.progressFill {
-  height: 100%;
-  border-radius: inherit;
-  background: linear-gradient(
-    90deg,
-    var(--brand-solid-medium) 0%,
-    var(--brand-solid-strong) 55%,
-    color-mix(in srgb, var(--brand-solid-strong) 85%, #fff) 100%
-  );
-  box-shadow:
-    0 0 12px color-mix(in srgb, var(--brand-solid-medium) 55%, transparent),
-    0 0 4px color-mix(in srgb, var(--brand-solid-strong) 40%, transparent);
-  transition: width 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-
-  @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
-}
-
-.progressSteps {
+.projectDots {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 8px;
+  justify-content: center;
+  gap: 10px;
   width: 100%;
-  padding-inline: 2px;
 }
 
-.progressStep {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
+.projectDot {
+  width: 10px;
+  height: 10px;
   padding: 0;
-  border: none;
-  background: transparent;
+  border: 2px solid var(--neutral-alpha-medium);
+  border-radius: 50%;
+  background: color-mix(in srgb, #0d1520 60%, var(--neutral-alpha-weak));
   cursor: pointer;
-  flex: 1;
-  min-width: 0;
-  transition: transform var(--transition-micro-medium);
+  transition:
+    border-color var(--transition-micro-medium),
+    background var(--transition-micro-medium),
+    box-shadow var(--transition-micro-medium),
+    transform var(--transition-micro-medium);
 
-  &:hover .progressDot {
+  &:hover {
     border-color: var(--brand-alpha-strong);
     background: var(--brand-alpha-weak);
   }
@@ -193,58 +158,14 @@
   }
 }
 
-.progressDot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: 2px solid var(--neutral-alpha-medium);
-  background: color-mix(in srgb, #0d1520 60%, var(--neutral-alpha-weak));
-  transition:
-    border-color var(--transition-micro-medium),
-    background var(--transition-micro-medium),
-    box-shadow var(--transition-micro-medium),
-    transform var(--transition-micro-medium);
+.projectDotActive {
+  border-color: var(--brand-solid-strong);
+  background: var(--brand-solid-strong);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--brand-solid-medium) 60%, transparent);
+  transform: scale(1.25);
 
   @media (prefers-reduced-motion: reduce) {
-    transition: none;
-  }
-}
-
-.progressStepLabel {
-  font-size: 0.72rem;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-  color: var(--neutral-on-background-weak);
-  line-height: 1;
-}
-
-.progressStepDone {
-  .progressDot {
-    border-color: var(--brand-solid-medium);
-    background: var(--brand-solid-medium);
-  }
-
-  .progressStepLabel {
-    color: var(--brand-on-background-medium);
-  }
-}
-
-.progressStepActive {
-  .progressDot {
-    border-color: var(--brand-solid-strong);
-    background: var(--brand-solid-strong);
-    box-shadow: 0 0 10px color-mix(in srgb, var(--brand-solid-medium) 60%, transparent);
-    transform: scale(1.2);
-  }
-
-  .progressStepLabel {
-    color: var(--brand-on-background-strong);
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .progressDot {
-      transform: none;
-    }
+    transform: none;
   }
 }
 
@@ -255,88 +176,41 @@
   text-align: center;
 }
 
-.contentRow {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  width: 100%;
-  padding: 8px 0 0;
-
-  @media (max-width: 640px) {
-    padding: 4px 0 0;
-    gap: 20px;
-  }
-
-  @media (min-width: 900px) {
-    flex-direction: row;
-    align-items: stretch;
-    gap: 32px;
-    min-height: 720px;
-  }
-}
-
-.previewCell {
+.previewSection {
   width: 100%;
   min-width: 0;
-  min-height: 720px;
+  min-height: max(800px, 85vh);
   overflow: hidden;
   color-scheme: dark;
-
-  @media (min-width: 900px) {
-    flex: 1 1 58%;
-    max-width: 58%;
-    max-height: min(800px, calc(100vh - 120px));
-  }
 }
 
-.infoCell {
-  display: flex;
-  flex-direction: column;
+.infoSection {
   width: 100%;
-  min-width: 0;
   border-radius: var(--radius-l);
   border: 1px solid var(--effect-surface-border);
   background: var(--effect-surface-bg);
   backdrop-filter: blur(8px);
   text-align: left;
-
-  @media (min-width: 900px) {
-    flex: 1 1 42%;
-    max-width: 42%;
-    position: sticky;
-    top: 120px;
-    align-self: flex-start;
-    max-height: min(820px, calc(100vh - 120px));
-  }
-}
-
-.infoScroll {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
   padding: 28px 28px;
-  line-height: 1.65;
-  font-size: 1rem;
-  @include branded-scrollbar($dark-chrome: true);
-  overflow-y: auto;
-  overflow-x: hidden;
-  max-height: inherit;
-  color-scheme: dark;
 
   @media (max-width: 640px) {
     padding: 24px 20px;
   }
-
-  @media (min-width: 900px) {
-    max-height: min(820px, calc(100vh - 120px));
-  }
 }
 
-.details {
-  display: flex;
-  flex-direction: column;
+.detailsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 24px;
   width: 100%;
+  line-height: 1.65;
+  font-size: 1rem;
+  color-scheme: dark;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 32px;
+  }
 }
 
 .detailBlock {
@@ -358,11 +232,7 @@
 }
 
 .outcomeBlock {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
-  width: 100%;
+  grid-column: 1 / -1;
   padding-top: 8px;
   border-top: 1px solid var(--effect-surface-border);
 }
