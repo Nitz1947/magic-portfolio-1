@@ -13,6 +13,25 @@
   display: flex;
   flex-direction: column;
   gap: var(--static-space-16);
+  padding: var(--static-space-16);
+  border-radius: var(--radius-l);
+  border: 1px solid var(--neutral-alpha-weak);
+  background: var(--neutral-alpha-weak);
+  transition:
+    border-color var(--transition-micro-medium),
+    box-shadow var(--transition-micro-medium),
+    transform var(--transition-micro-medium);
+
+  &:hover {
+    border-color: var(--brand-alpha-medium);
+    box-shadow: 0 0 0 1px var(--brand-alpha-weak), 0 12px 40px var(--brand-alpha-weak);
+    transform: translateY(calc(-1 * var(--static-space-4)));
+
+    @media (prefers-reduced-motion: reduce) {
+      transform: none;
+      box-shadow: none;
+    }
+  }
 }
 
 .actions {

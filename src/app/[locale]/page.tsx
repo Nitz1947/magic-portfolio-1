@@ -65,7 +65,7 @@ export default async function Home({ params }: PageProps) {
     .filter((p): p is NonNullable<typeof p> => p !== null);
 
   return (
-    <Column maxWidth="m" gap="xl" paddingY="12" horizontal="center">
+    <Column maxWidth="m" gap="48" paddingY="12" paddingX="l" horizontal="center" fillWidth>
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -181,20 +181,27 @@ export default async function Home({ params }: PageProps) {
         <TechMarquee />
       </RevealFx>
 
-      <RevealFx translateY="24" delay={0.55} fillWidth paddingX="l">
-        <Column fillWidth gap="16">
-          <Heading as="h2" variant="display-strong-xs">
-            {ui.featuredProjects}
-          </Heading>
-          <Text variant="body-default-m" onBackground="neutral-weak">
-            {ui.featuredProjectsSubline}
-          </Text>
+      <RevealFx translateY="24" delay={0.55} fillWidth>
+        <Column fillWidth gap="20">
+          <Column fillWidth gap="8">
+            <Heading as="h2" variant="display-strong-xs" wrap="balance">
+              {ui.featuredProjects}
+            </Heading>
+            <Text variant="body-default-m" onBackground="neutral-weak" wrap="balance">
+              {ui.featuredProjectsSubline}
+            </Text>
+          </Column>
           <ProjectShowcase projects={showcaseProjects} />
         </Column>
       </RevealFx>
 
-      <RevealFx translateY="20" delay={0.6}>
-        <Projects exclude={[...homepageFeaturedSlugs]} locale={locale} />
+      <RevealFx translateY="20" delay={0.6} fillWidth>
+        <Column fillWidth gap="16">
+          <Heading as="h2" variant="display-strong-xs" wrap="balance">
+            {ui.work.label}
+          </Heading>
+          <Projects exclude={[...homepageFeaturedSlugs]} locale={locale} />
+        </Column>
       </RevealFx>
 
       <RevealFx translateY="24" delay={0.65} fillWidth>
@@ -207,16 +214,12 @@ export default async function Home({ params }: PageProps) {
             <Row fillWidth paddingRight="64">
               <Line maxWidth={48} />
             </Row>
-            <Row fillWidth gap="24" marginTop="40" s={{ direction: "column" }}>
-              <Row flex={1} paddingLeft="l" paddingTop="24">
-                <Heading as="h2" variant="display-strong-xs" wrap="balance">
-                  {ui.latestFromBlog}
-                </Heading>
-              </Row>
-              <Row flex={3} paddingX="20">
-                <Posts range={[1, 2]} columns="2" locale={locale} />
-              </Row>
-            </Row>
+            <Column fillWidth gap="24" marginTop="24" s={{ gap: "16" }}>
+              <Heading as="h2" variant="display-strong-xs" wrap="balance">
+                {ui.latestFromBlog}
+              </Heading>
+              <Posts range={[1, 2]} columns="2" locale={locale} />
+            </Column>
             <Row fillWidth paddingLeft="64" horizontal="end">
               <Line maxWidth={48} />
             </Row>

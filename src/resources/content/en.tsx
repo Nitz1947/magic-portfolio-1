@@ -47,8 +47,8 @@ export function createEnglishContent(): LocaleContent {
     image: "/images/og/home.svg",
     label: "Home",
     title: `${person.name}'s Portfolio`,
-    description: `Full-stack developer portfolio — custom websites for gaming communities, Discord platforms, and businesses. Next.js, React, TypeScript.`,
-    headline: <>Code that ships like a product</>,
+    description: `Custom websites and web apps for businesses, gaming communities, and private game servers. Next.js, React, TypeScript — from idea to deploy.`,
+    headline: <>Custom websites and apps for businesses, communities, and game servers</>,
     featured: {
       display: true,
       items: [
@@ -80,10 +80,10 @@ export function createEnglishContent(): LocaleContent {
     },
     subline: (
       <>
-        I design and ship <Text as="span" size="xl" weight="strong">custom websites</Text>{" "}
-        for gaming communities, Discord platforms, and businesses that need more than
-        a template. From first sketch to Vercel deploy — fast, responsive, and
-        obsessively polished.
+        I design and ship <Text as="span" size="xl" weight="strong">professional websites and apps</Text>{" "}
+        without off-the-shelf templates — fast, responsive, and obsessively polished.
+        From Discord platforms and multi-gaming communities to B2B sites for businesses
+        without an in-house tech team.
       </>
     ),
   };
@@ -92,7 +92,7 @@ export function createEnglishContent(): LocaleContent {
     path: "/about",
     label: "About",
     title: `About – ${person.name}`,
-    description: `Meet ${person.name} — full-stack developer and web designer with OT/TFS experience and real client projects`,
+    description: `Meet ${person.name} — full-stack developer building custom websites for businesses, gaming communities, and private game servers`,
     tableOfContent: {
       display: true,
       subItems: false,
@@ -109,19 +109,22 @@ export function createEnglishContent(): LocaleContent {
       title: "Introduction",
       description: (
         <>
-          I'm a full-stack developer and web designer. I create{" "}
-          <strong>professional websites</strong> — for multi-gaming communities, private
-          game servers, and companies from every industry. Each project is{" "}
-          <strong>custom-built for the client</strong>.
+          Have a product vision but no technical team? I help business owners, gaming
+          communities, and private server operators turn ideas into live websites and
+          apps — <strong>custom-built for your brand</strong>.
           <br />
           <br />
-          For over 6 years I worked as a <strong>freelance contractor</strong> in the Open
-          Tibia ecosystem — not as a single-server owner, but delivering work for{" "}
-          <strong>different server owners</strong>. I built game systems, server scripts,
-          modules, and <strong>client ↔ server</strong> sync integrations, plus website
-          updates in <strong>PHP, HTML, and CSS</strong> (myAAC and custom). Today I
-          combine that background with the modern stack — React, TypeScript, Next.js, and
-          Vercel.
+          Every project starts with understanding business goals and users, not picking a
+          template. I deliver the full cycle: UX, code, deploy, and post-launch support
+          — from Discord platforms to B2B corporate sites.
+          <br />
+          <br />
+          <strong>Why me?</strong> Over 6 years as a freelance contractor in the Open
+          Tibia ecosystem taught me to jump into existing codebases fast, communicate
+          with non-technical clients, and ship to production. I built game systems,{" "}
+          <strong>client ↔ server</strong> integrations, and sites in{" "}
+          <strong>PHP, HTML, and CSS</strong> (myAAC and custom). Today I combine that
+          with React, TypeScript, Next.js, and Vercel.
         </>
       ),
     },
@@ -305,7 +308,7 @@ export function createEnglishContent(): LocaleContent {
     path: "/work",
     label: "Work",
     title: `Projects – ${person.name}`,
-    description: `Case studies — Strefa Kibica, BJ Trade, TFS/myAAC, and Next.js portfolio by ${person.name}`,
+    description: `Work by ${person.name} — Strefa Kibica, BJ Trade, TFS/myAAC, and Next.js portfolio. Custom sites for gaming and business.`,
   };
 
   const gallery: Gallery = {

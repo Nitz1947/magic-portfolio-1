@@ -47,8 +47,8 @@ export function createPolishContent(): LocaleContent {
     image: "/images/og/home.svg",
     label: "Strona główna",
     title: `Portfolio – ${person.name}`,
-    description: `Portfolio full-stack developera — custom strony dla gamingu, społeczności Discord i firm. Next.js, React, TypeScript.`,
-    headline: <>Kod, który wygląda jak produkt</>,
+    description: `Custom strony i aplikacje webowe dla firm, społeczności gamingowych i serwerów prywatnych. Next.js, React, TypeScript — od pomysłu po deploy.`,
+    headline: <>Custom strony i aplikacje dla firm, community i serwerów gier</>,
     featured: {
       display: true,
       items: [
@@ -80,10 +80,10 @@ export function createPolishContent(): LocaleContent {
     },
     subline: (
       <>
-        Projektuję i wdrażam <Text as="span" size="xl" weight="strong">custom strony</Text>{" "}
-        dla społeczności gamingowych, platform Discord i firm, które potrzebują
-        czegoś więcej niż szablonu. Od pierwszego szkicu po deploy na Vercel —
-        szybko, responsywnie i z dbałością o detale.
+        Projektuję i wdrażam <Text as="span" size="xl" weight="strong">profesjonalne strony i aplikacje</Text>{" "}
+        bez gotowych szablonów — szybko, responsywnie i z dbałością o detale.
+        Od platform Discord i multi gamingów po strony B2B dla firm bez własnego
+        zespołu technicznego.
       </>
     ),
   };
@@ -92,7 +92,7 @@ export function createPolishContent(): LocaleContent {
     path: "/about",
     label: "O mnie",
     title: `O mnie – ${person.name}`,
-    description: `Poznaj ${person.name} — full-stack developer i web designer z doświadczeniem OT/TFS i projektami dla firm`,
+    description: `Poznaj ${person.name} — full-stack developer budujący custom strony dla firm, community gamingowych i serwerów prywatnych`,
     tableOfContent: {
       display: true,
       subItems: false,
@@ -109,18 +109,23 @@ export function createPolishContent(): LocaleContent {
       title: "Wprowadzenie",
       description: (
         <>
-          Jestem full-stack developerem i web designerem. Potrafię tworzyć{" "}
-          <strong>profesjonalne strony internetowe</strong> — dla multi gamingów,
-          prywatnych serwerów gier oraz firm ze wszystkich branż. Każdy projekt
-          realizuję <strong>custom, indywidualnie pod klienta</strong>.
+          Masz wizję produktu, ale brakuje Ci zespołu technicznego? Pomagam
+          właścicielom firm, społecznościom gamingowym i operatorom prywatnych
+          serwerów zamienić pomysł w działającą stronę lub aplikację —{" "}
+          <strong>custom, pod Twoją markę</strong>.
           <br />
           <br />
-          Przez ponad 6 lat pracowałem jako <strong>freelance contractor</strong> w
-          ekosystemie Open Tibia — nie jako właściciel jednego serwera, lecz wykonując
-          zlecenia dla różnych ownerów. Tworzyłem systemy gry, skrypty serwerowe, moduły
-          i integracje <strong>klient ↔ serwer</strong> (sync), a także aktualizowałem
-          strony w <strong>PHP, HTML i CSS</strong> (myAAC i custom). Dziś łączę to
-          doświadczenie z nowoczesnym stackiem — React, TypeScript, Next.js i Vercel.
+          Każdy projekt zaczynam od zrozumienia celu biznesowego i użytkowników,
+          nie od wyboru gotowego szablonu. Dostarczam pełny cykl: UX, kod, deploy
+          i wsparcie po wdrożeniu — od platform Discord po strony B2B.
+          <br />
+          <br />
+          <strong>Dlaczego ja?</strong> Ponad 6 lat pracy kontraktorskiej w
+          ekosystemie Open Tibia nauczyło mnie szybkiego wejścia w istniejący
+          projekt, komunikacji z nietechnicznymi klientami i dowozienia na
+          produkcję. Tworzyłem systemy gry, integracje <strong>klient ↔ serwer</strong>{" "}
+          i strony w <strong>PHP, HTML i CSS</strong> (myAAC i custom). Dziś łączę
+          to z React, TypeScript, Next.js i Vercel.
         </>
       ),
     },
@@ -301,7 +306,7 @@ export function createPolishContent(): LocaleContent {
     path: "/work",
     label: "Projekty",
     title: `Projekty – ${person.name}`,
-    description: `Case studies — Strefa Kibica, BJ Trade, TFS/myAAC i portfolio Next.js autorstwa ${person.name}`,
+    description: `Realizacje ${person.name} — Strefa Kibica, BJ Trade, TFS/myAAC i portfolio Next.js. Custom strony dla gamingu i biznesu.`,
   };
 
   const gallery: Gallery = {

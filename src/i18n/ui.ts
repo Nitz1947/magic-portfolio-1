@@ -61,33 +61,38 @@ export type UiStrings = {
 const uiStrings: Record<Locale, UiStrings> = {
   en: {
     latestFromBlog: "Latest from the blog",
-    viewProjects: "View projects",
-    contactMe: "Contact",
+    viewProjects: "View work",
+    contactMe: "Get in touch",
     featuredProject: "Featured project",
     featuredProjects: "Selected work",
-    featuredProjectsSubline: "Live previews of recent projects — click to explore or open the deployed site.",
+    featuredProjectsSubline:
+      "Real projects for gaming communities and B2B clients — preview live or read the case study.",
     process: {
       title: "How I work",
       steps: [
         {
           number: "01",
-          title: "Discovery",
-          description: "Understanding goals, users, and constraints before writing code.",
+          title: "Brief",
+          description:
+            "We align on goals, target audience, and scope — so the site solves a real business problem.",
         },
         {
           number: "02",
-          title: "Architecture",
-          description: "Designing scalable structure — data models, API contracts, and UX flows.",
+          title: "Design",
+          description:
+            "Structure, user flow, and visual direction tailored to your brand — no generic templates.",
         },
         {
           number: "03",
-          title: "Build & iterate",
-          description: "Shipping in small increments with tests, reviews, and preview deploys.",
+          title: "Build",
+          description:
+            "Iterative development with preview deploys — you see progress before launch day.",
         },
         {
           number: "04",
-          title: "Launch & measure",
-          description: "Monitoring performance, gathering feedback, and continuous improvement.",
+          title: "Launch",
+          description:
+            "Vercel deploy, performance tuning, and handover — ready to use from day one.",
         },
       ],
     },
@@ -139,33 +144,38 @@ const uiStrings: Record<Locale, UiStrings> = {
   },
   pl: {
     latestFromBlog: "Najnowsze wpisy na blogu",
-    viewProjects: "Zobacz projekty",
-    contactMe: "Kontakt",
+    viewProjects: "Zobacz realizacje",
+    contactMe: "Napisz do mnie",
     featuredProject: "Wyróżniony projekt",
-    featuredProjects: "Wybrane projekty",
-    featuredProjectsSubline: "Podgląd na żywo ostatnich realizacji — kliknij, aby zobaczyć szczegóły lub otworzyć stronę.",
+    featuredProjects: "Wybrane realizacje",
+    featuredProjectsSubline:
+      "Prawdziwe projekty dla community gamingowych i klientów B2B — podgląd na żywo lub case study.",
     process: {
       title: "Jak pracuję",
       steps: [
         {
           number: "01",
-          title: "Discovery",
-          description: "Poznanie celów, użytkowników i ograniczeń zanim napiszę kod.",
+          title: "Brief",
+          description:
+            "Ustalamy cele, grupę docelową i zakres — żeby strona rozwiązywała realny problem biznesowy.",
         },
         {
           number: "02",
-          title: "Architektura",
-          description: "Projekt skalowalnej struktury — modele danych, kontrakty API i flow UX.",
+          title: "Projekt",
+          description:
+            "Struktura, flow użytkownika i kierunek wizualny dopasowany do marki — bez gotowych szablonów.",
         },
         {
           number: "03",
-          title: "Build & iteracja",
-          description: "Dostarczanie w małych krokach z testami, review i preview deployami.",
+          title: "Wdrożenie",
+          description:
+            "Iteracyjne kodowanie z preview deployami — widzisz postęp przed dniem launchu.",
         },
         {
           number: "04",
-          title: "Launch & pomiar",
-          description: "Monitoring wydajności, feedback użytkowników i ciągłe usprawnienia.",
+          title: "Launch",
+          description:
+            "Deploy na Vercel, optymalizacja i przekazanie — gotowe do użytku od pierwszego dnia.",
         },
       ],
     },

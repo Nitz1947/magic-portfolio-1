@@ -19,8 +19,7 @@ export const featuredProjectConfigs: Record<string, FeaturedProjectConfig> = {
   bjtrade: {
     slug: "bjtrade",
     liveUrl: "https://bjtrade-git-main-gawinekltd-3457s-projects.vercel.app/pl",
-    embedUrl: "https://bjtrade-git-main-gawinekltd-3457s-projects.vercel.app/pl",
-    canEmbed: true,
+    canEmbed: false,
     fallbackImage: "/images/projects/bjtrade/cover-01.svg",
     displayUrl: "bjtrade.pl/pl",
   },

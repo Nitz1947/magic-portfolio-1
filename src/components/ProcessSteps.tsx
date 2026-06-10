@@ -14,7 +14,7 @@ interface ProcessStepsProps {
 
 export function ProcessSteps({ title, steps }: ProcessStepsProps) {
   return (
-    <Column fillWidth gap="l" paddingX="l">
+    <Column fillWidth gap="l">
       <Heading as="h2" variant="display-strong-xs" wrap="balance">
         {title}
       </Heading>

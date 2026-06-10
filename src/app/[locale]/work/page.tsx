@@ -1,4 +1,4 @@
-import { Column, Heading, Meta, Schema } from "@once-ui-system/core";
+import { Column, Heading, Meta, Schema, Text } from "@once-ui-system/core";
 import { SyntaxHighlightBlock } from "@/components/effects";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
@@ -32,7 +32,7 @@ export default async function Work({ params }: PageProps) {
       <div className={styles.decoration} aria-hidden="true">
         <SyntaxHighlightBlock position="topRight" compact />
       </div>
-      <Column maxWidth="m" paddingTop="24" className={styles.content}>
+      <Column maxWidth="m" paddingTop="24" paddingX="l" gap="l" className={styles.content}>
         <Schema
           as="webPage"
           baseURL={baseURL}
@@ -46,9 +46,14 @@ export default async function Work({ params }: PageProps) {
             image: `${baseURL}${person.avatar}`,
           }}
         />
-        <Heading marginBottom="l" variant="heading-strong-xl">
-          {work.title}
-        </Heading>
+        <Column fillWidth gap="8" marginBottom="m">
+          <Heading variant="heading-strong-xl" wrap="balance">
+            {work.title}
+          </Heading>
+          <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
+            {work.description}
+          </Text>
+        </Column>
         <Projects locale={locale} />
       </Column>
     </div>

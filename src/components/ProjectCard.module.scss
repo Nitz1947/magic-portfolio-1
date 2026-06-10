@@ -17,6 +17,19 @@
   position: relative;
   border-radius: var(--radius-l);
   overflow: hidden;
+  border: 1px solid var(--neutral-alpha-weak);
+  transition:
+    border-color var(--transition-micro-medium),
+    box-shadow var(--transition-micro-medium);
+
+  .card:hover & {
+    border-color: var(--brand-alpha-medium);
+    box-shadow: 0 0 0 1px var(--brand-alpha-weak), 0 8px 32px var(--brand-alpha-weak);
+
+    @media (prefers-reduced-motion: reduce) {
+      box-shadow: none;
+    }
+  }
 
   &::after {
     content: "";
