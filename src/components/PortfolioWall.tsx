@@ -18,23 +18,12 @@ const COLUMN_ROTATIONS = [-4, 3, -2, 5];
 const COLUMN_SPEEDS = [28, -36, 22, -30];
 
 function buildColumns(projects: ShowcaseProject[]): WallCard[][] {
-  if (projects.length === 0) return [];
-
-  const cards: WallCard[] = projects.flatMap((project) =>
-    [0, 1].map((repeat) => ({
-      key: `${project.slug}-${repeat}`,
+  return projects.slice(0, 3).map((project) => [
+    {
+      key: project.slug,
       project,
-    })),
-  );
-
-  const columnCount = Math.min(4, Math.max(3, projects.length));
-  const columns: WallCard[][] = Array.from({ length: columnCount }, () => []);
-
-  cards.forEach((card, index) => {
-    columns[index % columnCount].push(card);
-  });
-
-  return columns;
+    },
+  ]);
 }
 
 export function PortfolioWall({ projects }: PortfolioWallProps) {
