@@ -47,8 +47,8 @@ export function createPolishContent(): LocaleContent {
     image: "/images/og/home.svg",
     label: "Strona główna",
     title: `Portfolio – ${person.name}`,
-    description: `Custom strony i aplikacje webowe dla firm i społeczności gamingowych. Next.js, React, TypeScript — od pomysłu po deploy.`,
-    headline: <>Custom strony i aplikacje dla firm i community gamingowych</>,
+    description: `Strony i aplikacje Next.js wdrożone na Vercel — platforma SEO, community Discord z OAuth, strona B2B z i18n. React, TypeScript.`,
+    headline: <>Strony i aplikacje Next.js — wdrożone na Vercel, nie w szablonie</>,
     featured: {
       display: true,
       items: [
@@ -58,7 +58,7 @@ export function createPolishContent(): LocaleContent {
               <strong className="ml-4">SEO Opt One</strong>
               <Line background="brand-alpha-strong" vert height="16" />
               <Text marginRight="4" onBackground="brand-medium">
-                Wyróżniony
+                audyt SEO
               </Text>
             </Row>
           ),
@@ -70,7 +70,7 @@ export function createPolishContent(): LocaleContent {
               <strong className="ml-4">Strefa Kibica</strong>
               <Line background="brand-alpha-strong" vert height="16" />
               <Text marginRight="4" onBackground="brand-medium">
-                Wyróżniony
+                Discord OAuth
               </Text>
             </Row>
           ),
@@ -82,7 +82,7 @@ export function createPolishContent(): LocaleContent {
               <strong className="ml-4">BJ Trade</strong>
               <Line background="brand-alpha-strong" vert height="16" />
               <Text marginRight="4" onBackground="brand-medium">
-                Wyróżniony
+                B2B PL/EN
               </Text>
             </Row>
           ),
@@ -92,10 +92,10 @@ export function createPolishContent(): LocaleContent {
     },
     subline: (
       <>
-        Projektuję i wdrażam <Text as="span" size="xl" weight="strong">profesjonalne strony i aplikacje</Text>{" "}
-        bez gotowych szablonów — szybko, responsywnie i z dbałością o detale.
-        Od platform Discord po strony B2B dla firm bez własnego
-        zespołu technicznego.
+        Buduję w <Text as="span" size="xl" weight="strong">Next.js i React</Text> — od platformy
+        audytu SEO z planami strategii i generatorami kodów, przez aplikację Discord z
+        wirtualnymi zakładami i rankingiem, po wielojęzyczną stronę hurtowni z certyfikatami
+        GMP/HACCP. Od briefu po deploy na Vercel.
       </>
     ),
   };
@@ -104,7 +104,7 @@ export function createPolishContent(): LocaleContent {
     path: "/about",
     label: "O mnie",
     title: `O mnie – ${person.name}`,
-    description: `Poznaj ${person.name} — full-stack developer budujący custom strony dla firm i community gamingowych`,
+    description: `Poznaj ${person.name} — full-stack developer budujący strony i aplikacje Next.js z wdrożeniami na Vercel`,
     tableOfContent: {
       display: true,
       subItems: false,
@@ -121,22 +121,19 @@ export function createPolishContent(): LocaleContent {
       title: "Wprowadzenie",
       description: (
         <>
-          Masz wizję produktu, ale brakuje Ci zespołu technicznego? Pomagam
-          właścicielom firm i społecznościom gamingowym zamienić pomysł w
-          działającą stronę lub aplikację —{" "}
-          <strong>custom, pod Twoją markę</strong>.
+          Potrzebujesz strony lub aplikacji, a nie masz zespołu dev? Buduję
+          produkty webowe pod konkretny cel biznesowy —{" "}
+          <strong>bez gotowych szablonów</strong>.
           <br />
           <br />
-          Każdy projekt zaczynam od zrozumienia celu biznesowego i użytkowników,
-          nie od wyboru gotowego szablonu. Dostarczam pełny cykl: UX, kod, deploy
-          i wsparcie po wdrożeniu — od platform Discord po strony B2B.
+          W portfolio: platforma audytu SEO, aplikacja Discord z OAuth i
+          rankingiem oraz strona B2B z i18n — wszystko na produkcji w Next.js.
+          Pełny cykl: UX, kod, deploy na Vercel i wsparcie po wdrożeniu.
           <br />
           <br />
-          <strong>Dlaczego ja?</strong> Ponad 6 lat pracy kontraktorskiej nauczyło
-          mnie szybkiego wejścia w istniejący projekt, komunikacji z
-          nietechnicznymi klientami i dowozienia na produkcję. Dziś buduję w{" "}
-          <strong>React, TypeScript, Next.js i Vercel</strong> — od narzędzi SEO
-          po platformy community i strony korporacyjne.
+          <strong>Dlaczego ja?</strong> Ponad 6 lat pracy kontraktorskiej —
+          szybkie wejście w projekt, jasna komunikacja z klientem i dowóz na
+          produkcję. Stack: <strong>React, TypeScript, Next.js, Vercel</strong>.
         </>
       ),
     },

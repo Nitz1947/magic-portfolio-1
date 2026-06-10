@@ -19,7 +19,6 @@ import { ProcessSteps } from "@/components/ProcessSteps";
 import { ProjectSlideshow } from "@/components/ProjectSlideshow";
 import { ServicesGrid } from "@/components/ServicesGrid";
 import { TechMarquee } from "@/components/TechMarquee";
-import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
 import { featuredProjectConfigs, homepageFeaturedSlugs } from "@/data/featuredProjects";
 import { localizedPath } from "@/i18n/paths";
@@ -194,18 +193,6 @@ export default async function Home({ params }: PageProps) {
             </Text>
           </Column>
           <ProjectSlideshow projects={showcaseProjects} />
-        </Column>
-      </RevealFx>
-
-      <RevealFx translateY="20" delay={0.6} fillWidth>
-        <Column fillWidth gap="16">
-          <Heading as="h2" variant="display-strong-xs" wrap="balance">
-            {ui.work.label}
-          </Heading>
-          <Projects
-            exclude={[...homepageFeaturedSlugs, "portfolio-developera-nextjs"]}
-            locale={locale}
-          />
         </Column>
       </RevealFx>
 

@@ -47,8 +47,8 @@ export function createEnglishContent(): LocaleContent {
     image: "/images/og/home.svg",
     label: "Home",
     title: `${person.name}'s Portfolio`,
-    description: `Custom websites and web apps for businesses and gaming communities. Next.js, React, TypeScript — from idea to deploy.`,
-    headline: <>Custom websites and apps for businesses and gaming communities</>,
+    description: `Next.js websites and apps deployed on Vercel — SEO platform, Discord community with OAuth, multilingual B2B site. React, TypeScript.`,
+    headline: <>Next.js websites and apps — shipped on Vercel, not from a template</>,
     featured: {
       display: true,
       items: [
@@ -58,7 +58,7 @@ export function createEnglishContent(): LocaleContent {
               <strong className="ml-4">SEO Opt One</strong>
               <Line background="brand-alpha-strong" vert height="16" />
               <Text marginRight="4" onBackground="brand-medium">
-                Featured
+                SEO audit
               </Text>
             </Row>
           ),
@@ -70,7 +70,7 @@ export function createEnglishContent(): LocaleContent {
               <strong className="ml-4">Strefa Kibica</strong>
               <Line background="brand-alpha-strong" vert height="16" />
               <Text marginRight="4" onBackground="brand-medium">
-                Featured
+                Discord OAuth
               </Text>
             </Row>
           ),
@@ -82,7 +82,7 @@ export function createEnglishContent(): LocaleContent {
               <strong className="ml-4">BJ Trade</strong>
               <Line background="brand-alpha-strong" vert height="16" />
               <Text marginRight="4" onBackground="brand-medium">
-                Featured
+                B2B PL/EN
               </Text>
             </Row>
           ),
@@ -92,10 +92,10 @@ export function createEnglishContent(): LocaleContent {
     },
     subline: (
       <>
-        I design and ship <Text as="span" size="xl" weight="strong">professional websites and apps</Text>{" "}
-        without off-the-shelf templates — fast, responsive, and obsessively polished.
-        From Discord platforms to B2B sites for businesses
-        without an in-house tech team.
+        I build with <Text as="span" size="xl" weight="strong">Next.js and React</Text> — from an SEO
+        audit platform with strategy plans and code generators, through a Discord app with
+        virtual betting and leaderboards, to a multilingual B2B wholesaler site with GMP/HACCP
+        certifications. From brief to Vercel deploy.
       </>
     ),
   };
@@ -104,7 +104,7 @@ export function createEnglishContent(): LocaleContent {
     path: "/about",
     label: "About",
     title: `About – ${person.name}`,
-    description: `Meet ${person.name} — full-stack developer building custom websites for businesses and gaming communities`,
+    description: `Meet ${person.name} — full-stack developer building Next.js websites and apps with live Vercel deployments`,
     tableOfContent: {
       display: true,
       subItems: false,
@@ -121,21 +121,18 @@ export function createEnglishContent(): LocaleContent {
       title: "Introduction",
       description: (
         <>
-          Have a product vision but no technical team? I help business owners and gaming
-          communities turn ideas into live websites and apps —{" "}
-          <strong>custom-built for your brand</strong>.
+          Need a website or app but no dev team? I build web products around a clear
+          business goal — <strong>no off-the-shelf templates</strong>.
           <br />
           <br />
-          Every project starts with understanding business goals and users, not picking a
-          template. I deliver the full cycle: UX, code, deploy, and post-launch support
-          — from Discord platforms to B2B corporate sites.
+          Portfolio includes an SEO audit platform, a Discord app with OAuth and
+          leaderboards, and a multilingual B2B site — all in production on Next.js.
+          Full cycle: UX, code, Vercel deploy, and post-launch support.
           <br />
           <br />
-          <strong>Why me?</strong> Over 6 years of freelance contract work taught me to
-          jump into existing projects fast, communicate with non-technical clients, and
-          ship to production. Today I build with{" "}
-          <strong>React, TypeScript, Next.js, and Vercel</strong> — from SEO tools to
-          community platforms and corporate sites.
+          <strong>Why me?</strong> Over 6 years of contract work — fast ramp-up, clear
+          client communication, and shipping to production. Stack:{" "}
+          <strong>React, TypeScript, Next.js, Vercel</strong>.
         </>
       ),
     },
