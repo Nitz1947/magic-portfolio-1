@@ -16,7 +16,7 @@
 }
 
 .mediaWrap {
-  @include rotating-border-glow($pseudo: before, $position: inside);
+  @include rotating-border-glow($pseudo: before, $position: inside, $halo: false);
   position: relative;
   border-radius: var(--radius-l);
   overflow: hidden;

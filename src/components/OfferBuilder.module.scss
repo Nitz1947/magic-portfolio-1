@@ -87,7 +87,7 @@
 }
 
 .featureGrid {
-  @include rotating-border-glow($opacity: 0.58);
+  @include rotating-border-glow();
   @include scrollable-list;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -114,7 +114,7 @@
 }
 
 .styleCard {
-  @include rotating-border-glow($opacity: 0.55, $duration: 5s);
+  @include rotating-border-glow($duration: 4s);
   display: flex;
   flex-direction: column;
   gap: var(--static-space-8);

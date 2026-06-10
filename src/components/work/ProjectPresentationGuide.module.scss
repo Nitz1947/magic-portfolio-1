@@ -66,7 +66,7 @@ $info-max-width: min(1200px, 92vw);
 }
 
 .thumbnail {
-  @include rotating-border-glow($opacity: 0.6);
+  @include rotating-border-glow();
   display: flex;
   flex-direction: column;
   align-items: flex-start;

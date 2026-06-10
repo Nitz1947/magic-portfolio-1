@@ -7,7 +7,7 @@
 }
 
 .fullBleedFrame {
-  @include rotating-border-glow($opacity: 0.68, $position: inside);
+  @include rotating-border-glow($position: inside);
   width: 100%;
   overflow: hidden;
   border-radius: var(--radius-l);
