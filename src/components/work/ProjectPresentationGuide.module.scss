@@ -2,7 +2,7 @@
 
 .guide {
   width: 100%;
-  max-width: min(1400px, 95vw);
+  max-width: 100%;
   margin-inline: auto;
   text-align: center;
 }
@@ -115,34 +115,35 @@
 .contentRow {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
   width: 100%;
   padding: 16px 0 0;
 
   @media (max-width: 640px) {
     padding: 12px 0 0;
+    gap: 20px;
   }
 
   @media (min-width: 900px) {
     flex-direction: row;
     align-items: stretch;
-    gap: 28px;
-    min-height: 620px;
+    gap: 32px;
+    min-height: 680px;
   }
 }
 
 .previewCell {
   width: 100%;
   min-width: 0;
-  min-height: 620px;
+  min-height: 680px;
   @include branded-scrollbar;
   overflow-y: auto;
   overflow-x: hidden;
 
   @media (min-width: 900px) {
-    flex: 1 1 59%;
-    max-width: 59%;
-    max-height: min(780px, calc(100vh - 140px));
+    flex: 1 1 58%;
+    max-width: 58%;
+    max-height: min(820px, calc(100vh - 120px));
   }
 }
 
@@ -158,12 +159,12 @@
   text-align: left;
 
   @media (min-width: 900px) {
-    flex: 1 1 41%;
-    max-width: 41%;
+    flex: 1 1 42%;
+    max-width: 42%;
     position: sticky;
     top: 120px;
     align-self: flex-start;
-    max-height: min(780px, calc(100vh - 140px));
+    max-height: min(820px, calc(100vh - 120px));
   }
 }
 
@@ -184,7 +185,7 @@
   }
 
   @media (min-width: 900px) {
-    max-height: min(780px, calc(100vh - 140px));
+    max-height: min(820px, calc(100vh - 120px));
   }
 }
 

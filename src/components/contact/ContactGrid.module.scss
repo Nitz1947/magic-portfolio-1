@@ -9,7 +9,7 @@
 }
 
 .hero {
-  padding: 28px 32px;
+  padding: 36px 40px;
   border-radius: var(--radius-l);
   border: 1px solid var(--effect-surface-border);
   background: var(--effect-surface-bg);
@@ -17,34 +17,49 @@
   max-width: 52rem;
   margin-inline: auto;
   text-align: center;
+
+  @include s {
+    padding: 28px 24px;
+  }
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: var(--static-space-20);
+  gap: 28px;
   width: 100%;
+  align-items: stretch;
+
+  > * {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    height: 100%;
+  }
 
   @include s {
     grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
 .cardLink {
-  display: block;
+  display: flex;
+  flex-direction: column;
   height: 100%;
   text-decoration: none;
   color: inherit;
 }
 
 .card {
-  padding: 28px 32px;
-  border: 1px solid var(--effect-surface-border);
+  padding: var(--static-space-24);
+  border: 1px solid var(--neutral-alpha-weak);
   border-radius: var(--radius-l);
-  background: var(--effect-surface-bg);
-  backdrop-filter: blur(8px);
+  background: var(--neutral-alpha-weak);
   text-align: center;
   align-items: center;
+  justify-content: flex-start;
+  flex: 1;
   height: 100%;
   transition:
     border-color var(--transition-micro-medium),
@@ -73,8 +88,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 3.25rem;
-  height: 3.25rem;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: var(--radius-m);
   background: var(--brand-alpha-weak);
   color: var(--brand-on-background-strong);
@@ -93,22 +108,27 @@
   flex-shrink: 0;
 }
 
+.formSection {
+  width: 100%;
+  margin-top: 8px;
+}
+
 .formCell {
   width: 100%;
 }
 
 .formInner {
-  padding: 32px;
+  padding: var(--static-space-32);
   border-radius: var(--radius-l);
   border: 1px solid var(--effect-surface-border);
   background: var(--effect-surface-bg);
   backdrop-filter: blur(8px);
   text-align: center;
-  align-items: center;
+  align-items: stretch;
   width: 100%;
   @include branded-scrollbar;
 
-  @media (max-width: 640px) {
+  @include s {
     padding: 24px 20px;
   }
 }
@@ -118,8 +138,6 @@
   flex-direction: column;
   gap: 20px;
   width: 100%;
-  max-width: 56rem;
-  margin-inline: auto;
   text-align: left;
 }
 
@@ -135,4 +153,5 @@
 
 .success {
   padding: 16px 0;
+  align-items: center;
 }

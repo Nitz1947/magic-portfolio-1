@@ -1,23 +1,29 @@
 @mixin branded-scrollbar {
   scrollbar-width: thin;
-  scrollbar-color: var(--brand-solid-medium) var(--neutral-alpha-weak);
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
 
   &::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
   }
 
   &::-webkit-scrollbar-track {
-    background: var(--neutral-alpha-weak);
+    background: var(--scrollbar-track);
     border-radius: var(--radius-full);
   }
 
   &::-webkit-scrollbar-thumb {
-    background: var(--brand-solid-medium);
+    background-color: var(--scrollbar-thumb);
     border-radius: var(--radius-full);
+    border: 2px solid transparent;
+    background-clip: padding-box;
 
     &:hover {
-      background: var(--brand-solid-strong);
+      background-color: var(--scrollbar-thumb-hover);
     }
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: var(--scrollbar-track);
   }
 }

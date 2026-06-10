@@ -61,7 +61,7 @@ export default async function Work({ params }: PageProps) {
       <Column
         fillWidth
         paddingTop="24"
-        paddingX="l"
+        paddingX="s"
         gap="xl"
         horizontal="center"
         align="center"

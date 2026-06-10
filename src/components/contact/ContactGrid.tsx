@@ -139,11 +139,11 @@ export function ContactGrid() {
 
       <div className={styles.grid}>
         {cards.map((card, index) => (
-          <RevealFx key={card.id} translateY="12" delay={0.05 * index} fillWidth>
+          <RevealFx key={card.id} translateY="12" delay={0.05 * index} fillWidth fillHeight>
             {"badge" in card && card.badge ? (
               <Column gap="16" className={styles.card} fillHeight data-cursor="card">
                 <div className={styles.iconWrap}>
-                  <Icon name={card.icon} size="l" onBackground="brand-strong" />
+                  <Icon name={card.icon} size="m" onBackground="brand-strong" />
                 </div>
                 <Column gap="8">
                   <Heading as="h3" variant="heading-strong-m">
@@ -166,7 +166,7 @@ export function ContactGrid() {
               >
                 <Column gap="16" className={styles.card} fillHeight>
                   <div className={styles.iconWrap}>
-                    <Icon name={card.icon} size="l" onBackground="brand-strong" />
+                    <Icon name={card.icon} size="m" onBackground="brand-strong" />
                   </div>
                   <Column gap="8">
                     <Heading as="h3" variant="heading-strong-m">
@@ -188,7 +188,7 @@ export function ContactGrid() {
         ))}
       </div>
 
-      <RevealFx translateY="12" delay={0.25} fillWidth>
+      <RevealFx translateY="12" delay={0.25} fillWidth className={styles.formSection}>
         <Column gap="20" className={`${styles.formInner} ${styles.formCell}`}>
           <Column gap="8" horizontal="center" align="center">
             <Heading as="h2" variant="heading-strong-l">
