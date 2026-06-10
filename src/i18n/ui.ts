@@ -53,6 +53,12 @@ export type UiStrings = {
     prev: string;
     next: string;
   };
+  quote: {
+    navLabel: string;
+    pageTitle: string;
+    pageDescription: string;
+    contactNav: string;
+  };
   services: {
     title: string;
     subline: string;
@@ -67,9 +73,19 @@ export type UiStrings = {
   offerBuilder: {
     title: string;
     subline: string;
+    steps: string[];
+    stepLabel: string;
+    stepHints: {
+      projectType: string;
+      features: string;
+      design: string;
+      integrations: string;
+    };
     sections: {
       projectType: string;
       features: string;
+      design: string;
+      integrations: string;
       budget: string;
       timeline: string;
       vision: string;
@@ -77,8 +93,13 @@ export type UiStrings = {
     };
     projectTypes: Array<{ id: string; label: string }>;
     features: Array<{ id: string; label: string }>;
+    designStyles: Array<{ id: string; label: string; description: string }>;
+    integrations: Array<{ id: string; label: string }>;
     budgets: Array<{ id: string; label: string }>;
     timelines: Array<{ id: string; label: string }>;
+    summary: {
+      title: string;
+    };
     fields: {
       name: string;
       email: string;
@@ -89,6 +110,9 @@ export type UiStrings = {
     placeholders: {
       select: string;
     };
+    next: string;
+    prev: string;
+    backHome: string;
     submit: string;
     submitting: string;
     submitAnother: string;
@@ -193,6 +217,13 @@ const uiStrings: Record<Locale, UiStrings> = {
       prev: "Previous project",
       next: "Next project",
     },
+    quote: {
+      navLabel: "Quote",
+      pageTitle: "Build your quote",
+      pageDescription:
+        "Configure your project step by step — project type, modules, design, integrations, budget, and contact. I'll reply with a clear proposal.",
+      contactNav: "Contact",
+    },
     services: {
       title: "Services",
       subline:
@@ -246,10 +277,27 @@ const uiStrings: Record<Locale, UiStrings> = {
     offerBuilder: {
       title: "Build your quote",
       subline:
-        "Pick what you need — I'll review your brief and reply with scope, timeline, and a clear proposal.",
+        "Six-step configurator — pick what you need and I'll reply with scope, timeline, and a clear proposal.",
+      steps: [
+        "Project type",
+        "Modules",
+        "Design & style",
+        "Integrations",
+        "Budget & timeline",
+        "Contact",
+      ],
+      stepLabel: "Step {current} of {total}",
+      stepHints: {
+        projectType: "Select one or more project types that match your goal.",
+        features: "Choose modules and features you need in the product.",
+        design: "Pick a visual direction — I'll tailor UI and motion to your brand.",
+        integrations: "Optional third-party services to connect at launch.",
+      },
       sections: {
-        projectType: "What are you building?",
-        features: "Modules & features",
+        projectType: "Project type",
+        features: "Modules",
+        design: "Design style",
+        integrations: "Integrations",
         budget: "Budget range",
         timeline: "Timeline",
         vision: "Your vision",
@@ -279,6 +327,44 @@ const uiStrings: Record<Locale, UiStrings> = {
         { id: "hosting", label: "Hosting setup" },
         { id: "maintenance", label: "Maintenance" },
       ],
+      designStyles: [
+        {
+          id: "minimalist",
+          label: "Minimalist",
+          description: "Clean layout, generous whitespace, focused typography.",
+        },
+        {
+          id: "corporate",
+          label: "Corporate",
+          description: "Trust-first B2B look with structured sections and clarity.",
+        },
+        {
+          id: "gaming",
+          label: "Gaming",
+          description: "Bold accents, energy, and community-driven UI patterns.",
+        },
+        {
+          id: "dark-premium",
+          label: "Dark premium",
+          description: "Deep surfaces, cyan accents, cinematic depth.",
+        },
+        {
+          id: "light-clean",
+          label: "Light clean",
+          description: "Bright, accessible interface with subtle brand color.",
+        },
+      ],
+      integrations: [
+        { id: "discord", label: "Discord" },
+        { id: "stripe", label: "Stripe" },
+        { id: "oauth-google", label: "OAuth Google" },
+        { id: "oauth-discord", label: "OAuth Discord" },
+        { id: "cms", label: "Headless CMS" },
+        { id: "analytics", label: "Analytics (GA / Plausible)" },
+      ],
+      summary: {
+        title: "Your quote at a glance",
+      },
       budgets: [
         { id: "up-to-3k", label: "Up to PLN 3,000" },
         { id: "3k-8k", label: "PLN 3,000 – 8,000" },
@@ -302,6 +388,9 @@ const uiStrings: Record<Locale, UiStrings> = {
       placeholders: {
         select: "Select…",
       },
+      next: "Next step",
+      prev: "Back",
+      backHome: "Back to home",
       submit: "Send quote request",
       submitting: "Sending…",
       submitAnother: "Send another request",
@@ -404,6 +493,13 @@ const uiStrings: Record<Locale, UiStrings> = {
       prev: "Poprzedni projekt",
       next: "Następny projekt",
     },
+    quote: {
+      navLabel: "Oferta",
+      pageTitle: "Konfigurator oferty",
+      pageDescription:
+        "Skonfiguruj projekt krok po kroku — typ, moduły, design, integracje, budżet i kontakt. Odpowiem z jasną propozycją.",
+      contactNav: "Kontakt",
+    },
     services: {
       title: "Usługi",
       subline:
@@ -455,12 +551,29 @@ const uiStrings: Record<Locale, UiStrings> = {
       ],
     },
     offerBuilder: {
-      title: "Zbuduj swoją ofertę",
+      title: "Konfigurator oferty",
       subline:
-        "Wybierz, czego potrzebujesz — przejrzę brief i odpowiem z zakresem, terminem i jasną propozycją.",
+        "Sześć kroków — wybierz, czego potrzebujesz, a przejrzę brief i odpowiem z zakresem, terminem i jasną propozycją.",
+      steps: [
+        "Typ projektu",
+        "Moduły",
+        "Design i styl",
+        "Integracje",
+        "Budżet i termin",
+        "Kontakt",
+      ],
+      stepLabel: "Krok {current} z {total}",
+      stepHints: {
+        projectType: "Wybierz jeden lub więcej typów projektu pasujących do celu.",
+        features: "Zaznacz moduły i funkcje, które mają znaleźć się w produkcie.",
+        design: "Wybierz kierunek wizualny — dopasuję UI i animacje do marki.",
+        integrations: "Opcjonalne usługi zewnętrzne do podłączenia przy starcie.",
+      },
       sections: {
-        projectType: "Co chcesz zbudować?",
-        features: "Moduły i funkcje",
+        projectType: "Typ projektu",
+        features: "Moduły",
+        design: "Styl designu",
+        integrations: "Integracje",
         budget: "Zakres budżetu",
         timeline: "Termin realizacji",
         vision: "Twoja wizja",
@@ -490,6 +603,44 @@ const uiStrings: Record<Locale, UiStrings> = {
         { id: "hosting", label: "Hosting setup" },
         { id: "maintenance", label: "Maintenance" },
       ],
+      designStyles: [
+        {
+          id: "minimalist",
+          label: "Minimalistyczny",
+          description: "Czysty layout, dużo przestrzeni, czytelna typografia.",
+        },
+        {
+          id: "corporate",
+          label: "Corporate",
+          description: "Profesjonalny wygląd B2B ze strukturą i przejrzystością.",
+        },
+        {
+          id: "gaming",
+          label: "Gaming",
+          description: "Odważne akcenty, energia i wzorce UI dla społeczności.",
+        },
+        {
+          id: "dark-premium",
+          label: "Dark premium",
+          description: "Ciemne powierzchnie, cyanowe akcenty, głębia wizualna.",
+        },
+        {
+          id: "light-clean",
+          label: "Light clean",
+          description: "Jasny, dostępny interfejs z subtelnym kolorem marki.",
+        },
+      ],
+      integrations: [
+        { id: "discord", label: "Discord" },
+        { id: "stripe", label: "Stripe" },
+        { id: "oauth-google", label: "OAuth Google" },
+        { id: "oauth-discord", label: "OAuth Discord" },
+        { id: "cms", label: "Headless CMS" },
+        { id: "analytics", label: "Analityka (GA / Plausible)" },
+      ],
+      summary: {
+        title: "Twoja oferta w skrócie",
+      },
       budgets: [
         { id: "up-to-3k", label: "Do 3 000 PLN" },
         { id: "3k-8k", label: "3 000 – 8 000 PLN" },
@@ -513,6 +664,9 @@ const uiStrings: Record<Locale, UiStrings> = {
       placeholders: {
         select: "Wybierz…",
       },
+      next: "Dalej",
+      prev: "Wstecz",
+      backHome: "Strona główna",
       submit: "Wyślij zapytanie ofertowe",
       submitting: "Wysyłanie…",
       submitAnother: "Wyślij kolejne zapytanie",

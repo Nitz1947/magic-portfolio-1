@@ -8,4 +8,6 @@ export { CodeRain } from "./CodeRain";
 export { CodeGridBackground } from "./CodeGridBackground";
 export { FloatingSymbols } from "./FloatingSymbols";
 export { TerminalTyping } from "./TerminalTyping";
+export { GlobalPageBackground } from "./GlobalPageBackground";
+export { CustomCursor } from "./CustomCursor";
 export type { SectionVariant } from "./SectionBackdrop";

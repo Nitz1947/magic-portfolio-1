@@ -121,18 +121,28 @@ export function createEnglishContent(): LocaleContent {
       title: "Introduction",
       description: (
         <>
-          Need a website or app but no dev team? I build web products around a clear
-          business goal — <strong>no off-the-shelf templates</strong>.
+          I'm <strong>Krystian G.</strong> — a full-stack freelancer who designs and
+          ships websites and web apps from scratch. I don't sell templates: every
+          project is a <strong>custom build</strong> aligned with your business,
+          audience, and budget.
           <br />
           <br />
-          Portfolio includes an SEO audit platform, a Discord app with OAuth and
-          leaderboards, and a multilingual B2B site — all in production on Next.js.
-          Full cycle: UX, code, Vercel deploy, and post-launch support.
+          <strong>What I build for clients:</strong> B2B corporate sites, community
+          and Discord platforms, SEO landing pages, e-commerce stores, admin panels,
+          SEO audits, and multi-language products (PL/EN and beyond).
           <br />
           <br />
-          <strong>Why me?</strong> Over 6 years of contract work — fast ramp-up, clear
-          client communication, and shipping to production. Stack:{" "}
-          <strong>React, TypeScript, Next.js, Vercel</strong>.
+          <strong>Why work with me:</strong> Next.js and Vercel mean speed,
+          performance, and reliable hosting. You get a transparent process, preview
+          deploys at every stage, and post-launch support — you're not left alone
+          with the tech.
+          <br />
+          <br />
+          <strong>Who it's for:</strong> companies without an in-house IT team,
+          gaming communities, entrepreneurs, and brands that want a professional
+          online presence without compromise. Proof in production:{" "}
+          <strong>SEO Opt One</strong>, <strong>Strefa Kibica</strong>, and{" "}
+          <strong>BJ Trade</strong>.
         </>
       ),
     },

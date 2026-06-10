@@ -46,8 +46,8 @@ const TimeDisplay: React.FC<TimeDisplayProps> = ({ timeZone, locale }) => {
 export const Header = () => {
   const pathname = usePathname() ?? "";
   const routePath = stripLocalePath(pathname);
-  const { locale, content, href } = useLocale();
-  const { person, about, blog, work, gallery } = content;
+  const { locale, content, ui, href } = useLocale();
+  const { person, about, work } = content;
 
   return (
     <>
@@ -133,44 +133,35 @@ export const Header = () => {
                   </Row>
                 </>
               )}
-              {routes["/blog"] && (
+              {routes["/quote"] && (
                 <>
                   <Row s={{ hide: true }}>
                     <ToggleButton
-                      prefixIcon="book"
-                      href={href("/blog")}
-                      label={blog.label}
-                      selected={routePath.startsWith("/blog")}
+                      prefixIcon="document"
+                      href={href("/quote")}
+                      label={ui.quote.navLabel}
+                      selected={routePath === "/quote"}
                     />
                   </Row>
                   <Row hide s={{ hide: false }}>
                     <ToggleButton
-                      prefixIcon="book"
-                      href={href("/blog")}
-                      selected={routePath.startsWith("/blog")}
+                      prefixIcon="document"
+                      href={href("/quote")}
+                      selected={routePath === "/quote"}
                     />
                   </Row>
                 </>
               )}
-              {routes["/gallery"] && (
-                <>
-                  <Row s={{ hide: true }}>
-                    <ToggleButton
-                      prefixIcon="gallery"
-                      href={href("/gallery")}
-                      label={gallery.label}
-                      selected={routePath.startsWith("/gallery")}
-                    />
-                  </Row>
-                  <Row hide s={{ hide: false }}>
-                    <ToggleButton
-                      prefixIcon="gallery"
-                      href={href("/gallery")}
-                      selected={routePath.startsWith("/gallery")}
-                    />
-                  </Row>
-                </>
-              )}
+              <Row s={{ hide: true }}>
+                <ToggleButton
+                  prefixIcon="email"
+                  href={`mailto:${person.email}`}
+                  label={ui.quote.contactNav}
+                />
+              </Row>
+              <Row hide s={{ hide: false }}>
+                <ToggleButton prefixIcon="email" href={`mailto:${person.email}`} />
+              </Row>
               {display.themeSwitcher && (
                 <>
                   <Line background="neutral-alpha-medium" vert maxHeight="24" />

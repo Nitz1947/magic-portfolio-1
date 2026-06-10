@@ -11,6 +11,7 @@ import {
   SpacingToken,
 } from "@once-ui-system/core";
 import { Footer, Header, RouteGuard, Providers } from "@/components";
+import { CustomCursor, GlobalPageBackground } from "@/components/effects";
 import { LocaleProvider } from "@/context/LocaleContext";
 import { defaultLocale, isLocale, locales } from "@/i18n/config";
 import { localizedPath } from "@/i18n/paths";
@@ -128,11 +129,13 @@ export default async function LocaleLayout({
             as="body"
             background="page"
             fillWidth
-            style={{ minHeight: "100vh" }}
+            style={{ minHeight: "100vh", position: "relative" }}
             margin="0"
             padding="0"
             horizontal="center"
           >
+            <GlobalPageBackground />
+            <CustomCursor />
             <RevealFx fill position="absolute">
               <Background
                 mask={{
@@ -177,7 +180,7 @@ export default async function LocaleLayout({
             </RevealFx>
             <Flex fillWidth minHeight="16" s={{ hide: true }} />
             <Header />
-            <Flex zIndex={0} fillWidth padding="l" horizontal="center" flex={1}>
+            <Flex zIndex={1} fillWidth padding="l" horizontal="center" flex={1}>
               <Flex horizontal="center" fillWidth minHeight="0">
                 <RouteGuard>{children}</RouteGuard>
               </Flex>

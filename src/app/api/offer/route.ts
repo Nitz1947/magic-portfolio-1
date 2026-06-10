@@ -19,6 +19,8 @@ type OfferPayload = {
   locale: string;
   projectTypes: string[];
   features: string[];
+  designStyle: string;
+  integrations: string[];
   budget: string;
   timeline: string;
   vision: string;
@@ -64,9 +66,26 @@ const LABELS = {
       "2-3-months": "2–3 miesiące",
       flexible: "Elastycznie",
     },
+    designStyles: {
+      minimalist: "Minimalistyczny",
+      corporate: "Corporate",
+      gaming: "Gaming",
+      "dark-premium": "Dark premium",
+      "light-clean": "Light clean",
+    },
+    integrations: {
+      discord: "Discord",
+      stripe: "Stripe",
+      "oauth-google": "OAuth Google",
+      "oauth-discord": "OAuth Discord",
+      cms: "Headless CMS",
+      analytics: "Analityka",
+    },
     headings: {
       projectTypes: "Typ projektu",
       features: "Wybrane moduły",
+      design: "Styl designu",
+      integrations: "Integracje",
       budget: "Budżet",
       timeline: "Termin",
       vision: "Wizja klienta",
@@ -111,9 +130,26 @@ const LABELS = {
       "2-3-months": "2–3 months",
       flexible: "Flexible",
     },
+    designStyles: {
+      minimalist: "Minimalist",
+      corporate: "Corporate",
+      gaming: "Gaming",
+      "dark-premium": "Dark premium",
+      "light-clean": "Light clean",
+    },
+    integrations: {
+      discord: "Discord",
+      stripe: "Stripe",
+      "oauth-google": "OAuth Google",
+      "oauth-discord": "OAuth Discord",
+      cms: "Headless CMS",
+      analytics: "Analytics",
+    },
     headings: {
       projectTypes: "Project type",
       features: "Selected modules",
+      design: "Design style",
+      integrations: "Integrations",
       budget: "Budget",
       timeline: "Timeline",
       vision: "Client vision",
@@ -140,6 +176,10 @@ function validatePayload(body: unknown): { ok: true; data: OfferPayload } | { ok
   const features = Array.isArray(raw.features)
     ? raw.features.filter((item): item is string => typeof item === "string")
     : [];
+  const designStyle = typeof raw.designStyle === "string" ? raw.designStyle : "";
+  const integrations = Array.isArray(raw.integrations)
+    ? raw.integrations.filter((item): item is string => typeof item === "string")
+    : [];
   const budget = typeof raw.budget === "string" ? raw.budget : "";
   const timeline = typeof raw.timeline === "string" ? raw.timeline : "";
   const vision = typeof raw.vision === "string" ? raw.vision.trim() : "";
@@ -163,6 +203,8 @@ function validatePayload(body: unknown): { ok: true; data: OfferPayload } | { ok
       locale,
       projectTypes,
       features,
+      designStyle,
+      integrations,
       budget,
       timeline,
       vision,
@@ -191,6 +233,10 @@ function buildEmailHtml(data: OfferPayload) {
       ${list(data.projectTypes, lang.projectTypes)}
       <h2 style="font-size: 16px;">${lang.headings.features}</h2>
       ${list(data.features, lang.features)}
+      <h2 style="font-size: 16px;">${lang.headings.design}</h2>
+      <p><strong>${data.designStyle ? resolveLabel(lang.designStyles, data.designStyle) : "—"}</strong></p>
+      <h2 style="font-size: 16px;">${lang.headings.integrations}</h2>
+      ${list(data.integrations, lang.integrations)}
       <h2 style="font-size: 16px;">${lang.headings.budget}</h2>
       <p><strong>${resolveLabel(lang.budgets, data.budget)}</strong></p>
       <h2 style="font-size: 16px;">${lang.headings.timeline}</h2>
@@ -298,6 +344,8 @@ export async function POST(request: Request) {
       email: data.contact.email,
       projectTypes: data.projectTypes,
       features: data.features,
+      designStyle: data.designStyle,
+      integrations: data.integrations,
       budget: data.budget,
       timeline: data.timeline,
       delivery,

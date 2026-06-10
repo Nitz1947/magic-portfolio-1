@@ -10,7 +10,6 @@ export { ProcessSteps } from "@/components/ProcessSteps";
 export { ServicesGrid } from "@/components/ServicesGrid";
 export { OfferBuilder } from "@/components/OfferBuilder";
 export { TechMarquee } from "@/components/TechMarquee";
-export { PortfolioWall } from "@/components/PortfolioWall";
 export {
   SyntaxHighlightBlock,
   SectionBackdrop,

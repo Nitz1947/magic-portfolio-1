@@ -121,19 +121,28 @@ export function createPolishContent(): LocaleContent {
       title: "Wprowadzenie",
       description: (
         <>
-          Potrzebujesz strony lub aplikacji, a nie masz zespołu dev? Buduję
-          produkty webowe pod konkretny cel biznesowy —{" "}
-          <strong>bez gotowych szablonów</strong>.
+          Jestem <strong>Krystian G.</strong> — freelancer full-stack, który projektuje
+          i wdraża strony oraz aplikacje webowe od zera. Nie sprzedaję szablonów:
+          każdy projekt to <strong>custom rozwiązanie</strong> dopasowane do Twojego
+          biznesu, grupy docelowej i budżetu.
           <br />
           <br />
-          W portfolio: platforma audytu SEO, aplikacja Discord z OAuth i
-          rankingiem oraz strona B2B z i18n — wszystko na produkcji w Next.js.
-          Pełny cykl: UX, kod, deploy na Vercel i wsparcie po wdrożeniu.
+          <strong>Co tworzę dla klientów:</strong> strony firmowe B2B, platformy
+          community i Discord, landingi SEO, sklepy internetowe, panele
+          administracyjne, audyty SEO oraz serwisy wielojęzyczne (PL/EN i więcej).
           <br />
           <br />
-          <strong>Dlaczego ja?</strong> Ponad 6 lat pracy kontraktorskiej —
-          szybkie wejście w projekt, jasna komunikacja z klientem i dowóz na
-          produkcję. Stack: <strong>React, TypeScript, Next.js, Vercel</strong>.
+          <strong>Dlaczego warto:</strong> Next.js i Vercel oznaczają szybkość,
+          wydajność i stabilny hosting. Dostajesz przejrzysty proces, preview
+          deploye na każdym etapie oraz wsparcie po wdrożeniu — nie zostajesz sam
+          z technologią.
+          <br />
+          <br />
+          <strong>Dla kogo:</strong> firmy bez własnego IT, społeczności gamingowe,
+          przedsiębiorcy i marki, które chcą profesjonalnej obecności online bez
+          kompromisów. Dowód jakości: <strong>SEO Opt One</strong>,{" "}
+          <strong>Strefa Kibica</strong> i <strong>BJ Trade</strong> — projekty live
+          na produkcji.
         </>
       ),
     },

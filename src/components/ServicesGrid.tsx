@@ -6,7 +6,7 @@ import { SectionBackground } from "@/components/effects";
 import styles from "./ServicesGrid.module.scss";
 
 export function ServicesGrid() {
-  const { ui } = useLocale();
+  const { ui, href } = useLocale();
   const { services } = ui;
 
   return (
@@ -24,7 +24,13 @@ export function ServicesGrid() {
       <div className={styles.grid}>
         {services.items.map((item, index) => (
           <RevealFx key={item.id} translateY="12" delay={0.05 * index} fillWidth>
-            <Column gap="16" className={styles.card} fillHeight>
+            <Column
+              gap="16"
+              className={styles.card}
+              fillHeight
+              data-cursor="card"
+              data-cursor-label={ui.work.viewProject}
+            >
               <div className={styles.iconWrap}>
                 <Icon name={item.icon} size="m" onBackground="brand-strong" />
               </div>
@@ -42,7 +48,7 @@ export function ServicesGrid() {
       </div>
 
       <Row horizontal="center" paddingTop="8">
-        <Button href="#offer-builder" variant="primary" size="m" arrowIcon>
+        <Button href={href("/quote")} variant="primary" size="m" arrowIcon>
           {services.cta}
         </Button>
       </Row>

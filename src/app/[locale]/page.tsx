@@ -9,18 +9,14 @@ import {
   Row,
   Schema,
   Meta,
-  Line,
 } from "@once-ui-system/core";
 import { Mailchimp } from "@/components";
-import { PortfolioWall } from "@/components/PortfolioWall";
 import { SectionBackdrop, HeroBackground } from "@/components/effects";
 import homeStyles from "./home.module.scss";
-import { OfferBuilder } from "@/components/OfferBuilder";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { ProjectSlideshow } from "@/components/ProjectSlideshow";
 import { ServicesGrid } from "@/components/ServicesGrid";
 import { TechMarquee } from "@/components/TechMarquee";
-import { Posts } from "@/components/blog/Posts";
 import { featuredProjectConfigs, homepageFeaturedSlugs } from "@/data/featuredProjects";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
@@ -140,9 +136,20 @@ export default async function Home({ params }: PageProps) {
                 >
                   {ui.viewProjects}
                 </Button>
+                {routes["/quote"] && (
+                  <Button
+                    href={localizedPath("/quote", locale)}
+                    variant="secondary"
+                    size="m"
+                    weight="default"
+                    arrowIcon
+                  >
+                    {ui.services.cta}
+                  </Button>
+                )}
                 <Button
                   href={`mailto:${person.email}`}
-                  variant="secondary"
+                  variant="tertiary"
                   size="m"
                   weight="default"
                 >
@@ -195,10 +202,6 @@ export default async function Home({ params }: PageProps) {
         </Column>
       </RevealFx>
 
-      <RevealFx translateY="24" delay={0.58} fillWidth>
-        <PortfolioWall projects={showcaseProjects} />
-      </RevealFx>
-
       <RevealFx translateY="24" delay={0.65} fillWidth>
         <ServicesGrid />
       </RevealFx>
@@ -206,29 +209,6 @@ export default async function Home({ params }: PageProps) {
       <RevealFx translateY="24" delay={0.72} fillWidth>
         <ProcessSteps title={ui.process.title} steps={ui.process.steps} />
       </RevealFx>
-
-      <RevealFx translateY="24" delay={0.76} fillWidth>
-        <OfferBuilder />
-      </RevealFx>
-
-      {routes["/blog"] && (
-        <RevealFx translateY="16" delay={0.8}>
-          <Column fillWidth gap="24" marginBottom="l">
-            <Row fillWidth paddingRight="64">
-              <Line maxWidth={48} />
-            </Row>
-            <Column fillWidth gap="24" marginTop="24" s={{ gap: "16" }}>
-              <Heading as="h2" variant="display-strong-xs" wrap="balance">
-                {ui.latestFromBlog}
-              </Heading>
-              <Posts range={[1, 2]} columns="2" locale={locale} />
-            </Column>
-            <Row fillWidth paddingLeft="64" horizontal="end">
-              <Line maxWidth={48} />
-            </Row>
-          </Column>
-        </RevealFx>
-      )}
 
       <Mailchimp />
     </Column>
