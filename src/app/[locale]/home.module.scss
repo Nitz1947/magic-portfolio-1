@@ -24,20 +24,9 @@
   letter-spacing: -0.02em;
 }
 
-.heroCorner {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: min(280px, 38vw);
+.heroContent {
+  position: relative;
   z-index: 2;
-  opacity: 0.75;
-  pointer-events: none;
-
-  @media (max-width: 768px) {
-    display: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    opacity: 0.55;
-  }
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
 }

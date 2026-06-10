@@ -1,5 +1,11 @@
 export { SyntaxHighlightBlock } from "./SyntaxHighlightBlock";
 export { SectionBackdrop } from "./SectionBackdrop";
+export { SectionBackground } from "./SectionBackground";
 export { ParticlesHero } from "./ParticlesHero";
+export { HeroBackground } from "./HeroBackground";
+export { BackgroundTerminal } from "./BackgroundTerminal";
+export { CodeRain } from "./CodeRain";
+export { CodeGridBackground } from "./CodeGridBackground";
+export { FloatingSymbols } from "./FloatingSymbols";
 export { TerminalTyping } from "./TerminalTyping";
 export type { SectionVariant } from "./SectionBackdrop";

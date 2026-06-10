@@ -1,0 +1,97 @@
+@import "./effects.shared.scss";
+
+.wrapper {
+  @include effect-layer;
+}
+
+.terminal {
+  @include mono-code;
+  position: absolute;
+  border: 1px solid var(--brand-alpha-weak);
+  border-radius: var(--radius-l);
+  background: var(--neutral-alpha-weak);
+  overflow: hidden;
+  font-size: clamp(11px, 1.4vw, 15px);
+  line-height: 1.55;
+  opacity: 0.1;
+  filter: blur(0.6px);
+  pointer-events: none;
+  user-select: none;
+
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 0.06;
+    filter: blur(1px);
+  }
+}
+
+.primary {
+  top: 6%;
+  right: -4%;
+  width: min(560px, 72vw);
+  transform: rotate(-4deg) scale(1.05);
+}
+
+.secondary {
+  bottom: 8%;
+  left: -6%;
+  width: min(420px, 58vw);
+  transform: rotate(3deg) scale(0.95);
+  opacity: 0.08;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.titlebar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--neutral-alpha-weak);
+  background: var(--neutral-alpha-medium);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--brand-alpha-medium);
+  opacity: 0.6;
+}
+
+.body {
+  padding: 14px 16px;
+  min-height: 3.4em;
+  color: var(--neutral-on-background-weak);
+}
+
+.prompt {
+  color: var(--brand-on-background-medium);
+  opacity: 0.7;
+}
+
+.cursor {
+  display: inline-block;
+  width: 7px;
+  height: 1.1em;
+  margin-left: 1px;
+  vertical-align: text-bottom;
+  background: var(--brand-on-background-medium);
+  opacity: 0.5;
+  animation: blink 1.2s step-end infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 0.15;
+  }
+}

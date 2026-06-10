@@ -16,6 +16,7 @@ import {
   useToast,
 } from "@once-ui-system/core";
 import { useLocale } from "@/context/LocaleContext";
+import { SectionBackground } from "@/components/effects";
 import styles from "./OfferBuilder.module.scss";
 
 type FormState = {
@@ -153,17 +154,20 @@ export function OfferBuilder() {
 
   if (submitted) {
     return (
-      <Column fillWidth gap="16" id="offer-builder">
-        <Feedback variant="success" title={offerBuilder.success.title} description={offerBuilder.success.description} />
-        <Button variant="secondary" size="m" onClick={() => setSubmitted(false)}>
-          {offerBuilder.submitAnother}
-        </Button>
-      </Column>
+      <SectionBackground variant="grid">
+        <Column fillWidth gap="16" id="offer-builder">
+          <Feedback variant="success" title={offerBuilder.success.title} description={offerBuilder.success.description} />
+          <Button variant="secondary" size="m" onClick={() => setSubmitted(false)}>
+            {offerBuilder.submitAnother}
+          </Button>
+        </Column>
+      </SectionBackground>
     );
   }
 
   return (
-    <Column fillWidth gap="24" id="offer-builder">
+    <SectionBackground variant="grid">
+      <Column fillWidth gap="24" id="offer-builder">
       <Column fillWidth gap="8">
         <Heading as="h2" variant="display-strong-xs" wrap="balance">
           {offerBuilder.title}
@@ -348,5 +352,6 @@ export function OfferBuilder() {
         </Column>
       </form>
     </Column>
+    </SectionBackground>
   );
 }

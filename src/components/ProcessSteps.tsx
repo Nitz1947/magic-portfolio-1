@@ -1,4 +1,5 @@
 import { Column, Heading, Row, Text } from "@once-ui-system/core";
+import { SectionBackground } from "@/components/effects";
 import styles from "./ProcessSteps.module.scss";
 
 export type ProcessStep = {
@@ -14,7 +15,8 @@ interface ProcessStepsProps {
 
 export function ProcessSteps({ title, steps }: ProcessStepsProps) {
   return (
-    <Column fillWidth gap="l">
+    <SectionBackground variant="symbols">
+      <Column fillWidth gap="l">
       <Heading as="h2" variant="display-strong-xs" wrap="balance">
         {title}
       </Heading>
@@ -34,5 +36,6 @@ export function ProcessSteps({ title, steps }: ProcessStepsProps) {
         ))}
       </Row>
     </Column>
+    </SectionBackground>
   );
 }

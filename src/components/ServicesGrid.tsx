@@ -2,6 +2,7 @@
 
 import { Button, Column, Heading, Icon, RevealFx, Row, Text } from "@once-ui-system/core";
 import { useLocale } from "@/context/LocaleContext";
+import { SectionBackground } from "@/components/effects";
 import styles from "./ServicesGrid.module.scss";
 
 export function ServicesGrid() {
@@ -9,7 +10,8 @@ export function ServicesGrid() {
   const { services } = ui;
 
   return (
-    <Column fillWidth gap="24" id="services">
+    <SectionBackground variant="grid">
+      <Column fillWidth gap="24" id="services">
       <Column fillWidth gap="8">
         <Heading as="h2" variant="display-strong-xs" wrap="balance">
           {services.title}
@@ -45,5 +47,6 @@ export function ServicesGrid() {
         </Button>
       </Row>
     </Column>
+    </SectionBackground>
   );
 }

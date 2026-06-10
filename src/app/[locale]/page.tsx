@@ -13,7 +13,7 @@ import {
 } from "@once-ui-system/core";
 import { Mailchimp } from "@/components";
 import { PortfolioWall } from "@/components/PortfolioWall";
-import { ParticlesHero, SectionBackdrop, TerminalTyping } from "@/components/effects";
+import { SectionBackdrop, HeroBackground } from "@/components/effects";
 import homeStyles from "./home.module.scss";
 import { OfferBuilder } from "@/components/OfferBuilder";
 import { ProcessSteps } from "@/components/ProcessSteps";
@@ -81,19 +81,14 @@ export default async function Home({ params }: PageProps) {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <SectionBackdrop variant="hero">
-        <Column fillWidth horizontal="center" gap="m">
+      <SectionBackdrop variant="hero" background={<HeroBackground />}>
+        <Column fillWidth horizontal="center" gap="m" className={homeStyles.heroContent}>
           <Column
             maxWidth="s"
             horizontal="center"
             align="center"
-            style={{ position: "relative" }}
             fillWidth
           >
-            <ParticlesHero />
-            <div className={homeStyles.heroCorner}>
-              <TerminalTyping />
-            </div>
             {home.featured.display && (
               <RevealFx
                 fillWidth

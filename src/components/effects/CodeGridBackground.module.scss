@@ -2,10 +2,10 @@
 
 .wrapper {
   @include effect-layer;
-  opacity: 0.12;
+  opacity: 0.06;
 
   @media (prefers-reduced-motion: reduce) {
-    opacity: 0.06;
+    opacity: 0.04;
   }
 }
 

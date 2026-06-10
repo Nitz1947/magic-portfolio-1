@@ -6,7 +6,6 @@ export { ProjectBrowserFrame } from "@/components/ProjectBrowserFrame";
 export { ProjectLivePreview } from "@/components/ProjectLivePreview";
 export { ProjectShowcase } from "@/components/ProjectShowcase";
 export { ProjectSlideshow } from "@/components/ProjectSlideshow";
-export { CodeRain } from "@/components/CodeRain";
 export { ProcessSteps } from "@/components/ProcessSteps";
 export { ServicesGrid } from "@/components/ServicesGrid";
 export { OfferBuilder } from "@/components/OfferBuilder";
@@ -15,7 +14,11 @@ export { PortfolioWall } from "@/components/PortfolioWall";
 export {
   SyntaxHighlightBlock,
   SectionBackdrop,
+  SectionBackground,
   ParticlesHero,
+  HeroBackground,
+  BackgroundTerminal,
+  CodeRain,
   TerminalTyping,
 } from "@/components/effects";
 export { HeadingLink } from "@/components/HeadingLink";
