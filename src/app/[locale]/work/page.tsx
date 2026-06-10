@@ -59,7 +59,7 @@ export default async function Work({ params }: PageProps) {
         <SyntaxHighlightBlock position="topRight" compact />
       </div>
       <Column
-        maxWidth="m"
+        fillWidth
         paddingTop="24"
         paddingX="l"
         gap="xl"

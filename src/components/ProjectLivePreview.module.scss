@@ -44,19 +44,19 @@
 
 .presentationContext {
   height: 100%;
-  min-height: 500px;
+  min-height: 620px;
 
   .fullBleedFrame {
     display: flex;
     flex-direction: column;
     flex: 1;
-    min-height: 500px;
+    min-height: 620px;
     height: 100%;
   }
 
   .viewportFullBleed {
     flex: 1;
-    min-height: 500px;
+    min-height: 620px;
     height: auto;
   }
 }

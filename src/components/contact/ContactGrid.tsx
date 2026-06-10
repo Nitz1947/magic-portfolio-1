@@ -143,7 +143,7 @@ export function ContactGrid() {
             {"badge" in card && card.badge ? (
               <Column gap="16" className={styles.card} fillHeight data-cursor="card">
                 <div className={styles.iconWrap}>
-                  <Icon name={card.icon} size="m" onBackground="brand-strong" />
+                  <Icon name={card.icon} size="l" onBackground="brand-strong" />
                 </div>
                 <Column gap="8">
                   <Heading as="h3" variant="heading-strong-m">
@@ -166,7 +166,7 @@ export function ContactGrid() {
               >
                 <Column gap="16" className={styles.card} fillHeight>
                   <div className={styles.iconWrap}>
-                    <Icon name={card.icon} size="m" onBackground="brand-strong" />
+                    <Icon name={card.icon} size="l" onBackground="brand-strong" />
                   </div>
                   <Column gap="8">
                     <Heading as="h3" variant="heading-strong-m">
@@ -251,8 +251,8 @@ export function ContactGrid() {
                 <Text variant="label-strong-s">{contact.quickMessage.message}</Text>
                 <Textarea
                   id="contact-message"
-                  lines={4}
-                placeholder={contact.quickMessage.messagePlaceholder}
+                  lines={6}
+                  placeholder={contact.quickMessage.messagePlaceholder}
                 value={form.message}
                 onChange={(event) => {
                   setForm((prev) => ({ ...prev, message: event.target.value }));

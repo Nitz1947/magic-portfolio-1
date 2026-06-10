@@ -2,7 +2,7 @@
 
 .guide {
   width: 100%;
-  max-width: 72rem;
+  max-width: min(1400px, 95vw);
   margin-inline: auto;
   text-align: center;
 }
@@ -92,10 +92,10 @@
   justify-content: center;
   gap: 12px;
   width: 100%;
-  padding: 20px 20px 0;
+  padding: 20px 0 0;
 
   @media (max-width: 640px) {
-    padding: 16px 16px 0;
+    padding: 16px 0 0;
   }
 }
 
@@ -115,34 +115,34 @@
 .contentRow {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   width: 100%;
-  padding: 16px 20px 0;
+  padding: 16px 0 0;
 
   @media (max-width: 640px) {
-    padding: 12px 12px 0;
+    padding: 12px 0 0;
   }
 
   @media (min-width: 900px) {
     flex-direction: row;
     align-items: stretch;
-    gap: 24px;
-    min-height: 500px;
+    gap: 28px;
+    min-height: 620px;
   }
 }
 
 .previewCell {
   width: 100%;
   min-width: 0;
-  min-height: 500px;
+  min-height: 620px;
   @include branded-scrollbar;
   overflow-y: auto;
   overflow-x: hidden;
 
   @media (min-width: 900px) {
-    flex: 1 1 63%;
-    max-width: 63%;
-    max-height: min(720px, calc(100vh - 160px));
+    flex: 1 1 59%;
+    max-width: 59%;
+    max-height: min(780px, calc(100vh - 140px));
   }
 }
 
@@ -158,38 +158,40 @@
   text-align: left;
 
   @media (min-width: 900px) {
-    flex: 1 1 37%;
-    max-width: 37%;
+    flex: 1 1 41%;
+    max-width: 41%;
     position: sticky;
     top: 120px;
     align-self: flex-start;
-    max-height: min(720px, calc(100vh - 160px));
+    max-height: min(780px, calc(100vh - 140px));
   }
 }
 
 .infoScroll {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 24px 20px;
+  gap: 28px;
+  padding: 28px 28px;
+  line-height: 1.65;
+  font-size: 1rem;
   @include branded-scrollbar;
   overflow-y: auto;
   overflow-x: hidden;
   max-height: inherit;
 
   @media (max-width: 640px) {
-    padding: 20px 16px;
+    padding: 24px 20px;
   }
 
   @media (min-width: 900px) {
-    max-height: min(720px, calc(100vh - 160px));
+    max-height: min(780px, calc(100vh - 140px));
   }
 }
 
 .details {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
   width: 100%;
 }
 
@@ -197,8 +199,12 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 10px;
   width: 100%;
+}
+
+.detailText {
+  line-height: 1.65;
 }
 
 .detailLabel {
@@ -240,7 +246,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 6px;
+  gap: 8px;
+  line-height: 1.6;
 }
 
 .navRow {
@@ -264,9 +271,9 @@
   flex-wrap: wrap;
   gap: 12px;
   justify-content: center;
-  padding: 0 20px 20px;
+  padding: 0 0 20px;
 
   @media (max-width: 640px) {
-    padding: 0 16px 16px;
+    padding: 0 0 16px;
   }
 }

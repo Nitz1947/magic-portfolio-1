@@ -158,7 +158,7 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
                     <Text variant="label-default-s" className={styles.detailLabel}>
                       {ui.work.presentation.forWhom}
                     </Text>
-                    <Text variant="body-default-s" onBackground="neutral-weak" wrap="balance">
+                    <Text variant="body-default-m" className={styles.detailText} onBackground="neutral-weak" wrap="balance">
                       {project.presentation.audience}
                     </Text>
                   </div>
@@ -166,7 +166,7 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
                     <Text variant="label-default-s" className={styles.detailLabel}>
                       {ui.work.presentation.delivered}
                     </Text>
-                    <Text variant="body-default-s" onBackground="neutral-weak" wrap="balance">
+                    <Text variant="body-default-m" className={styles.detailText} onBackground="neutral-weak" wrap="balance">
                       {project.presentation.delivered}
                     </Text>
                   </div>
@@ -189,7 +189,7 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
                     <ul className={styles.featureList}>
                       {project.presentation.features.map((feature) => (
                         <li key={feature}>
-                          <Text as="span" variant="body-default-s" onBackground="neutral-weak">
+                          <Text as="span" variant="body-default-m" className={styles.detailText} onBackground="neutral-weak">
                             {feature}
                           </Text>
                         </li>
