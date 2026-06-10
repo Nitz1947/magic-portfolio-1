@@ -50,15 +50,24 @@
   flex: 1;
   min-height: 0;
   width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior-x: none;
   @include branded-scrollbar($dark-chrome: true);
   color-scheme: dark;
+
+  &::-webkit-scrollbar:horizontal {
+    display: none;
+    height: 0;
+  }
 }
 
 .presentationContext {
   height: 100%;
   min-height: 720px;
+  overflow: hidden;
+  max-width: 100%;
 
   .fullBleedFrame {
     display: flex;
@@ -66,6 +75,8 @@
     flex: 1;
     min-height: 720px;
     height: 100%;
+    overflow: hidden;
+    max-width: 100%;
   }
 
   .viewportFullBleed {
@@ -75,6 +86,7 @@
     min-height: 720px;
     height: auto;
     overflow: hidden;
+    max-width: 100%;
   }
 }
 
@@ -91,10 +103,13 @@
 }
 
 .iframeExternal {
+  width: 100%;
+  max-width: 100%;
   height: var(--embed-viewport-height, 2400px);
   min-height: var(--embed-viewport-height, 2400px);
   contain: none;
   content-visibility: visible;
+  overflow: hidden;
 }
 
 .iframeActive {

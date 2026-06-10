@@ -1,14 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
-import {
-  Button,
-  Column,
-  Heading,
-  IconButton,
-  Row,
-  Text,
-} from "@once-ui-system/core";
+import { Button, Column, Row, Text } from "@once-ui-system/core";
 import { useLocale } from "@/context/LocaleContext";
 import type { ProjectPresentationContent } from "@/data/projectPresentations";
 import type { FeaturedProjectConfig } from "@/data/featuredProjects";
@@ -79,64 +72,52 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
             type="button"
             role="tab"
             aria-selected={index === activeIndex}
+            aria-controls={hashForSlug(item.slug)}
             className={`${styles.thumbnail} ${index === activeIndex ? styles.thumbnailActive : ""}`}
             onClick={() => goTo(index)}
           >
-            <Text variant="label-default-s" className={styles.thumbnailStep}>
+            <span className={styles.thumbnailStep}>
               {ui.work.presentation.step} {index + 1}/{projects.length}
-            </Text>
-            <Text variant="body-default-s" weight="strong" onBackground="neutral-strong">
-              {item.title}
-            </Text>
-            <Text variant="body-default-xs" onBackground="neutral-weak">
-              {item.presentation.tagline}
-            </Text>
+            </span>
+            <span className={styles.thumbnailTitle}>{item.title}</span>
+            <span className={styles.thumbnailTagline}>{item.presentation.tagline}</span>
           </button>
         ))}
       </div>
 
-      <div className={styles.progressBar} aria-hidden="true">
-        <div className={styles.progressFill} style={{ width: `${progress}%` }} />
+      <div className={styles.progressWrap} aria-hidden={projects.length <= 1}>
+        <div className={styles.progressBar}>
+          <div className={styles.progressFill} style={{ width: `${progress}%` }} />
+        </div>
+        {projects.length > 1 && (
+          <div className={styles.progressSteps}>
+            {projects.map((item, index) => (
+              <button
+                key={item.slug}
+                type="button"
+                className={`${styles.progressStep} ${index === activeIndex ? styles.progressStepActive : ""} ${index < activeIndex ? styles.progressStepDone : ""}`}
+                onClick={() => goTo(index)}
+                aria-label={`${ui.work.presentation.step} ${index + 1}: ${item.title}`}
+              >
+                <span className={styles.progressDot} />
+                <span className={styles.progressStepLabel}>{index + 1}</span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <section
         id={hashForSlug(project.slug)}
         className={styles.stage}
         aria-labelledby={`presentation-title-${project.slug}`}
+        role="tabpanel"
       >
-        <Column fillWidth gap="20" horizontal="center" align="center">
-          <div className={styles.stageHeader}>
-            <Column gap="8" horizontal="center" align="center">
-              <span className={styles.stepBadge}>
-                {ui.work.presentation.step} {activeIndex + 1}/{projects.length}
-              </span>
-              <Heading as="h2" id={`presentation-title-${project.slug}`} variant="heading-strong-xl" wrap="balance">
-                {project.title}
-              </Heading>
-              <Text variant="body-default-m" onBackground="brand-strong" wrap="balance">
-                {project.presentation.tagline}
-              </Text>
-            </Column>
-            {projects.length > 1 && (
-              <Row gap="8" className={styles.navButtons}>
-                <IconButton
-                  icon="chevronLeft"
-                  variant="secondary"
-                  size="m"
-                  aria-label={ui.slideshow.prev}
-                  onClick={() => goTo(activeIndex - 1)}
-                />
-                <IconButton
-                  icon="chevronRight"
-                  variant="secondary"
-                  size="m"
-                  aria-label={ui.slideshow.next}
-                  onClick={() => goTo(activeIndex + 1)}
-                />
-              </Row>
-            )}
-          </div>
+        <h2 id={`presentation-title-${project.slug}`} className={styles.srOnly}>
+          {project.title} — {project.presentation.tagline}
+        </h2>
 
+        <Column fillWidth gap="20" horizontal="center" align="center">
           <div className={styles.contentRow}>
             <div className={styles.previewCell}>
               <ProjectLivePreview
@@ -148,6 +129,7 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
                 displayUrl={project.config.displayUrl}
                 fullBleed
                 presentationLayout
+                externalScroll
               />
             </div>
 
@@ -232,30 +214,36 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
       </section>
 
       <div className={styles.navRow}>
-        <Text variant="label-default-s" onBackground="neutral-weak">
+        <Text variant="label-default-s" className={styles.navProgress}>
           {ui.work.presentation.progress
             .replace("{current}", String(activeIndex + 1))
             .replace("{total}", String(projects.length))}
         </Text>
-        <Row gap="8" className={styles.navButtons}>
-          <Button
-            variant="tertiary"
-            size="s"
-            prefixIcon="chevronLeft"
+        <Row gap="12" className={styles.navButtons}>
+          <button
+            type="button"
+            className={styles.navArrow}
             onClick={() => goTo(activeIndex - 1)}
             disabled={projects.length <= 1}
+            aria-label={ui.slideshow.prev}
           >
-            {ui.slideshow.prev}
-          </Button>
-          <Button
-            variant="tertiary"
-            size="s"
-            suffixIcon="chevronRight"
+            <span className={styles.navArrowIcon} aria-hidden="true">
+              ‹
+            </span>
+            <span>{ui.slideshow.prev}</span>
+          </button>
+          <button
+            type="button"
+            className={`${styles.navArrow} ${styles.navArrowPrimary}`}
             onClick={() => goTo(activeIndex + 1)}
             disabled={projects.length <= 1}
+            aria-label={ui.slideshow.next}
           >
-            {ui.slideshow.next}
-          </Button>
+            <span>{ui.slideshow.next}</span>
+            <span className={styles.navArrowIcon} aria-hidden="true">
+              ›
+            </span>
+          </button>
         </Row>
       </div>
     </Column>
