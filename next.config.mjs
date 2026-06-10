@@ -14,7 +14,7 @@ const nextConfig = {
     ? {
         output: "export",
         basePath,
-        assetPrefix: basePath,
+        assetPrefix: `${basePath}/`,
         trailingSlash: true,
       }
     : {}),

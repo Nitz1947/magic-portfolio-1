@@ -14,8 +14,11 @@ import {
 
 // IMPORTANT: Replace with your own domain address - it's used for SEO in meta tags and schema
 const baseURL: string =
-  process.env.NEXT_PUBLIC_BASE_URL ??
-  "https://magic-portfolio-beta-eight.vercel.app";
+  process.env.GITHUB_PAGES === "true"
+    ? (process.env.NEXT_PUBLIC_BASE_URL ??
+      "https://nitz1947.github.io/magic-portfolio-1")
+    : (process.env.NEXT_PUBLIC_BASE_URL ??
+      "https://magic-portfolio-beta-eight.vercel.app");
 
 const routes: RoutesConfig = {
   "/": true,
