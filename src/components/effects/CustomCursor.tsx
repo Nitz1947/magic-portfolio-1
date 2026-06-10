@@ -3,8 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useCursorTrail } from "./CursorTrailCanvas";
-import { useReducedEffects } from "./performance";
-import { subscribeAnimationFrame } from "./performance/useSharedAnimationFrame";
+import { useCursorMode } from "./performance/useCursorMode";
 import styles from "./CustomCursor.module.scss";
 
 type CursorState = "default" | "link" | "button" | "card";
@@ -12,14 +11,17 @@ type CursorState = "default" | "link" | "button" | "card";
 const CODE_CHARS = ["{", "}", ";", "<", ">", "/", "(", ")", "="] as const;
 const RING_LERP = 0.15;
 const DOT_LERP = 0.55;
-const CHAR_SPAWN_CHANCE = 0.022;
-const CHAR_MIN_DIST = 18;
+const CHAR_SPAWN_CHANCE = 0.018;
+const CHAR_MIN_DIST = 22;
+const MOVE_THROTTLE_MS = 16;
+const POSITION_EPSILON = 0.5;
+const IDLE_MS = 100;
+const SETTLE_EPSILON = 0.35;
 
 interface CodeCharEl {
   el: HTMLSpanElement;
   life: number;
   maxLife: number;
-  vy: number;
 }
 
 function restoreNativeCursor() {
@@ -28,43 +30,36 @@ function restoreNativeCursor() {
   document.body.style.cursor = "";
 }
 
+function roundPos(v: number): number {
+  return Math.round(v * 2) / 2;
+}
+
 export function CustomCursor() {
   const pathname = usePathname();
-  const reducedEffects = useReducedEffects();
+  const cursorMode = useCursorMode();
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const outerRingRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const crosshairRef = useRef<SVGSVGElement>(null);
   const spotlightRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const charsContainerRef = useRef<HTMLDivElement>(null);
   const ripplesContainerRef = useRef<HTMLDivElement>(null);
   const rootRef = useRef<HTMLDivElement>(null);
 
-  const [enabled, setEnabled] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const inViewportRef = useRef(false);
   const [state, setState] = useState<CursorState>("default");
   const [label, setLabel] = useState("");
 
-  const trailApi = useCursorTrail(canvasRef, { reducedEffects });
+  const isFull = cursorMode === "full";
+  const enabled = cursorMode !== "disabled";
+
+  const trailApi = useCursorTrail(canvasRef, { enabled: isFull });
   const trailRef = useRef(trailApi);
   trailRef.current = trailApi;
 
   const codeCharsRef = useRef<CodeCharEl[]>([]);
   const lastCharPosRef = useRef({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const coarse = window.matchMedia("(pointer: coarse)").matches;
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (coarse || reduced) {
-      setEnabled(false);
-      return;
-    }
-
-    setEnabled(true);
-  }, []);
 
   useEffect(() => {
     if (!enabled) return;
@@ -77,14 +72,22 @@ export function CustomCursor() {
     let dotY = mouseY;
     let ringX = mouseX;
     let ringY = mouseY;
-    let pendingMove = true;
+    let lastRenderedDotX = -9999;
+    let lastRenderedDotY = -9999;
+    let lastRenderedRingX = -9999;
+    let lastRenderedRingY = -9999;
+    let pendingMove = false;
     let cursorHiddenApplied = false;
     let lastMoveTime = 0;
-    let rafFrame = 0;
+    let idleTimer = 0;
+    let rafId = 0;
+    let loopRunning = false;
+    let inViewport = true;
+    let tabVisible = !document.hidden;
 
     const applyCursorHidden = () => {
       if (cursorHiddenApplied) return;
-      if (dotRef.current && canvasRef.current) {
+      if (dotRef.current) {
         document.documentElement.classList.add("cursor-hidden");
         cursorHiddenApplied = true;
         setMounted(true);
@@ -96,31 +99,21 @@ export function CustomCursor() {
       cursorHiddenApplied = false;
     };
 
-    const crossLines = crosshairRef.current
-      ? {
-          top: crosshairRef.current.querySelector("[data-line='top']") as SVGLineElement,
-          bottom: crosshairRef.current.querySelector("[data-line='bottom']") as SVGLineElement,
-          left: crosshairRef.current.querySelector("[data-line='left']") as SVGLineElement,
-          right: crosshairRef.current.querySelector("[data-line='right']") as SVGLineElement,
-        }
-      : null;
-
     const spawnCodeChar = (x: number, y: number) => {
+      if (!isFull) return;
       const container = charsContainerRef.current;
-      if (!container) return;
+      if (!container || codeCharsRef.current.length >= 6) return;
 
       const el = document.createElement("span");
       el.className = styles.codeChar;
       el.textContent = CODE_CHARS[Math.floor(Math.random() * CODE_CHARS.length)];
-      el.style.left = `${x + (Math.random() - 0.5) * 20}px`;
-      el.style.top = `${y + (Math.random() - 0.5) * 10}px`;
+      el.style.transform = `translate3d(${x + (Math.random() - 0.5) * 16}px, ${y + (Math.random() - 0.5) * 8}px, 0)`;
       container.appendChild(el);
 
       codeCharsRef.current.push({
         el,
         life: 1,
-        maxLife: 0.8 + Math.random() * 0.4,
-        vy: -0.6 - Math.random() * 0.8,
+        maxLife: 0.7 + Math.random() * 0.3,
       });
     };
 
@@ -150,19 +143,146 @@ export function CustomCursor() {
       root.style.visibility = visible ? "visible" : "hidden";
     };
 
+    const setMovingClass = (active: boolean) => {
+      rootRef.current?.classList.toggle(styles.moving, active);
+    };
+
     const showCursor = () => {
-      inViewportRef.current = true;
+      if (!inViewport || !tabVisible) return;
       setRootVisible(true);
+    };
+
+    const isSettled = () => {
+      return (
+        Math.abs(mouseX - dotX) < SETTLE_EPSILON &&
+        Math.abs(mouseY - dotY) < SETTLE_EPSILON &&
+        Math.abs(mouseX - ringX) < SETTLE_EPSILON &&
+        Math.abs(mouseY - ringY) < SETTLE_EPSILON
+      );
+    };
+
+    const needsAnimation = () => {
+      if (!tabVisible || !inViewport) return false;
+      if (pendingMove) return true;
+      if (!isSettled()) return true;
+      if (isFull && codeCharsRef.current.length > 0) return true;
+      if (trailRef.current.hasActiveParticles()) return true;
+      return false;
+    };
+
+    const stopLoop = () => {
+      loopRunning = false;
+      if (rafId !== 0) {
+        cancelAnimationFrame(rafId);
+        rafId = 0;
+      }
+      setMovingClass(false);
+    };
+
+    const scheduleIdleStop = () => {
+      if (idleTimer !== 0) window.clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(() => {
+        idleTimer = 0;
+        if (!needsAnimation()) stopLoop();
+      }, IDLE_MS);
+    };
+
+    const tick = () => {
+      if (!loopRunning) return;
+
+      dotX += (mouseX - dotX) * DOT_LERP;
+      dotY += (mouseY - dotY) * DOT_LERP;
+      ringX += (mouseX - ringX) * RING_LERP;
+      ringY += (mouseY - ringY) * RING_LERP;
+
+      const rdX = roundPos(dotX);
+      const rdY = roundPos(dotY);
+      const rrX = roundPos(ringX);
+      const rrY = roundPos(ringY);
+
+      if (
+        Math.abs(rdX - lastRenderedDotX) >= POSITION_EPSILON ||
+        Math.abs(rdY - lastRenderedDotY) >= POSITION_EPSILON
+      ) {
+        const txDot = `translate3d(${rdX}px, ${rdY}px, 0)`;
+        if (dotRef.current) dotRef.current.style.transform = txDot;
+        if (labelRef.current) {
+          labelRef.current.style.transform = `translate3d(${rdX + 28}px, ${rdY - 10}px, 0)`;
+        }
+        lastRenderedDotX = rdX;
+        lastRenderedDotY = rdY;
+      }
+
+      if (
+        Math.abs(rrX - lastRenderedRingX) >= POSITION_EPSILON ||
+        Math.abs(rrY - lastRenderedRingY) >= POSITION_EPSILON
+      ) {
+        const txRing = `translate3d(${rrX}px, ${rrY}px, 0)`;
+        if (ringRef.current) ringRef.current.style.transform = txRing;
+        if (outerRingRef.current) outerRingRef.current.style.transform = txRing;
+        if (spotlightRef.current) spotlightRef.current.style.transform = txRing;
+        lastRenderedRingX = rrX;
+        lastRenderedRingY = rrY;
+      }
+
+      if (pendingMove) {
+        if (isFull) {
+          addTrail(mouseX, mouseY);
+
+          const last = lastCharPosRef.current;
+          const cdx = mouseX - last.x;
+          const cdy = mouseY - last.y;
+          if (cdx * cdx + cdy * cdy > CHAR_MIN_DIST * CHAR_MIN_DIST) {
+            if (Math.random() < CHAR_SPAWN_CHANCE) {
+              spawnCodeChar(mouseX, mouseY);
+              lastCharPosRef.current = { x: mouseX, y: mouseY };
+            }
+          }
+        }
+        pendingMove = false;
+      }
+
+      if (isFull) {
+        codeCharsRef.current = codeCharsRef.current.filter((c) => {
+          c.life -= 0.02;
+          if (c.life <= 0) {
+            c.el.remove();
+            return false;
+          }
+          const t = c.life / c.maxLife;
+          c.el.style.opacity = String(t * 0.85);
+          return true;
+        });
+      }
+
+      render();
+
+      if (needsAnimation()) {
+        rafId = requestAnimationFrame(tick);
+      } else {
+        stopLoop();
+      }
+    };
+
+    const startLoop = () => {
+      if (!loopRunning) {
+        loopRunning = true;
+        setMovingClass(true);
+        rafId = requestAnimationFrame(tick);
+      }
+      scheduleIdleStop();
     };
 
     const onMove = (e: MouseEvent) => {
       const now = performance.now();
-      if (now - lastMoveTime < 8) return;
+      if (now - lastMoveTime < MOVE_THROTTLE_MS) return;
       lastMoveTime = now;
+
       mouseX = e.clientX;
       mouseY = e.clientY;
       pendingMove = true;
       showCursor();
+      startLoop();
     };
 
     const onOver = (e: MouseEvent) => {
@@ -187,8 +307,9 @@ export function CustomCursor() {
     };
 
     const onDown = (e: MouseEvent) => {
-      addBurst(e.clientX, e.clientY);
+      if (isFull) addBurst(e.clientX, e.clientY);
       spawnDomRipple(e.clientX, e.clientY);
+      startLoop();
     };
 
     const onResize = () => {
@@ -196,101 +317,30 @@ export function CustomCursor() {
     };
 
     const onVisibilityChange = () => {
+      tabVisible = !document.hidden;
       if (document.hidden) {
         setRootVisible(false);
+        stopLoop();
       } else {
         showCursor();
       }
     };
 
     const onPageShow = () => {
+      tabVisible = !document.hidden;
       showCursor();
       resize();
     };
 
-    const updateCrosshair = () => {
-      if (!crossLines) return;
-      const w = window.innerWidth;
-      const h = window.innerHeight;
-      crossLines.top.setAttribute("x1", String(dotX));
-      crossLines.top.setAttribute("y1", "0");
-      crossLines.top.setAttribute("x2", String(dotX));
-      crossLines.top.setAttribute("y2", String(dotY));
-      crossLines.bottom.setAttribute("x1", String(dotX));
-      crossLines.bottom.setAttribute("y1", String(dotY));
-      crossLines.bottom.setAttribute("x2", String(dotX));
-      crossLines.bottom.setAttribute("y2", String(h));
-      crossLines.left.setAttribute("x1", "0");
-      crossLines.left.setAttribute("y1", String(dotY));
-      crossLines.left.setAttribute("x2", String(dotX));
-      crossLines.left.setAttribute("y2", String(dotY));
-      crossLines.right.setAttribute("x1", String(dotX));
-      crossLines.right.setAttribute("y1", String(dotY));
-      crossLines.right.setAttribute("x2", String(w));
-      crossLines.right.setAttribute("y2", String(dotY));
+    const onMouseLeave = () => {
+      inViewport = false;
+      setRootVisible(false);
+      stopLoop();
     };
 
-    const animate = () => {
-      rafFrame += 1;
-
-      dotX += (mouseX - dotX) * DOT_LERP;
-      dotY += (mouseY - dotY) * DOT_LERP;
-      ringX += (mouseX - ringX) * RING_LERP;
-      ringY += (mouseY - ringY) * RING_LERP;
-
-      const txDot = `translate3d(${dotX}px, ${dotY}px, 0)`;
-      const txRing = `translate3d(${ringX}px, ${ringY}px, 0)`;
-
-      if (dotRef.current) {
-        dotRef.current.style.transform = txDot;
-      }
-      if (ringRef.current) {
-        ringRef.current.style.transform = txRing;
-      }
-      if (outerRingRef.current) {
-        outerRingRef.current.style.transform = txRing;
-      }
-      if (spotlightRef.current) {
-        spotlightRef.current.style.transform = txRing;
-      }
-      if (labelRef.current) {
-        labelRef.current.style.transform = `translate3d(${dotX + 28}px, ${dotY - 10}px, 0)`;
-      }
-
-      if (!reducedEffects || rafFrame % 2 === 0) {
-        updateCrosshair();
-      }
-
-      if (pendingMove) {
-        addTrail(mouseX, mouseY);
-        pendingMove = false;
-
-        const last = lastCharPosRef.current;
-        const cdx = mouseX - last.x;
-        const cdy = mouseY - last.y;
-        if (Math.sqrt(cdx * cdx + cdy * cdy) > CHAR_MIN_DIST) {
-          if (Math.random() < (reducedEffects ? CHAR_SPAWN_CHANCE * 0.5 : CHAR_SPAWN_CHANCE)) {
-            spawnCodeChar(mouseX, mouseY);
-            lastCharPosRef.current = { x: mouseX, y: mouseY };
-          }
-        }
-      }
-
-      const charDecay = reducedEffects ? 0.02 : 0.016;
-      codeCharsRef.current = codeCharsRef.current.filter((c) => {
-        c.life -= charDecay;
-        if (c.life <= 0) {
-          c.el.remove();
-          return false;
-        }
-        const t = c.life / c.maxLife;
-        const yOffset = (1 - t) * -30;
-        c.el.style.opacity = String(t * 0.9);
-        c.el.style.transform = `translate3d(0, ${yOffset}px, 0)`;
-        return true;
-      });
-
-      render();
+    const onMouseEnter = () => {
+      inViewport = true;
+      showCursor();
     };
 
     resize();
@@ -301,18 +351,21 @@ export function CustomCursor() {
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mousedown", onDown);
     window.addEventListener("resize", onResize);
-    document.addEventListener("mouseover", onOver);
+    document.addEventListener("mouseover", onOver, { passive: true });
+    document.addEventListener("mouseleave", onMouseLeave);
+    document.addEventListener("mouseenter", onMouseEnter);
     document.addEventListener("visibilitychange", onVisibilityChange);
     window.addEventListener("pageshow", onPageShow);
 
-    const unsubscribeRaf = subscribeAnimationFrame(animate, 2);
-
     return () => {
-      unsubscribeRaf();
+      stopLoop();
+      if (idleTimer !== 0) window.clearTimeout(idleTimer);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mousedown", onDown);
       window.removeEventListener("resize", onResize);
       document.removeEventListener("mouseover", onOver);
+      document.removeEventListener("mouseleave", onMouseLeave);
+      document.removeEventListener("mouseenter", onMouseEnter);
       document.removeEventListener("visibilitychange", onVisibilityChange);
       window.removeEventListener("pageshow", onPageShow);
       removeCursorHidden();
@@ -321,7 +374,7 @@ export function CustomCursor() {
       codeCharsRef.current = [];
       setMounted(false);
     };
-  }, [enabled, pathname, reducedEffects]);
+  }, [enabled, isFull, pathname, cursorMode]);
 
   useEffect(() => {
     return () => {
@@ -346,19 +399,14 @@ export function CustomCursor() {
       className={`${styles.root} ${mounted ? styles.ready : ""}`}
       aria-hidden="true"
     >
-      <canvas ref={canvasRef} className={styles.trailCanvas} />
+      {isFull && <canvas ref={canvasRef} className={styles.trailCanvas} />}
 
-      <svg ref={crosshairRef} className={styles.crosshair}>
-        <line data-line="top" />
-        <line data-line="bottom" />
-        <line data-line="left" />
-        <line data-line="right" />
-      </svg>
-
-      <div
-        ref={spotlightRef}
-        className={`${styles.spotlight} ${state === "card" ? styles.spotlightVisible : ""}`}
-      />
+      {isFull && (
+        <div
+          ref={spotlightRef}
+          className={`${styles.spotlight} ${state === "card" ? styles.spotlightVisible : ""}`}
+        />
+      )}
 
       <div ref={outerRingRef} className={styles.outerRing} />
       <div ref={ringRef} className={ringClass} />
@@ -370,7 +418,7 @@ export function CustomCursor() {
         </span>
       )}
 
-      <div ref={charsContainerRef} className={styles.charsLayer} />
+      {isFull && <div ref={charsContainerRef} className={styles.charsLayer} />}
       <div ref={ripplesContainerRef} className={styles.ripplesLayer} />
     </div>
   );
