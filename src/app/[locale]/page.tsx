@@ -15,7 +15,7 @@ import { Mailchimp } from "@/components";
 import { CodeRain } from "@/components/CodeRain";
 import { SectionBackdrop } from "@/components/effects";
 import { ProcessSteps } from "@/components/ProcessSteps";
-import { ProjectShowcase } from "@/components/ProjectShowcase";
+import { ProjectSlideshow } from "@/components/ProjectSlideshow";
 import { TechMarquee } from "@/components/TechMarquee";
 import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
@@ -191,7 +191,7 @@ export default async function Home({ params }: PageProps) {
               {ui.featuredProjectsSubline}
             </Text>
           </Column>
-          <ProjectShowcase projects={showcaseProjects} />
+          <ProjectSlideshow projects={showcaseProjects} />
         </Column>
       </RevealFx>
 

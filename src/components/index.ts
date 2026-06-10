@@ -5,6 +5,7 @@ export { ProjectCard } from "@/components/ProjectCard";
 export { ProjectBrowserFrame } from "@/components/ProjectBrowserFrame";
 export { ProjectLivePreview } from "@/components/ProjectLivePreview";
 export { ProjectShowcase } from "@/components/ProjectShowcase";
+export { ProjectSlideshow } from "@/components/ProjectSlideshow";
 export { CodeRain } from "@/components/CodeRain";
 export { ProcessSteps } from "@/components/ProcessSteps";
 export { TechMarquee } from "@/components/TechMarquee";

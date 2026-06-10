@@ -48,6 +48,11 @@ export type UiStrings = {
     previewBlocked: string;
     previewPlaceholder: string;
   };
+  slideshow: {
+    label: string;
+    prev: string;
+    next: string;
+  };
   relativeTime: {
     justNow: string;
     minutes: string;
@@ -66,7 +71,7 @@ const uiStrings: Record<Locale, UiStrings> = {
     featuredProject: "Featured project",
     featuredProjects: "Selected work",
     featuredProjectsSubline:
-      "Real projects for gaming communities and B2B clients — preview live or read the case study.",
+      "Three live Vercel projects — browse the slideshow, open the site, or read the case study.",
     process: {
       title: "How I work",
       steps: [
@@ -133,6 +138,11 @@ const uiStrings: Record<Locale, UiStrings> = {
       previewBlocked: "Live embed unavailable — open the site directly",
       previewPlaceholder: "Click to open the live site",
     },
+    slideshow: {
+      label: "Project slideshow",
+      prev: "Previous project",
+      next: "Next project",
+    },
     relativeTime: {
       justNow: "just now",
       minutes: "m ago",
@@ -149,7 +159,7 @@ const uiStrings: Record<Locale, UiStrings> = {
     featuredProject: "Wyróżniony projekt",
     featuredProjects: "Wybrane realizacje",
     featuredProjectsSubline:
-      "Prawdziwe projekty dla community gamingowych i klientów B2B — podgląd na żywo lub case study.",
+      "Trzy projekty live na Vercel — przełączaj slajdy, otwórz stronę lub czytaj case study.",
     process: {
       title: "Jak pracuję",
       steps: [
@@ -215,6 +225,11 @@ const uiStrings: Record<Locale, UiStrings> = {
       previewLoading: "Ładowanie podglądu…",
       previewBlocked: "Podgląd niedostępny — otwórz stronę bezpośrednio",
       previewPlaceholder: "Kliknij, aby otworzyć stronę na żywo",
+    },
+    slideshow: {
+      label: "Slideshow projektów",
+      prev: "Poprzedni projekt",
+      next: "Następny projekt",
     },
     relativeTime: {
       justNow: "przed chwilą",

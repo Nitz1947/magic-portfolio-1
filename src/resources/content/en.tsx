@@ -47,11 +47,23 @@ export function createEnglishContent(): LocaleContent {
     image: "/images/og/home.svg",
     label: "Home",
     title: `${person.name}'s Portfolio`,
-    description: `Custom websites and web apps for businesses, gaming communities, and private game servers. Next.js, React, TypeScript — from idea to deploy.`,
-    headline: <>Custom websites and apps for businesses, communities, and game servers</>,
+    description: `Custom websites and web apps for businesses and gaming communities. Next.js, React, TypeScript — from idea to deploy.`,
+    headline: <>Custom websites and apps for businesses and gaming communities</>,
     featured: {
       display: true,
       items: [
+        {
+          title: (
+            <Row gap="8" vertical="center">
+              <strong className="ml-4">SEO Opt One</strong>
+              <Line background="brand-alpha-strong" vert height="16" />
+              <Text marginRight="4" onBackground="brand-medium">
+                Featured
+              </Text>
+            </Row>
+          ),
+          href: "/work/seo-opt-one",
+        },
         {
           title: (
             <Row gap="8" vertical="center">
@@ -82,7 +94,7 @@ export function createEnglishContent(): LocaleContent {
       <>
         I design and ship <Text as="span" size="xl" weight="strong">professional websites and apps</Text>{" "}
         without off-the-shelf templates — fast, responsive, and obsessively polished.
-        From Discord platforms and multi-gaming communities to B2B sites for businesses
+        From Discord platforms to B2B sites for businesses
         without an in-house tech team.
       </>
     ),
@@ -92,7 +104,7 @@ export function createEnglishContent(): LocaleContent {
     path: "/about",
     label: "About",
     title: `About – ${person.name}`,
-    description: `Meet ${person.name} — full-stack developer building custom websites for businesses, gaming communities, and private game servers`,
+    description: `Meet ${person.name} — full-stack developer building custom websites for businesses and gaming communities`,
     tableOfContent: {
       display: true,
       subItems: false,
@@ -109,9 +121,9 @@ export function createEnglishContent(): LocaleContent {
       title: "Introduction",
       description: (
         <>
-          Have a product vision but no technical team? I help business owners, gaming
-          communities, and private server operators turn ideas into live websites and
-          apps — <strong>custom-built for your brand</strong>.
+          Have a product vision but no technical team? I help business owners and gaming
+          communities turn ideas into live websites and apps —{" "}
+          <strong>custom-built for your brand</strong>.
           <br />
           <br />
           Every project starts with understanding business goals and users, not picking a
@@ -119,12 +131,11 @@ export function createEnglishContent(): LocaleContent {
           — from Discord platforms to B2B corporate sites.
           <br />
           <br />
-          <strong>Why me?</strong> Over 6 years as a freelance contractor in the Open
-          Tibia ecosystem taught me to jump into existing codebases fast, communicate
-          with non-technical clients, and ship to production. I built game systems,{" "}
-          <strong>client ↔ server</strong> integrations, and sites in{" "}
-          <strong>PHP, HTML, and CSS</strong> (myAAC and custom). Today I combine that
-          with React, TypeScript, Next.js, and Vercel.
+          <strong>Why me?</strong> Over 6 years of freelance contract work taught me to
+          jump into existing projects fast, communicate with non-technical clients, and
+          ship to production. Today I build with{" "}
+          <strong>React, TypeScript, Next.js, and Vercel</strong> — from SEO tools to
+          community platforms and corporate sites.
         </>
       ),
     },
@@ -133,53 +144,34 @@ export function createEnglishContent(): LocaleContent {
       title: "Work Experience",
       experiences: [
         {
-          company: "Open Tibia — contractor for OT community",
-          timeframe: "2019 – Present",
-          role: "OT Developer, Integrator & CMS",
-          achievements: [
-            <>
-              6+ years of contract work for <strong>multiple server owners</strong> — game
-              systems, quests, events, and extensions in <strong>Lua</strong>,{" "}
-              <strong>C++</strong>, and <strong>C#</strong> on TFS.
-            </>,
-            <>
-              <strong>Game client ↔ server</strong> integrations — data sync, player
-              panels, rankings, and modules tailored per client.
-            </>,
-            <>
-              Community sites in <strong>myAAC</strong> and custom builds — updates in{" "}
-              <strong>PHP, HTML, and CSS</strong>; <strong>MariaDB</strong> and{" "}
-              <strong>MySQL</strong> on <strong>Ubuntu</strong> and <strong>Debian</strong>.
-            </>,
-          ],
-          images: [
-            {
-              src: "/images/projects/ot/cover-01.svg",
-              alt: "Open Tibia — TFS and myAAC",
-              width: 16,
-              height: 9,
-            },
-          ],
-        },
-        {
           company: "Web Projects (Freelance)",
           timeframe: "2022 – Present",
           role: "Full-Stack Developer & Web Designer",
           achievements: [
+            <>
+              <strong>SEO Opt One</strong> — SEO audit platform with code generators,
+              strategy plans, and marketing modules (Next.js, Vercel).
+            </>,
             <>
               <strong>Strefa Kibica</strong> — virtual betting platform for a Discord
               community (Next.js, OAuth, leaderboard).
             </>,
             <>
               <strong>BJ Trade</strong> — B2B corporate site for a herbs and spices
-              producer with quality certifications and Polish locale.
+              wholesaler with quality certifications, i18n PL/EN, and live Vercel deploy.
             </>,
             <>
-              <strong>Custom</strong> websites for multi-gaming, private servers, and
-              businesses — Next.js, TypeScript, i18n, Vercel deployments.
+              <strong>Custom</strong> websites for gaming communities and businesses —
+              Next.js, TypeScript, i18n, Vercel deployments.
             </>,
           ],
           images: [
+            {
+              src: "/images/projects/seo-opt-one/cover-01.svg",
+              alt: "SEO Opt One — SEO tool",
+              width: 16,
+              height: 9,
+            },
             {
               src: "/images/projects/strefa-kibica/cover-01.svg",
               alt: "Strefa Kibica — Discord community",
@@ -201,16 +193,6 @@ export function createEnglishContent(): LocaleContent {
       title: "Education",
       institutions: [
         {
-          name: "Open Tibia Community & TFS",
-          description: (
-            <>
-              6+ years of contract practice — Lua, C++, C#, PHP (myAAC), MariaDB/MySQL,
-              Ubuntu/Debian administration, and web ↔ game server integrations for OT
-              communities.
-            </>
-          ),
-        },
-        {
           name: "Self-directed — modern web",
           description: (
             <>
@@ -226,29 +208,6 @@ export function createEnglishContent(): LocaleContent {
       display: true,
       title: "Technical skills",
       skills: [
-        {
-          title: "OT / TFS & myAAC",
-          description: (
-            <>
-              Lua, C++, and C# on TFS; client ↔ server integrations; myAAC and custom
-              PHP/HTML/CSS; MariaDB/MySQL; Ubuntu/Debian hosting — contract work for
-              multiple owners.
-            </>
-          ),
-          tags: [
-            { name: "PHP", icon: "php" },
-            { name: "JavaScript", icon: "javascript" },
-            { name: "MySQL", icon: "mysql" },
-          ],
-          images: [
-            {
-              src: "/images/projects/ot/cover-01.svg",
-              alt: "TFS and myAAC",
-              width: 16,
-              height: 9,
-            },
-          ],
-        },
         {
           title: "Web design & Frontend",
           description: (
@@ -308,7 +267,7 @@ export function createEnglishContent(): LocaleContent {
     path: "/work",
     label: "Work",
     title: `Projects – ${person.name}`,
-    description: `Work by ${person.name} — Strefa Kibica, BJ Trade, TFS/myAAC, and Next.js portfolio. Custom sites for gaming and business.`,
+    description: `Work by ${person.name} — SEO Opt One, Strefa Kibica, BJ Trade, and Next.js portfolio. Custom sites for gaming and business.`,
   };
 
   const gallery: Gallery = {

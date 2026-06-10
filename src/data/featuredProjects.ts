@@ -8,6 +8,14 @@ export type FeaturedProjectConfig = {
 };
 
 export const featuredProjectConfigs: Record<string, FeaturedProjectConfig> = {
+  "seo-opt-one": {
+    slug: "seo-opt-one",
+    liveUrl: "https://seo-opt-one.vercel.app/",
+    embedUrl: "https://seo-opt-one.vercel.app/",
+    canEmbed: true,
+    fallbackImage: "/images/projects/seo-opt-one/cover-01.svg",
+    displayUrl: "seo-opt-one.vercel.app",
+  },
   "strefa-kibica": {
     slug: "strefa-kibica",
     liveUrl: "https://discord-strefakibica.vercel.app/",
@@ -18,14 +26,15 @@ export const featuredProjectConfigs: Record<string, FeaturedProjectConfig> = {
   },
   bjtrade: {
     slug: "bjtrade",
-    liveUrl: "https://bjtrade-git-main-gawinekltd-3457s-projects.vercel.app/pl",
-    canEmbed: false,
+    liveUrl: "https://website-clients-three.vercel.app/pl",
+    embedUrl: "https://website-clients-three.vercel.app/pl",
+    canEmbed: true,
     fallbackImage: "/images/projects/bjtrade/cover-01.svg",
-    displayUrl: "bjtrade.pl/pl",
+    displayUrl: "website-clients-three.vercel.app",
   },
 };
 
-export const homepageFeaturedSlugs = ["strefa-kibica", "bjtrade"] as const;
+export const homepageFeaturedSlugs = ["seo-opt-one", "strefa-kibica", "bjtrade"] as const;
 
 export function getFeaturedConfig(slug: string): FeaturedProjectConfig | undefined {
   return featuredProjectConfigs[slug];

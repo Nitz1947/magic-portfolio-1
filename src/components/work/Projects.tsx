@@ -25,8 +25,6 @@ export function Projects({ range, exclude, locale }: ProjectsProps) {
     const bFeatured = b.metadata.featured || featuredSlugs.has(b.slug);
     if (aFeatured && !bFeatured) return -1;
     if (!aFeatured && bFeatured) return 1;
-    if (a.slug === "serwer-ot-tfs-myAAC") return 1;
-    if (b.slug === "serwer-ot-tfs-myAAC") return -1;
     return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
   });
 
