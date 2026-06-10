@@ -96,13 +96,14 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
       });
     }
 
+    const maxLife = 0.6;
     ripples.current.push({
       x,
       y,
       radius: 5,
       maxRadius: 70 + Math.random() * 25,
-      life: 1,
-      maxLife: 0.6,
+      life: maxLife,
+      maxLife,
     });
   }, []);
 
@@ -124,9 +125,9 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
       p.life -= 0.016;
       if (p.life <= 0) return false;
 
-      const t = p.life / p.maxLife;
+      const t = Math.max(0, p.life / p.maxLife);
       const alpha = t * 0.85;
-      const size = p.size * (0.45 + t * 0.55);
+      const size = Math.max(0, p.size * (0.45 + t * 0.55));
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
@@ -144,9 +145,10 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
       p.vx *= 0.94;
       p.vy *= 0.94;
 
-      const t = p.life / p.maxLife;
+      const t = Math.max(0, p.life / p.maxLife);
+      const burstRadius = Math.max(0, p.size * t);
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size * t, 0, Math.PI * 2);
+      ctx.arc(p.x, p.y, burstRadius, 0, Math.PI * 2);
       ctx.fillStyle = brandRgba("--brand-on-background-weak", t * 0.95);
       ctx.fill();
       return true;
@@ -156,8 +158,8 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
       r.life -= 0.02;
       if (r.life <= 0) return false;
 
-      const t = 1 - r.life / r.maxLife;
-      r.radius = 5 + (r.maxRadius - 5) * t;
+      const t = Math.max(0, Math.min(1, 1 - r.life / r.maxLife));
+      r.radius = Math.max(0, 5 + (r.maxRadius - 5) * t);
 
       ctx.beginPath();
       ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
@@ -168,5 +170,12 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
     });
   }, [canvasRef]);
 
-  return { addTrail, addBurst, render, resize };
+  const reset = useCallback(() => {
+    trail.current = [];
+    bursts.current = [];
+    ripples.current = [];
+    lastTrailPos.current = { x: -9999, y: -9999 };
+  }, []);
+
+  return { addTrail, addBurst, render, resize, reset };
 }

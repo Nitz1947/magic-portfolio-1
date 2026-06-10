@@ -299,6 +299,7 @@ export function CustomCursor() {
       document.removeEventListener("visibilitychange", onVisibilityChange);
       window.removeEventListener("pageshow", onPageShow);
       removeCursorHidden();
+      trailRef.current.reset();
       codeCharsRef.current.forEach((c) => c.el.remove());
       codeCharsRef.current = [];
       setMounted(false);
