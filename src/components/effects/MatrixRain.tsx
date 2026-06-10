@@ -2,6 +2,8 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
+import { detectReducedEffects } from "./performance";
+import { subscribeAnimationFrame } from "./performance/useSharedAnimationFrame";
 import { getCssVar, onThemeChange, parseRgb, resolveCssColor } from "./themeColors";
 import styles from "./MatrixRain.module.scss";
 
@@ -129,23 +131,27 @@ export function MatrixRain() {
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isCoarse = window.matchMedia("(pointer: coarse)").matches;
-    const isSmallMobile = window.innerWidth <= 640;
+    const isTabletOrBelow = window.innerWidth <= 768;
+    const reducedEffects = detectReducedEffects();
 
-    if (prefersReduced || (isCoarse && isSmallMobile)) return;
+    if (prefersReduced || isCoarse || isTabletOrBelow) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationId = 0;
     let columns: Column[] = [];
     let fontSize = 15;
     let columnWidth = 16;
     let palette = readPalette();
     let globalAlpha = Number.parseFloat(getCssVar("--effect-matrix-alpha")) || 1;
+    const opacityCap = reducedEffects ? 0.75 : 1;
+    let accumulatedMs = 0;
+    const frameBudgetMs = reducedEffects ? 1000 / 45 : 1000 / 60;
 
     const getColumnDensity = (width: number) => {
+      if (reducedEffects) return 0.5;
       if (width <= 480) return 0.55;
-      if (width <= 768 || isCoarse) return 0.72;
+      if (width <= 1024) return 0.72;
       return 1;
     };
 
@@ -171,7 +177,12 @@ export function MatrixRain() {
       initColumns(w, h);
     };
 
-    const draw = () => {
+    const draw = (_deltaMs: number) => {
+      accumulatedMs += _deltaMs;
+      if (accumulatedMs < frameBudgetMs) return;
+      const speedFactor = Math.min(accumulatedMs / 16.67, 2);
+      accumulatedMs = 0;
+
       const w = window.innerWidth;
       const h = window.innerHeight;
 
@@ -181,7 +192,7 @@ export function MatrixRain() {
       ctx.textBaseline = "top";
 
       for (const col of columns) {
-        col.headY += col.speed;
+        col.headY += col.speed * speedFactor;
 
         if (col.headY - col.trailLength * fontSize > h + fontSize) {
           col.headY = -Math.random() * h * 0.4;
@@ -195,7 +206,7 @@ export function MatrixRain() {
           const y = col.headY - j * fontSize;
           if (y < -fontSize || y > h + fontSize) continue;
 
-          col.changeTimers[j]! -= 1;
+          col.changeTimers[j]! -= speedFactor;
           if (col.changeTimers[j]! <= 0) {
             col.chars[j] = randomChar();
             col.changeTimers[j] = 18 + Math.random() * 36;
@@ -205,14 +216,12 @@ export function MatrixRain() {
           const verticalT = Math.max(0, 1 - y / h);
           const brightness = trailT * 0.72 + verticalT * 0.28;
           const { r, g, b } = lerpColor(brightness, palette);
-          const alpha = globalAlpha * (0.35 + brightness * 0.65);
+          const alpha = Math.min(opacityCap, globalAlpha * (0.35 + brightness * 0.65));
 
           ctx.fillStyle = `rgba(${Math.round(r)}, ${Math.round(g)}, ${Math.round(b)}, ${alpha})`;
           ctx.fillText(col.chars[j]!, col.x, y);
         }
       }
-
-      animationId = requestAnimationFrame(draw);
     };
 
     const refreshTheme = () => {
@@ -224,12 +233,13 @@ export function MatrixRain() {
     window.addEventListener("resize", resize);
     const unsubscribeTheme = onThemeChange(refreshTheme);
 
+    let unsubscribeRaf = () => {};
     void document.fonts.ready.then(() => {
-      draw();
+      unsubscribeRaf = subscribeAnimationFrame(draw, 1);
     });
 
     return () => {
-      cancelAnimationFrame(animationId);
+      unsubscribeRaf();
       unsubscribeTheme();
       window.removeEventListener("resize", resize);
     };

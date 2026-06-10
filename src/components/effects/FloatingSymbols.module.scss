@@ -13,6 +13,8 @@
   white-space: nowrap;
   user-select: none;
   animation: drift linear infinite;
+  will-change: transform, opacity;
+  transform: translate3d(0, 0, 0);
 
   @include reduced-motion-hide;
 }

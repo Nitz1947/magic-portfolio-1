@@ -3,6 +3,8 @@
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useCursorTrail } from "./CursorTrailCanvas";
+import { useReducedEffects } from "./performance";
+import { subscribeAnimationFrame } from "./performance/useSharedAnimationFrame";
 import styles from "./CustomCursor.module.scss";
 
 type CursorState = "default" | "link" | "button" | "card";
@@ -28,6 +30,7 @@ function restoreNativeCursor() {
 
 export function CustomCursor() {
   const pathname = usePathname();
+  const reducedEffects = useReducedEffects();
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const outerRingRef = useRef<HTMLDivElement>(null);
@@ -45,7 +48,7 @@ export function CustomCursor() {
   const [state, setState] = useState<CursorState>("default");
   const [label, setLabel] = useState("");
 
-  const trailApi = useCursorTrail(canvasRef);
+  const trailApi = useCursorTrail(canvasRef, { reducedEffects });
   const trailRef = useRef(trailApi);
   trailRef.current = trailApi;
 
@@ -74,9 +77,10 @@ export function CustomCursor() {
     let dotY = mouseY;
     let ringX = mouseX;
     let ringY = mouseY;
-    let animationId = 0;
     let pendingMove = true;
     let cursorHiddenApplied = false;
+    let lastMoveTime = 0;
+    let rafFrame = 0;
 
     const applyCursorHidden = () => {
       if (cursorHiddenApplied) return;
@@ -152,6 +156,9 @@ export function CustomCursor() {
     };
 
     const onMove = (e: MouseEvent) => {
+      const now = performance.now();
+      if (now - lastMoveTime < 8) return;
+      lastMoveTime = now;
       mouseX = e.clientX;
       mouseY = e.clientY;
       pendingMove = true;
@@ -201,47 +208,57 @@ export function CustomCursor() {
       resize();
     };
 
+    const updateCrosshair = () => {
+      if (!crossLines) return;
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+      crossLines.top.setAttribute("x1", String(dotX));
+      crossLines.top.setAttribute("y1", "0");
+      crossLines.top.setAttribute("x2", String(dotX));
+      crossLines.top.setAttribute("y2", String(dotY));
+      crossLines.bottom.setAttribute("x1", String(dotX));
+      crossLines.bottom.setAttribute("y1", String(dotY));
+      crossLines.bottom.setAttribute("x2", String(dotX));
+      crossLines.bottom.setAttribute("y2", String(h));
+      crossLines.left.setAttribute("x1", "0");
+      crossLines.left.setAttribute("y1", String(dotY));
+      crossLines.left.setAttribute("x2", String(dotX));
+      crossLines.left.setAttribute("y2", String(dotY));
+      crossLines.right.setAttribute("x1", String(dotX));
+      crossLines.right.setAttribute("y1", String(dotY));
+      crossLines.right.setAttribute("x2", String(w));
+      crossLines.right.setAttribute("y2", String(dotY));
+    };
+
     const animate = () => {
+      rafFrame += 1;
+
       dotX += (mouseX - dotX) * DOT_LERP;
       dotY += (mouseY - dotY) * DOT_LERP;
       ringX += (mouseX - ringX) * RING_LERP;
       ringY += (mouseY - ringY) * RING_LERP;
 
+      const txDot = `translate3d(${dotX}px, ${dotY}px, 0)`;
+      const txRing = `translate3d(${ringX}px, ${ringY}px, 0)`;
+
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate(${dotX}px, ${dotY}px)`;
+        dotRef.current.style.transform = txDot;
       }
       if (ringRef.current) {
-        ringRef.current.style.transform = `translate(${ringX}px, ${ringY}px)`;
+        ringRef.current.style.transform = txRing;
       }
       if (outerRingRef.current) {
-        outerRingRef.current.style.transform = `translate(${ringX}px, ${ringY}px)`;
+        outerRingRef.current.style.transform = txRing;
       }
       if (spotlightRef.current) {
-        spotlightRef.current.style.transform = `translate(${ringX}px, ${ringY}px)`;
+        spotlightRef.current.style.transform = txRing;
       }
       if (labelRef.current) {
-        labelRef.current.style.transform = `translate(${dotX + 28}px, ${dotY - 10}px)`;
+        labelRef.current.style.transform = `translate3d(${dotX + 28}px, ${dotY - 10}px, 0)`;
       }
 
-      if (crossLines) {
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-        crossLines.top.setAttribute("x1", String(dotX));
-        crossLines.top.setAttribute("y1", "0");
-        crossLines.top.setAttribute("x2", String(dotX));
-        crossLines.top.setAttribute("y2", String(dotY));
-        crossLines.bottom.setAttribute("x1", String(dotX));
-        crossLines.bottom.setAttribute("y1", String(dotY));
-        crossLines.bottom.setAttribute("x2", String(dotX));
-        crossLines.bottom.setAttribute("y2", String(h));
-        crossLines.left.setAttribute("x1", "0");
-        crossLines.left.setAttribute("y1", String(dotY));
-        crossLines.left.setAttribute("x2", String(dotX));
-        crossLines.left.setAttribute("y2", String(dotY));
-        crossLines.right.setAttribute("x1", String(dotX));
-        crossLines.right.setAttribute("y1", String(dotY));
-        crossLines.right.setAttribute("x2", String(w));
-        crossLines.right.setAttribute("y2", String(dotY));
+      if (!reducedEffects || rafFrame % 2 === 0) {
+        updateCrosshair();
       }
 
       if (pendingMove) {
@@ -252,15 +269,16 @@ export function CustomCursor() {
         const cdx = mouseX - last.x;
         const cdy = mouseY - last.y;
         if (Math.sqrt(cdx * cdx + cdy * cdy) > CHAR_MIN_DIST) {
-          if (Math.random() < CHAR_SPAWN_CHANCE) {
+          if (Math.random() < (reducedEffects ? CHAR_SPAWN_CHANCE * 0.5 : CHAR_SPAWN_CHANCE)) {
             spawnCodeChar(mouseX, mouseY);
             lastCharPosRef.current = { x: mouseX, y: mouseY };
           }
         }
       }
 
+      const charDecay = reducedEffects ? 0.02 : 0.016;
       codeCharsRef.current = codeCharsRef.current.filter((c) => {
-        c.life -= 0.016;
+        c.life -= charDecay;
         if (c.life <= 0) {
           c.el.remove();
           return false;
@@ -268,12 +286,11 @@ export function CustomCursor() {
         const t = c.life / c.maxLife;
         const yOffset = (1 - t) * -30;
         c.el.style.opacity = String(t * 0.9);
-        c.el.style.transform = `translateY(${yOffset}px)`;
+        c.el.style.transform = `translate3d(0, ${yOffset}px, 0)`;
         return true;
       });
 
       render();
-      animationId = requestAnimationFrame(animate);
     };
 
     resize();
@@ -288,10 +305,10 @@ export function CustomCursor() {
     document.addEventListener("visibilitychange", onVisibilityChange);
     window.addEventListener("pageshow", onPageShow);
 
-    animate();
+    const unsubscribeRaf = subscribeAnimationFrame(animate, 2);
 
     return () => {
-      cancelAnimationFrame(animationId);
+      unsubscribeRaf();
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mousedown", onDown);
       window.removeEventListener("resize", onResize);
@@ -304,7 +321,7 @@ export function CustomCursor() {
       codeCharsRef.current = [];
       setMounted(false);
     };
-  }, [enabled, pathname]);
+  }, [enabled, pathname, reducedEffects]);
 
   useEffect(() => {
     return () => {

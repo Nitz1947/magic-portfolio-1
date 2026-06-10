@@ -4,4 +4,6 @@
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
+  contain: strict;
+  transform: translate3d(0, 0, 0);
 }

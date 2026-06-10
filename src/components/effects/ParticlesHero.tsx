@@ -7,6 +7,7 @@ import Particles, {
 } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { ISourceOptions } from "@tsparticles/engine";
+import { useReducedEffects } from "./performance";
 import { getCssVar, onThemeChange, resolveCssColor } from "./themeColors";
 import styles from "./ParticlesHero.module.scss";
 
@@ -48,7 +49,7 @@ function readParticleColors(): { colors: string[]; linkColor: string; opacityMin
   };
 }
 
-function useParticleOptions(): ISourceOptions {
+function useParticleOptions(reducedEffects: boolean): ISourceOptions {
   const [themeKey, setThemeKey] = useState(0);
 
   useEffect(() => {
@@ -59,17 +60,18 @@ function useParticleOptions(): ISourceOptions {
     void themeKey;
     const { colors, linkColor, opacityMin, opacityMax } = readParticleColors();
     const wrapperOpacity = Number.parseFloat(getCssVar("--effect-canvas-opacity")) || 0.72;
+    const particleCount = reducedEffects ? 28 : 38;
 
     return {
       fullScreen: false,
-      fpsLimit: 60,
+      fpsLimit: reducedEffects ? 45 : 60,
       detectRetina: true,
       background: {
         color: { value: "transparent" },
       },
       particles: {
         number: {
-          value: 55,
+          value: particleCount,
           density: { enable: true, width: 900, height: 700 },
         },
         color: { value: colors },
@@ -77,12 +79,12 @@ function useParticleOptions(): ISourceOptions {
           enable: true,
           color: linkColor,
           opacity: wrapperOpacity * 0.28,
-          distance: 130,
+          distance: reducedEffects ? 110 : 130,
           width: 1,
         },
         move: {
           enable: true,
-          speed: 0.6,
+          speed: reducedEffects ? 0.45 : 0.6,
           direction: "none",
           random: true,
           outModes: { default: "out" },
@@ -97,7 +99,7 @@ function useParticleOptions(): ISourceOptions {
       interactivity: {
         detectsOn: "canvas",
         events: {
-          onHover: { enable: true, mode: "grab" },
+          onHover: { enable: !reducedEffects, mode: "grab" },
           resize: { enable: true },
         },
         modes: {
@@ -108,12 +110,12 @@ function useParticleOptions(): ISourceOptions {
         },
       },
     };
-  }, [themeKey]);
+  }, [themeKey, reducedEffects]);
 }
 
-function ParticlesCanvas() {
+function ParticlesCanvas({ reducedEffects }: { reducedEffects: boolean }) {
   const { loaded } = useParticlesProvider();
-  const options = useParticleOptions();
+  const options = useParticleOptions(reducedEffects);
 
   if (!loaded) return null;
 
@@ -126,12 +128,13 @@ function ParticlesCanvas() {
 
 export function ParticlesHero() {
   const enabled = useParticlesEnabled();
+  const reducedEffects = useReducedEffects();
 
   if (!enabled) return null;
 
   return (
     <ParticlesProvider init={loadSlim}>
-      <ParticlesCanvas />
+      <ParticlesCanvas reducedEffects={reducedEffects} />
     </ParticlesProvider>
   );
 }

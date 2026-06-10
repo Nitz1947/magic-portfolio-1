@@ -4,6 +4,8 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { FloatingSymbols } from "./FloatingSymbols";
 import { MatrixRain } from "./MatrixRain";
+import { useReducedEffects } from "./performance";
+import { subscribeAnimationFrame } from "./performance/useSharedAnimationFrame";
 import { brandRgba, getCssVar, onThemeChange } from "./themeColors";
 import styles from "./GlobalPageBackground.module.scss";
 
@@ -26,6 +28,7 @@ const WATERMARK_POSITIONS = [
 export function GlobalPageBackground() {
   const pathname = usePathname();
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const reducedEffects = useReducedEffects();
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -33,16 +36,18 @@ export function GlobalPageBackground() {
 
     const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const isCoarse = window.matchMedia("(pointer: coarse)").matches;
-    if (prefersReduced || isCoarse) return;
+    const isMobile = window.innerWidth <= 768;
+
+    if (prefersReduced || isCoarse || isMobile) return;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let animationId = 0;
     let scrollY = 0;
-    const spacing = 52;
+    const spacing = reducedEffects ? 72 : 52;
     const dotRadius = 1.35;
     const mouse = { x: -9999, y: -9999, active: false };
+    let lastMoveTime = 0;
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -58,6 +63,9 @@ export function GlobalPageBackground() {
     };
 
     const onMove = (e: MouseEvent) => {
+      const now = performance.now();
+      if (now - lastMoveTime < 12) return;
+      lastMoveTime = now;
       mouse.x = e.clientX;
       mouse.y = e.clientY;
       mouse.active = true;
@@ -70,7 +78,7 @@ export function GlobalPageBackground() {
     resize();
     window.addEventListener("resize", resize);
     window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mouseleave", onLeave);
 
     const readAlphas = () => ({
@@ -79,6 +87,8 @@ export function GlobalPageBackground() {
     });
 
     let alphas = readAlphas();
+    const influenceRadius = reducedEffects ? 160 : 200;
+    const step = reducedEffects ? 2 : 1;
 
     const draw = () => {
       const w = window.innerWidth;
@@ -89,8 +99,8 @@ export function GlobalPageBackground() {
       const rows = Math.ceil(h / spacing) + 1;
       const scrollOffset = (scrollY * 0.12) % spacing;
 
-      for (let row = 0; row < rows; row++) {
-        for (let col = 0; col < cols; col++) {
+      for (let row = 0; row < rows; row += step) {
+        for (let col = 0; col < cols; col += step) {
           const baseX = col * spacing;
           const baseY = row * spacing - scrollOffset;
           let x = baseX;
@@ -100,9 +110,11 @@ export function GlobalPageBackground() {
           if (mouse.active) {
             const dx = mouse.x - baseX;
             const dy = mouse.y - baseY;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            const influence = Math.max(0, 1 - dist / 200);
-            if (influence > 0) {
+            const distSq = dx * dx + dy * dy;
+            const radiusSq = influenceRadius * influenceRadius;
+            if (distSq < radiusSq) {
+              const dist = Math.sqrt(distSq);
+              const influence = Math.max(0, 1 - dist / influenceRadius);
               x += dx * influence * 0.1;
               y += dy * influence * 0.1;
               alpha = alphas.base + influence * (alphas.active - alphas.base);
@@ -115,25 +127,25 @@ export function GlobalPageBackground() {
           ctx.fill();
         }
       }
-
-      animationId = requestAnimationFrame(draw);
     };
 
     const unsubscribeTheme = onThemeChange(() => {
       alphas = readAlphas();
     });
 
-    draw();
+    const unsubscribeRaf = subscribeAnimationFrame(draw, 0);
 
     return () => {
-      cancelAnimationFrame(animationId);
+      unsubscribeRaf();
       unsubscribeTheme();
       window.removeEventListener("resize", resize);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseleave", onLeave);
     };
-  }, [pathname]);
+  }, [pathname, reducedEffects]);
+
+  const symbolDensity = reducedEffects ? "sparse" : "full";
 
   return (
     <div className={styles.root} aria-hidden="true">
@@ -147,7 +159,7 @@ export function GlobalPageBackground() {
       <div className={styles.grid} />
       <MatrixRain />
       <canvas ref={canvasRef} className={styles.canvas} />
-      <FloatingSymbols density="full" />
+      <FloatingSymbols density={symbolDensity} />
       <div className={styles.watermarks}>
         {WATERMARK_POSITIONS.map((pos, i) => (
           <pre

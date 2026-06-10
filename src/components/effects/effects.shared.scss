@@ -4,6 +4,8 @@
   pointer-events: none;
   z-index: 0;
   overflow: hidden;
+  contain: strict;
+  transform: translate3d(0, 0, 0);
 }
 
 @mixin reduced-motion-hide {

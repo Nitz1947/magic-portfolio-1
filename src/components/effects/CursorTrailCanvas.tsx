@@ -3,7 +3,8 @@
 import { useCallback, useRef } from "react";
 import { brandRgba } from "./themeColors";
 
-const MAX_TRAIL = 30;
+const DEFAULT_MAX_TRAIL = 25;
+const REDUCED_MAX_TRAIL = 12;
 
 interface TrailParticle {
   x: number;
@@ -39,7 +40,15 @@ const TRAIL_VARS: [string, string, string] = [
   "--brand-on-background-strong",
 ];
 
-export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
+interface CursorTrailOptions {
+  reducedEffects?: boolean;
+}
+
+export function useCursorTrail(
+  canvasRef: React.RefObject<HTMLCanvasElement | null>,
+  options: CursorTrailOptions = {},
+) {
+  const maxTrail = options.reducedEffects ? REDUCED_MAX_TRAIL : DEFAULT_MAX_TRAIL;
   const trail = useRef<TrailParticle[]>([]);
   const bursts = useRef<BurstParticle[]>([]);
   const ripples = useRef<CanvasRipple[]>([]);
@@ -58,30 +67,33 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
     canvas.style.height = `${window.innerHeight}px`;
   }, [canvasRef]);
 
-  const addTrail = useCallback((x: number, y: number) => {
-    const last = lastTrailPos.current;
-    const dx = x - last.x;
-    const dy = y - last.y;
-    if (Math.sqrt(dx * dx + dy * dy) < 5) return;
+  const addTrail = useCallback(
+    (x: number, y: number) => {
+      const last = lastTrailPos.current;
+      const dx = x - last.x;
+      const dy = y - last.y;
+      if (Math.sqrt(dx * dx + dy * dy) < 5) return;
 
-    lastTrailPos.current = { x, y };
+      lastTrailPos.current = { x, y };
 
-    if (trail.current.length >= MAX_TRAIL) {
-      trail.current.shift();
-    }
+      if (trail.current.length >= maxTrail) {
+        trail.current.shift();
+      }
 
-    trail.current.push({
-      x,
-      y,
-      life: 1,
-      maxLife: 0.65 + Math.random() * 0.45,
-      size: 3 + Math.random() * 4.5,
-      colorIndex: Math.floor(Math.random() * 3),
-    });
-  }, []);
+      trail.current.push({
+        x,
+        y,
+        life: 1,
+        maxLife: 0.65 + Math.random() * 0.45,
+        size: 3 + Math.random() * 4.5,
+        colorIndex: Math.floor(Math.random() * 3),
+      });
+    },
+    [maxTrail],
+  );
 
   const addBurst = useCallback((x: number, y: number) => {
-    const count = 12 + Math.floor(Math.random() * 6);
+    const count = options.reducedEffects ? 8 + Math.floor(Math.random() * 4) : 12 + Math.floor(Math.random() * 6);
     for (let i = 0; i < count; i++) {
       const angle = (Math.PI * 2 * i) / count + Math.random() * 0.4;
       const speed = 2.5 + Math.random() * 4.5;
@@ -105,7 +117,7 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
       life: maxLife,
       maxLife,
     });
-  }, []);
+  }, [options.reducedEffects]);
 
   const render = useCallback(() => {
     const canvas = canvasRef.current;
@@ -117,12 +129,13 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
     const dpr = dprRef.current;
     const w = window.innerWidth;
     const h = window.innerHeight;
+    const lifeDecay = options.reducedEffects ? 0.02 : 0.016;
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
 
     trail.current = trail.current.filter((p) => {
-      p.life -= 0.016;
+      p.life -= lifeDecay;
       if (p.life <= 0) return false;
 
       const t = Math.max(0, p.life / p.maxLife);
@@ -168,7 +181,7 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
       ctx.stroke();
       return true;
     });
-  }, [canvasRef]);
+  }, [canvasRef, options.reducedEffects]);
 
   const reset = useCallback(() => {
     trail.current = [];

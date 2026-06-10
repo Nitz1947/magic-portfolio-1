@@ -8,11 +8,11 @@
   opacity: var(--effect-matrix-opacity, 0.2);
   mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
 
-  @media (prefers-reduced-motion: reduce) {
-    display: none;
-  }
+  contain: strict;
+  transform: translate3d(0, 0, 0);
+  will-change: opacity;
 
-  @media (pointer: coarse) and (max-width: 640px) {
+  @media (prefers-reduced-motion: reduce), (pointer: coarse), (max-width: 768px) {
     display: none;
   }
 }

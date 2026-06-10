@@ -34,6 +34,7 @@ export function ProjectLivePreview({
   const { ui } = useLocale();
   const containerRef = useRef<HTMLDivElement>(null);
   const [shouldLoad, setShouldLoad] = useState(!lazy);
+  const [isVisible, setIsVisible] = useState(false);
   const [embedBlocked, setEmbedBlocked] = useState(!canEmbed);
   const [isLoading, setIsLoading] = useState(canEmbed);
   const loadTimeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
@@ -41,24 +42,24 @@ export function ProjectLivePreview({
   const src = embedUrl || liveUrl;
 
   useEffect(() => {
-    if (!lazy || shouldLoad || !canEmbed) return;
+    if (!canEmbed) return;
 
     const node = containerRef.current;
     if (!node) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        setIsVisible(entry.isIntersecting);
+        if (lazy && entry.isIntersecting) {
           setShouldLoad(true);
-          observer.disconnect();
         }
       },
-      { rootMargin: "200px" },
+      { rootMargin: "200px", threshold: 0.08 },
     );
 
     observer.observe(node);
     return () => observer.disconnect();
-  }, [lazy, shouldLoad, canEmbed]);
+  }, [lazy, canEmbed]);
 
   useEffect(() => {
     if (!shouldLoad || !canEmbed || embedBlocked) return;
@@ -94,7 +95,7 @@ export function ProjectLivePreview({
         <>
           {isLoading && <div className={styles.loading}>{ui.work.previewLoading}</div>}
           <iframe
-            className={styles.iframe}
+            className={`${styles.iframe} ${isVisible ? styles.iframeActive : styles.iframePaused}`}
             src={src}
             title={`${title} — ${ui.work.preview}`}
             sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
