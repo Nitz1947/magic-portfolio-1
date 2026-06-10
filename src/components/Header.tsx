@@ -8,7 +8,7 @@ import { Fade, Flex, Line, Row, ToggleButton } from "@once-ui-system/core";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useLocale } from "@/context/LocaleContext";
 import { getTimeLocale, stripLocalePath } from "@/i18n/paths";
-import { routes, display } from "@/resources";
+import { display, routes } from "@/resources";
 import { ThemeToggle } from "./ThemeToggle";
 import styles from "./Header.module.scss";
 
@@ -152,16 +152,25 @@ export const Header = () => {
                   </Row>
                 </>
               )}
-              <Row s={{ hide: true }}>
-                <ToggleButton
-                  prefixIcon="email"
-                  href={`mailto:${person.email}`}
-                  label={ui.quote.contactNav}
-                />
-              </Row>
-              <Row hide s={{ hide: false }}>
-                <ToggleButton prefixIcon="email" href={`mailto:${person.email}`} />
-              </Row>
+              {routes["/contact"] && (
+                <>
+                  <Row s={{ hide: true }}>
+                    <ToggleButton
+                      prefixIcon="email"
+                      href={href("/contact")}
+                      label={ui.quote.contactNav}
+                      selected={routePath === "/contact"}
+                    />
+                  </Row>
+                  <Row hide s={{ hide: false }}>
+                    <ToggleButton
+                      prefixIcon="email"
+                      href={href("/contact")}
+                      selected={routePath === "/contact"}
+                    />
+                  </Row>
+                </>
+              )}
               {display.themeSwitcher && (
                 <>
                   <Line background="neutral-alpha-medium" vert maxHeight="24" />

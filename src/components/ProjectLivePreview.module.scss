@@ -1,8 +1,45 @@
+.fullBleedRoot {
+  width: 100%;
+}
+
+.fullBleedFrame {
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-l);
+  border: 1px solid var(--effect-surface-border);
+  background: var(--page-background);
+}
+
+.fullBleedChrome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--effect-surface-border);
+  background: var(--neutral-alpha-weak);
+}
+
+.fullBleedUrl {
+  font-family: var(--font-family-code);
+  color: var(--neutral-on-background-weak);
+}
+
 .viewport {
   position: relative;
   aspect-ratio: 16 / 9;
   overflow: hidden;
   background: var(--neutral-alpha-weak);
+}
+
+.viewportFullBleed {
+  aspect-ratio: unset;
+  min-height: 560px;
+  height: min(70vh, 720px);
+
+  @media (max-width: 768px) {
+    min-height: 480px;
+    height: min(60vh, 560px);
+  }
 }
 
 .iframe {

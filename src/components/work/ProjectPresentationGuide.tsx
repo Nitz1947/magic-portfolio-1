@@ -7,7 +7,6 @@ import {
   Heading,
   IconButton,
   Row,
-  SmartLink,
   Text,
 } from "@once-ui-system/core";
 import { useLocale } from "@/context/LocaleContext";
@@ -86,7 +85,7 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
             <Text variant="label-default-s" className={styles.thumbnailStep}>
               {ui.work.presentation.step} {index + 1}/{projects.length}
             </Text>
-            <Text variant="body-default-s" weight="strong">
+            <Text variant="body-default-s" weight="strong" onBackground="neutral-strong">
               {item.title}
             </Text>
             <Text variant="body-default-xs" onBackground="neutral-weak">
@@ -114,7 +113,7 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
               <Heading as="h2" id={`presentation-title-${project.slug}`} variant="heading-strong-xl" wrap="balance">
                 {project.title}
               </Heading>
-              <Text variant="body-default-m" onBackground="brand-medium" wrap="balance">
+              <Text variant="body-default-m" onBackground="brand-strong" wrap="balance">
                 {project.presentation.tagline}
               </Text>
             </Column>
@@ -138,7 +137,7 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
             )}
           </div>
 
-          <div className={styles.previewWrap}>
+          <div className={styles.previewCell}>
             <ProjectLivePreview
               title={project.title}
               liveUrl={project.config.liveUrl}
@@ -146,61 +145,64 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
               canEmbed={project.config.canEmbed}
               fallbackImage={project.config.fallbackImage}
               displayUrl={project.config.displayUrl}
+              fullBleed
             />
           </div>
 
-          <div className={styles.details}>
-            <div className={styles.detailBlock}>
-              <Text variant="label-default-s" className={styles.detailLabel}>
-                {ui.work.presentation.forWhom}
-              </Text>
-              <Text variant="body-default-s" onBackground="neutral-weak" wrap="balance">
-                {project.presentation.audience}
-              </Text>
-            </div>
-            <div className={styles.detailBlock}>
-              <Text variant="label-default-s" className={styles.detailLabel}>
-                {ui.work.presentation.delivered}
-              </Text>
-              <Text variant="body-default-s" onBackground="neutral-weak" wrap="balance">
-                {project.presentation.delivered}
-              </Text>
-            </div>
-            <div className={styles.detailBlock}>
-              <Text variant="label-default-s" className={styles.detailLabel}>
-                {ui.work.presentation.stack}
-              </Text>
-              <div className={styles.stackTags}>
-                {project.presentation.stack.map((item) => (
-                  <span key={item} className={styles.stackTag}>
-                    {item}
-                  </span>
-                ))}
+          <div className={styles.infoCell}>
+            <div className={styles.details}>
+              <div className={styles.detailBlock}>
+                <Text variant="label-default-s" className={styles.detailLabel}>
+                  {ui.work.presentation.forWhom}
+                </Text>
+                <Text variant="body-default-s" onBackground="neutral-weak" wrap="balance">
+                  {project.presentation.audience}
+                </Text>
+              </div>
+              <div className={styles.detailBlock}>
+                <Text variant="label-default-s" className={styles.detailLabel}>
+                  {ui.work.presentation.delivered}
+                </Text>
+                <Text variant="body-default-s" onBackground="neutral-weak" wrap="balance">
+                  {project.presentation.delivered}
+                </Text>
+              </div>
+              <div className={styles.detailBlock}>
+                <Text variant="label-default-s" className={styles.detailLabel}>
+                  {ui.work.presentation.stack}
+                </Text>
+                <div className={styles.stackTags}>
+                  {project.presentation.stack.map((item) => (
+                    <span key={item} className={styles.stackTag}>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <div className={styles.detailBlock}>
+                <Text variant="label-default-s" className={styles.detailLabel}>
+                  {ui.work.presentation.features}
+                </Text>
+                <ul className={styles.featureList}>
+                  {project.presentation.features.map((feature) => (
+                    <li key={feature}>
+                      <Text as="span" variant="body-default-s" onBackground="neutral-weak">
+                        {feature}
+                      </Text>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
-            <div className={styles.detailBlock}>
-              <Text variant="label-default-s" className={styles.detailLabel}>
-                {ui.work.presentation.features}
-              </Text>
-              <ul className={styles.featureList}>
-                {project.presentation.features.map((feature) => (
-                  <li key={feature}>
-                    <Text as="span" variant="body-default-s" onBackground="neutral-weak">
-                      {feature}
-                    </Text>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
 
-          <div className={styles.detailBlock}>
-            <Text variant="label-default-s" className={styles.detailLabel}>
-              {ui.work.presentation.outcome}
-            </Text>
-            <Text variant="body-default-m" wrap="balance">
-              {project.presentation.outcome}
-            </Text>
+            <div className={styles.outcomeBlock}>
+              <Text variant="label-default-s" className={styles.detailLabel}>
+                {ui.work.presentation.outcome}
+              </Text>
+              <Text variant="body-default-m" onBackground="neutral-strong" wrap="balance">
+                {project.presentation.outcome}
+              </Text>
+            </div>
           </div>
 
           <Row className={styles.actions} horizontal="center">
@@ -216,6 +218,9 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
             </Button>
             <Button href={project.href} variant="secondary" size="s" suffixIcon="arrowRight">
               {ui.work.readCaseStudy}
+            </Button>
+            <Button href={href("/quote")} variant="tertiary" size="s" suffixIcon="document">
+              {ui.services.cta}
             </Button>
           </Row>
         </Column>
@@ -248,12 +253,6 @@ export function ProjectPresentationGuide({ projects }: ProjectPresentationGuideP
           </Button>
         </Row>
       </div>
-
-      <Row horizontal="center">
-        <SmartLink href={href("/quote")} suffixIcon="arrowRight">
-          <Text variant="body-default-s">{ui.services.cta}</Text>
-        </SmartLink>
-      </Row>
     </Column>
   );
 }

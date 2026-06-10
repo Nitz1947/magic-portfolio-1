@@ -14,6 +14,8 @@ interface ProjectLivePreviewProps {
   fallbackImage: string;
   displayUrl: string;
   lazy?: boolean;
+  /** Full-bleed preview without browser chrome — for work presentation cell */
+  fullBleed?: boolean;
 }
 
 export function ProjectLivePreview({
@@ -24,6 +26,7 @@ export function ProjectLivePreview({
   fallbackImage,
   displayUrl,
   lazy = true,
+  fullBleed = false,
 }: ProjectLivePreviewProps) {
   const { ui } = useLocale();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -80,51 +83,61 @@ export function ProjectLivePreview({
 
   const showIframe = canEmbed && shouldLoad && !embedBlocked;
 
-  return (
-    <Column ref={containerRef} fillWidth>
-      <ProjectBrowserFrame url={displayUrl}>
-        <div className={styles.viewport}>
-          {showIframe ? (
-            <>
-              {isLoading && <div className={styles.loading}>{ui.work.previewLoading}</div>}
-              <iframe
-                className={styles.iframe}
-                src={src}
-                title={`${title} — ${ui.work.preview}`}
-                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-                loading="lazy"
-                onLoad={handleIframeLoad}
-                onError={handleIframeError}
-              />
-            </>
-          ) : (
-            <div className={styles.fallback}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={fallbackImage}
-                alt={title}
-                className={styles.fallbackImage}
-                loading="lazy"
-              />
-              <div className={styles.overlay}>
-                <Text variant="body-default-s" onBackground="neutral-strong">
-                  {embedBlocked ? ui.work.previewBlocked : ui.work.previewPlaceholder}
-                </Text>
-                <Button
-                  href={liveUrl}
-                  variant="primary"
-                  size="s"
-                  suffixIcon="arrowUpRightFromSquare"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {ui.work.openLive}
-                </Button>
-              </div>
-            </div>
-          )}
+  const viewportClass = fullBleed ? `${styles.viewport} ${styles.viewportFullBleed}` : styles.viewport;
+
+  const previewContent = (
+    <div className={viewportClass}>
+      {showIframe ? (
+        <>
+          {isLoading && <div className={styles.loading}>{ui.work.previewLoading}</div>}
+          <iframe
+            className={styles.iframe}
+            src={src}
+            title={`${title} — ${ui.work.preview}`}
+            sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+            loading="lazy"
+            onLoad={handleIframeLoad}
+            onError={handleIframeError}
+          />
+        </>
+      ) : (
+        <div className={styles.fallback}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={fallbackImage} alt={title} className={styles.fallbackImage} loading="lazy" />
+          <div className={styles.overlay}>
+            <Text variant="body-default-s" onBackground="neutral-strong">
+              {embedBlocked ? ui.work.previewBlocked : ui.work.previewPlaceholder}
+            </Text>
+            <Button
+              href={liveUrl}
+              variant="primary"
+              size="s"
+              suffixIcon="arrowUpRightFromSquare"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {ui.work.openLive}
+            </Button>
+          </div>
         </div>
-      </ProjectBrowserFrame>
+      )}
+    </div>
+  );
+
+  return (
+    <Column ref={containerRef} fillWidth className={fullBleed ? styles.fullBleedRoot : undefined}>
+      {fullBleed ? (
+        <div className={styles.fullBleedFrame}>
+          <div className={styles.fullBleedChrome}>
+            <Text variant="label-default-xs" onBackground="neutral-weak" className={styles.fullBleedUrl}>
+              {displayUrl}
+            </Text>
+          </div>
+          {previewContent}
+        </div>
+      ) : (
+        <ProjectBrowserFrame url={displayUrl}>{previewContent}</ProjectBrowserFrame>
+      )}
     </Column>
   );
 }

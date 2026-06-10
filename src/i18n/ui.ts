@@ -83,6 +83,44 @@ export type UiStrings = {
     pageDescription: string;
     contactNav: string;
   };
+  contact: {
+    pageTitle: string;
+    pageDescription: string;
+    email: {
+      title: string;
+      description: string;
+    };
+    quote: {
+      title: string;
+      description: string;
+    };
+    github: {
+      title: string;
+      description: string;
+    };
+    availability: {
+      title: string;
+      badge: string;
+    };
+    quickMessage: {
+      title: string;
+      description: string;
+      name: string;
+      email: string;
+      message: string;
+      messagePlaceholder: string;
+      submit: string;
+      submitting: string;
+      successTitle: string;
+      successDescription: string;
+      sendAnother: string;
+    };
+    errors: {
+      required: string;
+      email: string;
+      generic: string;
+    };
+  };
   services: {
     title: string;
     subline: string;
@@ -279,6 +317,45 @@ const uiStrings: Record<Locale, UiStrings> = {
       pageDescription:
         "Configure your project step by step — project type, modules, design, integrations, budget, and contact. I'll reply with a clear proposal.",
       contactNav: "Contact",
+    },
+    contact: {
+      pageTitle: "Contact",
+      pageDescription:
+        "Reach out directly, build a quote online, or send a quick message — I reply within 24–48 hours on business days.",
+      email: {
+        title: "Email",
+        description: "I reply within 24–48 hours",
+      },
+      quote: {
+        title: "Quote configurator",
+        description: "Build your project quote online",
+      },
+      github: {
+        title: "GitHub",
+        description: "Browse code and open-source work",
+      },
+      availability: {
+        title: "Availability",
+        badge: "Available for collaboration",
+      },
+      quickMessage: {
+        title: "Quick message",
+        description: "A short note is enough to start — I'll follow up with next steps.",
+        name: "Name",
+        email: "Email",
+        message: "Message",
+        messagePlaceholder: "Tell me about your project, timeline, or questions…",
+        submit: "Send message",
+        submitting: "Sending…",
+        successTitle: "Message sent",
+        successDescription: "Thanks — I'll get back to you within 24–48 hours.",
+        sendAnother: "Send another message",
+      },
+      errors: {
+        required: "This field is required",
+        email: "Enter a valid email address",
+        generic: "Something went wrong. Please try again or email kgdev@biuro.net directly.",
+      },
     },
     services: {
       title: "Services",
@@ -587,6 +664,45 @@ const uiStrings: Record<Locale, UiStrings> = {
       pageDescription:
         "Skonfiguruj projekt krok po kroku — typ, moduły, design, integracje, budżet i kontakt. Odpowiem z jasną propozycją.",
       contactNav: "Kontakt",
+    },
+    contact: {
+      pageTitle: "Kontakt",
+      pageDescription:
+        "Napisz bezpośrednio, zbuduj wycenę online albo wyślij krótką wiadomość — odpowiadam w ciągu 24–48 godzin w dni robocze.",
+      email: {
+        title: "E-mail",
+        description: "Odpowiadam w 24–48h",
+      },
+      quote: {
+        title: "Konfigurator oferty",
+        description: "Zbuduj wycenę online",
+      },
+      github: {
+        title: "GitHub",
+        description: "Przeglądaj kod i projekty open source",
+      },
+      availability: {
+        title: "Dostępność",
+        badge: "Dostępny do współpracy",
+      },
+      quickMessage: {
+        title: "Szybka wiadomość",
+        description: "Krótka notatka wystarczy na start — odezwę się z kolejnymi krokami.",
+        name: "Imię",
+        email: "E-mail",
+        message: "Wiadomość",
+        messagePlaceholder: "Opisz projekt, termin lub pytania…",
+        submit: "Wyślij wiadomość",
+        submitting: "Wysyłanie…",
+        successTitle: "Wiadomość wysłana",
+        successDescription: "Dziękuję — odezwę się w ciągu 24–48 godzin.",
+        sendAnother: "Wyślij kolejną wiadomość",
+      },
+      errors: {
+        required: "To pole jest wymagane",
+        email: "Podaj prawidłowy adres e-mail",
+        generic: "Coś poszło nie tak. Spróbuj ponownie lub napisz na kgdev@biuro.net.",
+      },
     },
     services: {
       title: "Usługi",
