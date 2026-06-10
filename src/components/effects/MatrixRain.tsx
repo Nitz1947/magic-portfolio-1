@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { getCssVar, onThemeChange, parseRgb, resolveCssColor } from "./themeColors";
 import styles from "./MatrixRain.module.scss";
@@ -119,6 +120,7 @@ function createColumn(x: number, fontSize: number, height: number): Column {
 }
 
 export function MatrixRain() {
+  const pathname = usePathname();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -231,7 +233,7 @@ export function MatrixRain() {
       unsubscribeTheme();
       window.removeEventListener("resize", resize);
     };
-  }, []);
+  }, [pathname]);
 
   return <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />;
 }

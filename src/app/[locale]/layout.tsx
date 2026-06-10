@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 import { Column, Flex, Meta } from "@once-ui-system/core";
 import { Footer, Header, RouteGuard } from "@/components";
-import { CustomCursor, GlobalPageBackground } from "@/components/effects";
+import { LayoutEffects } from "@/components/effects";
 import { LocaleProvider } from "@/context/LocaleContext";
 import { defaultLocale, isLocale, locales } from "@/i18n/config";
 import { localizedPath } from "@/i18n/paths";
@@ -125,8 +125,7 @@ export default async function LocaleLayout({
             padding="0"
             horizontal="center"
           >
-            <GlobalPageBackground />
-            <CustomCursor />
+            <LayoutEffects />
             <Flex fillWidth minHeight="16" s={{ hide: true }} position="relative" zIndex={2} />
             <Header />
             <Flex zIndex={2} fillWidth padding="l" horizontal="center" flex={1} position="relative">

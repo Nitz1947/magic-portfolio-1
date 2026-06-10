@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useRef } from "react";
 import { FloatingSymbols } from "./FloatingSymbols";
 import { MatrixRain } from "./MatrixRain";
@@ -23,6 +24,7 @@ const WATERMARK_POSITIONS = [
 ];
 
 export function GlobalPageBackground() {
+  const pathname = usePathname();
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -131,7 +133,7 @@ export function GlobalPageBackground() {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("mouseleave", onLeave);
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <div className={styles.root} aria-hidden="true">

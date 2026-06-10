@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useCursorTrail } from "./CursorTrailCanvas";
 import styles from "./CustomCursor.module.scss";
@@ -19,7 +20,14 @@ interface CodeCharEl {
   vy: number;
 }
 
+function restoreNativeCursor() {
+  document.documentElement.classList.remove("cursor-hidden");
+  document.documentElement.style.cursor = "";
+  document.body.style.cursor = "";
+}
+
 export function CustomCursor() {
+  const pathname = usePathname();
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const outerRingRef = useRef<HTMLDivElement>(null);
@@ -37,25 +45,37 @@ export function CustomCursor() {
   const [state, setState] = useState<CursorState>("default");
   const [label, setLabel] = useState("");
 
-  const { addTrail, addBurst, render, resize } = useCursorTrail(canvasRef);
+  const trailApi = useCursorTrail(canvasRef);
+  const trailRef = useRef(trailApi);
+  trailRef.current = trailApi;
+
   const codeCharsRef = useRef<CodeCharEl[]>([]);
   const lastCharPosRef = useRef({ x: 0, y: 0 });
 
   useEffect(() => {
     const coarse = window.matchMedia("(pointer: coarse)").matches;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (coarse || reduced) return;
+    if (coarse || reduced) {
+      setEnabled(false);
+      return;
+    }
 
     setEnabled(true);
+  }, []);
 
-    let mouseX = 0;
-    let mouseY = 0;
-    let dotX = 0;
-    let dotY = 0;
-    let ringX = 0;
-    let ringY = 0;
+  useEffect(() => {
+    if (!enabled) return;
+
+    const { addTrail, addBurst, render, resize } = trailRef.current;
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let dotX = mouseX;
+    let dotY = mouseY;
+    let ringX = mouseX;
+    let ringY = mouseY;
     let animationId = 0;
-    let pendingMove = false;
+    let pendingMove = true;
     let cursorHiddenApplied = false;
 
     const applyCursorHidden = () => {
@@ -68,11 +88,9 @@ export function CustomCursor() {
     };
 
     const removeCursorHidden = () => {
-      document.documentElement.classList.remove("cursor-hidden");
+      restoreNativeCursor();
       cursorHiddenApplied = false;
     };
-
-    resize();
 
     const crossLines = crosshairRef.current
       ? {
@@ -128,24 +146,16 @@ export function CustomCursor() {
       root.style.visibility = visible ? "visible" : "hidden";
     };
 
-    const onMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      pendingMove = true;
-      if (!inViewportRef.current) {
-        inViewportRef.current = true;
-        setRootVisible(true);
-      }
-    };
-
-    const onEnter = () => {
+    const showCursor = () => {
       inViewportRef.current = true;
       setRootVisible(true);
     };
 
-    const onLeave = () => {
-      inViewportRef.current = false;
-      setRootVisible(false);
+    const onMove = (e: MouseEvent) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      pendingMove = true;
+      showCursor();
     };
 
     const onOver = (e: MouseEvent) => {
@@ -181,9 +191,14 @@ export function CustomCursor() {
     const onVisibilityChange = () => {
       if (document.hidden) {
         setRootVisible(false);
-      } else if (inViewportRef.current) {
-        setRootVisible(true);
+      } else {
+        showCursor();
       }
+    };
+
+    const onPageShow = () => {
+      showCursor();
+      resize();
     };
 
     const animate = () => {
@@ -261,16 +276,18 @@ export function CustomCursor() {
       animationId = requestAnimationFrame(animate);
     };
 
+    resize();
+    showCursor();
+    applyCursorHidden();
+    requestAnimationFrame(applyCursorHidden);
+
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("mousedown", onDown);
     window.addEventListener("resize", onResize);
     document.addEventListener("mouseover", onOver);
-    document.documentElement.addEventListener("mouseenter", onEnter);
-    document.documentElement.addEventListener("mouseleave", onLeave);
     document.addEventListener("visibilitychange", onVisibilityChange);
+    window.addEventListener("pageshow", onPageShow);
 
-    applyCursorHidden();
-    requestAnimationFrame(applyCursorHidden);
     animate();
 
     return () => {
@@ -279,14 +296,20 @@ export function CustomCursor() {
       window.removeEventListener("mousedown", onDown);
       window.removeEventListener("resize", onResize);
       document.removeEventListener("mouseover", onOver);
-      document.documentElement.removeEventListener("mouseenter", onEnter);
-      document.documentElement.removeEventListener("mouseleave", onLeave);
       document.removeEventListener("visibilitychange", onVisibilityChange);
+      window.removeEventListener("pageshow", onPageShow);
       removeCursorHidden();
       codeCharsRef.current.forEach((c) => c.el.remove());
       codeCharsRef.current = [];
+      setMounted(false);
     };
-  }, [addTrail, addBurst, render, resize]);
+  }, [enabled, pathname]);
+
+  useEffect(() => {
+    return () => {
+      restoreNativeCursor();
+    };
+  }, []);
 
   if (!enabled) return null;
 

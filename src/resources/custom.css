@@ -25,14 +25,14 @@
   --effect-surface-border: var(--brand-alpha-weak);
   --effect-accent-text: var(--brand-on-background-strong);
   --effect-accent-muted: var(--brand-on-background-medium);
-  --effect-grid-opacity: 0.2;
-  --effect-mesh-strength: 0.45;
-  --effect-symbol-opacity: 0.1;
-  --effect-watermark-opacity: 0.07;
-  --effect-canvas-opacity: 0.45;
-  --effect-dot-base-alpha: 0.1;
-  --effect-dot-active-alpha: 0.28;
-  --effect-cursor-glow: var(--brand-alpha-medium);
-  --effect-matrix-opacity: 0.08;
-  --effect-matrix-alpha: 0.55;
+  --effect-grid-opacity: 0.34;
+  --effect-mesh-strength: 0.62;
+  --effect-symbol-opacity: 0.17;
+  --effect-watermark-opacity: 0.09;
+  --effect-canvas-opacity: 0.62;
+  --effect-dot-base-alpha: 0.14;
+  --effect-dot-active-alpha: 0.38;
+  --effect-cursor-glow: var(--brand-alpha-strong);
+  --effect-matrix-opacity: 0.15;
+  --effect-matrix-alpha: 0.82;
 }

@@ -124,6 +124,17 @@
     0 0 56px var(--brand-alpha-medium);
 }
 
+:global([data-theme="light"]) .dot {
+  background: var(--brand-on-background-strong);
+  box-shadow:
+    0 0 14px var(--effect-cursor-glow),
+    0 0 28px var(--brand-alpha-medium);
+}
+
+:global([data-theme="light"]) .crosshair line {
+  stroke: var(--brand-on-background-medium);
+}
+
 .ring {
   width: 34px;
   height: 34px;

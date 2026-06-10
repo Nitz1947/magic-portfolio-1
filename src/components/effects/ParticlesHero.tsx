@@ -43,8 +43,8 @@ function readParticleColors(): { colors: string[]; linkColor: string; opacityMin
   return {
     colors: [strong, weak, medium, solid],
     linkColor: weak,
-    opacityMin: isDark ? 0.18 : 0.08,
-    opacityMax: isDark ? 0.42 : 0.22,
+    opacityMin: isDark ? 0.18 : 0.12,
+    opacityMax: isDark ? 0.42 : 0.28,
   };
 }
 
