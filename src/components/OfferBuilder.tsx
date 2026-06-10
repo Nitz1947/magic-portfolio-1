@@ -532,14 +532,16 @@ export function OfferBuilder() {
             <Heading as="h3" variant="heading-strong-s">
               {offerBuilder.summary.title}
             </Heading>
-            {summaryItems.map((item) => (
-              <Column key={item.label} gap="4">
-                <Text variant="label-default-xs" onBackground="neutral-weak">
-                  {item.label}
-                </Text>
-                <Text variant="body-default-s">{item.value}</Text>
-              </Column>
-            ))}
+            <div className={styles.sidebarScroll}>
+              {summaryItems.map((item) => (
+                <Column key={item.label} gap="4">
+                  <Text variant="label-default-xs" onBackground="neutral-weak">
+                    {item.label}
+                  </Text>
+                  <Text variant="body-default-s">{item.value}</Text>
+                </Column>
+              ))}
+            </div>
           </Column>
         </aside>
       </div>

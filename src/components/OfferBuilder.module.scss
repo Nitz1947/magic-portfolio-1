@@ -1,5 +1,39 @@
 @import "./breakpoints.scss";
 
+@mixin branded-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: var(--brand-solid-medium) var(--neutral-alpha-weak);
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: var(--neutral-alpha-weak);
+    border-radius: var(--radius-full);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--brand-solid-medium);
+    border-radius: var(--radius-full);
+
+    &:hover {
+      background: var(--brand-solid-strong);
+    }
+  }
+}
+
+@mixin scrollable-list {
+  @include branded-scrollbar;
+  overflow-y: auto;
+  max-height: min(320px, 40vh);
+  padding-right: var(--static-space-4);
+
+  @include s {
+    max-height: min(240px, 35vh);
+  }
+}
+
 .wizard {
   position: relative;
 }
@@ -37,11 +71,28 @@
 }
 
 .sidebarInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--static-space-16);
   padding: var(--static-space-24);
   border: 1px solid var(--effect-surface-border);
   border-radius: var(--radius-l);
   background: var(--effect-surface-bg);
   backdrop-filter: blur(8px);
+}
+
+.sidebarScroll {
+  @include branded-scrollbar;
+  display: flex;
+  flex-direction: column;
+  gap: var(--static-space-12);
+  overflow-y: auto;
+  max-height: min(280px, 45vh);
+  padding-right: var(--static-space-4);
+
+  @include s {
+    max-height: min(200px, 32vh);
+  }
 }
 
 .section {
@@ -55,9 +106,11 @@
 }
 
 .featureGrid {
+  @include scrollable-list;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--static-space-12);
+  align-content: start;
 
   @include s {
     grid-template-columns: 1fr;
