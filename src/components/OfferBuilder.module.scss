@@ -1,0 +1,48 @@
+@import "./breakpoints.scss";
+
+.form {
+  padding: var(--static-space-32);
+  border: 1px solid var(--neutral-alpha-weak);
+  border-radius: var(--radius-l);
+  background: var(--neutral-alpha-weak);
+
+  @include s {
+    padding: var(--static-space-20);
+  }
+}
+
+.section {
+  padding-bottom: var(--static-space-24);
+  border-bottom: 1px solid var(--neutral-alpha-weak);
+
+  &:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+}
+
+.chipGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--static-space-8);
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--static-space-12);
+
+  @include s {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--static-space-16);
+
+  @include s {
+    grid-template-columns: 1fr;
+  }
+}

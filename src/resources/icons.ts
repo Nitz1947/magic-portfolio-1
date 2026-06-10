@@ -12,6 +12,10 @@ import {
   HiOutlineDocument,
   HiOutlineGlobeAsiaAustralia,
   HiOutlineRocketLaunch,
+  HiOutlineBuildingOffice2,
+  HiOutlineShoppingCart,
+  HiOutlineDevicePhoneMobile,
+  HiOutlineMagnifyingGlassCircle,
 } from "react-icons/hi2";
 
 import {
@@ -59,6 +63,10 @@ export const iconLibrary: Record<string, IconType> = {
   arrowUpRightFromSquare: HiArrowTopRightOnSquare,
   document: HiOutlineDocument,
   rocket: HiOutlineRocketLaunch,
+  building: HiOutlineBuildingOffice2,
+  cart: HiOutlineShoppingCart,
+  mobile: HiOutlineDevicePhoneMobile,
+  search: HiOutlineMagnifyingGlassCircle,
   javascript: SiJavascript,
   typescript: SiTypescript,
   react: SiReact,

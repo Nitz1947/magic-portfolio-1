@@ -53,6 +53,56 @@ export type UiStrings = {
     prev: string;
     next: string;
   };
+  services: {
+    title: string;
+    subline: string;
+    cta: string;
+    items: Array<{
+      id: string;
+      title: string;
+      description: string;
+      icon: string;
+    }>;
+  };
+  offerBuilder: {
+    title: string;
+    subline: string;
+    sections: {
+      projectType: string;
+      features: string;
+      budget: string;
+      timeline: string;
+      vision: string;
+      contact: string;
+    };
+    projectTypes: Array<{ id: string; label: string }>;
+    features: Array<{ id: string; label: string }>;
+    budgets: Array<{ id: string; label: string }>;
+    timelines: Array<{ id: string; label: string }>;
+    fields: {
+      name: string;
+      email: string;
+      phone: string;
+      company: string;
+      visionPlaceholder: string;
+    };
+    placeholders: {
+      select: string;
+    };
+    submit: string;
+    submitting: string;
+    submitAnother: string;
+    success: {
+      title: string;
+      description: string;
+    };
+    errors: {
+      required: string;
+      email: string;
+      projectType: string;
+      generic: string;
+    };
+  };
   relativeTime: {
     justNow: string;
     minutes: string;
@@ -143,6 +193,129 @@ const uiStrings: Record<Locale, UiStrings> = {
       prev: "Previous project",
       next: "Next project",
     },
+    services: {
+      title: "Services",
+      subline:
+        "From corporate sites to gaming communities — I build fast, maintainable Next.js products deployed on Vercel.",
+      cta: "Build your quote",
+      items: [
+        {
+          id: "corporate",
+          title: "Corporate website",
+          description:
+            "Brand-aligned company sites with CMS, contact flows, and SEO foundations — built to convert visitors into leads.",
+          icon: "building",
+        },
+        {
+          id: "gaming",
+          title: "Gaming & community",
+          description:
+            "Discord integrations, fan hubs, and community portals with live data, auth, and engagement features.",
+          icon: "discord",
+        },
+        {
+          id: "shop",
+          title: "E-commerce",
+          description:
+            "Product catalogs, checkout flows, and payment integrations — performant storefronts ready to scale.",
+          icon: "cart",
+        },
+        {
+          id: "landing",
+          title: "Landing pages",
+          description:
+            "High-converting campaign pages with premium motion, A/B-ready structure, and analytics hooks.",
+          icon: "mobile",
+        },
+        {
+          id: "seo",
+          title: "SEO & audits",
+          description:
+            "Technical SEO reviews, Core Web Vitals fixes, schema markup, and content structure improvements.",
+          icon: "search",
+        },
+        {
+          id: "admin",
+          title: "Admin panels",
+          description:
+            "Internal dashboards, role-based access, and workflow tools tailored to how your team actually operates.",
+          icon: "grid",
+        },
+      ],
+    },
+    offerBuilder: {
+      title: "Build your quote",
+      subline:
+        "Pick what you need — I'll review your brief and reply with scope, timeline, and a clear proposal.",
+      sections: {
+        projectType: "What are you building?",
+        features: "Modules & features",
+        budget: "Budget range",
+        timeline: "Timeline",
+        vision: "Your vision",
+        contact: "Contact details",
+      },
+      projectTypes: [
+        { id: "corporate", label: "Corporate website" },
+        { id: "shop", label: "E-commerce store" },
+        { id: "landing", label: "Landing page" },
+        { id: "gaming", label: "Community / gaming" },
+        { id: "admin", label: "Admin panel" },
+        { id: "discord", label: "Discord integration" },
+        { id: "seo", label: "SEO / audit" },
+        { id: "redesign", label: "Redesign" },
+        { id: "other", label: "Other" },
+      ],
+      features: [
+        { id: "cms", label: "CMS" },
+        { id: "i18n", label: "i18n PL/EN" },
+        { id: "contactForm", label: "Contact form" },
+        { id: "payments", label: "Payments" },
+        { id: "oauth", label: "OAuth login" },
+        { id: "blog", label: "Blog" },
+        { id: "gallery", label: "Gallery" },
+        { id: "animations", label: "Premium animations" },
+        { id: "seo", label: "SEO" },
+        { id: "hosting", label: "Hosting setup" },
+        { id: "maintenance", label: "Maintenance" },
+      ],
+      budgets: [
+        { id: "up-to-3k", label: "Up to PLN 3,000" },
+        { id: "3k-8k", label: "PLN 3,000 – 8,000" },
+        { id: "8k-15k", label: "PLN 8,000 – 15,000" },
+        { id: "15k-plus", label: "PLN 15,000+" },
+        { id: "tbd", label: "To be discussed" },
+      ],
+      timelines: [
+        { id: "asap", label: "ASAP" },
+        { id: "1-month", label: "1 month" },
+        { id: "2-3-months", label: "2–3 months" },
+        { id: "flexible", label: "Flexible" },
+      ],
+      fields: {
+        name: "Full name",
+        email: "Email",
+        phone: "Phone (optional)",
+        company: "Company (optional)",
+        visionPlaceholder: "Describe goals, audience, references, and must-have features…",
+      },
+      placeholders: {
+        select: "Select…",
+      },
+      submit: "Send quote request",
+      submitting: "Sending…",
+      submitAnother: "Send another request",
+      success: {
+        title: "Request sent",
+        description: "Thanks — I'll review your brief and get back to you within 1–2 business days.",
+      },
+      errors: {
+        required: "This field is required",
+        email: "Enter a valid email address",
+        projectType: "Select at least one project type",
+        generic: "Something went wrong. Please try again or email kgdev@biuro.net directly.",
+      },
+    },
     relativeTime: {
       justNow: "just now",
       minutes: "m ago",
@@ -230,6 +403,129 @@ const uiStrings: Record<Locale, UiStrings> = {
       label: "Slideshow projektów",
       prev: "Poprzedni projekt",
       next: "Następny projekt",
+    },
+    services: {
+      title: "Usługi",
+      subline:
+        "Od stron firmowych po community gamingowe — buduję szybkie, utrzymywalne produkty Next.js z deployem na Vercel.",
+      cta: "Zbuduj swoją ofertę",
+      items: [
+        {
+          id: "corporate",
+          title: "Strona firmowa",
+          description:
+            "Serwisy dopasowane do marki z CMS, formularzami i fundamentem SEO — zaprojektowane, by zamieniać odwiedzających w leady.",
+          icon: "building",
+        },
+        {
+          id: "gaming",
+          title: "Gaming i community",
+          description:
+            "Integracje Discord, huby fanowskie i portale społeczności z danymi live, autoryzacją i funkcjami angażującymi.",
+          icon: "discord",
+        },
+        {
+          id: "shop",
+          title: "Sklep internetowy",
+          description:
+            "Katalogi produktów, checkout i płatności — wydajne sklepy gotowe do skalowania.",
+          icon: "cart",
+        },
+        {
+          id: "landing",
+          title: "Landing page",
+          description:
+            "Strony kampanijne z premium animacjami, strukturą pod A/B i hookami analitycznymi.",
+          icon: "mobile",
+        },
+        {
+          id: "seo",
+          title: "SEO i audyty",
+          description:
+            "Przeglądy techniczne SEO, poprawki Core Web Vitals, schema markup i struktura treści.",
+          icon: "search",
+        },
+        {
+          id: "admin",
+          title: "Panele administracyjne",
+          description:
+            "Dashboardy wewnętrzne, role i narzędzia workflow dopasowane do pracy Twojego zespołu.",
+          icon: "grid",
+        },
+      ],
+    },
+    offerBuilder: {
+      title: "Zbuduj swoją ofertę",
+      subline:
+        "Wybierz, czego potrzebujesz — przejrzę brief i odpowiem z zakresem, terminem i jasną propozycją.",
+      sections: {
+        projectType: "Co chcesz zbudować?",
+        features: "Moduły i funkcje",
+        budget: "Zakres budżetu",
+        timeline: "Termin realizacji",
+        vision: "Twoja wizja",
+        contact: "Dane kontaktowe",
+      },
+      projectTypes: [
+        { id: "corporate", label: "Strona firmowa" },
+        { id: "shop", label: "Sklep internetowy" },
+        { id: "landing", label: "Landing page" },
+        { id: "gaming", label: "Community / gaming" },
+        { id: "admin", label: "Panel administracyjny" },
+        { id: "discord", label: "Integracja Discord" },
+        { id: "seo", label: "SEO / audyt" },
+        { id: "redesign", label: "Redesign" },
+        { id: "other", label: "Inne" },
+      ],
+      features: [
+        { id: "cms", label: "CMS" },
+        { id: "i18n", label: "i18n PL/EN" },
+        { id: "contactForm", label: "Formularz kontaktowy" },
+        { id: "payments", label: "Płatności" },
+        { id: "oauth", label: "Logowanie OAuth" },
+        { id: "blog", label: "Blog" },
+        { id: "gallery", label: "Galeria" },
+        { id: "animations", label: "Animacje premium" },
+        { id: "seo", label: "SEO" },
+        { id: "hosting", label: "Hosting setup" },
+        { id: "maintenance", label: "Maintenance" },
+      ],
+      budgets: [
+        { id: "up-to-3k", label: "Do 3 000 PLN" },
+        { id: "3k-8k", label: "3 000 – 8 000 PLN" },
+        { id: "8k-15k", label: "8 000 – 15 000 PLN" },
+        { id: "15k-plus", label: "15 000+ PLN" },
+        { id: "tbd", label: "Do ustalenia" },
+      ],
+      timelines: [
+        { id: "asap", label: "ASAP" },
+        { id: "1-month", label: "1 miesiąc" },
+        { id: "2-3-months", label: "2–3 miesiące" },
+        { id: "flexible", label: "Elastycznie" },
+      ],
+      fields: {
+        name: "Imię i nazwisko",
+        email: "E-mail",
+        phone: "Telefon (opcjonalnie)",
+        company: "Firma (opcjonalnie)",
+        visionPlaceholder: "Opisz cele, grupę docelową, referencje i must-have funkcje…",
+      },
+      placeholders: {
+        select: "Wybierz…",
+      },
+      submit: "Wyślij zapytanie ofertowe",
+      submitting: "Wysyłanie…",
+      submitAnother: "Wyślij kolejne zapytanie",
+      success: {
+        title: "Zapytanie wysłane",
+        description: "Dziękuję — przejrzę brief i odezwę się w ciągu 1–2 dni roboczych.",
+      },
+      errors: {
+        required: "To pole jest wymagane",
+        email: "Podaj prawidłowy adres e-mail",
+        projectType: "Wybierz co najmniej jeden typ projektu",
+        generic: "Coś poszło nie tak. Spróbuj ponownie lub napisz na kgdev@biuro.net.",
+      },
     },
     relativeTime: {
       justNow: "przed chwilą",

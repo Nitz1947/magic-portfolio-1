@@ -14,8 +14,10 @@ import {
 import { Mailchimp } from "@/components";
 import { CodeRain } from "@/components/CodeRain";
 import { SectionBackdrop } from "@/components/effects";
+import { OfferBuilder } from "@/components/OfferBuilder";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { ProjectSlideshow } from "@/components/ProjectSlideshow";
+import { ServicesGrid } from "@/components/ServicesGrid";
 import { TechMarquee } from "@/components/TechMarquee";
 import { Projects } from "@/components/work/Projects";
 import { Posts } from "@/components/blog/Posts";
@@ -200,12 +202,23 @@ export default async function Home({ params }: PageProps) {
           <Heading as="h2" variant="display-strong-xs" wrap="balance">
             {ui.work.label}
           </Heading>
-          <Projects exclude={[...homepageFeaturedSlugs]} locale={locale} />
+          <Projects
+            exclude={[...homepageFeaturedSlugs, "portfolio-developera-nextjs"]}
+            locale={locale}
+          />
         </Column>
+      </RevealFx>
+
+      <RevealFx translateY="24" delay={0.62} fillWidth>
+        <ServicesGrid />
       </RevealFx>
 
       <RevealFx translateY="24" delay={0.65} fillWidth>
         <ProcessSteps title={ui.process.title} steps={ui.process.steps} />
+      </RevealFx>
+
+      <RevealFx translateY="24" delay={0.68} fillWidth>
+        <OfferBuilder />
       </RevealFx>
 
       {routes["/blog"] && (

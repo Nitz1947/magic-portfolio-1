@@ -8,6 +8,8 @@ export { ProjectShowcase } from "@/components/ProjectShowcase";
 export { ProjectSlideshow } from "@/components/ProjectSlideshow";
 export { CodeRain } from "@/components/CodeRain";
 export { ProcessSteps } from "@/components/ProcessSteps";
+export { ServicesGrid } from "@/components/ServicesGrid";
+export { OfferBuilder } from "@/components/OfferBuilder";
 export { TechMarquee } from "@/components/TechMarquee";
 export { SyntaxHighlightBlock, SectionBackdrop } from "@/components/effects";
 export { HeadingLink } from "@/components/HeadingLink";
