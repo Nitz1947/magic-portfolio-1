@@ -1,6 +1,6 @@
 .footer {
-  border-top: 1px solid rgba(34, 211, 238, 0.1);
-  background: linear-gradient(to top, rgba(6, 10, 15, 0.92), rgba(6, 10, 15, 0.55));
+  border-top: 1px solid var(--effect-surface-border);
+  background: linear-gradient(to top, var(--effect-surface-bg), transparent);
   backdrop-filter: blur(12px);
 }
 
@@ -11,8 +11,8 @@
 .ctaBlock {
   padding: 24px 16px;
   border-radius: var(--radius-l);
-  border: 1px solid rgba(34, 211, 238, 0.1);
-  background: rgba(8, 12, 18, 0.45);
+  border: 1px solid var(--effect-surface-border);
+  background: var(--effect-surface-bg);
 }
 
 .bottom {

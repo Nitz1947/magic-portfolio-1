@@ -46,7 +46,7 @@
   .track:hover & {
     color: var(--brand-on-background-strong);
     border-color: var(--brand-alpha-medium);
-    box-shadow: 0 0 12px rgba(6, 182, 212, 0.12);
+    box-shadow: 0 0 12px var(--brand-alpha-weak);
   }
 }
 

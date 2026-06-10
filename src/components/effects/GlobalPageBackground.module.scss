@@ -6,17 +6,18 @@
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
-  background: #101a26;
+  background: var(--page-background);
 }
 
 .mesh {
   position: absolute;
   inset: -30%;
+  opacity: var(--effect-mesh-strength, 1);
   background:
-    radial-gradient(ellipse 55% 45% at 12% 18%, rgba(6, 182, 212, 0.38), transparent 58%),
-    radial-gradient(ellipse 50% 42% at 88% 72%, rgba(20, 184, 166, 0.3), transparent 52%),
-    radial-gradient(ellipse 38% 32% at 55% 45%, rgba(124, 58, 237, 0.2), transparent 62%),
-    radial-gradient(ellipse 30% 28% at 72% 22%, rgba(8, 145, 178, 0.24), transparent 55%);
+    radial-gradient(ellipse 55% 45% at 12% 18%, var(--brand-alpha-medium), transparent 58%),
+    radial-gradient(ellipse 50% 42% at 88% 72%, var(--brand-alpha-weak), transparent 52%),
+    radial-gradient(ellipse 38% 32% at 55% 45%, var(--accent-alpha-weak), transparent 62%),
+    radial-gradient(ellipse 30% 28% at 72% 22%, var(--brand-alpha-weak), transparent 55%);
   animation: meshDrift 28s ease-in-out infinite alternate;
 
   @media (prefers-reduced-motion: reduce) {
@@ -46,7 +47,7 @@
   left: 8%;
   width: 280px;
   height: 280px;
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.22), transparent 70%);
+  background: radial-gradient(circle, var(--brand-alpha-medium), transparent 70%);
   animation-duration: 18s;
 }
 
@@ -55,7 +56,7 @@
   right: 6%;
   width: 320px;
   height: 320px;
-  background: radial-gradient(circle, rgba(6, 182, 212, 0.18), transparent 70%);
+  background: radial-gradient(circle, var(--brand-alpha-weak), transparent 70%);
   animation-duration: 22s;
   animation-delay: -6s;
 }
@@ -65,7 +66,7 @@
   left: 38%;
   width: 240px;
   height: 240px;
-  background: radial-gradient(circle, rgba(20, 184, 166, 0.16), transparent 70%);
+  background: radial-gradient(circle, var(--accent-alpha-weak), transparent 70%);
   animation-duration: 16s;
   animation-delay: -3s;
 }
@@ -73,10 +74,10 @@
 .grid {
   position: absolute;
   inset: 0;
-  opacity: 0.72;
+  opacity: var(--effect-grid-opacity, 0.5);
   background-image:
-    linear-gradient(rgba(34, 211, 238, 0.14) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(34, 211, 238, 0.14) 1px, transparent 1px);
+    linear-gradient(var(--brand-alpha-weak) 1px, transparent 1px),
+    linear-gradient(90deg, var(--brand-alpha-weak) 1px, transparent 1px);
   background-size: 72px 72px;
   transform: perspective(900px) rotateX(58deg) scale(1.35);
   transform-origin: center 85%;
@@ -93,10 +94,10 @@
 .perspectiveGrid {
   position: absolute;
   inset: 0;
-  opacity: 0.26;
+  opacity: calc(var(--effect-grid-opacity, 0.5) * 0.45);
   background-image:
-    linear-gradient(rgba(20, 184, 166, 0.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(20, 184, 166, 0.15) 1px, transparent 1px);
+    linear-gradient(var(--brand-alpha-weak) 1px, transparent 1px),
+    linear-gradient(90deg, var(--brand-alpha-weak) 1px, transparent 1px);
   background-size: 48px 48px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 5%, transparent 75%);
 }
@@ -106,6 +107,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
+  opacity: var(--effect-canvas-opacity, 0.85);
 
   @media (prefers-reduced-motion: reduce), (pointer: coarse) {
     display: none;
@@ -123,14 +125,15 @@
   position: absolute;
   font-size: clamp(9px, 1.1vw, 12px);
   line-height: 1.5;
-  color: rgba(34, 211, 238, 0.16);
+  color: var(--effect-accent-muted);
+  opacity: var(--effect-watermark-opacity, 0.16);
   white-space: pre;
   user-select: none;
   filter: blur(0.3px);
   transform-origin: center;
 
   @media (prefers-reduced-motion: reduce) {
-    opacity: 0.08;
+    opacity: calc(var(--effect-watermark-opacity, 0.16) * 0.5);
   }
 }
 
@@ -141,9 +144,9 @@
   bottom: -8%;
   height: 42%;
   background:
-    radial-gradient(ellipse 60% 50% at 30% 100%, rgba(6, 182, 212, 0.28), transparent 65%),
-    radial-gradient(ellipse 55% 45% at 70% 100%, rgba(124, 58, 237, 0.18), transparent 60%),
-    radial-gradient(ellipse 40% 35% at 50% 100%, rgba(20, 184, 166, 0.22), transparent 55%);
+    radial-gradient(ellipse 60% 50% at 30% 100%, var(--brand-alpha-weak), transparent 65%),
+    radial-gradient(ellipse 55% 45% at 70% 100%, var(--accent-alpha-weak), transparent 60%),
+    radial-gradient(ellipse 40% 35% at 50% 100%, var(--brand-alpha-weak), transparent 55%);
   filter: blur(24px);
   animation: auroraWave 22s ease-in-out infinite alternate;
 
@@ -190,10 +193,10 @@
 
 @keyframes gridPulse {
   0% {
-    opacity: 0.45;
+    opacity: calc(var(--effect-grid-opacity, 0.5) * 0.65);
   }
   100% {
-    opacity: 0.68;
+    opacity: var(--effect-grid-opacity, 0.5);
   }
 }
 

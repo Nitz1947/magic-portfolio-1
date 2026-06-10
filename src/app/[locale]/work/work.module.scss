@@ -23,8 +23,8 @@
   width: 100%;
   padding: 16px;
   border-radius: var(--radius-l);
-  border: 1px solid rgba(34, 211, 238, 0.12);
-  background: rgba(8, 12, 18, 0.55);
+  border: 1px solid var(--effect-surface-border);
+  background: var(--effect-surface-bg);
   backdrop-filter: blur(8px);
 
   @media (max-width: 640px) {
@@ -38,7 +38,7 @@
 }
 
 .statValue {
-  color: rgba(34, 211, 238, 0.95);
+  color: var(--effect-accent-text);
   font-variant-numeric: tabular-nums;
 }
 

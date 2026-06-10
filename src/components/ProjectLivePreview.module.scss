@@ -38,7 +38,7 @@
   gap: var(--static-space-16);
   padding: var(--static-space-24);
   text-align: center;
-  background: rgba(0, 0, 0, 0.52);
+  background: var(--backdrop);
   backdrop-filter: blur(3px);
 }
 

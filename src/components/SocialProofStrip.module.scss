@@ -1,7 +1,7 @@
 .strip {
-  border-top: 1px solid rgba(34, 211, 238, 0.12);
-  border-bottom: 1px solid rgba(34, 211, 238, 0.12);
-  background: rgba(6, 10, 15, 0.55);
+  border-top: 1px solid var(--effect-surface-border);
+  border-bottom: 1px solid var(--effect-surface-border);
+  background: var(--effect-surface-bg);
   backdrop-filter: blur(8px);
 }
 
@@ -11,14 +11,14 @@
 }
 
 .value {
-  color: rgba(34, 211, 238, 0.95);
+  color: var(--effect-accent-text);
   font-variant-numeric: tabular-nums;
 }
 
 .divider {
   width: 1px;
   height: 2rem;
-  background: rgba(34, 211, 238, 0.15);
+  background: var(--brand-alpha-weak);
   flex-shrink: 0;
 
   @media (max-width: 640px) {
@@ -29,16 +29,16 @@
 .status {
   padding: 6px 12px;
   border-radius: 999px;
-  border: 1px solid rgba(34, 211, 238, 0.2);
-  background: rgba(6, 182, 212, 0.08);
+  border: 1px solid var(--brand-alpha-weak);
+  background: var(--brand-alpha-weak);
 }
 
 .dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(20, 184, 166, 0.95);
-  box-shadow: 0 0 10px rgba(20, 184, 166, 0.55);
+  background: var(--brand-solid-strong);
+  box-shadow: 0 0 10px var(--brand-alpha-medium);
   animation: pulse 2.4s ease-in-out infinite;
 
   @media (prefers-reduced-motion: reduce) {

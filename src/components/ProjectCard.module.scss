@@ -85,7 +85,7 @@
   align-items: center;
   justify-content: center;
   gap: var(--static-space-12);
-  background: rgba(0, 0, 0, 0.55);
+  background: var(--backdrop);
   opacity: 0;
   transition: opacity var(--transition-micro-medium);
   border-radius: var(--radius-l);
@@ -97,6 +97,6 @@
 
   @media (prefers-reduced-motion: reduce) {
     opacity: 1;
-    background: rgba(0, 0, 0, 0.35);
+    background: var(--neutral-alpha-medium);
   }
 }

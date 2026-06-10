@@ -4,7 +4,7 @@
   overflow: hidden;
   pointer-events: none;
   z-index: 0;
-  opacity: 0.72;
+  opacity: var(--effect-canvas-opacity, 0.72);
   mask-image: linear-gradient(to bottom, black 0%, transparent 88%);
 
   @media (prefers-reduced-motion: reduce) {

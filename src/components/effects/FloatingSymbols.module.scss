@@ -8,7 +8,8 @@
   @include mono-code;
   position: absolute;
   font-size: clamp(12px, 1.8vw, 17px);
-  color: rgba(34, 211, 238, 0.22);
+  color: var(--effect-accent-muted);
+  opacity: var(--effect-symbol-opacity, 0.22);
   white-space: nowrap;
   user-select: none;
   animation: drift linear infinite;
@@ -19,13 +20,13 @@
 @keyframes drift {
   0% {
     transform: translateY(0) translateX(0);
-    opacity: 0.16;
+    opacity: calc(var(--effect-symbol-opacity, 0.22) * 0.7);
   }
   50% {
-    opacity: 0.34;
+    opacity: var(--effect-symbol-opacity, 0.22);
   }
   100% {
     transform: translateY(-40px) translateX(8px);
-    opacity: 0.16;
+    opacity: calc(var(--effect-symbol-opacity, 0.22) * 0.7);
   }
 }

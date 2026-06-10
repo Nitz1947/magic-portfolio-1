@@ -1,13 +1,9 @@
 "use client";
 
 import { useCallback, useRef } from "react";
+import { brandRgba } from "./themeColors";
 
 const MAX_TRAIL = 30;
-const TRAIL_COLORS = [
-  "rgba(34, 211, 238,",
-  "rgba(6, 182, 212,",
-  "rgba(20, 184, 166,",
-] as const;
 
 interface TrailParticle {
   x: number;
@@ -36,6 +32,12 @@ interface CanvasRipple {
   life: number;
   maxLife: number;
 }
+
+const TRAIL_VARS: [string, string, string] = [
+  "--brand-on-background-weak",
+  "--brand-on-background-medium",
+  "--brand-on-background-strong",
+];
 
 export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | null>) {
   const trail = useRef<TrailParticle[]>([]);
@@ -74,7 +76,7 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
       life: 1,
       maxLife: 0.65 + Math.random() * 0.45,
       size: 3 + Math.random() * 4.5,
-      colorIndex: Math.floor(Math.random() * TRAIL_COLORS.length),
+      colorIndex: Math.floor(Math.random() * 3),
     });
   }, []);
 
@@ -128,7 +130,7 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
 
       ctx.beginPath();
       ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-      ctx.fillStyle = `${TRAIL_COLORS[p.colorIndex]}${alpha})`;
+      ctx.fillStyle = brandRgba(TRAIL_VARS[p.colorIndex]!, alpha);
       ctx.fill();
       return true;
     });
@@ -145,7 +147,7 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
       const t = p.life / p.maxLife;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.size * t, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(34, 211, 238, ${t * 0.95})`;
+      ctx.fillStyle = brandRgba("--brand-on-background-weak", t * 0.95);
       ctx.fill();
       return true;
     });
@@ -159,7 +161,7 @@ export function useCursorTrail(canvasRef: React.RefObject<HTMLCanvasElement | nu
 
       ctx.beginPath();
       ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(34, 211, 238, ${r.life * 0.65})`;
+      ctx.strokeStyle = brandRgba("--brand-on-background-weak", r.life * 0.65);
       ctx.lineWidth = 2;
       ctx.stroke();
       return true;

@@ -38,9 +38,9 @@
 
 .sidebarInner {
   padding: var(--static-space-24);
-  border: 1px solid rgba(34, 211, 238, 0.15);
+  border: 1px solid var(--effect-surface-border);
   border-radius: var(--radius-l);
-  background: rgba(6, 78, 89, 0.12);
+  background: var(--effect-surface-bg);
   backdrop-filter: blur(8px);
 }
 
@@ -87,13 +87,13 @@
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    border-color: rgba(34, 211, 238, 0.35);
+    border-color: var(--brand-alpha-medium);
   }
 }
 
 .styleCardActive {
-  border-color: rgba(34, 211, 238, 0.55);
-  box-shadow: 0 0 20px rgba(34, 211, 238, 0.12);
+  border-color: var(--brand-alpha-strong);
+  box-shadow: 0 0 20px var(--brand-alpha-weak);
 }
 
 .contactGrid {
