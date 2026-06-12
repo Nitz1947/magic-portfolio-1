@@ -1,12 +1,13 @@
 import classNames from "classnames";
 import { notFound } from "next/navigation";
 
-import { Column, Flex, Meta } from "@once-ui-system/core";
+import { Column, Flex } from "@once-ui-system/core";
 import { Footer, Header, RouteGuard } from "@/components";
 import { LayoutEffects } from "@/components/effects";
 import { LocaleProvider } from "@/context/LocaleContext";
 import { defaultLocale, isLocale, locales } from "@/i18n/config";
 import { localizedPath } from "@/i18n/paths";
+import { buildPageMetadata } from "@/i18n/seo";
 import { getUi } from "@/i18n/ui";
 import { baseURL, fonts, getContent, style, dataStyle } from "@/resources";
 
@@ -23,11 +24,11 @@ export async function generateMetadata({
   const locale = isLocale(localeParam) ? localeParam : defaultLocale;
   const { home } = getContent(locale);
 
-  return Meta.generate({
+  return buildPageMetadata({
+    locale,
+    path: home.path,
     title: home.title,
     description: home.description,
-    baseURL: baseURL,
-    path: localizedPath(home.path, locale),
     image: home.image,
   });
 }
@@ -128,7 +129,16 @@ export default async function LocaleLayout({
             <LayoutEffects />
             <Flex fillWidth minHeight="16" s={{ hide: true }} position="relative" zIndex={2} />
             <Header />
-            <Flex zIndex={2} fillWidth padding="l" horizontal="center" flex={1} position="relative">
+            <Flex
+              as="main"
+              id="main-content"
+              zIndex={2}
+              fillWidth
+              padding="l"
+              horizontal="center"
+              flex={1}
+              position="relative"
+            >
               <Flex horizontal="center" fillWidth minHeight="0">
                 <RouteGuard>{children}</RouteGuard>
               </Flex>

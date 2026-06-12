@@ -17,6 +17,7 @@ import TableOfContents from "@/components/about/TableOfContents";
 import styles from "@/components/about/about.module.scss";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
+import { buildPageMetadata } from "@/i18n/seo";
 import { getUi } from "@/i18n/ui";
 import React from "react";
 
@@ -28,12 +29,12 @@ export async function generateMetadata({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const { about } = getContent(locale);
 
-  return Meta.generate({
+  return buildPageMetadata({
+    locale,
+    path: about.path,
     title: about.title,
     description: about.description,
-    baseURL: baseURL,
     image: `/api/og/generate?title=${encodeURIComponent(about.title)}`,
-    path: localizedPath(about.path, locale),
   });
 }
 
@@ -155,7 +156,7 @@ export default async function About({ params }: PageProps) {
                 />
               </Row>
             )}
-            <Heading className={styles.textAlign} variant="display-strong-xl">
+            <Heading as="h1" className={styles.textAlign} variant="display-strong-xl">
               {person.name}
             </Heading>
             <Text

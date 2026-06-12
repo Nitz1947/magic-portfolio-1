@@ -6,6 +6,7 @@ import { featuredProjectConfigs, homepageFeaturedSlugs } from "@/data/featuredPr
 import { getProjectPresentations } from "@/data/projectPresentations";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
+import { buildPageMetadata } from "@/i18n/seo";
 import { getUi } from "@/i18n/ui";
 import { baseURL, getContent } from "@/resources";
 import { getPosts } from "@/utils/utils";
@@ -19,12 +20,12 @@ export async function generateMetadata({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const { work } = getContent(locale);
 
-  return Meta.generate({
+  return buildPageMetadata({
+    locale,
+    path: work.path,
     title: work.title,
     description: work.description,
-    baseURL: baseURL,
     image: `/api/og/generate?title=${encodeURIComponent(work.title)}`,
-    path: localizedPath(work.path, locale),
   });
 }
 
@@ -81,7 +82,7 @@ export default async function Work({ params }: PageProps) {
           }}
         />
         <Column fillWidth gap="12" horizontal="center" align="center" className={styles.hero}>
-          <Heading variant="display-strong-s" wrap="balance">
+          <Heading as="h1" variant="display-strong-s" wrap="balance">
             {ui.work.hubTitle}
           </Heading>
           <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">

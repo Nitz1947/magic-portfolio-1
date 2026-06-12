@@ -8,7 +8,6 @@ import {
   Badge,
   Row,
   Schema,
-  Meta,
 } from "@once-ui-system/core";
 import { Mailchimp, SocialProofStrip } from "@/components";
 import { SectionBackdrop, HeroBackground } from "@/components/effects";
@@ -16,8 +15,10 @@ import homeStyles from "./home.module.scss";
 import { ProcessSteps } from "@/components/ProcessSteps";
 import { ServicesGrid } from "@/components/ServicesGrid";
 import { TechMarquee } from "@/components/TechMarquee";
+import { JsonLd } from "@/components/JsonLd";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
+import { buildPageMetadata } from "@/i18n/seo";
 import { getUi } from "@/i18n/ui";
 import { baseURL, getContent, routes } from "@/resources";
 
@@ -29,12 +30,25 @@ export async function generateMetadata({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const { home } = getContent(locale);
 
-  return Meta.generate({
+  return buildPageMetadata({
+    locale,
+    path: home.path,
     title: home.title,
     description: home.description,
-    baseURL: baseURL,
-    path: localizedPath(home.path, locale),
     image: home.image,
+    keywords:
+      locale === "pl"
+        ? [
+            "tworzenie stron www Next.js",
+            "portfolio web developera",
+            "strony internetowe dla firm",
+            "web developer Polska",
+          ]
+        : [
+            "Next.js web developer portfolio",
+            "custom websites",
+            "React TypeScript developer",
+          ],
   });
 }
 
@@ -45,6 +59,12 @@ export default async function Home({ params }: PageProps) {
 
   return (
     <Column maxWidth="m" gap="48" paddingY="12" paddingX="l" horizontal="center" fillWidth>
+      <JsonLd
+        locale={locale}
+        pageTitle={home.title}
+        pageDescription={home.description}
+        path={home.path}
+      />
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -97,7 +117,7 @@ export default async function Home({ params }: PageProps) {
               </RevealFx>
             )}
             <RevealFx translateY="8" fillWidth horizontal="center" paddingBottom="16">
-              <Heading wrap="balance" variant="display-strong-l" className={homeStyles.heroHeadline}>
+              <Heading as="h1" wrap="balance" variant="display-strong-l" className={homeStyles.heroHeadline}>
                 {home.headline}
               </Heading>
             </RevealFx>

@@ -46,8 +46,8 @@ export function createEnglishContent(): LocaleContent {
     path: "/",
     image: "/images/og/home.svg",
     label: "Home",
-    title: `${person.name}'s Portfolio`,
-    description: `Custom websites and web apps — individual approach, needs analysis, and delivery tailored to your industry. Next.js, React, TypeScript.`,
+    title: `${person.name} — Next.js Web Developer Portfolio`,
+    description: `Custom websites and web apps for businesses — Next.js, React, TypeScript. Individual approach, SEO-ready builds, and delivery tailored to your industry.`,
     headline: <>Websites and apps built to fit — for businesses that need more than a template</>,
     featured: {
       display: true,
@@ -79,8 +79,8 @@ export function createEnglishContent(): LocaleContent {
   const about: About = {
     path: "/about",
     label: "About",
-    title: `About – ${person.name}`,
-    description: `Meet ${person.name} — full-stack developer building Next.js websites and apps with live Vercel deployments`,
+    title: `About — Next.js Web Developer | ${person.name}`,
+    description: `Meet ${person.name} — full-stack developer building SEO-ready Next.js websites, e-commerce stores, and web apps deployed on Vercel.`,
     tableOfContent: {
       display: true,
       subItems: false,
@@ -132,14 +132,6 @@ export function createEnglishContent(): LocaleContent {
           role: "Full-Stack Developer & Web Designer",
           achievements: [
             <>
-              <strong>SEO Opt One</strong> — SEO audit platform with code generators,
-              strategy plans, and marketing modules (Next.js, Vercel).
-            </>,
-            <>
-              <strong>Strefa Kibica</strong> — virtual betting platform for a Discord
-              community (Next.js, OAuth, leaderboard).
-            </>,
-            <>
               <strong>BJ Trade</strong> — B2B corporate site for a herbs and spices
               wholesaler with quality certifications, i18n PL/EN, and live Vercel deploy.
             </>,
@@ -149,18 +141,6 @@ export function createEnglishContent(): LocaleContent {
             </>,
           ],
           images: [
-            {
-              src: "/images/projects/seo-opt-one/cover-01.svg",
-              alt: "SEO Opt One — SEO tool",
-              width: 16,
-              height: 9,
-            },
-            {
-              src: "/images/projects/strefa-kibica/cover-01.svg",
-              alt: "Strefa Kibica — Discord community",
-              width: 16,
-              height: 9,
-            },
             {
               src: "/images/projects/bjtrade/cover-01.svg",
               alt: "BJ Trade — corporate website",
@@ -206,7 +186,7 @@ export function createEnglishContent(): LocaleContent {
           ],
           images: [
             {
-              src: "/images/projects/strefa-kibica/cover-01.svg",
+              src: "/images/projects/bjtrade/cover-01.svg",
               alt: "Next.js web project",
               width: 16,
               height: 9,

@@ -47,7 +47,7 @@ export const Header = () => {
   const pathname = usePathname() ?? "";
   const routePath = stripLocalePath(pathname);
   const { locale, content, ui, href } = useLocale();
-  const { person, about, work } = content;
+  const { person, about, work, home } = content;
 
   return (
     <>
@@ -92,7 +92,12 @@ export const Header = () => {
           >
             <Row gap="4" vertical="center" textVariant="body-default-s" suppressHydrationWarning>
               {routes["/"] && (
-                <ToggleButton prefixIcon="home" href={href("/")} selected={routePath === "/"} />
+                <ToggleButton
+                  prefixIcon="home"
+                  href={href("/")}
+                  label={home.label}
+                  selected={routePath === "/"}
+                />
               )}
               <Line background="neutral-alpha-medium" vert maxHeight="24" />
               {routes["/about"] && (
@@ -109,6 +114,7 @@ export const Header = () => {
                     <ToggleButton
                       prefixIcon="person"
                       href={href("/about")}
+                      label={about.label}
                       selected={routePath === "/about"}
                     />
                   </Row>
@@ -128,6 +134,7 @@ export const Header = () => {
                     <ToggleButton
                       prefixIcon="grid"
                       href={href("/work")}
+                      label={work.label}
                       selected={routePath.startsWith("/work")}
                     />
                   </Row>
@@ -147,6 +154,7 @@ export const Header = () => {
                     <ToggleButton
                       prefixIcon="document"
                       href={href("/quote")}
+                      label={ui.quote.navLabel}
                       selected={routePath === "/quote"}
                     />
                   </Row>
@@ -166,6 +174,7 @@ export const Header = () => {
                     <ToggleButton
                       prefixIcon="email"
                       href={href("/contact")}
+                      label={ui.quote.contactNav}
                       selected={routePath === "/contact"}
                     />
                   </Row>

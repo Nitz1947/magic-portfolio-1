@@ -15,6 +15,7 @@ import {
 import { baseURL, getContent } from "@/resources";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
+import { buildPageMetadata } from "@/i18n/seo";
 import { getUi } from "@/i18n/ui";
 import { formatDate } from "@/utils/formatDate";
 import { ScrollToHash, CustomMDX } from "@/components";
@@ -45,12 +46,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   if (!post) return {};
 
-  return Meta.generate({
+  return buildPageMetadata({
+    locale,
+    path: `${work.path}/${post.slug}`,
     title: post.metadata.title,
     description: post.metadata.summary,
-    baseURL: baseURL,
     image: post.metadata.image || `/api/og/generate?title=${post.metadata.title}`,
-    path: `${localizedPath(work.path, locale)}/${post.slug}`,
   });
 }
 

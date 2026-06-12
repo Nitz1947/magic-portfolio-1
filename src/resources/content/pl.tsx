@@ -46,8 +46,8 @@ export function createPolishContent(): LocaleContent {
     path: "/",
     image: "/images/og/home.svg",
     label: "Strona główna",
-    title: `Portfolio – ${person.name}`,
-    description: `Strony i aplikacje webowe szyte na miarę — indywidualne podejście, analiza potrzeb i wdrożenie dopasowane do branży. Next.js, React, TypeScript.`,
+    title: `Portfolio web developera Next.js — ${person.name}`,
+    description: `Strony internetowe dla firm i aplikacje webowe — Next.js, React, TypeScript. Indywidualne podejście, SEO i wdrożenie dopasowane do branży.`,
     headline: <>Strony i aplikacje szyte na miarę — dla firm, które chcą więcej niż szablon</>,
     featured: {
       display: true,
@@ -78,8 +78,8 @@ export function createPolishContent(): LocaleContent {
   const about: About = {
     path: "/about",
     label: "O mnie",
-    title: `O mnie – ${person.name}`,
-    description: `Poznaj ${person.name} — full-stack developer budujący strony i aplikacje Next.js z wdrożeniami na Vercel`,
+    title: `O mnie — web developer Next.js | ${person.name}`,
+    description: `Poznaj ${person.name} — full-stack developer tworzący strony internetowe dla firm, sklepy i aplikacje Next.js z optymalizacją SEO i wdrożeniem na Vercel.`,
     tableOfContent: {
       display: true,
       subItems: false,
@@ -131,14 +131,6 @@ export function createPolishContent(): LocaleContent {
           role: "Full-Stack Developer & Web Designer",
           achievements: [
             <>
-              <strong>SEO Opt One</strong> — platforma audytu SEO z generatorami kodów,
-              planami strategii i modułami marketingowymi (Next.js, Vercel).
-            </>,
-            <>
-              <strong>Strefa Kibica</strong> — platforma wirtualnych zakładów dla społeczności
-              Discord (Next.js, OAuth, ranking).
-            </>,
-            <>
               <strong>BJ Trade</strong> — strona firmowa B2B dla hurtowni ziół i przypraw
               z certyfikatami jakości, i18n PL/EN i wersją live na Vercel.
             </>,
@@ -148,18 +140,6 @@ export function createPolishContent(): LocaleContent {
             </>,
           ],
           images: [
-            {
-              src: "/images/projects/seo-opt-one/cover-01.svg",
-              alt: "SEO Opt One — narzędzie SEO",
-              width: 16,
-              height: 9,
-            },
-            {
-              src: "/images/projects/strefa-kibica/cover-01.svg",
-              alt: "Strefa Kibica — Discord community",
-              width: 16,
-              height: 9,
-            },
             {
               src: "/images/projects/bjtrade/cover-01.svg",
               alt: "BJ Trade — strona firmowa",
@@ -204,7 +184,7 @@ export function createPolishContent(): LocaleContent {
           ],
           images: [
             {
-              src: "/images/projects/strefa-kibica/cover-01.svg",
+              src: "/images/projects/bjtrade/cover-01.svg",
               alt: "Projekt webowy Next.js",
               width: 16,
               height: 9,

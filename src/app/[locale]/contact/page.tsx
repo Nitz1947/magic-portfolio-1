@@ -3,6 +3,7 @@ import { ContactGrid } from "@/components/contact/ContactGrid";
 import { SyntaxHighlightBlock } from "@/components/effects";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
+import { buildPageMetadata } from "@/i18n/seo";
 import { getUi } from "@/i18n/ui";
 import { baseURL, getContent } from "@/resources";
 import styles from "./contact.module.scss";
@@ -15,11 +16,11 @@ export async function generateMetadata({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const { contact } = getUi(locale);
 
-  return Meta.generate({
+  return buildPageMetadata({
+    locale,
+    path: "/contact",
     title: contact.pageTitle,
     description: contact.pageDescription,
-    baseURL: baseURL,
-    path: localizedPath("/contact", locale),
   });
 }
 

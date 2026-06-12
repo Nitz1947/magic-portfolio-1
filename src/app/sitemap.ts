@@ -6,12 +6,15 @@ import { localizedPath } from "@/i18n/paths";
 export const dynamic = "force-static";
 
 export default async function sitemap() {
-  const blogs = getPosts(["src", "app", "blog", "posts"]).flatMap((post) =>
-    locales.map((locale) => ({
-      url: `${baseURL}${localizedPath(`/blog/${post.slug}`, locale)}`,
-      lastModified: post.metadata.publishedAt,
-    })),
-  );
+  const blogs =
+    routesConfig["/blog"]
+      ? getPosts(["src", "app", "blog", "posts"]).flatMap((post) =>
+          locales.map((locale) => ({
+            url: `${baseURL}${localizedPath(`/blog/${post.slug}`, locale)}`,
+            lastModified: post.metadata.publishedAt,
+          })),
+        )
+      : [];
 
   const works = getPosts(["src", "app", "work", "projects"]).flatMap((post) =>
     locales.map((locale) => ({

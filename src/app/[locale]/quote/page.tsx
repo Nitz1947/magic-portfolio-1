@@ -3,6 +3,7 @@ import { OfferBuilder } from "@/components/OfferBuilder";
 import styles from "./quote.module.scss";
 import { localizedPath } from "@/i18n/paths";
 import { resolveLocale } from "@/i18n/page";
+import { buildPageMetadata } from "@/i18n/seo";
 import { getUi } from "@/i18n/ui";
 import { baseURL, getContent } from "@/resources";
 
@@ -14,11 +15,11 @@ export async function generateMetadata({ params }: PageProps) {
   const locale = await resolveLocale(params);
   const ui = getUi(locale);
 
-  return Meta.generate({
+  return buildPageMetadata({
+    locale,
+    path: "/quote",
     title: ui.quote.pageTitle,
     description: ui.quote.pageDescription,
-    baseURL: baseURL,
-    path: localizedPath("/quote", locale),
   });
 }
 
